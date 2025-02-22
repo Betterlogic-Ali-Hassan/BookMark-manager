@@ -3,6 +3,9 @@ export type Card = {
   icon: string;
   title: string;
   path: string;
-  tags: string[];
+  tags: {
+    id: number;
+    name: string;
+  }[];
   des: string;
 };

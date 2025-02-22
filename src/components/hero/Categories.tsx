@@ -1,11 +1,30 @@
 import { categoriesData } from "@/constant/categoriesData";
-const Categories = () => {
+
+type CategoryFilterProps = {
+  selectedCategories: number[];
+  setSelectedCategories: (categories: number[]) => void;
+  categoryCounts: { [key: number]: number };
+};
+
+const Categories = ({
+  selectedCategories,
+  setSelectedCategories,
+  categoryCounts,
+}: CategoryFilterProps) => {
+  const toggleCategory = (categoryId: number) => {
+    setSelectedCategories(
+      selectedCategories.includes(categoryId)
+        ? selectedCategories.filter((id) => id !== categoryId)
+        : [...selectedCategories, categoryId]
+    );
+  };
   return (
     <div className='hidden lg:block w-[260px] justify-self-end overflow-x-hidden overflow-y-auto no-scrollbar py-2'>
       <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2'>
         {categoriesData.map((category, i) => (
           <div key={i}>
             <button
+              onClick={() => toggleCategory(category.id)}
               type='button'
               className='text-neutral-300 hover:text-white group focus:outline-none max-w-[260px] cursor-pointer flex gap-0.5 text-sm items-center'
             >
@@ -13,7 +32,7 @@ const Categories = () => {
                 {category.name}
               </span>
               <span className='w-8 text-left shrink whitespace-nowrap truncate text-neutral-600'>
-                {category.count}
+                {categoryCounts[category.id] || 0}
               </span>
             </button>
           </div>

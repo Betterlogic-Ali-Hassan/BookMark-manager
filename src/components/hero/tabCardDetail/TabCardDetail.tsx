@@ -59,7 +59,7 @@ const TabCardDetail = ({
                 </div>
                 <div className='flex flex-wrap gap-1.5 text-neutral-300'>
                   {activeTabData?.tags.map((tag, id) => (
-                    <Badge text={tag} key={id} />
+                    <Badge text={tag.name} key={id} />
                   ))}
                 </div>
                 <div className='flex items-center gap-5'>

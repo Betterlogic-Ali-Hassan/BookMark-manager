@@ -11,6 +11,9 @@ interface Props {
   toggleCard: (cardId: number) => void;
   setShowCardDetail: (show: boolean) => void;
   showCardDetail: boolean;
+  selectedCategories: number[];
+  setSelectedCategories: (categories: number[]) => void;
+  categoryCounts: { [key: number]: number };
 }
 const Hero = ({
   setShowSelectionCard,
@@ -21,10 +24,17 @@ const Hero = ({
   toggleCard,
   setShowCardDetail,
   showCardDetail,
+  selectedCategories,
+  setSelectedCategories,
+  categoryCounts,
 }: Props) => {
   return (
     <>
-      <Categories />
+      <Categories
+        categoryCounts={categoryCounts}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+      />
       <TabsArea
         toggleCard={toggleCard}
         clearSelection={clearSelection}

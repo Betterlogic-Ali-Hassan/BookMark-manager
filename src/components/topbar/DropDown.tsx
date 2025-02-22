@@ -6,6 +6,7 @@ interface Props {
   selectAll: () => void;
   setShowCardDetail: (show: boolean) => void;
   clearSelection: () => void;
+  count: number;
 }
 const DropDown = ({
   setShowSelectionCard,
@@ -13,6 +14,7 @@ const DropDown = ({
   selectAll,
   setShowCardDetail,
   clearSelection,
+  count,
 }: Props) => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -33,7 +35,7 @@ const DropDown = ({
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
       <div className='flex items-center px-4 whitespace-nowrap text-neutral-500 text-sm'>
-        70 bookmarks
+        {count} bookmarks
         <div className='relative flex justify-center items-center'>
           <button
             ref={btnRef}

@@ -6,6 +6,7 @@ interface Props {
   selectAll: () => void;
   setShowCardDetail: (show: boolean) => void;
   clearSelection: () => void;
+  count: number;
 }
 const TopBar = ({
   setShowSelectionCard,
@@ -13,12 +14,14 @@ const TopBar = ({
   selectAll,
   setShowCardDetail,
   clearSelection,
+  count,
 }: Props) => {
   return (
     <>
       <div className='hidden lg:block'></div>
       <TopNav />
       <DropDown
+        count={count}
         setShowCardDetail={setShowCardDetail}
         selectAll={selectAll}
         setShowSelectionCard={setShowSelectionCard}

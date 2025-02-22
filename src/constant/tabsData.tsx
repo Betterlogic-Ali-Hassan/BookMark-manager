@@ -4,7 +4,7 @@ export type TabItem = {
   title: string;
   path: string;
   des: string;
-  tags: string[];
+  tags: { id: number; name: string }[];
 };
 
 export const tabsData: TabItem[] = Array.from({ length: 70 }, (_, index) => {
@@ -41,44 +41,46 @@ export const tabsData: TabItem[] = Array.from({ length: 70 }, (_, index) => {
     },
   ];
 
-  const tags: string[] = [
-    "AI",
-    "API",
-    "Audio",
-    "Automation",
-    "Book",
-    "Buy",
-    "Community",
-    "Design",
-    "Directory",
-    "Documentation",
-    "Engineering",
-    "Entertainment",
-    "Event",
-    "Forum",
-    "Game",
-    "Health",
-    "Inspiration",
-    "Investing",
-    "Learn",
-    "Marketing",
-    "Mental Models",
-    "Mindset",
-    "News",
-    "Podcast",
-    "Research",
-    "SEO",
-    "Science",
-    "Startups",
-    "Tools",
-    "Trending",
-    "Tutorial",
-    "Video",
-    "Web Development",
-    "Writing",
+  // Tags array with IDs
+  const tags = [
+    { id: 1, name: "AI" },
+    { id: 2, name: "API" },
+    { id: 3, name: "Audio" },
+    { id: 4, name: "Automation" },
+    { id: 5, name: "Book" },
+    { id: 6, name: "Buy" },
+    { id: 7, name: "Community" },
+    { id: 8, name: "Design" },
+    { id: 9, name: "Directory" },
+    { id: 10, name: "Documentation" },
+    { id: 11, name: "Engineering" },
+    { id: 12, name: "Entertainment" },
+    { id: 13, name: "Event" },
+    { id: 14, name: "Forum" },
+    { id: 15, name: "Game" },
+    { id: 16, name: "Health" },
+    { id: 17, name: "Inspiration" },
+    { id: 18, name: "Investing" },
+    { id: 19, name: "Learn" },
+    { id: 20, name: "Marketing" },
+    { id: 21, name: "Mental Models" },
+    { id: 22, name: "Mindset" },
+    { id: 23, name: "News" },
+    { id: 24, name: "Podcast" },
+    { id: 25, name: "Research" },
+    { id: 26, name: "SEO" },
+    { id: 27, name: "Science" },
+    { id: 28, name: "Startups" },
+    { id: 29, name: "Tools" },
+    { id: 30, name: "Trending" },
+    { id: 31, name: "Tutorial" },
+    { id: 32, name: "Video" },
+    { id: 33, name: "Web Development" },
+    { id: 34, name: "Writing" },
   ];
 
   const item = baseItems[index % baseItems.length];
+
   return {
     id: index + 1,
     icon: item.icon,
