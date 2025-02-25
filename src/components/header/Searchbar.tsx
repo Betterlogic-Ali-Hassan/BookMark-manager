@@ -1,8 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Searchbar = () => {
   return (
     <div className='hidden lg:flex gap-4 justify-between items-center py-2 border-b border-b-neutral-800'>
       <div className='flex gap-2 grow'>
-        <button className='grow flex items-center gap-2 bg-white/5 ring-white/10 placeholder:text-white/50 focus:ring-blue-500 disabled:bg-white/20 disabled:text-white/70 disabled:ring-white/20 w-full rounded border-0 bg-white py-1.5 px-4 ring-1 ring-inset  focus:ring-2 focus:ring-inset text-sm leading-6 whitespace-nowrap text-neutral-400'>
+        <Link
+          to='/search'
+          className='grow flex items-center gap-2 bg-white/5 ring-white/10 placeholder:text-white/50 focus:ring-blue-500 disabled:bg-white/20 disabled:text-white/70 disabled:ring-white/20 w-full rounded border-0 bg-white py-1.5 px-4 ring-1 ring-inset  focus:ring-2 focus:ring-inset text-sm leading-6 whitespace-nowrap text-neutral-400'
+        >
           <svg
             className='h-5 w-5 text-neutral-400'
             viewBox='0 0 20 20'
@@ -17,7 +22,7 @@ const Searchbar = () => {
           </svg>{" "}
           <span>Search</span>{" "}
           <span className='ml-auto inline-block'>Ctrl + K</span>
-        </button>{" "}
+        </Link>{" "}
         <button
           className='rounded bg-white/10 px-3 py-2 text-sm font-semibold  shadow-none  ring-0 ring-inset hover:bg-white/20 disabled:hover:bg-white/10 disabled:cursor-not-allowed text-neutral-200 hover:text-white whitespace-nowrap flex items-center'
           title=''

@@ -1,23 +1,14 @@
 import { categoriesData } from "@/constant/categoriesData";
 
 type CategoryFilterProps = {
-  selectedCategories: number[];
-  setSelectedCategories: (categories: number[]) => void;
   categoryCounts: { [key: number]: number };
+  toggleCategory: (categoryId: number) => void;
 };
 
 const Categories = ({
-  selectedCategories,
-  setSelectedCategories,
+  toggleCategory,
   categoryCounts,
 }: CategoryFilterProps) => {
-  const toggleCategory = (categoryId: number) => {
-    setSelectedCategories(
-      selectedCategories.includes(categoryId)
-        ? selectedCategories.filter((id) => id !== categoryId)
-        : [...selectedCategories, categoryId]
-    );
-  };
   return (
     <div className='hidden lg:block w-[260px] justify-self-end overflow-x-hidden overflow-y-auto no-scrollbar py-2'>
       <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2'>

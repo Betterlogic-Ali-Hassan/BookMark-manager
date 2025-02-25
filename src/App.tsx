@@ -1,38 +1,38 @@
-import { useEffect, useMemo, useState } from "react";
-import Header from "./components/header/Header";
-import Hero from "./components/hero/Hero";
-import TopBar from "./components/topbar/TopBar";
-import { tabsData } from "./constant/tabsData";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import { useEffect, useState } from "react";
 import { Card } from "./types/TabCardType";
+import { tabsData } from "./constant/tabsData";
 
 const App = () => {
   const cards: Card[] = tabsData;
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCards, setFilteredCards] = useState(cards);
-  const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
+  const [showSelectionCard, setShowSelectionCard] = useState(false);
   const toggleCard = (id: number) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
     );
   };
   const selectAll = () => {
-    setSelectedCards(cards.map((_, card) => card));
+    setSelectedCards(cards.map((_, index) => index));
   };
+
   const clearSelection = () => {
     setSelectedCards([]);
   };
-  const categoryCounts = useMemo(() => {
-    const counts: { [key: number]: number } = {};
-    cards.forEach((card) => {
-      card.tags.forEach((category) => {
-        counts[category.id] = (counts[category.id] || 0) + 1;
-      });
-    });
-    return counts;
-  }, []);
+  const toggleCategory = (categoryId: number) => {
+    setSelectedCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
+
   useEffect(() => {
     const filtered = cards.filter((card) => {
       const matchesSearch = card.title
@@ -44,34 +44,53 @@ const App = () => {
       return matchesSearch && matchesCategories;
     });
     setFilteredCards(filtered);
-  }, [selectedCategories, searchTerm]);
+  }, [selectedCategories, searchTerm, cards]);
+
   return (
-    <div className='flex flex-col lg:grid lg:grid-cols-[1fr_minmax(20rem,48rem)_minmax(20rem,1fr)] lg:grid-rows-[auto_auto_1fr] relative h-screen w-screen  bg-black text-white '>
-      <Header />
-      <TopBar
-        count={filteredCards.length}
-        selectAll={selectAll}
-        setShowSelectionCard={setShowSelectionCard}
-        showSelectionCard={showSelectionCard}
-        setShowCardDetail={setShowCardDetail}
-        clearSelection={clearSelection}
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
-      />
-      <Hero
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
-        toggleCard={toggleCard}
-        clearSelection={clearSelection}
-        selectedCards={selectedCards}
-        cards={filteredCards}
-        showSelectionCard={showSelectionCard}
-        setShowSelectionCard={setShowSelectionCard}
-        showCardDetail={showCardDetail}
-        setShowCardDetail={setShowCardDetail}
-        categoryCounts={categoryCounts}
-      />
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Home
+              selectAll={selectAll}
+              showSelectionCard={showSelectionCard}
+              setShowCardDetail={setShowCardDetail}
+              clearSelection={clearSelection}
+              setShowSelectionCard={setShowSelectionCard}
+              cards={cards}
+              toggleCategory={toggleCategory}
+              filteredCards={filteredCards}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              toggleCard={toggleCard}
+              selectedCards={selectedCards}
+              showCardDetail={showCardDetail}
+            />
+          }
+        ></Route>
+        <Route
+          path='/search'
+          element={
+            <Search
+              toggleCategory={toggleCategory}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              showCardDetail={showCardDetail}
+              setShowSelectionCard={setShowSelectionCard}
+              clearSelection={clearSelection}
+              toggleCard={toggleCard}
+              setShowCardDetail={setShowCardDetail}
+              selectedCards={selectedCards}
+              showSelectionCard={showSelectionCard}
+              setSearchTerm={setSearchTerm}
+              searchTerm={searchTerm}
+              filteredCards={filteredCards}
+            />
+          }
+        ></Route>
+      </Routes>
+    </Router>
   );
 };
 
