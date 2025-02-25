@@ -4,6 +4,7 @@ import Search from "./pages/Search";
 import { useEffect, useState } from "react";
 import { Card } from "./types/TabCardType";
 import { tabsData } from "./constant/tabsData";
+import AddBookmark from "./pages/AddBookmark";
 
 const App = () => {
   const cards: Card[] = tabsData;
@@ -89,6 +90,7 @@ const App = () => {
             />
           }
         ></Route>
+        <Route path='/new' element={<AddBookmark />}></Route>
       </Routes>
     </Router>
   );
