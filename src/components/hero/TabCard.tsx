@@ -3,7 +3,7 @@ import { Card } from "@/types/TabCardType";
 
 interface Props {
   setShowCardDetail: (show: boolean) => void;
-  toggleCard: (cardId: number) => void;
+  toggleCard: (cardId: number, url: string) => void;
   selected: boolean;
   id: number;
   showSelectionCard: boolean;
@@ -20,7 +20,7 @@ const TabCard = ({
   setActiveTab,
 }: Props) => {
   const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id);
+    if (showSelectionCard) toggleCard(id, data.path);
     setActiveTab(id);
   };
   const handleCardDetail = () => {

@@ -12,13 +12,15 @@ interface Props {
   selectAll: () => void;
   setShowCardDetail: (show: boolean) => void;
   clearSelection: () => void;
-  toggleCard: (cardId: number) => void;
+  toggleCard: (cardId: number, url: string) => void;
   showCardDetail: boolean;
   setShowSelectionCard: (show: boolean) => void;
   showSelectionCard: boolean;
   selectedCards: number[];
+  selectedCardUrl: string;
 }
 const Home = ({
+  selectedCardUrl,
   filteredCards,
   cards,
   toggleCategory,
@@ -57,6 +59,7 @@ const Home = ({
         toggleCategory={toggleCategory}
       />
       <Hero
+        selectedCardUrl={selectedCardUrl}
         toggleCategory={toggleCategory}
         toggleCard={toggleCard}
         clearSelection={clearSelection}

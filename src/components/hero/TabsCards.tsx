@@ -4,7 +4,7 @@ import TabCard from "./TabCard";
 interface Props {
   setShowCardDetail: (show: boolean) => void;
   cards: Card[];
-  toggleCard: (cardId: number) => void;
+  toggleCard: (cardId: number, url: string) => void;
   selectedCards: number[];
   showSelectionCard: boolean;
   setActiveTab: (tab: number) => void;

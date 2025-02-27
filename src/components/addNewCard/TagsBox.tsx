@@ -3,6 +3,8 @@ import ActionBtns from "./ActionBtns";
 import TagBox from "../TagBox";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 interface Props {
   setShowLinkInput: (show: boolean) => void;
   setShowTextBox: (show: boolean) => void;
@@ -25,6 +27,17 @@ const TagsBox = ({
     setTimeout(() => {
       navigate("/");
       setLoading(false);
+      toast.success("Bookmark Added", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      localStorage.clear();
     }, 2000);
   };
   return (

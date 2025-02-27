@@ -12,7 +12,7 @@ interface Props {
   setSearchTerm: Dispatch<SetStateAction<string>>;
   searchTerm: string;
   filteredCards: Card[];
-  toggleCard: (cardId: number) => void;
+  toggleCard: (cardId: number, url: string) => void;
   setShowCardDetail: (show: boolean) => void;
   selectedCards: number[];
   showSelectionCard: boolean;
@@ -22,8 +22,10 @@ interface Props {
   selectedCategories: number[];
   setSelectedCategories: (categories: number[]) => void;
   toggleCategory: (categoryId: number) => void;
+  selectedCardUrl: string;
 }
 const Search = ({
+  selectedCardUrl,
   setSearchTerm,
   searchTerm,
   filteredCards,
@@ -85,6 +87,7 @@ const Search = ({
         </div>
         <div className='hidden relative lg:block pt-2'>
           <TabCardDetail
+            selectedCardUrl={selectedCardUrl}
             cards={filteredCards}
             activeTab={activeTab}
             clearSelection={clearSelection}

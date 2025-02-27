@@ -13,7 +13,6 @@ import TagBox from "./TagBox";
 import { categoriesData } from "@/constant/categoriesData";
 
 const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
-  const tagData = categoriesData.slice(0, 5);
   return (
     <AlertDialog>
       <AlertDialogTrigger
@@ -39,7 +38,7 @@ const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
       <AlertDialogContent className='max-w-3xl  transform overflow-hidden rounded-md bg-neutral-800 border-transparent px-4 pb-4 pt-5 text-left shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            <TagBox categoriesData={tagData} />
+            <TagBox categoriesData={categoriesData} />
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter className='flex items-center gap-3 mt-6 border-t border-t-neutral-700 pt-4'>
@@ -57,8 +56,12 @@ const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
           </div>
           <div className='grow'></div>
           <div className='gap-3 flex'>
-            <AlertDialogAction className='cancel-btn'>Cancel</AlertDialogAction>
-            <AlertDialogCancel className='done-btn'>Save</AlertDialogCancel>
+            <AlertDialogAction className='cancel-btn bg-[#ffffff1a] text-white  hover:bg-[#fff3]'>
+              Cancel
+            </AlertDialogAction>
+            <AlertDialogCancel className='done-btn bg-[#60a5fa] hover:bg-[#93c5fd]'>
+              Save
+            </AlertDialogCancel>
           </div>
         </AlertDialogFooter>
       </AlertDialogContent>

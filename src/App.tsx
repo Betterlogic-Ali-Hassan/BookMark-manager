@@ -9,15 +9,17 @@ import AddBookmark from "./pages/AddBookmark";
 const App = () => {
   const cards: Card[] = tabsData;
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [selectedCardUrl, setSelectedCardUrl] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCards, setFilteredCards] = useState(cards);
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
-  const toggleCard = (id: number) => {
+  const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
     );
+    setSelectedCardUrl(url);
   };
   const selectAll = () => {
     setSelectedCards(cards.map((_, index) => index));
@@ -65,6 +67,7 @@ const App = () => {
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
               toggleCard={toggleCard}
+              selectedCardUrl={selectedCardUrl}
               selectedCards={selectedCards}
               showCardDetail={showCardDetail}
             />
@@ -74,6 +77,7 @@ const App = () => {
           path='/search'
           element={
             <Search
+              selectedCardUrl={selectedCardUrl}
               toggleCategory={toggleCategory}
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}

@@ -7,6 +7,7 @@ interface Props {
   saveBtn?: boolean;
   prevBtnClick?: () => void;
   loading?: boolean;
+  handleCancel?: () => void;
 }
 const ActionBtns = ({
   noprevbtn,
@@ -14,9 +15,11 @@ const ActionBtns = ({
   prevBtnClick,
   saveBtn,
   loading,
+  handleCancel,
 }: Props) => {
   const navigate = useNavigate();
   const cancelBtnClick = () => {
+    if (handleCancel) handleCancel();
     navigate("/");
   };
   return (

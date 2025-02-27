@@ -9,12 +9,14 @@ interface Props {
   cards: Card[];
   selectedCards: number[];
   clearSelection: () => void;
-  toggleCard: (cardId: number) => void;
+  toggleCard: (cardId: number, url: string) => void;
   setShowCardDetail: (show: boolean) => void;
   showCardDetail: boolean;
+  selectedCardUrl: string;
 }
 
 const TabsArea = ({
+  selectedCardUrl,
   setShowSelectionCard,
   showSelectionCard,
   cards,
@@ -36,6 +38,7 @@ const TabsArea = ({
         setActiveTab={setActiveTab}
       />
       <TabCardDetail
+        selectedCardUrl={selectedCardUrl}
         cards={cards}
         activeTab={activeTab}
         clearSelection={clearSelection}

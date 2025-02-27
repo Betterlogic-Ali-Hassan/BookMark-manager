@@ -1,19 +1,29 @@
 import AlertDialogBox from "@/components/AlertDialogBox";
 import TagAlertBox from "@/components/TagAlertBox";
 import { cn } from "@/lib/utils";
+import { toast } from "react-toastify";
 
 interface Props {
   setShowSelectionCard: (show: boolean) => void;
   showSelectionCard: boolean;
   selectedCards: number[];
   clearSelection: () => void;
+  selectedCardUrl?: string;
 }
 const SelectionCard = ({
+  selectedCardUrl,
   setShowSelectionCard,
   showSelectionCard,
   selectedCards,
   clearSelection,
 }: Props) => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(selectedCardUrl ? selectedCardUrl : "");
+    toast.success("Url is Copied");
+  };
+  const handleOpenLink = () => {
+    window.open(selectedCardUrl, "_blank");
+  };
   const handleCancel = () => {
     clearSelection();
     setShowSelectionCard(false);
@@ -55,6 +65,7 @@ const SelectionCard = ({
             <button
               className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
+              onClick={handleOpenLink}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -75,6 +86,7 @@ const SelectionCard = ({
             <button
               className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
+              onClick={handleCopy}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
