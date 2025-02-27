@@ -1,7 +1,14 @@
+import { Link } from "react-router-dom";
+
 const ActionsBtns = () => {
   return (
     <nav className='hidden lg:flex items-center justify-end gap-4 border-b border-b-neutral-800 pr-4'>
-      <button title='Settings' className='text-sm' aria-label='Settings'>
+      <Link
+        to='/settings/tag'
+        title='Settings'
+        className='text-sm'
+        aria-label='Settings'
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -21,7 +28,7 @@ const ActionsBtns = () => {
             d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
           ></path>
         </svg>
-      </button>{" "}
+      </Link>{" "}
       <button
         className='text-sm'
         title='Documentation'
