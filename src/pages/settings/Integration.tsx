@@ -1,10 +1,6 @@
-const ImportSetting = () => {
+const Integration = () => {
   return (
     <div className='px-4 py-6 sm:p-8'>
-      <h2 className='text-xl font-semibold mb-6'>Import Bookmarks</h2>
-      <p className='mb-6 text-neutral-700 dark:text-neutral-200'>
-        Import bookmarks from an HTML file exported from another app or browser.
-      </p>
       <div className='mb-6'>
         <div className='rounded-md p-4 bg-blue-50 dark:bg-white/10 border border-transparent dark:border-blue-300'>
           <div className='flex'>
@@ -55,4 +51,4 @@ const ImportSetting = () => {
   );
 };
 
-export default ImportSetting;
+export default Integration;
