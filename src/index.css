@@ -114,6 +114,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  .control-label {
+    @apply text-sm font-semibold;
+  }
   .btn {
     @apply rounded-r bg-[#ffffff0d] flex items-center text-sm text-white input-shadow hover:bg-[#fff3]  font-medium border-0 outline-none ml-[1px] h-[36px] py-2 px-3 gap-1.5;
   }

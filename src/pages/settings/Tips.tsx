@@ -1,3 +1,5 @@
+import ExtensionsBtns from "@/components/settingPage/tipsPage/ExtensionsBtns";
+
 const Tips = () => {
   return (
     <div className='px-4 py-6 sm:p-8'>
@@ -34,66 +36,16 @@ const Tips = () => {
             </svg>
           </a>
         </div>
-        <div className='hidden md:grid grid-cols-2 gap-3 mt-4'>
-          <a
-            target='_blank'
-            title='Go to Chrome Web Store'
-            className='no-underline flex flex-shrink items-center justify-center border rounded-md px-8 py-3 gap-3 border-neutral-300 dark:border-white/20 hover:bg-blue-500/5 dark:hover:bg-white/10 dark:bg-white/5'
-            href='https://chrome.google.com/webstore/detail/obdikhdfjocemafhpnidegmdfhbibdkf'
-          >
-            <img
-              src='/brand/Google/Chrome.svg'
-              alt='Chrome'
-              className='w-8 h-8'
-            />
-            <span>Chrome Extension</span>
-          </a>
-          <span className='no-underline flex flex-shrink items-center justify-center border rounded-md px-8 py-3 gap-3 border-neutral-300 dark:border-white/20 dark:bg-white/5'>
-            <img
-              src='/brand/Apple/Safari.svg'
-              alt='Safari'
-              className='w-8 h-8'
-            />
-            <span>Safari (coming soon)</span>
-          </span>
-          <a
-            target='_blank'
-            title='Go to Edge Add-ons'
-            className='no-underline flex flex-shrink items-center justify-center border rounded-md px-8 py-3 gap-3 border-neutral-300 dark:border-white/20 hover:bg-blue-500/5 dark:hover:bg-white/10 dark:bg-white/5'
-            href='https://microsoftedge.microsoft.com/addons/detail/bookmark-manager/gpbcnlcokalkplkflnihocjkglnmdkfj'
-          >
-            <img
-              src='/brand/Microsoft/Edge.svg'
-              alt='Microsoft Edge'
-              className='w-8 h-8'
-            />
-            <span>Edge Extension</span>
-          </a>
-          <a
-            target='_blank'
-            title='Go to Firefox Add-ons'
-            className='no-underline flex flex-shrink items-center justify-center border rounded-md px-8 py-3 gap-3 border-neutral-300 dark:border-white/20 hover:bg-blue-500/5 dark:hover:bg-white/10 dark:bg-white/5'
-            href='https://addons.mozilla.org/firefox/addon/bookmark-manager-com/'
-          >
-            <img
-              src='/brand/Mozilla/Firefox.svg'
-              alt='Firefox'
-              className='w-8 h-8'
-            />
-            <span>Firefox Add-On</span>
-          </a>
-        </div>
+        <ExtensionsBtns />
+
         <h2 className='text-xl font-semibold mb-6 mt-8'>Mobile App</h2>
         <p>
           Install the mobile app to save and access bookmarks from your phone.
         </p>
         <div className='flex gap-3 mt-3'>
-          <a
-            target='_blank'
-            href='https://play.google.com/store/apps/details?id=com.bookmarkmanager.twa'
-          >
+          <a target='_blank' href='#'>
             <img
-              src='/brand/Google/GetItOnGooglePlay.png'
+              src='https://bookmarkmanager.com/brand/Google/GetItOnGooglePlay.png'
               alt='Get It On Google Play'
               className='h-12 m-0'
             />
@@ -154,7 +106,7 @@ const Tips = () => {
         <p>
           If you have any issues, feedback, or questions, please contact us at
           <a
-            className='text-blue-500 dark:text-blue-300'
+            className='text-blue-500 dark:text-blue-300 ml-1'
             href='mailto:kevin@bookmarkmanager.com'
           >
             kevin@bookmarkmanager.com

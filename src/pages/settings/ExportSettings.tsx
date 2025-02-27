@@ -7,7 +7,10 @@ const ExportSettings = () => {
         apps and browsers.
       </p>
       <div className='mb-5'>
-        <button className='btn secondary flex items-center gap-2'>
+        <button
+          className='btn secondary flex items-center gap-2 rounded disabled:cursor-not-allowed disabled:opacity-50 '
+          disabled
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'

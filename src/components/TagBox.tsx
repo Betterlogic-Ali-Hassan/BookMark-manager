@@ -6,11 +6,26 @@ interface Props {
     count: number;
     id: number;
   }[];
+  allowedText?: boolean;
+  handleAddTag?: () => void;
+  tagInputValue?: string;
+  setTagInputValue?: (value: string) => void;
 }
-const TagBox = ({ categoriesData }: Props) => {
+const TagBox = ({
+  categoriesData,
+  allowedText,
+  handleAddTag,
+  tagInputValue,
+  setTagInputValue,
+}: Props) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [notificationText, setNotificationText] = useState("");
   const [showNotificationText, setShowNotificationText] = useState(false);
+  const handleTag = () => {
+    if (handleAddTag) {
+      handleAddTag();
+    }
+  };
   const toggleTags = (tag: string) => {
     setSelectedTags((prev) => {
       const isTagSelected = prev.includes(tag);
@@ -31,9 +46,15 @@ const TagBox = ({ categoriesData }: Props) => {
   return (
     <>
       <div className='flex gap-3 items-center overflow-hidden h-5'>
-        <label htmlFor='tags' className='text-white block text-sm font-medium'>
-          Tags
-        </label>
+        {!allowedText && (
+          <label
+            htmlFor='tags'
+            className='text-white block text-sm font-medium'
+          >
+            Tags
+          </label>
+        )}
+
         <div
           className={cn(
             "ml-auto text-sm text-neutral-500 dark:text-neutral-200 flex items-center gap-1.5 opacity-100 transition-all duration-300 translate-y-[0%] whitespace-nowrap text-ellipsis",
@@ -60,12 +81,14 @@ const TagBox = ({ categoriesData }: Props) => {
       <div className='mt-2 flex rounded mb-6'>
         <input
           type='text'
+          value={tagInputValue}
+          onChange={(e) => setTagInputValue && setTagInputValue(e.target.value)}
           name='tags'
           id='multi-tags-editor-input'
           className='input '
           placeholder='Search or add new tag'
         />
-        <button type='button' className='btn'>
+        <button type='button' className='btn' onClick={handleTag}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='currentColor'

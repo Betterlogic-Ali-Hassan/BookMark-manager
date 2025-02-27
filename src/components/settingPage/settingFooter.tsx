@@ -1,6 +1,6 @@
-const settingFooter = () => {
+const SettingFooter = () => {
   return (
-    <div className='flex items-center justify-end gap-x-3 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
+    <div className=' mt-auto flex items-center justify-end gap-x-3 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
       <a href='#' className='flex gap-2 items-center'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -18,9 +18,11 @@ const settingFooter = () => {
         </svg>
         Docs
       </a>
-      <button className='btn secondary ml-auto inline-flex'>Done</button>
+      <button className='btn secondary ml-auto inline-flex rounded '>
+        Done
+      </button>
     </div>
   );
 };
 
-export default settingFooter;
+export default SettingFooter;

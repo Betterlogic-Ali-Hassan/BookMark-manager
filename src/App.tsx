@@ -5,6 +5,14 @@ import { useEffect, useState } from "react";
 import { Card } from "./types/TabCardType";
 import { tabsData } from "./constant/tabsData";
 import AddBookmark from "./pages/AddBookmark";
+import Account from "./pages/settings/Account";
+import Tips from "./pages/settings/Tips";
+import TagSetting from "./pages/settings/TagSetting";
+import ThemeSetting from "./pages/settings/ThemeSetting";
+import ImportSetting from "./pages/settings/ImportSetting";
+import ExportSettings from "./pages/settings/ExportSettings";
+import SettingLayout from "./pages/settings/SettingLayout";
+import Integration from "./pages/settings/Integration";
 
 const App = () => {
   const cards: Card[] = tabsData;
@@ -95,6 +103,15 @@ const App = () => {
           }
         ></Route>
         <Route path='/new' element={<AddBookmark />}></Route>
+        <Route path='/settings' element={<SettingLayout />}>
+          <Route path='account' element={<Account />} />
+          <Route path='tips' element={<Tips />} />
+          <Route path='tag' element={<TagSetting />} />
+          <Route path='theme-setting' element={<ThemeSetting />} />
+          <Route path='import' element={<ImportSetting />} />
+          <Route path='export' element={<ExportSettings />} />
+          <Route path='integration' element={<Integration />} />
+        </Route>
       </Routes>
     </Router>
   );

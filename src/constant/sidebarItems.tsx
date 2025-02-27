@@ -20,6 +20,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Tags",
+    link: "tag",
   },
   {
     icon: (
@@ -39,6 +40,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Appearance",
+    link: "theme-setting",
   },
   {
     icon: (
@@ -58,6 +60,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Integration",
+    link: "integration",
   },
   {
     icon: (
@@ -77,6 +80,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Import",
+    link: "import",
   },
   {
     icon: (
@@ -96,6 +100,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Export",
+    link: "export",
   },
   {
     icon: (
@@ -115,6 +120,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Tips",
+    link: "tips",
   },
   {
     icon: (
@@ -134,5 +140,6 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Account",
+    link: "account",
   },
 ];
