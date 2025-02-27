@@ -1,4 +1,4 @@
-const SettingFooter = () => {
+const SettingPageFooter = () => {
   return (
     <div className=' mt-auto flex items-center justify-end gap-x-3 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
       <a href='#' className='flex gap-2 items-center'>
@@ -25,4 +25,4 @@ const SettingFooter = () => {
   );
 };
 
-export default SettingFooter;
+export default SettingPageFooter;
