@@ -15,10 +15,10 @@ interface Props {
   clearSelection: () => void;
   cards: Card[];
   activeTab: number;
-  selectedCardUrl: string;
+  selectedCardUrls: string[];
 }
 const TabCardDetail = ({
-  selectedCardUrl,
+  selectedCardUrls,
   showCardDetail,
   setShowCardDetail,
   setShowSelectionCard,
@@ -73,7 +73,7 @@ const TabCardDetail = ({
                   </div>
                 </div>
                 <hr className='border-neutral-700' />
-                <ActionsBtns />
+                <ActionsBtns url={activeTabData?.path} />
                 <CloseBtn setShowCardDetail={setShowCardDetail} />
               </div>
             </div>
@@ -81,7 +81,7 @@ const TabCardDetail = ({
         </div>
       </div>
       <SelectionCard
-        selectedCardUrl={selectedCardUrl}
+        selectedCardUrls={selectedCardUrls}
         clearSelection={clearSelection}
         selectedCards={selectedCards}
         showSelectionCard={showSelectionCard}

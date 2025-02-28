@@ -1,22 +1,25 @@
 import { Card } from "@/types/TabCardType";
 import Categories from "./Categories";
 import TabsArea from "./TabsArea";
-
+type Tags = {
+  name: string;
+  id: number;
+};
 interface Props {
   setShowSelectionCard: (show: boolean) => void;
   showSelectionCard: boolean;
   cards: Card[];
   selectedCards: number[];
   clearSelection: () => void;
-  toggleCard: (cardId: number, url: string) => void;
+  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
   setShowCardDetail: (show: boolean) => void;
   showCardDetail: boolean;
-  selectedCardUrl: string;
+  selectedCardUrls: string[];
   categoryCounts: { [key: number]: number };
   toggleCategory: (categoryId: number) => void;
 }
 const Hero = ({
-  selectedCardUrl,
+  selectedCardUrls,
   setShowSelectionCard,
   showSelectionCard,
   cards,
@@ -35,7 +38,7 @@ const Hero = ({
         toggleCategory={toggleCategory}
       />
       <TabsArea
-        selectedCardUrl={selectedCardUrl}
+        selectedCardUrls={selectedCardUrls}
         toggleCard={toggleCard}
         clearSelection={clearSelection}
         selectedCards={selectedCards}

@@ -10,20 +10,7 @@ type Tag = {
 };
 const TagSetting = () => {
   const [showTagBox, setShowTagBox] = useState(false);
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [tagInputValue, setTagInputValue] = useState<string>("");
-  const handleAddTag = () => {
-    if (tagInputValue.trim()) {
-      const newTag: Tag = {
-        name: tagInputValue,
-        count: 1,
-        id: Date.now(),
-      };
-
-      setTags([...tags, newTag]);
-      setTagInputValue("");
-    }
-  };
+  const [tags] = useState<Tag[]>([]);
 
   return (
     <div className='px-4 py-6 sm:p-8'>
@@ -65,13 +52,7 @@ const TagSetting = () => {
       </div>
       <div>
         {showTagBox ? (
-          <TagBox
-            categoriesData={tags}
-            allowedText
-            handleAddTag={handleAddTag}
-            tagInputValue={tagInputValue}
-            setTagInputValue={setTagInputValue}
-          />
+          <TagBox categoriesData={tags} allowedText />
         ) : (
           <button
             className='flex gap-2 items-center text-neutral-500 hover:text-neutral-900 border border-dashed rounded py-4 px-6 w-full whitespace-nowrap truncate font-semibold dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-white hover:border-solid dark:hover:bg-white/5 hover:bg-neutral-50'

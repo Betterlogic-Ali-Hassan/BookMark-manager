@@ -8,21 +8,31 @@ interface Props {
   showSelectionCard: boolean;
   selectedCards: number[];
   clearSelection: () => void;
-  selectedCardUrl?: string;
+  selectedCardUrls?: string[];
 }
 const SelectionCard = ({
-  selectedCardUrl,
+  selectedCardUrls,
   setShowSelectionCard,
   showSelectionCard,
   selectedCards,
   clearSelection,
 }: Props) => {
   const handleCopy = () => {
-    navigator.clipboard.writeText(selectedCardUrl ? selectedCardUrl : "");
-    toast.success("Url is Copied");
+    if ((selectedCardUrls?.length || 0) > 0) {
+      const urlsToCopy = selectedCardUrls && selectedCardUrls.join("\n");
+      navigator.clipboard.writeText(urlsToCopy ? urlsToCopy : "");
+      toast.success("URLs Copied");
+    } else {
+      toast.error("No URL Selected");
+    }
   };
-  const handleOpenLink = () => {
-    window.open(selectedCardUrl, "_blank");
+
+  const handleOpenLinks = () => {
+    if ((selectedCardUrls?.length || 0) > 0) {
+      (selectedCardUrls || []).forEach((url) => window.open(url, "_blank"));
+    } else {
+      toast.error("No URL Selected");
+    }
   };
   const handleCancel = () => {
     clearSelection();
@@ -65,7 +75,7 @@ const SelectionCard = ({
             <button
               className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
-              onClick={handleOpenLink}
+              onClick={handleOpenLinks}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'

@@ -2,21 +2,24 @@ import { useState } from "react";
 import TabCardDetail from "./tabCardDetail/TabCardDetail";
 import TabsCards from "./TabsCards";
 import { Card } from "@/types/TabCardType";
-
+type Tags = {
+  name: string;
+  id: number;
+};
 interface Props {
   setShowSelectionCard: (show: boolean) => void;
   showSelectionCard: boolean;
   cards: Card[];
   selectedCards: number[];
   clearSelection: () => void;
-  toggleCard: (cardId: number, url: string) => void;
+  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
   setShowCardDetail: (show: boolean) => void;
   showCardDetail: boolean;
-  selectedCardUrl: string;
+  selectedCardUrls: string[];
 }
 
 const TabsArea = ({
-  selectedCardUrl,
+  selectedCardUrls,
   setShowSelectionCard,
   showSelectionCard,
   cards,
@@ -38,7 +41,7 @@ const TabsArea = ({
         setActiveTab={setActiveTab}
       />
       <TabCardDetail
-        selectedCardUrl={selectedCardUrl}
+        selectedCardUrls={selectedCardUrls}
         cards={cards}
         activeTab={activeTab}
         clearSelection={clearSelection}

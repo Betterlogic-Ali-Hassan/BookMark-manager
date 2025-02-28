@@ -3,6 +3,10 @@ import Header from "@/components/header/Header";
 import Hero from "@/components/hero/Hero";
 import TopBar from "@/components/topbar/TopBar";
 import { Card } from "@/types/TabCardType";
+type Tags = {
+  name: string;
+  id: number;
+};
 interface Props {
   filteredCards: Card[];
   cards: Card[];
@@ -12,15 +16,15 @@ interface Props {
   selectAll: () => void;
   setShowCardDetail: (show: boolean) => void;
   clearSelection: () => void;
-  toggleCard: (cardId: number, url: string) => void;
+  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
   showCardDetail: boolean;
   setShowSelectionCard: (show: boolean) => void;
   showSelectionCard: boolean;
   selectedCards: number[];
-  selectedCardUrl: string;
+  selectedCardUrls: string[];
 }
 const Home = ({
-  selectedCardUrl,
+  selectedCardUrls,
   filteredCards,
   cards,
   toggleCategory,
@@ -59,7 +63,7 @@ const Home = ({
         toggleCategory={toggleCategory}
       />
       <Hero
-        selectedCardUrl={selectedCardUrl}
+        selectedCardUrls={selectedCardUrls}
         toggleCategory={toggleCategory}
         toggleCard={toggleCard}
         clearSelection={clearSelection}

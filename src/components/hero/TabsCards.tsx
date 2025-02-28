@@ -1,10 +1,13 @@
 import { Card } from "@/types/TabCardType";
 import TabCard from "./TabCard";
-
+type Tags = {
+  name: string;
+  id: number;
+};
 interface Props {
   setShowCardDetail: (show: boolean) => void;
   cards: Card[];
-  toggleCard: (cardId: number, url: string) => void;
+  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
   selectedCards: number[];
   showSelectionCard: boolean;
   setActiveTab: (tab: number) => void;

@@ -1,5 +1,10 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+type Tag = {
+  name: string;
+  count: number;
+  id: number;
+};
 interface Props {
   categoriesData: {
     name: string;
@@ -7,23 +12,31 @@ interface Props {
     id: number;
   }[];
   allowedText?: boolean;
-  handleAddTag?: () => void;
   tagInputValue?: string;
   setTagInputValue?: (value: string) => void;
 }
-const TagBox = ({
-  categoriesData,
-  allowedText,
-  handleAddTag,
-  tagInputValue,
-  setTagInputValue,
-}: Props) => {
+const TagBox = ({ categoriesData, allowedText }: Props) => {
+  const [tagInputValue, setTagInputValue] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [notificationText, setNotificationText] = useState("");
   const [showNotificationText, setShowNotificationText] = useState(false);
+  const [tags, setTags] = useState<Tag[]>(categoriesData || []);
+
   const handleTag = () => {
-    if (handleAddTag) {
-      handleAddTag();
+    if (tagInputValue?.trim()) {
+      const newTag: Tag = {
+        name: tagInputValue,
+        count: 1,
+        id: Date.now(),
+      };
+      setTags((prevTags) => [...prevTags, newTag]);
+      setShowNotificationText(true);
+      setNotificationText(`New Tag Added '${tagInputValue}'`);
+      setTimeout(() => {
+        setShowNotificationText(false);
+      }, 1000);
+
+      if (setTagInputValue) setTagInputValue("");
     }
   };
   const toggleTags = (tag: string) => {
@@ -107,7 +120,7 @@ const TagBox = ({
         </button>
       </div>
       <div className='flex flex-wrap justify-center gap-1.5 overflow-hidden py-1'>
-        {categoriesData.map((category, id) => (
+        {tags.map((category, id) => (
           <button
             type='button'
             key={id}

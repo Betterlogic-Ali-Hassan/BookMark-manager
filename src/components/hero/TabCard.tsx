@@ -1,9 +1,12 @@
 import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
-
+type Tags = {
+  name: string;
+  id: number;
+};
 interface Props {
   setShowCardDetail: (show: boolean) => void;
-  toggleCard: (cardId: number, url: string) => void;
+  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
   selected: boolean;
   id: number;
   showSelectionCard: boolean;
@@ -20,7 +23,7 @@ const TabCard = ({
   setActiveTab,
 }: Props) => {
   const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, data.path);
+    if (showSelectionCard) toggleCard(id, data.path, data.tags);
     setActiveTab(id);
   };
   const handleCardDetail = () => {

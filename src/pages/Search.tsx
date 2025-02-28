@@ -22,10 +22,10 @@ interface Props {
   selectedCategories: number[];
   setSelectedCategories: (categories: number[]) => void;
   toggleCategory: (categoryId: number) => void;
-  selectedCardUrl: string;
+  selectedCardUrls: string[];
 }
 const Search = ({
-  selectedCardUrl,
+  selectedCardUrls,
   setSearchTerm,
   searchTerm,
   filteredCards,
@@ -87,7 +87,7 @@ const Search = ({
         </div>
         <div className='hidden relative lg:block pt-2'>
           <TabCardDetail
-            selectedCardUrl={selectedCardUrl}
+            selectedCardUrls={selectedCardUrls}
             cards={filteredCards}
             activeTab={activeTab}
             clearSelection={clearSelection}

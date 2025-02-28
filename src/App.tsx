@@ -13,21 +13,28 @@ import ImportSetting from "./pages/settings/ImportSetting";
 import ExportSettings from "./pages/settings/ExportSettings";
 import SettingLayout from "./pages/settings/SettingLayout";
 import Integration from "./pages/settings/Integration";
+import EditBookmark from "./pages/EditBookmark";
 
 const App = () => {
   const cards: Card[] = tabsData;
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-  const [selectedCardUrl, setSelectedCardUrl] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCards, setFilteredCards] = useState(cards);
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
+  const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
+
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
     );
-    setSelectedCardUrl(url);
+
+    setSelectedCardUrls((prev) =>
+      prev.includes(url)
+        ? prev.filter((cardUrl) => cardUrl !== url)
+        : [...prev, url]
+    );
   };
   const selectAll = () => {
     setSelectedCards(cards.map((_, index) => index));
@@ -75,7 +82,7 @@ const App = () => {
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
               toggleCard={toggleCard}
-              selectedCardUrl={selectedCardUrl}
+              selectedCardUrls={selectedCardUrls}
               selectedCards={selectedCards}
               showCardDetail={showCardDetail}
             />
@@ -85,7 +92,7 @@ const App = () => {
           path='/search'
           element={
             <Search
-              selectedCardUrl={selectedCardUrl}
+              selectedCardUrls={selectedCardUrls}
               toggleCategory={toggleCategory}
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
@@ -112,6 +119,10 @@ const App = () => {
           <Route path='export' element={<ExportSettings />} />
           <Route path='integration' element={<Integration />} />
         </Route>
+        <Route
+          path='/edit-bookmark'
+          element={<EditBookmark setShowCardDetail={setShowCardDetail} />}
+        />
       </Routes>
     </Router>
   );
