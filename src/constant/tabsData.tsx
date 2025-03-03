@@ -1,14 +1,7 @@
-export type TabItem = {
-  id: number;
-  icon: string;
-  title: string;
-  path: string;
-  des: string;
-  tags: { id: number; name: string }[];
-};
+import { Card } from "@/types/TabCardType";
 
-export const tabsData: TabItem[] = Array.from({ length: 70 }, (_, index) => {
-  const baseItems: Omit<TabItem, "id" | "tags">[] = [
+export const tabsData: Card[] = Array.from({ length: 70 }, (_, index) => {
+  const baseItems: Omit<Card, "id" | "tags">[] = [
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://podscan.fm//&size=32",
       title: "Podscan.fm",

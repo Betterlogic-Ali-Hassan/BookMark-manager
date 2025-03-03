@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { Card } from "../types/TabCardType";
 import { tabsData } from "../constant/tabsData";
+
 type Tags = { id: number; name: string }[];
 type BookmarkContextType = {
   cards: Card[];
@@ -27,6 +28,7 @@ type BookmarkContextType = {
   selectAll: () => void;
   clearSelection: () => void;
   setSelectedCategories: (categories: number[]) => void;
+  setCards: (cards: Card[]) => void;
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
@@ -34,15 +36,16 @@ const BookmarkContext = createContext<BookmarkContextType | undefined>(
 );
 
 export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
-  const cards: Card[] = tabsData;
+  const [cards, setCards] = useState<Card[]>(tabsData);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCards, setFilteredCards] = useState(cards);
+  const [filteredCards, setFilteredCards] = useState<Card[]>(cards);
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
 
+  // Fixed toggleCard function to match the expected signature
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
@@ -56,7 +59,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const selectAll = () => {
-    setSelectedCards(cards.map((_, index) => index));
+    setSelectedCards(filteredCards.map((card) => card.id));
+    setSelectedCardUrls(filteredCards.map((card) => card.path));
   };
 
   const clearSelection = () => {
@@ -72,6 +76,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  // Update filteredCards whenever cards, searchTerm, or selectedCategories change
   useEffect(() => {
     const filtered = cards.filter((card) => {
       const matchesSearch = card.title
@@ -101,6 +106,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setShowCardDetail,
     setShowSelectionCard,
     selectAll,
+    setCards,
     clearSelection,
   };
 

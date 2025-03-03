@@ -8,8 +8,8 @@ const TabsCards = ({ setActiveTab, cards }: Props) => {
   return (
     <div>
       <div className='flex flex-col gap-2 px-1.5 lg:px-0 mt-2 lg:mt-0'>
-        {cards.map((data, index) => (
-          <TabCard key={index} data={data} setActiveTab={setActiveTab} />
+        {cards.map((data) => (
+          <TabCard key={data.id} data={data} setActiveTab={setActiveTab} />
         ))}
       </div>
     </div>

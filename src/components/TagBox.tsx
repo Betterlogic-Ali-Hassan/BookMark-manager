@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 import { categoriesData } from "@/constant/categoriesData";
 import { cn } from "@/lib/utils";
+import { useFormContext } from "@/context/from-Context";
 
 type Tag = {
   name: string;
@@ -14,24 +15,25 @@ type Tag = {
 
 interface TagBoxProps {
   allowedText?: boolean;
-  initialSelectedTags?: string[];
   onTagsChange?: (tags: string[]) => void;
 }
 
-const TagBox = ({
-  allowedText = false,
-  initialSelectedTags = [],
-  onTagsChange,
-}: TagBoxProps) => {
+const TagBox = ({ allowedText = false, onTagsChange }: TagBoxProps) => {
   const [tagInputValue, setTagInputValue] = useState("");
-  const [selectedTags, setSelectedTags] =
-    useState<string[]>(initialSelectedTags);
+  const { formData, updateFormData } = useFormContext();
+  const [selectedTags, setSelectedTags] = useState<string[]>(
+    formData.tags || []
+  );
   const [notificationText, setNotificationText] = useState("");
   const [showNotificationText, setShowNotificationText] = useState(false);
   const [tags, setTags] = useState<Tag[]>(categoriesData || []);
 
-  // Notify parent component of tag changes
+  // Update formData.tags whenever selectedTags changes
   useEffect(() => {
+    // Update the formData with the selected tags
+    updateFormData("tags", selectedTags);
+
+    // Notify parent component of tag changes
     if (onTagsChange) {
       onTagsChange(selectedTags);
     }

@@ -1,8 +1,15 @@
+import { useBookmarks } from "@/context/BookmarkContext";
 import { Link } from "react-router-dom";
 
 const AddNewCardBtn = () => {
+  const { setShowCardDetail, setShowSelectionCard } = useBookmarks();
+  const handleLinkClick = () => {
+    setShowCardDetail(false);
+    setShowSelectionCard(false);
+  };
   return (
     <Link
+      onClick={handleLinkClick}
       to='/new'
       className='rounded bg-white dark:bg-white/10 px-3 py-2 text-sm font-semibold text-neutral-900 shadow-sm dark:shadow-none ring-1 dark:ring-0 ring-inset ring-neutral-300 hover:bg-neutral-50 disabled:hover:bg-white dark:hover:bg-white/20 dark:disabled:hover:bg-white/10 disabled:cursor-not-allowed dark:text-neutral-200 dark:hover:text-white whitespace-nowrap flex items-center'
     >
