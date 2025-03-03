@@ -72,7 +72,7 @@ const DropDownContent = () => {
       </button>
       {showSelectionCard && (
         <button
-          className='px-4 py-2 text-sm text-white text-start w-full flex items-center gap-3 hover:bg-black/20'
+          className='px-4 py-2 text-sm text-neutral-700 dark:text-white text-start w-full flex items-center gap-3 hover:bg-black/5 dark:hover:bg-black/20'
           onClick={handleCloseSelectionCard}
         >
           <svg

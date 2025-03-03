@@ -62,7 +62,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
         </a>
         {!showSelectionCard && (
           <button
-            className='hidden group-hover:block focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded-r px-4 lg:px-3 h-14 lg:h-12 text-neutral-400 hover:text-neutral-700 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5  '
+            className='hidden group-hover:block focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-300 rounded-r px-4 lg:px-3 h-14 lg:h-12 text-neutral-400 hover:text-neutral-700 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5  '
             onClick={handleCardDetail}
           >
             <svg
