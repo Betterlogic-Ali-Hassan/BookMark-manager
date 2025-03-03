@@ -37,7 +37,7 @@ const SelectionCard = () => {
   return (
     <div
       className={cn(
-        "hidden lg:block relative  opacity-0 translate-x-[50%] transition-all duration-300",
+        "hidden lg:block relative  opacity-0 translate-x-[100%] transition-all duration-300",
         showSelectionCard && "opacity-100 translate-x-0"
       )}
     >
