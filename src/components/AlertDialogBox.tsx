@@ -22,7 +22,7 @@ const AlertDialogBox = ({ className, allowText, disabled, trigger }: Props) => {
     <AlertDialog>
       <AlertDialogTrigger
         className={cn(
-          "px-4 py-2 text-sm text-neutral-400 hover:text-white",
+          "px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white",
           className
         )}
         disabled={disabled}
@@ -50,12 +50,12 @@ const AlertDialogBox = ({ className, allowText, disabled, trigger }: Props) => {
           </>
         )}
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-lg border-none transform overflow-hidden rounded-md bg-neutral-800 px-4 pb-4 pt-5 text-left shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
+      <AlertDialogContent className='max-w-lg border-none transform overflow-hidden rounded-md bg-white dark:bg-neutral-800 px-4 pb-4 pt-5 text-left shadow-xl dark:shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
         <AlertDialogHeader>
           <AlertDialogTitle className='sm:flex sm:items-start'>
-            <div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 sm:mx-0 sm:h-10 sm:w-10'>
+            <div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-white/10 sm:mx-0 sm:h-10 sm:w-10'>
               <svg
-                className='h-6 w-6 text-red-300'
+                className='h-6 w-6 text-red-600 dark:text-red-300'
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke-width='1.5'
@@ -71,13 +71,13 @@ const AlertDialogBox = ({ className, allowText, disabled, trigger }: Props) => {
             </div>
             <div className='mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left'>
               <h3
-                className='text-base font-semibold leading-6 text-white'
+                className='text-base font-semibold leading-6 text-neutral-900 dark:text-white'
                 id='modal-title'
               >
                 Delete Bookmark
               </h3>{" "}
               <div className='mt-2'>
-                <p className='text-sm text-neutral-400'>
+                <p className='text-sm text-neutral-500 dark:text-neutral-400'>
                   Are you sure you want to delete this bookmark?
                 </p>
               </div>
@@ -85,7 +85,7 @@ const AlertDialogBox = ({ className, allowText, disabled, trigger }: Props) => {
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction className='btn secondary sm:mt-0 sm:w-auto mt-3 inline-flex w-full justify-center bg-[#ffffff1a] border-transparent text-white hover:bg-[#fff3] hover:text-white px-3 py-2 h-[36px]'>
+          <AlertDialogAction className='btn secondary sm:mt-0 sm:w-auto mt-3 inline-flex w-full justify-center  border-transparent dark:text-white dark:hover:bg-[#fff3] dark:hover:text-white px-3 py-2 h-[36px] bg-white text-black hover:bg-[#fafafa]'>
             Cancel
           </AlertDialogAction>
           <AlertDialogCancel className='inline-flex w-full justify-center gap-x-1.5 rounded bg-red-500 px-3 py-2 text-sm font-semibold !text-white shadow-sm hover:bg-red-400 sm:ml-3 sm:w-auto h-[36px] border-transparent'>

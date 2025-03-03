@@ -1,11 +1,14 @@
-interface Props {
-  setShowCardDetail: (show: boolean) => void;
-}
-const CloseBtn = ({ setShowCardDetail }: Props) => {
+import { useBookmarks } from "@/context/BookmarkContext";
+
+const CloseBtn = () => {
+  const { setShowCardDetail } = useBookmarks();
+  const handleShowCardDetail = () => {
+    setShowCardDetail(false);
+  };
   return (
     <button
-      onClick={() => setShowCardDetail(false)}
-      className='absolute top-0 right-0 text-neutral-400 hover:text-white'
+      onClick={handleShowCardDetail}
+      className='absolute top-0 right-0 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'

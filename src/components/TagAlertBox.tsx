@@ -10,13 +10,12 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import TagBox from "./TagBox";
-import { categoriesData } from "@/constant/categoriesData";
 
 const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger
-        className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+        className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
         disabled={disabled}
       >
         <svg
@@ -38,7 +37,7 @@ const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
       <AlertDialogContent className='max-w-3xl  transform overflow-hidden rounded-md bg-neutral-800 border-transparent px-4 pb-4 pt-5 text-left shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            <TagBox categoriesData={categoriesData} />
+            <TagBox />
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter className='flex items-center gap-3 mt-6 border-t border-t-neutral-700 pt-4'>

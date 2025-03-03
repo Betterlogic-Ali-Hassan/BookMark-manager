@@ -4,8 +4,7 @@ const AddNewCardBtn = () => {
   return (
     <Link
       to='/new'
-      className='rounded bg-white/10 px-3 py-2 text-sm font-semibold  shadow-none  ring-0 ring-inset hover:bg-white/20 disabled:hover:bg-white/10 disabled:cursor-not-allowed text-neutral-200 hover:text-white whitespace-nowrap flex items-center'
-      title=''
+      className='rounded bg-white dark:bg-white/10 px-3 py-2 text-sm font-semibold text-neutral-900 shadow-sm dark:shadow-none ring-1 dark:ring-0 ring-inset ring-neutral-300 hover:bg-neutral-50 disabled:hover:bg-white dark:hover:bg-white/20 dark:disabled:hover:bg-white/10 disabled:cursor-not-allowed dark:text-neutral-200 dark:hover:text-white whitespace-nowrap flex items-center'
     >
       <svg
         className='-ml-0.5 mr-1.5 h-5 w-5'

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import AlertDialogBox from "./AlertDialogBox";
-interface Props {
-  setShowCardDetail: (show: boolean) => void;
-}
-const EditActionBtns = ({ setShowCardDetail }: Props) => {
+import { useBookmarks } from "@/context/BookmarkContext";
+
+const EditActionBtns = () => {
+  const { setShowCardDetail } = useBookmarks();
   const navigate = useNavigate();
   const handleBack = () => {
     setShowCardDetail(false);

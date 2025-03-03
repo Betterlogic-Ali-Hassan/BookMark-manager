@@ -1,38 +1,27 @@
+import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
-type Tags = {
-  name: string;
-  id: number;
-};
+
 interface Props {
-  setShowCardDetail: (show: boolean) => void;
-  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
-  selected: boolean;
-  id: number;
-  showSelectionCard: boolean;
   data: Card;
   setActiveTab: (tab: number) => void;
 }
-const TabCard = ({
-  setShowCardDetail,
-  toggleCard,
-  id,
-  selected,
-  showSelectionCard,
-  data,
-  setActiveTab,
-}: Props) => {
+const TabCard = ({ data, setActiveTab }: Props) => {
+  const { id, path, tags, icon, title } = data;
+  const { toggleCard, showSelectionCard, setShowCardDetail, selectedCards } =
+    useBookmarks();
   const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, data.path, data.tags);
+    if (showSelectionCard) toggleCard(id, path, tags);
     setActiveTab(id);
   };
   const handleCardDetail = () => {
     setShowCardDetail(true);
   };
+  const selected = selectedCards.includes(data.id);
   return (
     <div
       className={cn(
-        " border-transparent bg-neutral-900 hover:bg-neutral-800  bookmark overflow-hidden select-none w-full relative border block rounded-md group",
+        " bg-white border-transparent dark:bg-neutral-900 dark:hover:bg-neutral-800 hover:bg-neutral-100  bookmark overflow-hidden select-none w-full relative border block rounded-md group",
         selected && "hover:bg-blue-200/20 border-blue-300/50 bg-blue-200/10 ",
         showSelectionCard && "cursor-pointer"
       )}
@@ -42,15 +31,15 @@ const TabCard = ({
         <a
           target='_blank'
           className={cn(
-            "focus:outline-none focus-visible:ring-1 ring-inset   ring-neutral-300 rounded truncate grow flex items-center gap-3 px-5 lg:px-4 h-14 lg:h-12",
+            "focus:outline-none focus-visible:ring-1 ring-inset   ring-blue-500 dark:ring-neutral-300rounded truncate grow flex items-center gap-3 px-5 lg:px-4 h-14 lg:h-12",
             showSelectionCard && "pointer-events-none"
           )}
-          href={data.path}
+          href={path}
         >
           <object
             type='image/png'
             className='w-[16px] h-[16px] flex-none rounded-sm overflow-hidden'
-            data={data.icon}
+            data={icon}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -67,13 +56,13 @@ const TabCard = ({
               ></path>
             </svg>
           </object>
-          <div className='truncate text-sm font-medium text-white pr-8'>
-            {data.title}
+          <div className='truncate text-sm font-medium text-neutral-900 dark:text-white pr-8'>
+            {title}
           </div>
         </a>
         {!showSelectionCard && (
           <button
-            className='hidden group-hover:block focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-300 rounded-r px-4 lg:px-3 h-14 lg:h-12 text-neutral-400 hover:text-white hover:bg-white/5 '
+            className='hidden group-hover:block focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded-r px-4 lg:px-3 h-14 lg:h-12 text-neutral-400 hover:text-neutral-700 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5  '
             onClick={handleCardDetail}
           >
             <svg

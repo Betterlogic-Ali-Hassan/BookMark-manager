@@ -2,14 +2,11 @@ import ActionsBtns from "./ActionsBtns";
 import Logo from "./Logo";
 import Searchbar from "./Searchbar";
 
-interface Props {
-  setShowSelectionCard: (show: boolean) => void;
-}
-const Header = ({ setShowSelectionCard }: Props) => {
+const Header = () => {
   return (
     <>
       <Logo />
-      <Searchbar setShowSelectionCard={setShowSelectionCard} />
+      <Searchbar />
       <ActionsBtns />
     </>
   );

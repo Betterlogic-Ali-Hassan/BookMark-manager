@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 const SettingLayout = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate(-1);
+    navigate("/");
   };
   return (
     <div className='bg-neutral-200 dark:bg-black min-h-screen p-0 md:px-8 md:pb-8 flex flex-col items-center text-sm'>

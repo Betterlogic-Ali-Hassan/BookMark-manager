@@ -1,56 +1,28 @@
-import { useState } from "react";
 import ActionBtns from "./ActionBtns";
 import { cn } from "@/lib/utils";
+import { useFormContext } from "@/context/from-Context";
 interface Props {
-  setShowLinkInput?: (show: boolean) => void;
-  setShowTextBox?: (show: boolean) => void;
-  setShowTagBox?: (show: boolean) => void;
   actionBtns?: boolean;
   className?: string;
 }
-const TextBoxInputs = ({
-  setShowLinkInput,
-  setShowTextBox,
-  setShowTagBox,
-  actionBtns,
-  className,
-}: Props) => {
-  const [title, setTitle] = useState(localStorage.getItem("titleValue") || "");
-  const [description, setDescription] = useState(
-    localStorage.getItem("descriptionValue") || ""
-  );
-  const [error, setError] = useState("");
+const TextBoxInputs = ({ actionBtns, className }: Props) => {
+  const { formData, updateFormData, nextStep, prevStep, errors, resetForm } =
+    useFormContext();
+
   const handleNextBtn = () => {
-    if (title === "") {
-      setError("Title is required");
-      return;
-    } else {
-      setError("");
-      if (setShowLinkInput && setShowTextBox && setShowTagBox) {
-        setShowLinkInput(false);
-        setShowTextBox(false);
-        setShowTagBox(true);
-      }
-      localStorage.setItem("titleValue", title);
-      localStorage.setItem("descriptionValue", description);
-    }
+    nextStep();
   };
   const handlePrevBtn = () => {
-    if (setShowLinkInput && setShowTextBox && setShowTagBox) {
-      setShowLinkInput(true);
-      setShowTextBox(false);
-      setShowTagBox(false);
-    }
-    localStorage.setItem("titleValue", title);
-    localStorage.setItem("descriptionValue", description);
+    prevStep();
   };
   const handleCancel = () => {
-    setTitle("");
-    setDescription("");
-    setError("");
-    localStorage.removeItem("titleValue");
-    localStorage.removeItem("descriptionValue");
+    resetForm();
   };
+  const handleInputChange =
+    (field: "title" | "description") =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      updateFormData(field, e.target.value);
+    };
   return (
     <>
       <div className={cn("px-4 py-6 sm:p-8", className)}>
@@ -61,20 +33,20 @@ const TextBoxInputs = ({
             </label>
             <div className='relative mt-2'>
               <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={formData.title}
+                onChange={handleInputChange("title")}
                 type='text'
                 name='title'
                 id='title'
                 placeholder='Title'
                 className={cn(
                   "input  rounded ",
-                  error !== "" && "border-red-600 dark:border-red-400"
+                  errors.title && "border-red-600 dark:border-red-400"
                 )}
               />
-              {error !== "" && (
+              {errors.title && (
                 <p className='mt-2 text-sm text-red-600 dark:text-red-300'>
-                  {error}
+                  {errors.title}
                 </p>
               )}
             </div>
@@ -85,8 +57,8 @@ const TextBoxInputs = ({
         </label>
         <div className='relative mt-2'>
           <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={formData.description}
+            onChange={handleInputChange("description")}
             name='description'
             id='description'
             placeholder='Description'

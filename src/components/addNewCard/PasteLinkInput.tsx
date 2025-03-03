@@ -1,61 +1,37 @@
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ActionBtns from "./ActionBtns";
 import { cn } from "@/lib/utils";
+import { useFormContext } from "@/context/from-Context";
 interface Props {
-  setShowLinkInput?: (show: boolean) => void;
-  setShowTextBox?: (show: boolean) => void;
   actionBtns?: boolean;
   className?: string;
 }
 
-const PasteLinkInput = ({
-  setShowLinkInput,
-  setShowTextBox,
-  actionBtns,
-  className,
-}: Props) => {
-  const [inputValue, setInputValue] = useState(
-    localStorage.getItem("inputText") || ""
-  );
+const PasteLinkInput = ({ actionBtns, className }: Props) => {
+  const { formData, updateFormData, nextStep, errors, resetForm } =
+    useFormContext();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const urlRegex =
-    /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
-
   const handleNextBtn = () => {
-    if (!urlRegex.test(inputValue)) {
-      setError("URL is invalid");
-      return;
-    }
-    if (urlRegex.test(inputValue)) {
-      setError("");
-      if (setShowLinkInput && setShowTextBox) {
-        setShowLinkInput(false);
-        setShowTextBox(true);
-      }
-    }
+    nextStep();
   };
 
-  useEffect(() => {
-    localStorage.setItem("inputText", inputValue);
-  }, [inputValue]);
   const handleCancel = () => {
-    setInputValue("");
-    setError("");
-    localStorage.removeItem("inputText");
+    resetForm();
   };
-  const handlePasteUrl = () => {
+  const handlePasteUrl = async () => {
     setLoading(true);
-    setTimeout(async () => {
-      try {
-        const pastedText = await navigator.clipboard.readText();
-        setInputValue(pastedText);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }, 2000);
+    try {
+      const pastedText = await navigator.clipboard.readText();
+      updateFormData("url", pastedText);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleUrlInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateFormData("url", e.target.value);
   };
   return (
     <>
@@ -68,13 +44,13 @@ const PasteLinkInput = ({
             <input
               type='url'
               name='url'
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={formData.url}
+              onChange={handleUrlInputValue}
               id='url'
               placeholder='https://example.com'
               className='input'
             />
-            {error !== "" && (
+            {errors.url && (
               <>
                 <div className='flex pointer-events-none absolute inset-y-0 right-[84px] items-center pr-3'>
                   <svg
@@ -117,9 +93,9 @@ const PasteLinkInput = ({
             </button>
           </div>
 
-          {error !== "" && (
+          {errors.url && (
             <p className='mt-2 text-sm text-red-600 dark:text-red-300'>
-              {error}
+              {errors.url}
             </p>
           )}
         </div>

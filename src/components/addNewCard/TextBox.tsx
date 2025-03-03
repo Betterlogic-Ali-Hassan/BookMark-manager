@@ -1,22 +1,10 @@
 import TextBoxInputs from "./TextBoxInputs";
-interface Props {
-  setShowLinkInput: (show: boolean) => void;
-  setShowTextBox: (show: boolean) => void;
-  setShowTagBox: (show: boolean) => void;
-}
-const TextBox = ({
-  setShowLinkInput,
-  setShowTextBox,
-  setShowTagBox,
-}: Props) => {
+
+const TextBox = () => {
   return (
-    <div className='bg-white dark:bg-neutral-900 shadow-sm dark:bg-shadow-none ring-1 ring-neutral-900/5 dark:ring-0 sm:rounded-lg dark:border dark:border-neutral-800'>
-      <TextBoxInputs
-        setShowLinkInput={setShowLinkInput}
-        setShowTagBox={setShowTagBox}
-        setShowTextBox={setShowTextBox}
-      />
-    </div>
+    <>
+      <TextBoxInputs />
+    </>
   );
 };
 

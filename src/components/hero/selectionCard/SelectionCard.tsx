@@ -1,22 +1,17 @@
 import AlertDialogBox from "@/components/AlertDialogBox";
 import TagAlertBox from "@/components/TagAlertBox";
+import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
 import { toast } from "react-toastify";
 
-interface Props {
-  setShowSelectionCard: (show: boolean) => void;
-  showSelectionCard: boolean;
-  selectedCards: number[];
-  clearSelection: () => void;
-  selectedCardUrls?: string[];
-}
-const SelectionCard = ({
-  selectedCardUrls,
-  setShowSelectionCard,
-  showSelectionCard,
-  selectedCards,
-  clearSelection,
-}: Props) => {
+const SelectionCard = () => {
+  const {
+    selectedCardUrls,
+    clearSelection,
+    setShowSelectionCard,
+    selectedCards,
+    showSelectionCard,
+  } = useBookmarks();
   const handleCopy = () => {
     if ((selectedCardUrls?.length || 0) > 0) {
       const urlsToCopy = selectedCardUrls && selectedCardUrls.join("\n");
@@ -48,11 +43,11 @@ const SelectionCard = ({
     >
       <div className='sticky top-0 left-0 w-full max-w-md min-w-72 text-white ml-2'>
         <div>
-          <div className='text-sm flex flex-col items-start text-white  z-30 rounded-md bg-neutral-900 overflow-hidden'>
-            <div className='rounded-t-md py-2.5 px-4 font-medium  text-white bg-blue-200/10 w-full whitespace-nowrap flex items-center justify-between'>
+          <div className='text-sm flex flex-col items-start dark:text-white text-neutral-700 z-30 rounded-md bg-white dark:bg-neutral-900 overflow-hidden'>
+            <div className='rounded-t-md py-2.5 px-4 font-medium  text-blue-500 dark:text-white bg-blue-50 dark:bg-blue-200/10 w-full whitespace-nowrap flex items-center justify-between'>
               <span>{selectedCards.length} selected</span>
               <button
-                className='text-neutral-400 hover:text-white'
+                className='text-blue-400 hover:text-blue-700 dark:text-neutral-400 dark:hover:text-white'
                 onClick={handleCancel}
               >
                 <svg
@@ -73,7 +68,7 @@ const SelectionCard = ({
             </div>
             <TagAlertBox disabled={isDisabled} />
             <button
-              className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+              className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
               onClick={handleOpenLinks}
             >
@@ -94,7 +89,7 @@ const SelectionCard = ({
               Open
             </button>
             <button
-              className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+              className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
               onClick={handleCopy}
             >
@@ -117,7 +112,7 @@ const SelectionCard = ({
 
             <AlertDialogBox
               disabled={isDisabled}
-              className='hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-white [&_svg]:text-[#a3a3a3]'
+              className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-neutral-700 hover:text-neutral-700 [&_svg]:text-[#a3a3a3]'
               allowText
             />
           </div>

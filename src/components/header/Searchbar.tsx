@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import AddNewCardBtn from "./AddNewCardBtn";
-interface Props {
-  setShowSelectionCard: (show: boolean) => void;
-}
-const Searchbar = ({ setShowSelectionCard }: Props) => {
+import { useBookmarks } from "@/context/BookmarkContext";
+
+const Searchbar = () => {
+  const { setShowSelectionCard } = useBookmarks();
+  const handleShowSelectionCard = () => {
+    setShowSelectionCard(false);
+  };
   return (
-    <div className='hidden lg:flex gap-4 justify-between items-center py-2 border-b border-b-neutral-800'>
+    <div className='hidden lg:flex gap-4 justify-between items-center py-2 border-b border-b-neutral-300 dark:border-b-neutral-800'>
       <div className='flex gap-2 grow'>
         <Link
-          onClick={() => setShowSelectionCard(false)}
+          onClick={handleShowSelectionCard}
           to='/search'
-          className='grow flex items-center gap-2 bg-white/5 ring-white/10 placeholder:text-white/50 focus:ring-blue-500 disabled:bg-white/20 disabled:text-white/70 disabled:ring-white/20 w-full rounded border-0 bg-white py-1.5 px-4 ring-1 ring-inset  focus:ring-2 focus:ring-inset text-sm leading-6 whitespace-nowrap text-neutral-400'
+          className='grow flex items-center gap-2 dark:bg-white/5 dark:ring-white/10 dark:placeholder:text-white/50 dark:focus:ring-blue-500 dark:disabled:bg-white/20 dark:disabled:text-white/70 dark:disabled:ring-white/20 w-full rounded border-0 bg-white py-1.5 px-4 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 text-sm leading-6 whitespace-nowrap text-neutral-400'
         >
           <svg
             className='h-5 w-5 text-neutral-400'

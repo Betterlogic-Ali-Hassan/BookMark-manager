@@ -1,17 +1,13 @@
-interface Props {
-  setShowSelectionCard: (show: boolean) => void;
-  showSelectionCard: boolean;
-  selectAll: () => void;
-  setShowCardDetail: (show: boolean) => void;
-  clearSelection: () => void;
-}
-const DropDownContent = ({
-  setShowSelectionCard,
-  showSelectionCard,
-  selectAll,
-  setShowCardDetail,
-  clearSelection,
-}: Props) => {
+import { useBookmarks } from "@/context/BookmarkContext";
+
+const DropDownContent = () => {
+  const {
+    setShowSelectionCard,
+    selectAll,
+    setShowCardDetail,
+    clearSelection,
+    showSelectionCard,
+  } = useBookmarks();
   const handleSelectAll = () => {
     setShowSelectionCard(true);
     selectAll();
@@ -26,10 +22,10 @@ const DropDownContent = ({
     clearSelection();
   };
   return (
-    <div className='absolute right-2 top-10 lg:right-1 lg:top-7 z-30 w-48 origin-top-right rounded bg-neutral-700 py-1 shadow-black/70 ring-1 ring-black ring-opacity-5 focus:outline-none'>
+    <div className='absolute right-2 top-10 lg:right-1 lg:top-7 z-30 w-48 origin-top-right rounded bg-white dark:bg-neutral-700 py-1 shadow-lg dark:shadow-black/70 ring-1 ring-black ring-opacity-5 focus:outline-none'>
       {!showSelectionCard && (
         <button
-          className='px-4 py-2 text-sm text-white text-start w-full flex items-center gap-3 hover:bg-black/20'
+          className='px-4 py-2 text-sm text-neutral-700 dark:text-white text-start w-full flex items-center gap-3 hover:bg-black/5 dark:hover:bg-black/20'
           onClick={handleShowSelectionCard}
         >
           <svg
@@ -53,7 +49,7 @@ const DropDownContent = ({
       )}
 
       <button
-        className='px-4 py-2 text-sm text-white text-start w-full flex items-center gap-3 hover:bg-black/20'
+        className='px-4 py-2 text-sm text-neutral-700 dark:text-white text-start w-full flex items-center gap-3 hover:bg-black/5 dark:hover:bg-black/20'
         onClick={handleSelectAll}
       >
         <svg

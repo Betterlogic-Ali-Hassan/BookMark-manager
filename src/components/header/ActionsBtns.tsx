@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const ActionsBtns = () => {
   return (
-    <nav className='hidden lg:flex items-center justify-end gap-4 border-b border-b-neutral-800 pr-4'>
+    <nav className='hidden lg:flex items-center justify-end gap-4 border-b border-b-neutral-300 dark:border-b-neutral-800 pr-4'>
       <Link
         to='/settings/tag'
         title='Settings'
-        className='text-sm'
+        className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
         aria-label='Settings'
       >
         <svg
@@ -15,7 +15,7 @@ const ActionsBtns = () => {
           viewBox='0 0 24 24'
           stroke-width='1.5'
           stroke='currentColor'
-          className='w-6 h-6  text-white/50  hover:text-white'
+          className='w-6 h-6  '
         >
           <path
             stroke-linecap='round'
@@ -30,7 +30,7 @@ const ActionsBtns = () => {
         </svg>
       </Link>{" "}
       <button
-        className='text-sm'
+        className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
         title='Documentation'
         aria-label='Documentation'
       >
@@ -40,7 +40,7 @@ const ActionsBtns = () => {
           viewBox='0 0 24 24'
           stroke-width='1.5'
           stroke='currentColor'
-          className='w-6 h-6 text-white/50 hover:text-white'
+          className='w-6 h-6 '
         >
           <path
             stroke-linecap='round'
@@ -49,14 +49,18 @@ const ActionsBtns = () => {
           ></path>
         </svg>
       </button>{" "}
-      <button className='text-sm' aria-label='Exit Demo' title='Exit Demo'>
+      <button
+        className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
+        aria-label='Exit Demo'
+        title='Exit Demo'
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
           viewBox='0 0 24 24'
           stroke-width='1.5'
           stroke='currentColor'
-          className='w-6 h-6 text-white/50 hover:text-white'
+          className='w-6 h-6 '
         >
           <path
             stroke-linecap='round'

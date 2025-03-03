@@ -1,43 +1,30 @@
-import { useState } from "react";
 import TagBox from "../TagBox";
 import ActionBtns from "./ActionBtns";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { categoriesData } from "@/constant/categoriesData";
+
 import { cn } from "@/lib/utils";
+import { useFormContext } from "@/context/from-Context";
 type Tags = {
   name: string;
   id: number;
 };
 interface Props {
-  setShowLinkInput?: (show: boolean) => void;
-  setShowTextBox?: (show: boolean) => void;
-  setShowTagBox?: (show: boolean) => void;
   actionBtns?: boolean;
   className?: string;
   selectedCardTags?: Tags[];
 }
-const TagBoxContent = ({
-  setShowLinkInput,
-  setShowTextBox,
-  setShowTagBox,
-  actionBtns,
-  className,
-}: Props) => {
+const TagBoxContent = ({ actionBtns, className }: Props) => {
+  const { prevStep, resetForm, isLoading, setIsLoading } = useFormContext();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const handlePrevBtn = () => {
-    if (setShowLinkInput && setShowTextBox && setShowTagBox) {
-      setShowLinkInput(false);
-      setShowTextBox(true);
-      setShowTagBox(false);
-    }
-  };
+
   const handleSaveBtn = () => {
-    setLoading(true);
+    setIsLoading(true);
+
+    // Simulate API call
     setTimeout(() => {
       navigate("/");
-      setLoading(false);
+      setIsLoading(false);
       toast.success("Bookmark Added", {
         position: "top-right",
         autoClose: 5000,
@@ -48,21 +35,22 @@ const TagBoxContent = ({
         progress: undefined,
         theme: "dark",
       });
-      localStorage.clear();
+
+      resetForm();
     }, 2000);
   };
 
   return (
     <>
       <div className={cn("px-4 py-6 sm:p-8", className)}>
-        <TagBox categoriesData={categoriesData} />
+        <TagBox />
       </div>
       {!actionBtns && (
         <ActionBtns
-          prevBtnClick={handlePrevBtn}
+          prevBtnClick={prevStep}
           saveBtn
           nextBtnClick={handleSaveBtn}
-          loading={loading}
+          loading={isLoading}
         />
       )}
     </>

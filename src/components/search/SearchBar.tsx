@@ -1,9 +1,8 @@
+import { useBookmarks } from "@/context/BookmarkContext";
 import { Link } from "react-router-dom";
-interface Props {
-  searchTerm: string;
-  setSearchTerm: (searchTerm: string) => void;
-}
-const SearchBar = ({ searchTerm, setSearchTerm }: Props) => {
+
+const SearchBar = () => {
+  const { searchTerm, setSearchTerm } = useBookmarks();
   return (
     <div className='sticky w-full z-30 bg-neutral-200 dark:bg-black top-0 py-2 pr-2'>
       <label htmlFor='search' className='sr-only'>

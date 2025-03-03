@@ -1,56 +1,14 @@
 import { useState } from "react";
 import TabCardDetail from "./tabCardDetail/TabCardDetail";
 import TabsCards from "./TabsCards";
-import { Card } from "@/types/TabCardType";
-type Tags = {
-  name: string;
-  id: number;
-};
-interface Props {
-  setShowSelectionCard: (show: boolean) => void;
-  showSelectionCard: boolean;
-  cards: Card[];
-  selectedCards: number[];
-  clearSelection: () => void;
-  toggleCard: (cardId: number, url: string, tag: Tags[]) => void;
-  setShowCardDetail: (show: boolean) => void;
-  showCardDetail: boolean;
-  selectedCardUrls: string[];
-}
+import { tabsData } from "@/constant/tabsData";
 
-const TabsArea = ({
-  selectedCardUrls,
-  setShowSelectionCard,
-  showSelectionCard,
-  cards,
-  selectedCards,
-  clearSelection,
-  toggleCard,
-  setShowCardDetail,
-  showCardDetail,
-}: Props) => {
+const TabsArea = () => {
   const [activeTab, setActiveTab] = useState(0);
   return (
     <div className='block lg:grid lg:col-span-2 lg:grid-cols-subgrid overflow-y-auto no-scrollbar lg:overflow-y-scroll overflow-x-hidden grow pb-4 lg:pb-6'>
-      <TabsCards
-        setShowCardDetail={setShowCardDetail}
-        cards={cards}
-        toggleCard={toggleCard}
-        selectedCards={selectedCards}
-        showSelectionCard={showSelectionCard}
-        setActiveTab={setActiveTab}
-      />
-      <TabCardDetail
-        selectedCardUrls={selectedCardUrls}
-        cards={cards}
-        activeTab={activeTab}
-        clearSelection={clearSelection}
-        selectedCards={selectedCards}
-        showSelectionCard={showSelectionCard}
-        setShowSelectionCard={setShowSelectionCard}
-        showCardDetail={showCardDetail}
-        setShowCardDetail={setShowCardDetail}
-      />
+      <TabsCards setActiveTab={setActiveTab} cards={tabsData} />
+      <TabCardDetail activeTab={activeTab} cards={tabsData} />
     </div>
   );
 };

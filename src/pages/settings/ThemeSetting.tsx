@@ -17,10 +17,14 @@ const ThemeSetting = () => {
             <ThemeSelector
               label='System default'
               des='The default color theme of your browser or operating system'
-              selected
+              value='system'
             />
-            <ThemeSelector label='Dark' des='A dark color theme' />
-            <ThemeSelector label='Light' des='A light color theme' />
+            <ThemeSelector value='dark' label='Dark' des='A dark color theme' />
+            <ThemeSelector
+              value='light'
+              label='Light'
+              des='A light color theme'
+            />
           </div>
         </fieldset>
       </div>

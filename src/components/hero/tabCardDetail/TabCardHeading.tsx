@@ -5,7 +5,7 @@ interface Props {
 const TabCardHeading = ({ icon, title }: Props) => {
   return (
     <>
-      <h2 className='text-2xl font-semibold flex items-center gap-3 text-white pr-7'>
+      <h2 className='text-2xl font-semibold flex items-center gap-3 text-black dark:text-white pr-7'>
         <object
           type='image/png'
           aria-label='Favicon'

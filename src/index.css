@@ -118,13 +118,13 @@
     @apply text-sm font-semibold;
   }
   .btn {
-    @apply rounded-r bg-[#ffffff0d] flex items-center text-sm text-white input-shadow hover:bg-[#fff3]  font-medium border-0 outline-none ml-[1px] h-[36px] py-2 px-3 gap-1.5;
+    @apply rounded-r dark:bg-[#ffffff0d] flex items-center text-sm dark:text-white input-shadow dark:hover:bg-[#fff3]  font-medium border-0 outline-none ml-[1px] h-[36px] py-2 px-3 gap-1.5 text-[#171717] bg-white hover:bg-[#fafafa];
   }
   .input {
     @apply block w-full rounded-none rounded-l bg-[#ffffff0d] focus:ring-[#60a5fa] focus:ring-2 text-sm text-white font-medium border-0  input-shadow py-1.5 px-3 outline-none h-[36px] placeholder:text-[#777];
   }
   .cancel-btn {
-    @apply sm:mt-0 sm:w-auto mt-3 inline-flex w-full justify-center bg-[#ffffff1a] border-transparent text-white hover:bg-[#fff3] hover:text-white px-3 py-2 h-[36px];
+    @apply sm:mt-0 sm:w-auto mt-3 inline-flex w-full justify-center dark:bg-[#ffffff1a] border-transparent dark:text-white dark:hover:bg-[#fff3] dark:hover:text-white text-[#171717] bg-white hover:bg-[#fafafa] hover:text-[#171717] input-shadow px-3 py-2 h-[36px];
   }
   .done-btn {
     @apply sm:mt-0 sm:w-auto mt-3 inline-flex w-full justify-center bg-[#60a5fa] border-transparent text-white hover:bg-[#93c5fd] hover:text-white px-3 py-2 h-[36px];
@@ -134,9 +134,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.input-shadow {
+.dark .input-shadow {
   --tw-text-opacity: 1;
   --tw-ring-color: #ffffff1a;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 #0000);
+}
+.input-shadow {
+  --tw-text-opacity: 1;
+  --tw-ring-color: #d4d4d4;
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
     var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0

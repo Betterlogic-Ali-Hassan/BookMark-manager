@@ -12,7 +12,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
     <div className='flex items-center justify-start'>
       <Link
         to='/edit-bookmark'
-        className='px-4 py-2 text-sm text-neutral-400 hover:text-white'
+        className='px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
         title='Edit'
       >
         <svg
@@ -31,7 +31,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
         </svg>
       </Link>
       <button
-        className='px-4 py-2 text-sm text-neutral-400 hover:text-white'
+        className='px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
         role='menuitem'
         title='Share'
       >
@@ -52,7 +52,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
       </button>
       <button
         onClick={handleCopy}
-        className='px-4 py-2 text-sm text-neutral-400 hover:text-white'
+        className='px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
         title='Copy URL'
       >
         <svg

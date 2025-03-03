@@ -23,7 +23,7 @@ const TagSetting = () => {
         <div className='flex gap-3 mb-8'>
           <NoTagAlertBox />
           <AlertDialogBox
-            className='btn secondary flex items-center gap-2 rounded text-white '
+            className='btn secondary flex items-center gap-2 rounded dark:text-white text-[#171717] hover:text-[#171717]'
             trigger={
               <>
                 <svg

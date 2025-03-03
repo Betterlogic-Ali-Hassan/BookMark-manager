@@ -3,10 +3,7 @@ import TagBoxContent from "@/components/addNewCard/TagBoxContent";
 import TextBoxInputs from "@/components/addNewCard/TextBoxInputs";
 import EditActionBtns from "@/components/EditActionBtns";
 
-interface Props {
-  setShowCardDetail: (show: boolean) => void;
-}
-const EditBookmark = ({ setShowCardDetail }: Props) => {
+const EditBookmark = () => {
   return (
     <div className='bg-neutral-200 dark:bg-black min-h-screen p-0 sm:px-8 sm:pb-8 flex flex-col items-center'>
       <div className='w-full max-w-3xl'>
@@ -31,7 +28,7 @@ const EditBookmark = ({ setShowCardDetail }: Props) => {
           <PasteLinkInput actionBtns className='sm:px-8 sm:pb-0 pt-6 ' />
           <TextBoxInputs actionBtns className='sm:px-8 sm:py-0 sm:pt-4' />
           <TagBoxContent actionBtns className='sm:px-8 sm:pt-4' />
-          <EditActionBtns setShowCardDetail={setShowCardDetail} />
+          <EditActionBtns />
         </div>
       </div>
     </div>

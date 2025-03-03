@@ -1,24 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import DropDownContent from "./DropDownContent";
-interface Props {
-  setShowSelectionCard: (show: boolean) => void;
-  showSelectionCard: boolean;
-  selectAll: () => void;
-  setShowCardDetail: (show: boolean) => void;
-  clearSelection: () => void;
-  count: number;
-}
-const DropDown = ({
-  setShowSelectionCard,
-  showSelectionCard,
-  selectAll,
-  setShowCardDetail,
-  clearSelection,
-  count,
-}: Props) => {
+import { useBookmarks } from "@/context/BookmarkContext";
+
+const DropDown = () => {
+  const { filteredCards } = useBookmarks();
   const [openDropDown, setOpenDropDown] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
-
+  const count = filteredCards.length;
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!btnRef.current) return;
@@ -39,7 +27,7 @@ const DropDown = ({
         <div className='relative flex justify-center items-center'>
           <button
             ref={btnRef}
-            className='p-2 lg:p-0.5 text-white lg:text-neutral-400 hover:text-white'
+            className='p-2 lg:p-0.5 text-neutral-800 dark:text-white lg:text-neutral-500 dark:lg:text-neutral-400 hover:text-black dark:hover:text-white'
             onClick={() => setOpenDropDown(!openDropDown)}
           >
             <svg
@@ -57,15 +45,7 @@ const DropDown = ({
               ></path>
             </svg>
           </button>
-          {openDropDown && (
-            <DropDownContent
-              setShowCardDetail={setShowCardDetail}
-              selectAll={selectAll}
-              setShowSelectionCard={setShowSelectionCard}
-              showSelectionCard={showSelectionCard}
-              clearSelection={clearSelection}
-            />
-          )}
+          {openDropDown && <DropDownContent />}
         </div>
       </div>
     </div>
