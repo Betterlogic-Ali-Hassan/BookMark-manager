@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import DropDownContent from "./DropDownContent";
 import { useBookmarks } from "@/context/BookmarkContext";
+import ThumbnailToggle from "../hero/ThumbnailToggle";
 
 const DropDown = () => {
   const { filteredCards } = useBookmarks();
@@ -22,6 +23,7 @@ const DropDown = () => {
 
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
+      <ThumbnailToggle />
       <div className='flex items-center px-4 whitespace-nowrap text-neutral-500 text-sm'>
         {count} bookmarks
         <div className='relative flex justify-center items-center'>
