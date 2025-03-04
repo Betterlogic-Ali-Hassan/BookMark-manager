@@ -1,16 +1,16 @@
 const Logo = () => {
   return (
     <div className='hidden lg:flex gap-2 items-center px-4 border-b border-b-neutral-300 dark:border-b-neutral-800 '>
-      <a href='/'>
+      {/* <a href='/'>
         <img
           src='https://bookmarkmanager.com/logo/icon.svg'
           alt='Bookmark Manager Logo Icon'
-          className='w-7 h-7'
+          className='w-10 h-10'
         />
-      </a>
-      <div className='text-sm font-semibold rounded  bg-black/20 dark:bg-white/10 text-white px-2 py-1 leading-none'>
+      </a> */}
+      {/* <div className='text-sm font-semibold rounded  bg-black/20 dark:bg-white/10 text-white px-2 py-1 leading-none'>
         DEMO
-      </div>
+      </div> */}
     </div>
   );
 };

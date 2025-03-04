@@ -1,5 +1,6 @@
 import Header from "@/components/header/Header";
 import Hero from "@/components/hero/Hero";
+import HomeSidebar from "@/components/homeSidebar/HomeSidebar";
 import KeyboardShortcut from "@/components/KeyBoardShortCut";
 import TopBar from "@/components/topbar/TopBar";
 import { ThumbnailTogglerProvider } from "@/context/ThumbnailTogglerContext";
@@ -13,6 +14,7 @@ const Home = () => {
         <TopBar />
         <Hero />
       </ThumbnailTogglerProvider>
+      <HomeSidebar />
     </div>
   );
 };

@@ -167,3 +167,20 @@
     #ffffff1a
   );
 }
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+  background: white !important;
+  border-radius: 50% !important;
+  height: 28px !important;
+  width: 28px !important;
+  margin-top: calc(0px - (28px / 2)) !important;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+.swiper-button-disabled {
+  display: none !important;
+}
