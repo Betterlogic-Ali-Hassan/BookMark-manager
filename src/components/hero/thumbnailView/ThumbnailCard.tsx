@@ -53,7 +53,7 @@ const ThumbnailCard = ({ data }: Props) => {
               alt='icon'
               className='h-[24px] w-[24px] rounded-full border-[#ffffff38] border'
             />
-            <h1 className='text-base font-semibold mt-4 h-[60px] flex line-clamp-3 -tracking-[0.21px]'>
+            <h1 className='text-base font-semibold mt-4 h-[60px] flex line-clamp-3 -tracking-[0.21px] mb-[10.72px]'>
               MicroStrategy Nearly Even on Bitcoin Buys After Latest Rally
             </h1>
             <div className='gap-x-4 flex w-full h-auto items-center'>
