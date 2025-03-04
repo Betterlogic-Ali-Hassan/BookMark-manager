@@ -43,7 +43,7 @@ const ThumbnailCard = ({ data }: Props) => {
     // </div>
     <div className='h-fit'>
       <a
-        href='#'
+        href={data.path}
         className='flex flex-col h-[326px] w-[296px] bg-[#1a1e28] rounded-[16px] gap-y-4 border border-[#a8b3cf44] hover:border-[#a8b3cf88] transition duration-200'
       >
         <div className='p-6 pb-[5px] w-fit h-auto flex flex-col'>
