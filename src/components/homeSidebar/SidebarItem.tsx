@@ -21,7 +21,7 @@ const SidebarItem = ({ data }: Props) => {
           <span></span>
           <div
             className={cn(
-              " text-primary-500 hover:bg-white dark:hover:bg-neutral-700 flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
+              " text-primary-500 hover:bg-[#f2f2f2a4] dark:hover:bg-[#111] flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
               selected && "bg-white dark:bg-neutral-700"
             )}
           >
