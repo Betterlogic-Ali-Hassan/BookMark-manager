@@ -41,9 +41,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
               className='mySwiper w-[768px] relative'
             >
               <SliderBtn
-                icon={
-                  <ChevronRight size={18} className='text-dark !fill-none' />
-                }
+                icon={<ChevronRight size={18} className='text-black' />}
                 id='next1'
                 className='right-0 h-7 w-7'
               />
@@ -103,9 +101,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                   </SwiperSlide>
                 ))}
               <SliderBtn
-                icon={
-                  <ChevronLeft size={18} className='text-dark !fill-none' />
-                }
+                icon={<ChevronLeft size={18} className='text-black' />}
                 id='prev1'
                 className='left-0 h-7 w-7'
               />
