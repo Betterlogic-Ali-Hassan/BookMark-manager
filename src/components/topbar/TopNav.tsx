@@ -3,8 +3,9 @@ import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
+import SliderBtn from "../SliderBtn";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 interface Props {
   className?: string;
   categoriesData: {
@@ -32,13 +33,20 @@ const TopNav = ({ className, categoriesData }: Props) => {
     <div className='lg:h-[3.25rem]'>
       <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 lg:bg-neutral-200 dark:lg:bg-black'>
         <div className='flex overflow-hidden items-center'>
-          <div className='flex overflow-x-auto no-scrollbar'>
+          <div className='flex overflow-x-auto no-scrollbar relative'>
             <Swiper
-              navigation={true}
-              slidesPerView='auto'
               modules={[Navigation]}
-              className='mySwiper w-[768px]'
+              slidesPerView='auto'
+              navigation={{ nextEl: "#next1", prevEl: "#prev1" }}
+              className='mySwiper w-[768px] relative'
             >
+              <SliderBtn
+                icon={
+                  <ChevronRight size={18} className='text-dark !fill-none' />
+                }
+                id='next1'
+                className='right-0 h-7 w-7'
+              />
               {selectedCategories.length > 0 && (
                 <SwiperSlide className='max-w-fit'>
                   <button
@@ -94,6 +102,13 @@ const TopNav = ({ className, categoriesData }: Props) => {
                     </button>
                   </SwiperSlide>
                 ))}
+              <SliderBtn
+                icon={
+                  <ChevronLeft size={18} className='text-dark !fill-none' />
+                }
+                id='prev1'
+                className='left-0 h-7 w-7'
+              />
             </Swiper>
           </div>
         </div>

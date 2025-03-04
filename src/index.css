@@ -184,3 +184,6 @@
 .swiper-button-disabled {
   display: none !important;
 }
+.swiper-wrapper {
+  display: flex;
+}
