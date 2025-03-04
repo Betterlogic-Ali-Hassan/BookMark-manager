@@ -1,6 +1,6 @@
 import { useThumbnailToggler } from "@/context/ThumbnailTogglerContext";
 import { cn } from "@/lib/utils";
-import { GalleryThumbnails, ListCheck } from "lucide-react";
+import { GalleryThumbnails, List } from "lucide-react";
 
 const ThumbnailToggle = () => {
   const { isListView, setIsListView } = useThumbnailToggler();
@@ -20,7 +20,7 @@ const ThumbnailToggle = () => {
         )}
       >
         <span className='sr-only'>ListView</span>
-        <ListCheck size={20} />
+        <List size={20} />
       </button>
       <button
         onClick={handleThumbnailView}
