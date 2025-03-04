@@ -6,6 +6,7 @@ interface Props {
   data: Card;
 }
 const ThumbnailCard = ({ data }: Props) => {
+  const { icon } = data;
   return (
     <div className='h-fit'>
       <a
@@ -15,7 +16,7 @@ const ThumbnailCard = ({ data }: Props) => {
         <div className='p-6 pb-[5px] w-fit h-auto flex flex-col'>
           <div>
             <img
-              src={data.icon}
+              src={icon}
               alt='icon'
               className='h-[24px] w-[24px] rounded-full border-[#444] dark:border-[#ffffff38] border'
             />
