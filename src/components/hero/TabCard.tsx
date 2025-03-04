@@ -1,6 +1,7 @@
 import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
+import MoreIconBtn from "../MoreIconBtn";
 
 interface Props {
   data: Card;
@@ -8,15 +9,12 @@ interface Props {
 }
 const TabCard = ({ data, setActiveTab }: Props) => {
   const { id, path, tags, icon, title } = data;
-  const { toggleCard, showSelectionCard, setShowCardDetail, selectedCards } =
-    useBookmarks();
+  const { toggleCard, showSelectionCard, selectedCards } = useBookmarks();
   const handleToggle = () => {
     if (showSelectionCard) toggleCard(id, path, tags);
     setActiveTab(id);
   };
-  const handleCardDetail = () => {
-    setShowCardDetail(true);
-  };
+
   const selected = selectedCards.includes(data.id);
   return (
     <div
@@ -60,27 +58,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             {title}
           </div>
         </a>
-        {!showSelectionCard && (
-          <button
-            className='hidden group-hover:block focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-300 rounded-r px-4 lg:px-3 h-14 lg:h-12 text-neutral-400 hover:text-neutral-700 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5  '
-            onClick={handleCardDetail}
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke-width='1.5'
-              stroke='currentColor'
-              className='w-6 h-6'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                d='M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z'
-              ></path>
-            </svg>
-          </button>
-        )}
+        <MoreIconBtn className='hidden group-hover:block hover:bg-neutral-50 dark:hover:bg-white/5' />
       </div>
     </div>
   );
