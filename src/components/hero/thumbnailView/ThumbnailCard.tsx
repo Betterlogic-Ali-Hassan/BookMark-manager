@@ -69,7 +69,7 @@ const ThumbnailCard = ({ data }: Props) => {
         </div>
         <div className='max-w-[286px] w-full max-h-[152px] rounded-[16px] items-end mx-auto -mt-[4px] -mb-[8px]'>
           <img
-            src='https://economictimes.indiatimes.com/thumb/msid-95395602,width-1599,height-1066,resizemode-4,imgsize-39490/file-photo-the-company-logo-for-salesforce-com-is-displayed-on-the-salesforce-tower-in-new-york.jpg?from=mdr'
+            src='/thumbnail.jpeg'
             alt='img'
             className='max-w-[280px] w-full h-[152px] p-[3px] rounded-[16px]'
           />
