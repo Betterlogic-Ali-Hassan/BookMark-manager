@@ -19,15 +19,14 @@ const SidebarItem = ({ data }: Props) => {
       <Tooltip>
         <TooltipTrigger className='flex h-16 w-full items-center justify-center'>
           <span></span>
-          <button
-            type='button'
+          <div
             className={cn(
-              " text-primary-500 dark:bg-primary-500/10 flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
+              " text-primary-500 hover:bg-white dark:hover:bg-neutral-700 flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
               selected && "bg-white dark:bg-neutral-700"
             )}
           >
             {icon}
-          </button>
+          </div>
         </TooltipTrigger>
         <TooltipContent
           side='right'
