@@ -51,7 +51,7 @@ const ThumbnailCard = ({ data }: Props) => {
             <img
               src={data.icon}
               alt='icon'
-              className='h-[22px] w-[22px] rounded-full border-[#ffffff38] border'
+              className='h-[24px] w-[24px] rounded-full border-[#ffffff38] border'
             />
             <h1 className='text-base font-semibold mt-4 h-[60px] flex line-clamp-3 -tracking-[0.21px]'>
               MicroStrategy Nearly Even on Bitcoin Buys After Latest Rally
