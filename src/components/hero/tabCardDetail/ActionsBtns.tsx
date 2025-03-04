@@ -12,7 +12,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
     <div className='flex items-center justify-start'>
       <Link
         to='/edit-bookmark'
-        className='px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+        className='pr-4 pl-0 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
         title='Edit'
       >
         <svg
