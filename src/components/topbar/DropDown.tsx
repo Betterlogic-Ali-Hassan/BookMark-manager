@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import DropDownContent from "./DropDownContent";
 import { useBookmarks } from "@/context/BookmarkContext";
 import ThumbnailToggle from "../hero/ThumbnailToggle";
+import { usePageContext } from "@/context/PageContext";
 
 const DropDown = () => {
   const { filteredCards } = useBookmarks();
+  const { page } = usePageContext();
   const [openDropDown, setOpenDropDown] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const count = filteredCards.length;
@@ -23,7 +25,7 @@ const DropDown = () => {
 
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
-      <ThumbnailToggle />
+      {page !== "history" && <ThumbnailToggle />}
       <div className='flex items-center px-4 whitespace-nowrap text-neutral-500 text-sm'>
         {count} bookmarks
         <div className='relative flex justify-center items-center'>

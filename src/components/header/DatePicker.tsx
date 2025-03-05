@@ -22,7 +22,7 @@ export function DatePicker() {
         <Button
           variant={"outline"}
           className={cn(
-            " justify-start text-left font-normal hover:bg-white hover:border-blue-500 border-dotted border-2 border-neutral-300 dark:border-neutral-800 gap-4 rounded "
+            " justify-start text-left font-normal hover:bg-white hover:border-blue-500 border-dotted border-2 border-neutral-300 dark:border-neutral-800 gap-4 rounded max-h-[36px]"
           )}
         >
           <span>{format(date ? date : today, "yyyy/MM/dd")}</span>

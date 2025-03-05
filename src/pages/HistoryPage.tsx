@@ -8,13 +8,13 @@ import { ThumbnailTogglerProvider } from "@/context/ThumbnailTogglerContext";
 
 const HistoryPage = () => {
   return (
-    <div className='flex flex-col lg:grid lg:grid-cols-[1fr_minmax(20rem,51.8rem)_minmax(20rem,1fr)] lg:grid-rows-[auto_auto_1fr] relative min-h-screen w-screen bg-neutral-200 dark:bg-black no-scrollbar'>
+    <div className='flex flex-col lg:grid lg:grid-cols-[1fr_minmax(20rem,48rem)_minmax(20rem,1fr)] lg:grid-rows-[auto_auto_1fr] relative min-h-screen w-screen bg-neutral-200 dark:bg-black no-scrollbar'>
       <KeyboardShortcut />
       <Header />
       <ThumbnailTogglerProvider>
         <History />
         <>
-          <div></div>
+          <div className='w-[260px]'></div>
           <TabsArea />
         </>
       </ThumbnailTogglerProvider>
