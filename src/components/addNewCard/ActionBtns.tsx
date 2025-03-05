@@ -1,87 +1,63 @@
-import { Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+"use client";
 
-interface Props {
-  noprevbtn?: boolean;
-  nextBtnClick?: () => void;
-  saveBtn?: boolean;
-  prevBtnClick?: () => void;
-  loading?: boolean;
-  handleCancel?: () => void;
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+
+interface ActionButtonsProps {
+  showPrevButton?: boolean;
+  onNextClick?: () => void;
+  onPrevClick?: () => void;
+  onCancel?: () => void;
+  isSaveButton?: boolean;
+  isLoading?: boolean;
 }
-const ActionBtns = ({
-  noprevbtn,
-  nextBtnClick,
-  prevBtnClick,
-  saveBtn,
-  loading,
-  handleCancel,
-}: Props) => {
-  const navigate = useNavigate();
-  const cancelBtnClick = () => {
-    if (handleCancel) handleCancel();
-    navigate("/");
-  };
+
+export default function ActionButtons({
+  showPrevButton = true,
+  onNextClick,
+  onPrevClick,
+  onCancel,
+  isSaveButton = false,
+  isLoading = false,
+}: ActionButtonsProps) {
   return (
     <div className='flex items-center justify-end gap-x-6 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
-      {!noprevbtn && (
+      {showPrevButton && (
         <button
-          className='cancel-btn text-sm font-semibold rounded-sm flex items-center gap-x-1'
-          onClick={prevBtnClick}
+          type='button'
+          className='text-sm font-semibold rounded-sm flex items-center gap-x-1 text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors'
+          onClick={onPrevClick}
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 20 20'
-            fill='currentColor'
-            className='w-5 h-5 text-neutral-400'
-          >
-            <path
-              fill-rule='evenodd'
-              d='M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z'
-              clip-rule='evenodd'
-            ></path>
-          </svg>
+          <ChevronLeft className='w-5 h-5 text-neutral-400' />
           Previous
         </button>
       )}
       <div className='flex gap-3 ml-auto'>
         <button
-          className='cancel-btn text-sm font-semibold rounded-sm'
-          onClick={cancelBtnClick}
+          type='button'
+          className='text-sm font-semibold rounded-sm px-3 py-2 text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors'
+          onClick={onCancel}
         >
           Cancel
         </button>
         <button
-          className='done-btn text-sm font-semibold flex items-center gap-x-1 rounded-sm'
-          onClick={nextBtnClick}
+          type='button'
+          className='text-sm font-semibold flex items-center gap-x-1 rounded-sm px-3 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors'
+          onClick={onNextClick}
+          disabled={isLoading}
         >
-          {saveBtn ? (
+          {isSaveButton ? (
             <>
-              {loading && <Loader2 size={20} className='animate-spin' />}
+              {isLoading && <Loader2 size={20} className='animate-spin' />}
               Save
             </>
           ) : (
             <>
-              {" "}
               Next
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-                className='w-5 h-5'
-              >
-                <path
-                  fill-rule='evenodd'
-                  d='M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z'
-                  clip-rule='evenodd'
-                ></path>
-              </svg>
+              <ChevronRight className='w-5 h-5' />
             </>
           )}
         </button>
       </div>
     </div>
   );
-};
-
-export default ActionBtns;
+}

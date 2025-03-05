@@ -187,3 +187,7 @@
 .swiper-wrapper {
   display: flex;
 }
+html,
+body {
+  overflow-x: hidden;
+}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import AddNewCardBtn from "./AddNewCardBtn";
+// import AddNewCardBtn from "./AddNewCardBtn";
 import { useBookmarks } from "@/context/BookmarkContext";
+import { DatePicker } from "./DatePicker";
 
 const Searchbar = () => {
   const { setShowSelectionCard } = useBookmarks();
@@ -30,7 +31,8 @@ const Searchbar = () => {
           <span>Search</span>
           <span className='ml-auto inline-block'>Ctrl + K</span>
         </Link>
-        <AddNewCardBtn />
+        {/* <AddNewCardBtn /> */}
+        <DatePicker />
       </div>
     </div>
   );

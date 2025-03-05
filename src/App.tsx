@@ -12,6 +12,7 @@ import ImportSetting from "./pages/settings/ImportSetting";
 import ExportSettings from "./pages/settings/ExportSettings";
 import Integration from "./pages/settings/Integration";
 import EditBookmark from "./pages/EditBookmark";
+import HistoryPage from "./pages/HistoryPage";
 const App = () => {
   return (
     <BookmarkProvider>
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='integration' element={<Integration />} />
           </Route>
           <Route path='/edit-bookmark' element={<EditBookmark />} />
+          <Route path='/history' element={<HistoryPage />} />
         </Routes>
       </Router>
     </BookmarkProvider>

@@ -11,7 +11,7 @@ const ThumbnailToggle = () => {
     setIsListView(true);
   };
   return (
-    <div className='h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground grid grid-cols-2 mr-4'>
+    <div className='h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground grid grid-cols-2 mr-4 max-w-[96px]'>
       <button
         onClick={handleListView}
         className={cn(
