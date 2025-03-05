@@ -1,11 +1,12 @@
 import TagBox from "../TagBox";
 import ActionBtns from "./ActionBtns";
-import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 import { cn } from "@/lib/utils";
 import { useFormContext } from "@/context/from-Context";
 import { useBookmarks } from "@/context/BookmarkContext";
+import { usePageContext } from "@/context/PageContext";
 
 type Tags = {
   name: string;
@@ -20,7 +21,7 @@ const TagBoxContent = ({ actionBtns, className }: Props) => {
   const { prevStep, resetForm, isLoading, setIsLoading, formData } =
     useFormContext();
   const { cards, setCards } = useBookmarks();
-  const navigate = useNavigate();
+  const { setPage } = usePageContext();
 
   const handleSaveBtn = () => {
     setIsLoading(true);
@@ -41,7 +42,7 @@ const TagBoxContent = ({ actionBtns, className }: Props) => {
 
     // Simulate API call
     setTimeout(() => {
-      navigate("/");
+      setPage("home");
       setIsLoading(false);
       toast.success("Bookmark Added", {
         position: "top-right",

@@ -1,19 +1,20 @@
-import { Link } from "react-router-dom";
-// import AddNewCardBtn from "./AddNewCardBtn";
+import AddNewCardBtn from "./AddNewCardBtn";
 import { useBookmarks } from "@/context/BookmarkContext";
 import { DatePicker } from "./DatePicker";
+import { usePageContext } from "@/context/PageContext";
 
 const Searchbar = () => {
+  const { page, setPage } = usePageContext();
   const { setShowSelectionCard } = useBookmarks();
   const handleShowSelectionCard = () => {
     setShowSelectionCard(false);
+    setPage("search");
   };
   return (
     <div className='hidden lg:flex gap-4 justify-between items-center py-2 border-b border-b-neutral-300 dark:border-b-neutral-800'>
       <div className='flex gap-2 grow'>
-        <Link
+        <button
           onClick={handleShowSelectionCard}
-          to='/search'
           className='grow flex items-center gap-2 dark:bg-white/5 dark:ring-white/10 dark:placeholder:text-white/50 dark:focus:ring-blue-500 dark:disabled:bg-white/20 dark:disabled:text-white/70 dark:disabled:ring-white/20 w-full rounded border-0 bg-white py-1.5 px-4 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 text-sm leading-6 whitespace-nowrap text-neutral-400'
         >
           <svg
@@ -30,9 +31,8 @@ const Searchbar = () => {
           </svg>
           <span>Search</span>
           <span className='ml-auto inline-block'>Ctrl + K</span>
-        </Link>
-        {/* <AddNewCardBtn /> */}
-        <DatePicker />
+        </button>
+        {page === "history" ? <DatePicker /> : <AddNewCardBtn />}
       </div>
     </div>
   );

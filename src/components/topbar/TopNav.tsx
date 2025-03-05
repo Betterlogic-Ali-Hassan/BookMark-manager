@@ -1,10 +1,10 @@
 import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
-import { useLocation, useNavigate } from "react-router-dom";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SliderBtn from "../SliderBtn";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { usePageContext } from "@/context/PageContext";
 
 interface Props {
   className?: string;
@@ -15,16 +15,15 @@ interface Props {
   }[];
 }
 const TopNav = ({ className, categoriesData }: Props) => {
+  const { page, setPage } = usePageContext();
   const { setSelectedCategories, toggleCategory, selectedCategories } =
     useBookmarks();
-  const navigate = useNavigate();
-  const location = useLocation();
   const handleClearFilter = () => {
     setSelectedCategories([]);
   };
   const handleToggleCategory = (categoryId: number) => {
-    if (location.pathname !== "/") {
-      navigate("/");
+    if (page !== "home") {
+      setPage("home");
     }
     toggleCategory(categoryId);
   };
@@ -74,7 +73,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                   (cat) => cat.id === categoryId
                 );
                 return (
-                  <SwiperSlide className='max-w-fit'>
+                  <SwiperSlide className='max-w-fit' key={i}>
                     <button
                       className='focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded h-9 text-white hover:text-white dark:text-neutral-300 bg-blue-500 hover:bg-blue-400 dark:bg-blue-300/20 dark:hover:bg-blue-300/30 justify-center dark:hover:text-white inline-flex items-center text-sm font-semibold px-2 mr-2'
                       key={i}
@@ -87,7 +86,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
               })}
               {selectedCategories.length === 0 &&
                 categoriesData.slice(0, 5).map((category, i) => (
-                  <SwiperSlide className='max-w-fit'>
+                  <SwiperSlide className='max-w-fit' key={i}>
                     <button
                       className={cn(
                         "focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded h-9 text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white inline-flex items-center text-sm font-semibold px-2 mr-2",

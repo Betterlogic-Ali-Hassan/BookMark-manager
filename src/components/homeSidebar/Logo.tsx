@@ -1,12 +1,16 @@
+import { usePageContext } from "@/context/PageContext";
+
 const Logo = () => {
+  const { setPage } = usePageContext();
+  const goHome = () => setPage("home");
   return (
-    <a href='/'>
+    <button onClick={goHome}>
       <img
         src='https://bookmarkmanager.com/logo/icon.svg'
         alt='Bookmark Manager Logo Icon'
         className='w-10 h-10'
       />
-    </a>
+    </button>
   );
 };
 

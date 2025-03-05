@@ -21,7 +21,8 @@ export const sidebarData = [
         </g>
       </svg>
     ),
-    tooltip: "Dashboards",
+    tooltip: "Bookmarks",
+    link: "home",
   },
   {
     icon: (
@@ -45,7 +46,8 @@ export const sidebarData = [
         </g>
       </svg>
     ),
-    tooltip: "Layouts",
+    tooltip: "History",
+    link: "history",
   },
   {
     icon: (
@@ -70,6 +72,7 @@ export const sidebarData = [
       </svg>
     ),
     tooltip: "Chat",
+    link: "chat",
   },
   {
     icon: (
@@ -94,6 +97,7 @@ export const sidebarData = [
       </svg>
     ),
     tooltip: "Documentation",
+    link: "document",
   },
 ];
 export const sidebarDataBottom = [
@@ -120,6 +124,7 @@ export const sidebarDataBottom = [
       </svg>
     ),
     tooltip: "Customize",
+    link: "customize",
   },
   {
     icon: (
@@ -144,6 +149,7 @@ export const sidebarDataBottom = [
       </svg>
     ),
     tooltip: "Search",
+    link: "search",
   },
   {
     icon: (
@@ -168,5 +174,6 @@ export const sidebarDataBottom = [
       </svg>
     ),
     tooltip: "Settings",
+    link: "settings",
   },
 ];

@@ -1,5 +1,5 @@
+import { usePageContext } from "@/context/PageContext";
 import { Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   noprevbtn?: boolean;
@@ -17,10 +17,10 @@ const ActionBtns = ({
   loading,
   handleCancel,
 }: Props) => {
-  const navigate = useNavigate();
+  const { setPage } = usePageContext();
   const cancelBtnClick = () => {
     if (handleCancel) handleCancel();
-    navigate("/");
+    setPage("home");
   };
   return (
     <div className='flex items-center justify-end gap-x-6 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>

@@ -1,14 +1,14 @@
+import { usePageContext } from "@/context/PageContext";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const KeyboardShortcut = () => {
-  const navigate = useNavigate();
+  const { setPage } = usePageContext();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === "k") {
         event.preventDefault();
-        navigate("/search");
+        setPage("search");
       }
     };
 
@@ -16,7 +16,7 @@ const KeyboardShortcut = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [navigate]);
+  }, [setPage]);
 
   return null;
 };

@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { usePageContext } from "@/context/PageContext";
 
 const ActionsBtns = () => {
+  const { setPage } = usePageContext();
+  const goSetting = () => {
+    setPage("settings");
+  };
   return (
     <nav className='hidden lg:flex items-center justify-end gap-4 border-b border-b-neutral-300 dark:border-b-neutral-800 pr-4'>
-      <Link
-        to='/settings/tag'
-        title='Settings'
+      <button
         className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
-        aria-label='Settings'
+        onClick={goSetting}
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -28,7 +30,7 @@ const ActionsBtns = () => {
             d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
           ></path>
         </svg>
-      </Link>{" "}
+      </button>
       <button
         className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
         title='Documentation'

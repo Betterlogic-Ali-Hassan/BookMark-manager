@@ -1,11 +1,21 @@
 import SettingPageFooter from "@/components/settingPage/SettingPageFooter";
 import Sidebar from "@/components/settingPage/Sidebar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { usePageContext } from "@/context/PageContext";
 
-const SettingLayout = () => {
-  const navigate = useNavigate();
+import Tips from "./Tips";
+import Account from "./Account";
+import TagSetting from "./TagSetting";
+import ThemeSetting from "./ThemeSetting";
+import ImportSetting from "./ImportSetting";
+import ExportSettings from "./ExportSettings";
+import Integration from "./Integration";
+import { useState } from "react";
+
+const Settings = () => {
+  const { setPage } = usePageContext();
+  const [currentPage, setCurrentPage] = useState("tag");
   const handleBack = () => {
-    navigate("/");
+    setPage("home");
   };
   return (
     <div className='bg-neutral-200 dark:bg-black min-h-screen p-0 md:px-8 md:pb-8 flex flex-col items-center text-sm'>
@@ -29,9 +39,15 @@ const SettingLayout = () => {
           <span className='text-xl leading-1 font-semibold'>Settings</span>
         </button>
         <div className='bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm dark:bg-shadow-none ring-1 ring-neutral-900/5 dark:ring-0 md:rounded-lg dark:border-y dark:md:border dark:border-neutral-800 dark:md:border-neutral-700 md:flex'>
-          <Sidebar />
+          <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <main className='md:grow flex flex-col'>
-            <Outlet />
+            {currentPage === "tips" && <Tips />}
+            {currentPage === "tag" && <TagSetting />}
+            {currentPage === "theme" && <ThemeSetting />}
+            {currentPage === "import" && <ImportSetting />}
+            {currentPage === "export" && <ExportSettings />}
+            {currentPage === "integration" && <Integration />}
+            {currentPage === "account" && <Account />}
             <SettingPageFooter />
           </main>
         </div>
@@ -40,4 +56,4 @@ const SettingLayout = () => {
   );
 };
 
-export default SettingLayout;
+export default Settings;

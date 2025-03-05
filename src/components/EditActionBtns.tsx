@@ -1,13 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { usePageContext } from "@/context/PageContext";
 import AlertDialogBox from "./AlertDialogBox";
 import { useBookmarks } from "@/context/BookmarkContext";
 
 const EditActionBtns = () => {
+  const { setPage } = usePageContext();
   const { setShowCardDetail } = useBookmarks();
-  const navigate = useNavigate();
+
   const handleBack = () => {
     setShowCardDetail(false);
-    navigate("/");
+    setPage("home");
   };
   return (
     <div className='flex items-center justify-end gap-x-3 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>

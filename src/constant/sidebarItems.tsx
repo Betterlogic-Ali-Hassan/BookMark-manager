@@ -40,7 +40,7 @@ export const sidebarItem = [
       </svg>
     ),
     label: "Appearance",
-    link: "theme-setting",
+    link: "theme",
   },
   {
     icon: (
