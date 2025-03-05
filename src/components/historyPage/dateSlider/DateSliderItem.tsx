@@ -21,8 +21,9 @@ const DateSliderItem = ({
   return (
     <div
       className={cn(
-        "text-xs flex items-center flex-col justify-center leading-[1] pt-[7px] pb-2 px-2 capitalize border-neutral-300 dark:border-neutral-800 lg:w-[83px] w-[73px] h-[44px] hover:bg-black dark:bg-[#111] dark:hover:bg-white transition duration-200 bg-white rounded cursor-pointer hover:text-white dark:hover:text-black",
-        isSelected && "bg-black text-white dark:bg-white dark:text-black"
+        "text-xs flex items-center flex-col justify-center leading-[1] pt-[7px] pb-2 px-2 capitalize border-neutral-300 dark:border-neutral-800 lg:w-[83px] w-[73px] h-[44px]  dark:bg-neutral-900 dark:hover:bg-neutral-800 hover:bg-neutral-100 transition duration-200 bg-white rounded cursor-pointer ",
+        isSelected &&
+          "bg-black text-white dark:bg-white dark:text-black hover:bg-black dark:hover:bg-white"
       )}
       onClick={handleSelectedItem(date)}
     >
