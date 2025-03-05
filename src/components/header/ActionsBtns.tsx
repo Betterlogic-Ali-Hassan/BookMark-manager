@@ -6,7 +6,7 @@ const ActionsBtns = () => {
     setPage("settings");
   };
   return (
-    <nav className='hidden lg:flex items-center justify-end gap-4 border-b border-b-neutral-300 dark:border-b-neutral-800 pr-4'>
+    <nav className='hidden lg:flex items-center justify-end gap-4  pr-4'>
       <button
         className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
         onClick={goSetting}
