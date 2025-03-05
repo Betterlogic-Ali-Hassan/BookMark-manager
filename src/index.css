@@ -134,6 +134,10 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+body::-webkit-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .dark .input-shadow {
   --tw-text-opacity: 1;
   --tw-ring-color: #ffffff1a;
