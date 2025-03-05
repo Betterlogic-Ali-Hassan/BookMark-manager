@@ -1,4 +1,3 @@
-import DropDown from "../topbar/DropDown";
 import ActionsBtns from "./ActionsBtns";
 import DateSlider from "./dateSlider/DateSlider";
 import HoursBalls from "./HoursBalls";
@@ -12,7 +11,7 @@ const History = () => {
         <HoursBalls />
         <ActionsBtns />
       </div>
-      <DropDown />
+      <div className='hidden lg:block'></div>
     </>
   );
 };

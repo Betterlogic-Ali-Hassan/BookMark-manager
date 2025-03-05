@@ -1,6 +1,6 @@
 import AddNewCardBtn from "./AddNewCardBtn";
 import { useBookmarks } from "@/context/BookmarkContext";
-import { DatePicker } from "./DatePicker";
+// import { DatePicker } from "./DatePicker";
 import { usePageContext } from "@/context/PageContext";
 
 const Searchbar = () => {
@@ -32,7 +32,8 @@ const Searchbar = () => {
           <span>Search</span>
           <span className='ml-auto inline-block'>Ctrl + K</span>
         </button>
-        {page === "history" ? <DatePicker /> : <AddNewCardBtn />}
+        {page === "history" ? null : <AddNewCardBtn />}
+        {/* <DatePicker /> */}
       </div>
     </div>
   );

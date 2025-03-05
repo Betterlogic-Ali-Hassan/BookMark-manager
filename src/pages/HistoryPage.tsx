@@ -4,6 +4,7 @@ import TabsArea from "@/components/hero/TabsArea";
 import History from "@/components/historyPage/History";
 import HomeSidebar from "@/components/homeSidebar/HomeSidebar";
 import KeyboardShortcut from "@/components/KeyBoardShortCut";
+import TopBar from "@/components/topbar/TopBar";
 import { ThumbnailTogglerProvider } from "@/context/ThumbnailTogglerContext";
 
 const HistoryPage = () => {
@@ -12,6 +13,7 @@ const HistoryPage = () => {
       <KeyboardShortcut />
       <Header />
       <ThumbnailTogglerProvider>
+        <TopBar />
         <History />
         <>
           <div className='w-[260px]'></div>
