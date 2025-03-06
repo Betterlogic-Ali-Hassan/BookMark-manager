@@ -71,8 +71,8 @@ export const sidebarData = [
         </g>
       </svg>
     ),
-    tooltip: "Chat",
-    link: "chat",
+    tooltip: "Extensions",
+    link: "extensions",
   },
   {
     icon: (

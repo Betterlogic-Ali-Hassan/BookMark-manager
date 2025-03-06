@@ -11,7 +11,7 @@ const HoursBall = ({ text, isSelected, isDisabled, onSelect }: Props) => {
   return (
     <div
       className={cn(
-        "max-w-[25px] flex items-center justify-center transition duration-200 cursor-pointer min-w-[25px] h-[25px] rounded-full bg-white dark:bg-neutral-900 dark:hover:bg-neutral-900 hover:bg-neutral-100 text-[11px]",
+        "max-w-[25px] flex items-center justify-center transition duration-200 cursor-pointer min-w-[25px] h-[25px] rounded-full bg-white dark:bg-neutral-900 dark:hover:bg-neutral-800 hover:bg-neutral-100 text-[11px]",
         isSelected &&
           "bg-black text-white dark:bg-white dark:text-black dark:hover:bg-white  hover:bg-black",
         isDisabled &&

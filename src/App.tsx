@@ -6,6 +6,7 @@ import EditBookmark from "./pages/EditBookmark";
 import HistoryPage from "./pages/HistoryPage";
 import { usePageContext } from "./context/PageContext";
 import Settings from "./pages/settings/Settings";
+import ExtensionPage from "./pages/ExtensionPage";
 const App = () => {
   const { page } = usePageContext();
   return (
@@ -16,6 +17,7 @@ const App = () => {
       {page === "settings" && <Settings />}
       {page === "edit" && <EditBookmark />}
       {page === "history" && <HistoryPage />}
+      {page === "extensions" && <ExtensionPage />}
     </BookmarkProvider>
   );
 };

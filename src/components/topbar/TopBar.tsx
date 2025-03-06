@@ -8,10 +8,10 @@ const TopBar = () => {
   return (
     <>
       <div className='hidden lg:block'></div>
-      {page === "home" ? (
-        <TopNav categoriesData={categoriesData} />
-      ) : (
+      {page === "history" ? (
         <div className='hidden lg:block'></div>
+      ) : (
+        <TopNav categoriesData={categoriesData} />
       )}
       <DropDown />
     </>

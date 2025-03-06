@@ -6,6 +6,9 @@ import { useThumbnailToggler } from "@/context/ThumbnailTogglerContext";
 import HourlyLog from "../HourlyLog";
 import { usePageContext } from "@/context/PageContext";
 
+import ExtensionCard from "../extensionPage/ExtensionCard";
+import { useState } from "react";
+
 interface Props {
   setActiveTab: (tab: number) => void;
   cards: Card[];
@@ -13,13 +16,29 @@ interface Props {
 
 const TabsCards = ({ setActiveTab, cards }: Props) => {
   const { isListView } = useThumbnailToggler();
+  const [favoriteExe, setFavoriteExe] = useState<Card[]>([]);
   const { page } = usePageContext();
-  const isShowHourlyLog = page !== "home";
+  const isShowHourlyLog = page === "history";
 
-  // Helper function to render cards based on view type
   const renderCard = (data: Card) => {
     return isListView ? (
-      <ThumbnailCard data={data} key={data.id} setActiveTab={setActiveTab} />
+      <>
+        {page === "extensions" ? (
+          <ExtensionCard
+            setFavoriteExe={setFavoriteExe}
+            favoriteExe={favoriteExe}
+            data={data}
+            key={data.id}
+            setActiveTab={setActiveTab}
+          />
+        ) : (
+          <ThumbnailCard
+            data={data}
+            key={data.id}
+            setActiveTab={setActiveTab}
+          />
+        )}
+      </>
     ) : (
       <TabCard key={data.id} data={data} setActiveTab={setActiveTab} />
     );
@@ -33,10 +52,24 @@ const TabsCards = ({ setActiveTab, cards }: Props) => {
 
   return (
     <div className={cn(isListView && "max-w-[970px]")}>
-      {/* Top hourly log */}
       {isShowHourlyLog && <HourlyLog />}
-
+      {page === "extensions" && (
+        <>
+          {favoriteExe.length > 0 && (
+            <>
+              <h2 className='text-2xl font-semibold mb-4'>
+                Favorites Extension
+              </h2>
+              <div className={containerClasses}>
+                {favoriteExe.map(renderCard)}
+              </div>
+            </>
+          )}
+          <h2 className='text-2xl font-semibold mb-4'>Extension List</h2>
+        </>
+      )}
       <div className={containerClasses}>
+        {favoriteExe.length > 0 && favoriteExe.map(renderCard)}
         {cards.slice(0, 10).map(renderCard)}
         {isShowHourlyLog && <HourlyLog />}
         {cards.slice(10, 30).map(renderCard)}

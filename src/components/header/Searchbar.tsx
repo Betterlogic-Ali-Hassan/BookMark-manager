@@ -32,7 +32,7 @@ const Searchbar = () => {
           <span>Search</span>
           <span className='ml-auto inline-block'>Ctrl + K</span>
         </button>
-        {page === "history" ? null : <AddNewCardBtn />}
+        {page === "home" ? <AddNewCardBtn /> : null}
         {/* <DatePicker /> */}
       </div>
     </div>

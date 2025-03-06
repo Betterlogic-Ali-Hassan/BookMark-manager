@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import { usePageContext } from "./PageContext";
 
 const ThumbnailTogglerContext = createContext<
   | {
@@ -13,7 +14,9 @@ export const ThumbnailTogglerProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [isListView, setIsListView] = useState(false);
+  const { page } = usePageContext();
+  const showCards = page === "extensions";
+  const [isListView, setIsListView] = useState(showCards);
 
   return (
     <ThumbnailTogglerContext.Provider value={{ isListView, setIsListView }}>
