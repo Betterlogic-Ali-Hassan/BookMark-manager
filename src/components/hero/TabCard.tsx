@@ -64,15 +64,23 @@ const TabCard = ({ data, setActiveTab }: Props) => {
               {title}
             </div>
           </a>
+          <div className='pr-6 text-xs opacity-50  max-w-[300px]  min-w-[300px] tracking-wide'>
+            <span className='truncate max-w-[170px] block'>{path}</span>
+          </div>
+          {tags.slice(1).map((tag) => (
+            <div
+              className=' text-xs  truncate max-w-[120px] min-w-[120px] tracking-wide'
+              key={tag.id}
+            >
+              <span className='bg-hover h-9 px-2 btn max-w-fit rounded text-xs'>
+                {tag.name}
+              </span>
+            </div>
+          ))}
           {page === "history" && (
-            <>
-              <div className='pr-6 text-xs opacity-50  max-w-[300px]  min-w-[300px] tracking-wide'>
-                <span className='truncate max-w-[170px] block'>{path}</span>
-              </div>
-              <div className='pr-6 text-xs opacity-50 truncate max-w-[140px] min-w-[140px] tracking-wide'>
-                {today}
-              </div>
-            </>
+            <div className='pr-6 text-xs opacity-50 truncate max-w-[140px] min-w-[140px] tracking-wide'>
+              {today}
+            </div>
           )}
         </div>
         <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card' />
