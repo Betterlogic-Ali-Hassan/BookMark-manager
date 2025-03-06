@@ -43,11 +43,11 @@ const SelectionCard = () => {
     >
       <div className='sticky top-0 left-0 w-full max-w-md min-w-72 text-white ml-2'>
         <div>
-          <div className='text-sm flex flex-col items-start dark:text-white text-neutral-700 z-30 rounded-md bg-white dark:bg-neutral-900 overflow-hidden'>
-            <div className='rounded-t-md py-2.5 px-4 font-medium  text-blue-500 dark:text-white bg-blue-50 dark:bg-blue-200/10 w-full whitespace-nowrap flex items-center justify-between'>
+          <div className='text-sm flex flex-col items-start text-text z-30 rounded-md bg-card overflow-hidden'>
+            <div className='rounded-t-md py-2.5 px-4 font-medium  text-text  bg-selected-hover w-full whitespace-nowrap flex items-center justify-between'>
               <span>{selectedCards.length} selected</span>
               <button
-                className='text-blue-400 hover:text-blue-700 dark:text-neutral-400 dark:hover:text-white'
+                className='text-foreground hover:text-text '
                 onClick={handleCancel}
               >
                 <svg
@@ -68,7 +68,7 @@ const SelectionCard = () => {
             </div>
             <TagAlertBox disabled={isDisabled} />
             <button
-              className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+              className='hover:bg-hover  w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
               onClick={handleOpenLinks}
             >
@@ -78,7 +78,7 @@ const SelectionCard = () => {
                 viewBox='0 0 24 24'
                 stroke-width='1.5'
                 stroke='currentColor'
-                className='h-5 w-5 text-neutral-400 shrink-0'
+                className='h-5 w-5 text-foreground shrink-0'
               >
                 <path
                   stroke-linecap='round'
@@ -89,7 +89,7 @@ const SelectionCard = () => {
               Open
             </button>
             <button
-              className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+              className='hover:bg-hover  w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isDisabled}
               onClick={handleCopy}
             >
@@ -99,7 +99,7 @@ const SelectionCard = () => {
                 viewBox='0 0 24 24'
                 stroke-width='1.5'
                 stroke='currentColor'
-                className='h-5 w-5 text-neutral-400 shrink-0'
+                className='h-5 w-5 text-foreground shrink-0'
               >
                 <path
                   stroke-linecap='round'
@@ -112,7 +112,7 @@ const SelectionCard = () => {
 
             <AlertDialogBox
               disabled={isDisabled}
-              className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-neutral-700 hover:text-neutral-700 [&_svg]:text-[#a3a3a3]'
+              className='hover:bg-hover  w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-foreground [&_svg]:text-foreground'
               allowText
             />
           </div>

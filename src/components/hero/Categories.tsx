@@ -26,12 +26,12 @@ const Categories = () => {
             <button
               onClick={getCategoryName(category.id)}
               type='button'
-              className='text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white group focus:outline-none max-w-[260px] cursor-pointer flex gap-0.5 text-sm items-center'
+              className='text-foreground  hover:text-text  group focus:outline-none max-w-[260px] cursor-pointer flex gap-0.5 text-sm items-center'
             >
-              <span className='group-focus-visible:ring-1 ring-0 rounded ring-inset ring-neutral-700 dark:ring-neutral-300 leading-1 whitespace-nowrap truncate grow text-right p-2'>
+              <span className='group-focus-visible:ring-1 ring-0 rounded ring-inset ring-border  leading-1 whitespace-nowrap truncate grow text-right p-2'>
                 {category.name}
               </span>
-              <span className='w-8 text-left shrink whitespace-nowrap truncate text-neutral-400 dark:text-neutral-600'>
+              <span className='w-8 text-left shrink whitespace-nowrap truncate text-foreground'>
                 {categoryCounts[category.id] || 0}
               </span>
             </button>

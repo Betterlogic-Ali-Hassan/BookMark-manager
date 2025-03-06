@@ -54,7 +54,7 @@ const PasteLinkInput = ({ actionBtns, className }: Props) => {
               <>
                 <div className='flex pointer-events-none absolute inset-y-0 right-[84px] items-center pr-3'>
                   <svg
-                    className='h-5 w-5 text-red-500 dark:text-red-300'
+                    className='h-5 w-5  text-error'
                     viewBox='0 0 20 20'
                     fill='currentColor'
                     aria-hidden='true'
@@ -94,9 +94,7 @@ const PasteLinkInput = ({ actionBtns, className }: Props) => {
           </div>
 
           {errors.url && (
-            <p className='mt-2 text-sm text-red-600 dark:text-red-300'>
-              {errors.url}
-            </p>
+            <p className='mt-2 text-sm  text-error'>{errors.url}</p>
           )}
         </div>
       </div>

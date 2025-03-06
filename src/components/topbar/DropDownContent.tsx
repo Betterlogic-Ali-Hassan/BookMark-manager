@@ -22,10 +22,10 @@ const DropDownContent = () => {
     clearSelection();
   };
   return (
-    <div className='absolute right-2 top-10 lg:right-1 lg:top-7 z-30 w-48 origin-top-right rounded bg-white dark:bg-neutral-700 py-1 shadow-lg dark:shadow-black/70 ring-1 ring-black ring-opacity-5 focus:outline-none'>
+    <div className='absolute right-2 top-10 lg:right-1 lg:top-7 z-30 w-48 origin-top-right rounded bg-card  py-1 shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none'>
       {!showSelectionCard && (
         <button
-          className='px-4 py-2 text-sm text-neutral-700 dark:text-white text-start w-full flex items-center gap-3 hover:bg-black/5 dark:hover:bg-black/20'
+          className='px-4 py-2 text-sm text-text  text-start w-full flex items-center gap-3 hover:bg-hover'
           onClick={handleShowSelectionCard}
         >
           <svg
@@ -38,7 +38,7 @@ const DropDownContent = () => {
             stroke-width='1.5'
             stroke-linecap='round'
             stroke-linejoin='round'
-            className='h-5 w-5 text-neutral-400'
+            className='h-5 w-5 text-foreground'
           >
             <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
             <path d='M9 11l3 3l8 -8'></path>
@@ -49,7 +49,7 @@ const DropDownContent = () => {
       )}
 
       <button
-        className='px-4 py-2 text-sm text-neutral-700 dark:text-white text-start w-full flex items-center gap-3 hover:bg-black/5 dark:hover:bg-black/20'
+        className='px-4 py-2 text-sm text-text  text-start w-full flex items-center gap-3 hover:bg-hover'
         onClick={handleSelectAll}
       >
         <svg
@@ -72,7 +72,7 @@ const DropDownContent = () => {
       </button>
       {showSelectionCard && (
         <button
-          className='px-4 py-2 text-sm text-neutral-700 dark:text-white text-start w-full flex items-center gap-3 hover:bg-black/5 dark:hover:bg-black/20'
+          className='px-4 py-2 text-sm text-text  text-start w-full flex items-center gap-3 hover:bg-hover'
           onClick={handleCloseSelectionCard}
         >
           <svg

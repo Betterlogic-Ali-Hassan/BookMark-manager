@@ -33,7 +33,7 @@ const ExtensionCard = ({
   };
   return (
     <div
-      className='dark:bg-[#222223] rounded-[24px] max-w-[284px] group  p-6  flex flex-col items-start gap-6'
+      className='bg-card rounded-[24px] max-w-[284px] group  p-6  flex flex-col items-start gap-6'
       onClick={handleToggle}
     >
       <div className='flex justify-between w-full h-[60px]'>
@@ -44,7 +44,7 @@ const ExtensionCard = ({
         />
         <div className='flex gap-5'>
           <span
-            className='cursor-pointer text-red-600 hidden group-hover:block'
+            className='cursor-pointer text-error hidden group-hover:block'
             onClick={addFavoriteExe}
           >
             {isFavorite(favoriteExe) ? (
@@ -53,12 +53,12 @@ const ExtensionCard = ({
               <FaRegHeart size={20} />
             )}
           </span>
-          <Switch className=' data-[state=checked]:dark:bg-white dark:bg-[#444] ' />
+          <Switch className=' data-[state=checked]:bg-text  bg-border  ' />
         </div>
       </div>
       <div className='flex flex-col gap-1'>
         <h2 className='font-semibold'>{title}</h2>
-        <p className='dark:text-[#757576] '>
+        <p className='text-foreground '>
           A simple journaling app for capturing daily memories with text, photo,
           stickers and video.
         </p>

@@ -23,7 +23,7 @@ const ActionBtns = ({
     setPage("home");
   };
   return (
-    <div className='flex items-center justify-end gap-x-6 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
+    <div className='flex items-center justify-end gap-x-6 border-t border-border  px-4 py-4 sm:px-8'>
       {!noprevbtn && (
         <button
           className='cancel-btn text-sm font-semibold rounded-sm flex items-center gap-x-1'

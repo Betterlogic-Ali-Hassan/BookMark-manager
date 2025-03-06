@@ -8,7 +8,7 @@ const ActionsBtns = () => {
   return (
     <nav className='hidden lg:flex items-center justify-end gap-4  pr-4'>
       <button
-        className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
+        className='text-sm text-foreground  hover:text-text '
         onClick={goSetting}
       >
         <svg
@@ -32,7 +32,7 @@ const ActionsBtns = () => {
         </svg>
       </button>
       <button
-        className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
+        className='text-sm text-foreground  hover:text-text '
         title='Documentation'
         aria-label='Documentation'
       >
@@ -52,7 +52,7 @@ const ActionsBtns = () => {
         </svg>
       </button>{" "}
       <button
-        className='text-sm text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white'
+        className='text-sm text-foreground  hover:text-text '
         aria-label='Exit Demo'
         title='Exit Demo'
       >

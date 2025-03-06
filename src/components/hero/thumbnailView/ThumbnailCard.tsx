@@ -29,8 +29,9 @@ const ThumbnailCard = ({ data, setActiveTab }: Props) => {
       <a
         href={data.path}
         className={cn(
-          "flex flex-col h-[326px] max-w-[296px] bg-white dark:bg-[#1a1e28] rounded-[16px] gap-y-4 justify-between border border-[#d4d4d4] hover:border-[#999] dark:border-[#a8b3cf44] dark:hover:border-[#a8b3cf88] transition duration-200 pb-4 ",
-          selected && "hover:bg-blue-200/20 border-blue-300/50 bg-blue-200/10",
+          "flex flex-col h-[326px] max-w-[296px] bg-card rounded-[16px] gap-y-4 justify-between border border-border hover:border-text  transition duration-200 pb-4 ",
+          selected &&
+            "hover:bg-selected-hover border-selected-border bg-selected-bg",
           showSelectionCard && "pointer-events-none"
         )}
       >
@@ -39,7 +40,7 @@ const ThumbnailCard = ({ data, setActiveTab }: Props) => {
             <img
               src={icon}
               alt='icon'
-              className='h-[24px] w-[24px] rounded-full border-[#444] dark:border-[#ffffff38] border'
+              className='h-[24px] w-[24px] rounded-full border-text  border'
             />
             <h1 className='text-[14.5px] font-semibold mt-4  line-clamp-2  -tracking-[0.21px] mb-4 '>
               {des}

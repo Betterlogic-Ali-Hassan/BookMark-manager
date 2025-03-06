@@ -15,10 +15,10 @@ const Searchbar = () => {
       <div className='flex gap-2 grow'>
         <button
           onClick={handleShowSelectionCard}
-          className='grow flex items-center gap-2 dark:bg-white/5 dark:ring-white/10 dark:placeholder:text-white/50 dark:focus:ring-blue-500 dark:disabled:bg-white/20 dark:disabled:text-white/70 dark:disabled:ring-white/20 w-full rounded border-0 bg-white py-1.5 px-4 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 text-sm leading-6 whitespace-nowrap text-neutral-400 min-h-[40px]'
+          className='grow flex items-center gap-2  w-full rounded border-0 bg-card  py-1.5 px-4 ring-1 ring-inset ring-border focus:ring-2 focus:ring-inset focus:ring-brand text-sm leading-6 whitespace-nowrap text-foreground min-h-[40px]'
         >
           <svg
-            className='h-5 w-5 text-neutral-400'
+            className='h-5 w-5 text-foreground'
             viewBox='0 0 20 20'
             fill='currentColor'
             aria-hidden='true'

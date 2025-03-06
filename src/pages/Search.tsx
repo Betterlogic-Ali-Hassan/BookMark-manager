@@ -1,7 +1,7 @@
 import TabCardDetail from "@/components/hero/tabCardDetail/TabCardDetail";
 import TabsCards from "@/components/hero/TabsCards";
-import DataNotFound from "@/components/search/DataNotFound";
-import SearchBar from "@/components/search/SearchBar";
+import DataNotFound from "@/components/searchPage/DataNotFound";
+import SearchBar from "@/components/searchPage/SearchBar";
 import TopNav from "@/components/topbar/TopNav";
 import { categoriesData } from "@/constant/categoriesData";
 import { useBookmarks } from "@/context/BookmarkContext";
@@ -16,7 +16,7 @@ const Search = () => {
     cat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <div className='relative bg-neutral-200 dark:bg-black z-30 min-h-screen'>
+    <div className='relative bg-background z-30 min-h-screen'>
       <div className='lg:grid grid-cols-[minmax(14rem,1fr)_minmax(32rem,40rem)_minmax(20rem,1fr)] overflow-hidden'>
         <div className='hidden lg:block'></div>
         <div className='w-full h-screen overflow-y-auto overflow-x-hidden no-scrollbar'>
@@ -31,7 +31,7 @@ const Search = () => {
               {searchTerm !== "" && (
                 <TopNav
                   categoriesData={filteredCategories}
-                  className='mr-2 bg-[#ffffff1a] hover:bg-[#fff3] text-white font-semibold'
+                  className='mr-2 bg-hover hover:bg-btn-hover text-white font-semibold'
                 />
               )}
             </div>

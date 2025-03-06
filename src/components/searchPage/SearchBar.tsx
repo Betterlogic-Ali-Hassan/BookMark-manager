@@ -6,14 +6,14 @@ const SearchBar = () => {
   const { searchTerm, setSearchTerm } = useBookmarks();
   const goHome = () => setPage("home");
   return (
-    <div className='sticky w-full z-30 bg-neutral-200 dark:bg-black top-0 py-2 pr-2'>
+    <div className='sticky w-full z-30 bg-background  top-0 py-2 pr-2'>
       <label htmlFor='search' className='sr-only'>
         Search
       </label>
       <div className='flex items-center'>
         <button
           onClick={goHome}
-          className='px-4 py-1.5 focus:outline-none focus-visible:ring-1 ring-0 ring-inset rounded ring-neutral-700 dark:ring-neutral-300'
+          className='px-4 py-1.5 focus:outline-none focus-visible:ring-1 ring-0 ring-inset rounded ring-border '
           aria-label='Go back'
         >
           <svg
@@ -22,7 +22,7 @@ const SearchBar = () => {
             viewBox='0 0 24 24'
             strokeWidth='2'
             stroke='currentColor'
-            className='w-6 h-6 dark:text-white'
+            className='w-6 h-6 text-text'
           >
             <path
               strokeLinecap='round'
@@ -51,7 +51,7 @@ const SearchBar = () => {
             name='search'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className='dark:bg-white/5 dark:text-white dark:ring-white/10 dark:placeholder:text-white/50 dark:focus:ring-blue-400 dark:disabled:bg-white/20 dark:disabled:text-white/70 dark:disabled:ring-white/20 block w-full rounded-full border-0 bg-white py-1.5 pl-10 pr-3 text-neutral-900 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 text-sm leading-6'
+            className='bg-card  focus:ring-brand  block w-full rounded-full border-0  py-1.5 pl-10 pr-3 text-text ring-1 ring-inset  placeholder:text-neutral-400 focus:ring-2 focus:ring-inset ring-brand  text-sm leading-6'
             placeholder='Search'
             type='search'
           />

@@ -15,7 +15,7 @@ const Tips = () => {
         </p>
         <div className='md:hidden'>
           <a
-            className='text-blue-500 dark:text-blue-300 whitespace-nowrap flex gap-1.5 items-center'
+            className='text-brand  whitespace-nowrap flex gap-1.5 items-center'
             href='/docs/getting-started/#installing-the-browser-extension'
             title='Visit the documentation'
           >
@@ -55,7 +55,7 @@ const Tips = () => {
         <p>
           Install the desktop app for quick access to your bookmark manager.
           <a
-            className='text-blue-500 dark:text-blue-300 whitespace-nowrap flex gap-1.5 items-center'
+            className='text-brand  whitespace-nowrap flex gap-1.5 items-center'
             href='/docs/getting-started#installing-on-desktop'
             title='Visit the documentation'
           >
@@ -82,7 +82,7 @@ const Tips = () => {
         <p className='mb-4'>
           Visit the documentation to learn more.
           <a
-            className='text-blue-500 dark:text-blue-300 whitespace-nowrap flex gap-1.5 items-center'
+            className='text-brand  whitespace-nowrap flex gap-1.5 items-center'
             href='/docs'
             title='Visit the documentation'
           >
@@ -106,7 +106,7 @@ const Tips = () => {
         <p>
           If you have any issues, feedback, or questions, please contact us at
           <a
-            className='text-blue-500 dark:text-blue-300 ml-1'
+            className='text-brand  ml-1'
             href='mailto:kevin@bookmarkmanager.com'
           >
             kevin@bookmarkmanager.com

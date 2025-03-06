@@ -11,7 +11,7 @@ const EditActionBtns = () => {
     setPage("home");
   };
   return (
-    <div className='flex items-center justify-end gap-x-3 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
+    <div className='flex items-center justify-end gap-x-3 border-t border-border  px-4 py-4 sm:px-8'>
       <AlertDialogBox
         className='btn secondary flex items-center gap-x-1.5 rounded'
         trigger={

@@ -32,17 +32,14 @@ const SidebarItem = ({ data }: Props) => {
           <span></span>
           <div
             className={cn(
-              " text-primary-500 hover:bg-[#f2f2f2a4] dark:hover:bg-[#111] flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
-              selected && "bg-white dark:bg-neutral-700"
+              " text-text hover:bg-hover  flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
+              selected && "bg-card "
             )}
           >
             {icon}
           </div>
         </TooltipTrigger>
-        <TooltipContent
-          side='right'
-          className='bg-black dark:bg-white text-white dark:text-black'
-        >
+        <TooltipContent side='right' className='bg-text  text-card '>
           <p>{tooltip}</p>
         </TooltipContent>
       </Tooltip>

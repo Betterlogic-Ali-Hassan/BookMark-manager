@@ -1,6 +1,6 @@
 const SettingPageFooter = () => {
   return (
-    <div className=' mt-auto flex items-center justify-end gap-x-3 border-t border-neutral-900/10 dark:border-white/10 px-4 py-4 sm:px-8'>
+    <div className=' mt-auto flex items-center justify-end gap-x-3 border-t border-border  px-4 py-4 sm:px-8'>
       <a href='#' className='flex gap-2 items-center'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -8,7 +8,7 @@ const SettingPageFooter = () => {
           viewBox='0 0 24 24'
           strokeWidth='1.5'
           stroke='currentColor'
-          className='w-5 h-5 text-neutral-500 dark:text-neutral-400'
+          className='w-5 h-5 text-foreground'
         >
           <path
             strokeLinecap='round'

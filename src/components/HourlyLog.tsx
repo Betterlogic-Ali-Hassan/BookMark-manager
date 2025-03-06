@@ -9,7 +9,7 @@ const HourlyLog = () => {
       </h4>
       <AlertDialogBox
         trigger={<ActionBtn text='Delete' />}
-        className='p-0 dark:text-white'
+        className='p-0 text-text'
       />
     </div>
   );

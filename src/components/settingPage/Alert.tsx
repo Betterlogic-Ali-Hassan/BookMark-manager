@@ -1,11 +1,11 @@
 const Alert = ({ title }: { title: string }) => {
   return (
     <div className='mb-6'>
-      <div className='rounded-md p-4 bg-blue-50 dark:bg-white/10 border border-transparent dark:border-blue-300'>
+      <div className='rounded-md p-4 bg-card  border border-brand '>
         <div className='flex'>
           <div className='flex-shrink-0'>
             <svg
-              className='h-6 w-6 text-blue-400 dark:text-blue-300'
+              className='h-6 w-6 text-brand '
               fill='none'
               viewBox='0 0 24 24'
               stroke-width='1.5'
@@ -20,7 +20,7 @@ const Alert = ({ title }: { title: string }) => {
             </svg>
           </div>
           <div className='ml-3'>
-            <div className='text-blue-700 dark:text-blue-200'>
+            <div className='text-text'>
               <p>{title}</p>
               <div className='mt-3'>
                 <button className='btn flex items-center gap-2 rounded'>

@@ -41,13 +41,11 @@ const TextBoxInputs = ({ actionBtns, className }: Props) => {
                 placeholder='Title'
                 className={cn(
                   "input  rounded ",
-                  errors.title && "border-red-600 dark:border-red-400"
+                  errors.title && "border-error "
                 )}
               />
               {errors.title && (
-                <p className='mt-2 text-sm text-red-600 dark:text-red-300'>
-                  {errors.title}
-                </p>
+                <p className='mt-2 text-sm text-error '>{errors.title}</p>
               )}
             </div>
           </div>

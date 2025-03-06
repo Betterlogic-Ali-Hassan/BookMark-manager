@@ -22,8 +22,9 @@ const TabCard = ({ data, setActiveTab }: Props) => {
   return (
     <div
       className={cn(
-        " bg-white border-transparent dark:bg-neutral-900 dark:hover:bg-neutral-800 hover:bg-neutral-100  bookmark overflow-hidden select-none w-full relative border block rounded-md group",
-        selected && "hover:bg-blue-200/20 border-blue-300/50 bg-blue-200/10 ",
+        "  border-transparent hover:bg-hover overflow-hidden select-none bg-card  w-full relative border block rounded-md group",
+        selected &&
+          "hover:bg-selected-hover border-selected-border bg-selected-bg",
         showSelectionCard && "cursor-pointer"
       )}
       onClick={handleToggle}
@@ -33,7 +34,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
           <a
             target='_blank'
             className={cn(
-              "focus:outline-none focus-visible:ring-1 ring-inset    ring-blue-500 dark:ring-neutral-300rounded truncate grow flex items-center gap-3 px-5 lg:px-4 h-14 lg:h-12",
+              "focus:outline-none focus-visible:ring-1 ring-inset ring-brand  rounded truncate grow flex items-center gap-3 px-5 lg:px-4 h-14 lg:h-12",
               showSelectionCard && "pointer-events-none",
               page === "history" && "max-w-[280px] min-w-[280px]"
             )}
@@ -50,7 +51,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
                 viewBox='0 0 24 24'
                 stroke-width='1.5'
                 stroke='currentColor'
-                className='w-[16px] h-[16px] text-slate-400'
+                className='w-[16px] h-[16px] text-foreground'
               >
                 <path
                   stroke-linecap='round'
@@ -59,7 +60,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
                 ></path>
               </svg>
             </object>
-            <div className='truncate text-sm font-medium text-neutral-900 dark:text-white pr-8 max-w-[150px]'>
+            <div className='truncate text-sm font-medium text-text  pr-8 max-w-[150px]'>
               {title}
             </div>
           </a>
@@ -74,7 +75,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             </>
           )}
         </div>
-        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-neutral-50 dark:hover:bg-white/5' />
+        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card' />
       </div>
     </div>
   );

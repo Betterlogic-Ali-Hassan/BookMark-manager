@@ -15,7 +15,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
     <div className='flex items-center justify-start'>
       <button
         onClick={goEditPage}
-        className='pr-4 pl-0 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+        className='pr-4 pl-0 py-2 text-sm text-foreground  hover:text-text '
         title='Edit'
       >
         <svg
@@ -34,7 +34,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
         </svg>
       </button>
       <button
-        className='px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+        className='px-4 py-2 text-sm text-foreground  hover:text-text '
         role='menuitem'
         title='Share'
       >
@@ -55,7 +55,7 @@ const ActionsBtns = ({ url }: { url?: string }) => {
       </button>
       <button
         onClick={handleCopy}
-        className='px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+        className='px-4 py-2 text-sm text-foreground  hover:text-text '
         title='Copy URL'
       >
         <svg

@@ -26,12 +26,12 @@ const DropDown = () => {
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
       {page !== "history" && <ThumbnailToggle />}
-      <div className='flex items-center px-4 whitespace-nowrap text-neutral-500 text-sm'>
+      <div className='flex items-center px-4 whitespace-nowrap text-foreground  text-sm'>
         {count} bookmarks
         <div className='relative flex justify-center items-center'>
           <button
             ref={btnRef}
-            className='p-2 lg:p-0.5 text-neutral-800 dark:text-white lg:text-neutral-500 dark:lg:text-neutral-400 hover:text-black dark:hover:text-white'
+            className='p-2 lg:p-0.5  lg:text-foreground   hover:text-text'
             onClick={() => setOpenDropDown(!openDropDown)}
           >
             <svg

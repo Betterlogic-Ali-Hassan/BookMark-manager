@@ -1,6 +1,6 @@
 const Heading = () => {
   return (
-    <h2 className='px-4 py-6 sm:p-8 sm:pt-0 text-xl font-semibold leading-7 text-neutral-900 dark:text-white flex items-center justify-center gap-3'>
+    <h2 className='px-4 py-6 sm:p-8 sm:pt-0 text-xl font-semibold leading-7 text-text  flex items-center justify-center gap-3'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'

@@ -15,7 +15,7 @@ const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger
-        className='hover:bg-neutral-100 dark:hover:bg-white/5 w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+        className='hover:bg-hover w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50'
         disabled={disabled}
       >
         <svg
@@ -34,7 +34,7 @@ const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
         </svg>
         Edit tags
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-3xl  transform overflow-hidden rounded-md bg-neutral-800 border-transparent px-4 pb-4 pt-5 text-left shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
+      <AlertDialogContent className='max-w-3xl  transform overflow-hidden rounded-md bg-card border-transparent px-4 pb-4 pt-5 text-left shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
         <AlertDialogHeader>
           <AlertDialogTitle>
             <TagBox />
@@ -55,10 +55,10 @@ const TagAlertBox = ({ disabled }: { disabled?: boolean }) => {
           </div>
           <div className='grow'></div>
           <div className='gap-3 flex'>
-            <AlertDialogAction className='cancel-btn bg-[#ffffff1a] text-white  hover:bg-[#fff3]'>
+            <AlertDialogAction className='btn rounded'>
               Cancel
             </AlertDialogAction>
-            <AlertDialogCancel className='done-btn bg-[#60a5fa] hover:bg-[#93c5fd]'>
+            <AlertDialogCancel className='btn rounded text-white bg-[#60a5fa] hover:bg-[#93c5fd]'>
               Save
             </AlertDialogCancel>
           </div>

@@ -10,14 +10,14 @@ const Sidebar = ({ currentPage, setCurrentPage }: Props) => {
     return () => setCurrentPage(page);
   };
   return (
-    <div className='flex gap-1 w-screen md:w-48 md:py-2 overflow-x-auto no-scrollbar md:dark:bg-neutral-800 md:bg-neutral-50 md:flex-col dark:border-neutral-700 border-neutral-200 md:rounded-l-lg md:flex-none border-b md:border-b-0'>
+    <div className='flex gap-1 w-screen md:w-48 md:py-2 overflow-x-auto no-scrollbar md:flex-col border-border bg-hover md:rounded-l-lg md:flex-none border-b md:border-b-0 '>
       {sidebarItem.map((item, i) => (
         <button
           onClick={goToPage(item.link)}
           className={cn(
-            "flex items-center gap-4 border-b-2 md:border-none whitespace-nowrap py-4 px-6 font-semibold md:text-left hover:bg-black/5 hover:text-neutral-900 hover:dark:text-white hover:dark:bg-black/30  ",
+            "flex items-center gap-4 border-b-2 md:border-none whitespace-nowrap py-4 px-6 font-semibold md:text-left hover:bg-sidebar-hover hover:text-text ",
             currentPage === item.link &&
-              "border-blue-600 dark:border-white dark:bg-black/30 dark:text-white bg-black/5 text-neutral-900"
+              "border-brand bg-sidebar-hover text-text"
           )}
           key={i}
         >

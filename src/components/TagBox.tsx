@@ -28,12 +28,8 @@ const TagBox = ({ allowedText = false, onTagsChange }: TagBoxProps) => {
   const [showNotificationText, setShowNotificationText] = useState(false);
   const [tags, setTags] = useState<Tag[]>(categoriesData || []);
 
-  // Update formData.tags whenever selectedTags changes
   useEffect(() => {
-    // Update the formData with the selected tags
     updateFormData("tags", selectedTags);
-
-    // Notify parent component of tag changes
     if (onTagsChange) {
       onTagsChange(selectedTags);
     }
@@ -108,7 +104,7 @@ const TagBox = ({ allowedText = false, onTagsChange }: TagBoxProps) => {
 
         <div
           className={cn(
-            "ml-auto text-sm text-neutral-500 dark:text-neutral-200 flex items-center gap-1.5 opacity-100 transition-all duration-300 translate-y-[0%] whitespace-nowrap text-ellipsis",
+            "ml-auto text-sm text-foreground  flex items-center gap-1.5 opacity-100 transition-all duration-300 translate-y-[0%] whitespace-nowrap text-ellipsis",
             !showNotificationText && "opacity-0 translate-y-[10%]"
           )}
           aria-live='polite'
@@ -140,13 +136,13 @@ const TagBox = ({ allowedText = false, onTagsChange }: TagBoxProps) => {
           onKeyDown={handleKeyDown}
           name='tags'
           id='multi-tags-editor-input'
-          className='input w-full rounded-md border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-sm'
+          className='input w-full rounded-md  px-3 py-2 text-sm'
           placeholder='Search or add new tag'
           aria-label='Add or search tags'
         />
         <button
           type='button'
-          className='btn ml-2 inline-flex items-center rounded-md bg-neutral-100 dark:bg-neutral-800 px-3 py-2 text-sm font-medium'
+          className='btn ml-2 inline-flex items-center rounded-md bg-hover  px-3 py-2 text-sm font-medium'
           onClick={handleTag}
           aria-label='Add tag'
         >
@@ -174,9 +170,9 @@ const TagBox = ({ allowedText = false, onTagsChange }: TagBoxProps) => {
             type='button'
             key={category.id}
             className={cn(
-              "flex-none cursor-pointer inline-block whitespace-nowrap truncate dark:hover:bg-[#fff3] max-w-xs tag py-2 px-3 rounded-[0.25rem] text-sm font-semibold btn dark:text-white dark:bg-[#ffffff1a]",
+              "flex-none cursor-pointer inline-block whitespace-nowrap truncate hover:bg-hover max-w-xs tag py-2 px-3 rounded-[0.25rem] text-sm font-semibold btn text-text dark:bg-card",
               selectedTags.includes(category.name) &&
-                "dark:bg-[#60a5fa] bg-[#2563eb] text-white  hover:bg-[#3b82f6] dark:hover:bg-[#93c5fd]"
+                " bg-brand text-white  hover:bg-brand-hover "
             )}
             onClick={() => toggleTags(category.name)}
             aria-pressed={selectedTags.includes(category.name)}

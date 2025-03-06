@@ -2,7 +2,7 @@ const ExportSettings = () => {
   return (
     <div className='px-4 py-6 sm:p-8'>
       <h2 className='text-xl font-semibold mb-6'>Export Bookmarks</h2>
-      <p className='mb-6 text-neutral-700 dark:text-neutral-200'>
+      <p className='mb-6 text-text'>
         Export your bookmarks as an HTML file that can be imported into other
         apps and browsers.
       </p>
@@ -27,9 +27,7 @@ const ExportSettings = () => {
           </svg>
           Export Bookmarks (0)
         </button>
-        <p className='mt-2 text-neutral-500 dark:text-neutral-400'>
-          No bookmarks to export.
-        </p>
+        <p className='mt-2 text-foreground'>No bookmarks to export.</p>
       </div>
     </div>
   );

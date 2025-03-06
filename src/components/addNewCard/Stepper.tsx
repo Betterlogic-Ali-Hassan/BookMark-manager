@@ -38,14 +38,13 @@ const Stepper = () => {
                 className='absolute inset-0 flex items-center'
                 aria-hidden='true'
               >
-                <div className='h-0.5 w-full bg-neutral-300 dark:bg-neutral-700'></div>
+                <div className='h-0.5 w-full bg-border '></div>
               </div>
               <button
                 className={cn(
-                  "relative flex h-8 w-8 items-center justify-center rounded-full group border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:border-neutral-400",
-                  isCompleted &&
-                    "dark:bg-blue-400 bg-blue-600 border-blue-600 dark:border-blue-400",
-                  isActive && "border-blue-600 dark:border-blue-400"
+                  "relative flex h-8 w-8 items-center justify-center rounded-full group border-2  bg-card  border-border",
+                  isCompleted && "bg-brand  border-brand",
+                  isActive && "border-brand"
                 )}
                 aria-current={isActive ? "step" : undefined}
               >
@@ -66,9 +65,9 @@ const Stepper = () => {
                   <>
                     <span
                       className={cn(
-                        "h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-neutral-300 dark:group-hover:bg-neutral-700",
+                        "h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-border ",
                         isActive &&
-                          "bg-blue-600 dark:bg-blue-400 dark:group-hover:bg-blue-400"
+                          "bg-blue-600 dark:bg-brand dark:group-hover:bg-brand"
                       )}
                     ></span>
                     <span className='sr-only'>{step.srText}</span>

@@ -5,7 +5,7 @@ interface Props {
 const TabCardHeading = ({ icon, title }: Props) => {
   return (
     <>
-      <h2 className='text-2xl font-semibold flex items-center gap-3 text-black dark:text-white pr-7'>
+      <h2 className='text-2xl font-semibold flex items-center gap-3 text-text pr-7'>
         <object
           type='image/png'
           aria-label='Favicon'
@@ -18,7 +18,7 @@ const TabCardHeading = ({ icon, title }: Props) => {
             viewBox='0 0 24 24'
             stroke-width='1.5'
             stroke='currentColor'
-            className='w-[32px] h-[32px] text-slate-400'
+            className='w-[32px] h-[32px] text-foreground'
           >
             <path
               stroke-linecap='round'

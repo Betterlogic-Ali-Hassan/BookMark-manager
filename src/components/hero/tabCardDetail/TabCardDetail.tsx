@@ -24,7 +24,7 @@ const TabCardDetail = ({ activeTab, cards }: Props) => {
       >
         <div className='sticky top-0 left-0 w-full max-w-md min-w-72 text-white ml-2'>
           <div>
-            <div className='py-5 p-6 bg-white dark:bg-neutral-900 rounded-md'>
+            <div className='py-5 p-6 bg-card  rounded-md'>
               <div className='relative flex flex-col gap-5'>
                 <TabCardHeading
                   title={activeTabData?.title}
@@ -35,27 +35,23 @@ const TabCardDetail = ({ activeTab, cards }: Props) => {
                     target='_blank'
                     rel='noopener'
                     title='Open'
-                    className='text-blue-600 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300'
+                    className='text-brand hover:text-brand-hover '
                     href={activeTabData?.path}
                   >
                     {activeTabData?.path}
                   </a>
                 </div>
-                <div className='text-sm text-neutral-600 dark:text-neutral-300'>
-                  {activeTabData?.des}
-                </div>
-                <div className='flex flex-wrap gap-1.5 text-neutral-600 dark:text-neutral-300'>
+                <div className='text-sm text-text '>{activeTabData?.des}</div>
+                <div className='flex flex-wrap gap-1.5 text-text '>
                   {activeTabData?.tags.map((tag, id) => (
                     <Badge text={tag.name} key={id} />
                   ))}
                 </div>
                 <div className='flex items-center gap-5'>
-                  <div className='text-xs text-neutral-600 dark:text-neutral-300'>
+                  <div className='text-xs text-text '>
                     Updated on 11/20/2024
                   </div>
-                  <div className='text-xs text-neutral-600 dark:text-neutral-300'>
-                    Added on 11/5/2024
-                  </div>
+                  <div className='text-xs text-text '>Added on 11/5/2024</div>
                 </div>
                 <hr className='border-neutral-200 dark:border-neutral-700' />
                 <ActionsBtns url={activeTabData?.path} />

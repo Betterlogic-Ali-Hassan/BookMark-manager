@@ -28,19 +28,19 @@ const NoTagAlertBox = () => {
         </svg>
         Rename Tag
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-lg gap-0 transform overflow-hidden rounded-md bg-white dark:bg-neutral-800 px-4 pb-4 pt-5 text-left shadow-xl dark:shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
+      <AlertDialogContent className='max-w-lg gap-0 transform overflow-hidden rounded-md bg-card  px-4 pb-4 pt-5 text-left shadow-xl dark:shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
         <AlertDialogHeader>
           <AlertDialogTitle>
             <h2 className='mb-6 text-xl'>Rename Tag</h2>
             <div className='mb-6'>
-              <div className='rounded-md p-4 bg-yellow-50 dark:bg-white/10 border border-transparent dark:border-yellow-300'>
+              <div className='rounded-md p-4 bg-warn border border-warn-border '>
                 <div className='flex'>
                   <div className='flex-shrink-0'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'
                       fill='currentColor'
-                      className='h-6 w-6 text-yellow-400 dark:text-yellow-300'
+                      className='h-6 w-6 text-warn-text '
                     >
                       <path
                         fill-rule='evenodd'
@@ -50,7 +50,7 @@ const NoTagAlertBox = () => {
                     </svg>
                   </div>
                   <div className='ml-3'>
-                    <p className='text-sm text-neutral-700 dark:text-neutral-200'>
+                    <p className='text-sm text-text'>
                       There are no tags to rename.
                     </p>
                   </div>

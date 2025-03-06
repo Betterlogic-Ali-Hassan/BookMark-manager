@@ -19,10 +19,10 @@ const AccountDeleteAlert = () => {
       <AlertDialogTrigger className='btn secondary rounded'>
         Delete Account
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-lg  transform overflow-hidden rounded-md bg-white dark:bg-neutral-800 px-4 pb-4 pt-5 text-left shadow-xl dark:shadow-black/90 transition-all sm:my-8 w-full sm:p-6'>
+      <AlertDialogContent className='max-w-lg  transform overflow-hidden rounded-md bg-card  px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full sm:p-6'>
         <AlertDialogHeader>
           <AlertDialogTitle className='sm:flex sm:items-start'>
-            <div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-white/10 sm:mx-0 sm:h-10 sm:w-10'>
+            <div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10'>
               <svg
                 className='h-6 w-6 text-red-600 dark:text-red-300'
                 fill='none'
@@ -40,20 +40,20 @@ const AccountDeleteAlert = () => {
             </div>
             <div className='mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left'>
               <h3
-                className='text-base font-semibold leading-6 text-neutral-900 dark:text-white'
+                className='text-base font-semibold leading-6 text-text '
                 id='modal-title'
               >
                 Delete Account
               </h3>
               <div className='mt-2'>
-                <p className='text-sm text-neutral-500 dark:text-neutral-400 mb-3'>
+                <p className='text-sm text-foreground  mb-3'>
                   Are you sure you want to permanently delete your account and
                   all of its data? <br />
                   This cannot be undone.
                 </p>
-                <p className='text-sm text-neutral-500 dark:text-neutral-400'>
+                <p className='text-sm text-foreground '>
                   Type
-                  <strong className='text-sm font-bold text-neutral-600 dark:text-neutral-300 mb-2 mx-1'>
+                  <strong className='text-sm font-bold text-text  mb-2 mx-1'>
                     {accountName}
                   </strong>
                   to confirm.
@@ -70,7 +70,7 @@ const AccountDeleteAlert = () => {
         </AlertDialogHeader>
         <AlertDialogFooter className='mt-6 sm:flex sm:flex-row-reverse sm:justify-start'>
           <AlertDialogAction
-            className='inline-flex w-full justify-center gap-x-1.5 rounded disabled:cursor-not-allowed bg-red-600 dark:bg-red-500 disabled:bg-red-400 disabled:dark:bg-red-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 dark:hover:bg-red-400 sm:ml-3 sm:w-auto'
+            className='inline-flex w-full justify-center gap-x-1.5 rounded disabled:cursor-not-allowed bg-red-500 hover:opacity-80 disabled:bg-error  px-3 py-2 text-sm font-semibold text-white shadow-sm  sm:ml-3 sm:w-auto'
             disabled={isDisabled}
           >
             <svg

@@ -12,13 +12,13 @@ const TagSetting = () => {
       <h2 className='text-xl font-semibold mb-8'>Tags</h2>
       <div>
         <h3 className='text-md font-semibold mb-4'>Edit Tags</h3>
-        <p className='mb-3 text-neutral-700 dark:text-neutral-200'>
+        <p className='mb-3 text-text'>
           Rename or delete a tag for all bookmarks it's applied to.
         </p>
         <div className='flex gap-3 mb-8'>
           <NoTagAlertBox />
           <AlertDialogBox
-            className='btn secondary flex items-center gap-2 rounded dark:text-white text-[#171717] hover:text-[#171717]'
+            className='btn secondary flex items-center gap-2 rounded text-text hover:text-black'
             trigger={
               <>
                 <svg
@@ -50,7 +50,7 @@ const TagSetting = () => {
           <TagBox allowedText />
         ) : (
           <button
-            className='flex gap-2 items-center text-neutral-500 hover:text-neutral-900 border border-dashed rounded py-4 px-6 w-full whitespace-nowrap truncate font-semibold dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-white hover:border-solid dark:hover:bg-white/5 hover:bg-neutral-50'
+            className='flex gap-2 items-center text-foreground hover:text-text border border-dashed rounded py-4 px-6 w-full whitespace-nowrap truncate font-semibold  hover:border-solid border-border hover:bg-hover'
             onClick={() => setShowTagBox(true)}
           >
             <svg
@@ -59,7 +59,7 @@ const TagSetting = () => {
               viewBox='0 0 24 24'
               stroke-width='1.5'
               stroke='currentColor'
-              className='w-6 h-6 dark:text-neutral-500 text-neutral-400'
+              className='w-6 h-6 text-foreground'
             >
               <path
                 stroke-linecap='round'

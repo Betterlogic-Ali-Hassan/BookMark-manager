@@ -8,7 +8,7 @@ const CloseBtn = () => {
   return (
     <button
       onClick={handleShowCardDetail}
-      className='absolute top-0 right-0 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+      className='absolute top-0 right-0 text-foreground hover:text-text'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'

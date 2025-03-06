@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SliderBtn from "../SliderBtn";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePageContext } from "@/context/PageContext";
+import Button from "../ui/button";
 
 interface Props {
   className?: string;
@@ -30,7 +31,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
 
   return (
     <div className='lg:h-[3.25rem]'>
-      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 lg:bg-neutral-200 dark:lg:bg-black'>
+      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border '>
         <div className='flex overflow-hidden items-center'>
           <div className='flex overflow-x-auto no-scrollbar relative'>
             <Swiper
@@ -46,9 +47,9 @@ const TopNav = ({ className, categoriesData }: Props) => {
               />
               {selectedCategories.length > 0 && (
                 <SwiperSlide className='max-w-fit'>
-                  <button
-                    className='focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded h-9 text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white inline-flex items-center text-sm font-semibold px-2 mr-2'
+                  <Button
                     onClick={handleClearFilter}
+                    className='h-9 px-2 mr-2 bg-transparent hover:bg-transparent ring-0'
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -65,7 +66,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                       ></path>
                     </svg>
                     <span>All</span>
-                  </button>
+                  </Button>
                 </SwiperSlide>
               )}
               {selectedCategories.map((categoryId, i) => {
@@ -74,13 +75,13 @@ const TopNav = ({ className, categoriesData }: Props) => {
                 );
                 return (
                   <SwiperSlide className='max-w-fit' key={i}>
-                    <button
-                      className='focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded h-9 text-white hover:text-white dark:text-neutral-300 bg-blue-500 hover:bg-blue-400 dark:bg-blue-300/20 dark:hover:bg-blue-300/30 justify-center dark:hover:text-white inline-flex items-center text-sm font-semibold px-2 mr-2'
+                    <Button
+                      className='h-9 px-2 mr-2 bg-brand text-white hover:bg-brand-hover ring-0'
                       key={i}
                       onClick={() => handleToggleCategory(categoryId)}
                     >
                       {category?.name}
-                    </button>
+                    </Button>
                   </SwiperSlide>
                 );
               })}
