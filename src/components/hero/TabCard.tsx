@@ -69,7 +69,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
           </div>
           {tags.slice(1).map((tag) => (
             <div
-              className=' text-xs  truncate max-w-[120px] min-w-[120px] tracking-wide'
+              className=' text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide'
               key={tag.id}
             >
               <span className='bg-hover h-9 px-2 btn max-w-fit rounded text-xs'>
