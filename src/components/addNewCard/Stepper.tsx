@@ -1,5 +1,6 @@
 import { useFormContext } from "@/context/from-Context";
 import { cn } from "@/lib/utils";
+import Check from "../svgs/Check";
 
 const Stepper = () => {
   const { currentStep, goToStep, validateCurrentStep } = useFormContext();
@@ -11,11 +12,9 @@ const Stepper = () => {
   ];
 
   const handleStepClick = (stepIndex: number) => {
-    // Only allow clicking on previous steps or current step
     if (stepIndex <= currentStep) {
       goToStep(stepIndex);
     } else if (stepIndex === currentStep + 1) {
-      // Try to go to the next step if current step is valid
       if (validateCurrentStep()) {
         goToStep(stepIndex);
       }
@@ -49,18 +48,7 @@ const Stepper = () => {
                 aria-current={isActive ? "step" : undefined}
               >
                 {isCompleted ? (
-                  <svg
-                    className='h-5 w-5 text-white'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                    aria-hidden='true'
-                  >
-                    <path
-                      fillRule='evenodd'
-                      d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z'
-                      clipRule='evenodd'
-                    ></path>
-                  </svg>
+                  <Check />
                 ) : (
                   <>
                     <span

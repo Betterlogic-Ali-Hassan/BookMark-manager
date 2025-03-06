@@ -20,6 +20,7 @@ module.exports = {
 			brand: 'var(--brand-color)',
 			hover: 'var(--hover-color)',
 			error: 'var(--error-color)',
+			success: 'var(--success-color)',
 			'btn-hover':'var( --btn-hover)',
 			'sidebar-hover':'var( --sidebar-hover)',
 			'brand-hover':'var( --brand-hover)',

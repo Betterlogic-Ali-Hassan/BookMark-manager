@@ -37,10 +37,8 @@ const TagBoxContent = ({ actionBtns, className }: Props) => {
       des: formData.description,
     };
 
-    // Update the cards state with the new card
     setCards([...cards, newCard]);
 
-    // Simulate API call
     setTimeout(() => {
       setPage("home");
       setIsLoading(false);
@@ -67,7 +65,7 @@ const TagBoxContent = ({ actionBtns, className }: Props) => {
       {!actionBtns && (
         <ActionBtns
           prevBtnClick={prevStep}
-          saveBtn
+          showSaveBtn
           nextBtnClick={handleSaveBtn}
           loading={isLoading}
         />
