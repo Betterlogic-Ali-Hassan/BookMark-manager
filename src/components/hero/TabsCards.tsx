@@ -1,17 +1,14 @@
 "use client";
 
+import { useState, useMemo, useCallback } from "react";
 import type { Card } from "@/types/TabCardType";
 import { cn } from "@/lib/utils";
 import { useThumbnailToggler } from "@/context/ThumbnailTogglerContext";
 import { usePageContext } from "@/context/PageContext";
-import { useState, useMemo } from "react";
 
-// Components
-import TabCard from "./TabCard";
-import ThumbnailCard from "./thumbnailView/ThumbnailCard";
 import HourlyLog from "../HourlyLog";
-import ExtensionCard from "../extensionPage/ExtensionCard";
-import ExtensionListViewCard from "../extensionPage/ExtensionListViewCard";
+import CardGroup from "./CardGroup";
+import InfiniteScrollSentinel from "./InfiniteScrollSentinel";
 
 interface TabsCardsProps {
   setActiveTab: (tab: number) => void;
@@ -24,51 +21,50 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
   const { page } = usePageContext();
   const isShowHourlyLog = page === "history";
   const isExtensionsPage = page === "extensions";
+  const INITIAL_CARDS_COUNT = isExtensionsPage ? 20 : 100;
+  const CARDS_PER_LOAD = isExtensionsPage ? 20 : 40;
+  const [visibleCardsCount, setVisibleCardsCount] =
+    useState(INITIAL_CARDS_COUNT);
+
+  const loadMoreCards = useCallback(() => {
+    setVisibleCardsCount((prevCount) =>
+      Math.min(prevCount + CARDS_PER_LOAD, cards.length)
+    );
+  }, [cards.length]);
+
+  const visibleCards = useMemo(() => {
+    return cards.slice(0, visibleCardsCount);
+  }, [cards, visibleCardsCount]);
 
   const cardGroups = useMemo(() => {
     if (!isShowHourlyLog) {
-      return [cards];
-    }
-    return [
-      cards.slice(0, 10),
-      cards.slice(10, 30),
-      cards.slice(30, 45),
-      cards.slice(45),
-    ];
-  }, [cards, isShowHourlyLog]);
-
-  const renderCard = (data: Card) => {
-    if (isExtensionsPage) {
-      return isListView ? (
-        <ExtensionCard
-          setFavoriteExe={setFavoriteExe}
-          favoriteExe={favoriteExe}
-          data={data}
-          key={data.id}
-          setActiveTab={setActiveTab}
-        />
-      ) : (
-        <ExtensionListViewCard
-          setFavoriteExe={setFavoriteExe}
-          favoriteExe={favoriteExe}
-          key={data.id}
-          data={data}
-          setActiveTab={setActiveTab}
-        />
-      );
+      return [visibleCards];
     }
 
-    return isListView ? (
-      <ThumbnailCard data={data} key={data.id} setActiveTab={setActiveTab} />
-    ) : (
-      <TabCard key={data.id} data={data} setActiveTab={setActiveTab} />
-    );
-  };
+    const groups = [];
+    let currentIndex = 0;
 
-  const containerClasses = cn(
-    "flex flex-col gap-2 px-1.5 lg:px-0 mt-2 lg:mt-0",
-    isListView && "grid grid-cols-3 gap-6 gap-x-4"
-  );
+    while (currentIndex < visibleCards.length) {
+      if (currentIndex === 0) {
+        groups.push(visibleCards.slice(0, Math.min(10, visibleCards.length)));
+        currentIndex = 10;
+      } else if (currentIndex === 10) {
+        groups.push(visibleCards.slice(10, Math.min(30, visibleCards.length)));
+        currentIndex = 30;
+      } else if (currentIndex === 30) {
+        groups.push(visibleCards.slice(30, Math.min(45, visibleCards.length)));
+        currentIndex = 45;
+      } else {
+        groups.push(visibleCards.slice(currentIndex));
+        break;
+      }
+    }
+
+    return groups.filter((group) => group.length > 0);
+  }, [visibleCards, isShowHourlyLog]);
+
+  // Check if we've loaded all cards
+  const hasMoreCards = visibleCardsCount < cards.length;
 
   return (
     <div className={cn(isListView && "max-w-[970px]")}>
@@ -76,18 +72,37 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
 
       {isExtensionsPage && favoriteExe.length > 0 && (
         <div className='mb-12'>
-          <div className={containerClasses}>{favoriteExe.map(renderCard)}</div>
+          <CardGroup
+            cards={favoriteExe}
+            isListView={isListView}
+            isExtensionsPage={isExtensionsPage}
+            isShowHourlyLog={false}
+            showHourlyLogAfter={false}
+            setActiveTab={setActiveTab}
+            favoriteExe={favoriteExe}
+            setFavoriteExe={setFavoriteExe}
+          />
         </div>
       )}
 
-      <>
-        {cardGroups.map((group, index) => (
-          <div key={`group-${index}`} className={containerClasses}>
-            {group.map(renderCard)}
-            {isShowHourlyLog && index < cardGroups.length - 1 && <HourlyLog />}
-          </div>
-        ))}
-      </>
+      {cardGroups.map((group, index) => (
+        <CardGroup
+          key={`group-${index}`}
+          cards={group}
+          isListView={isListView}
+          isExtensionsPage={isExtensionsPage}
+          isShowHourlyLog={isShowHourlyLog}
+          showHourlyLogAfter={index < cardGroups.length - 1}
+          setActiveTab={setActiveTab}
+          favoriteExe={favoriteExe}
+          setFavoriteExe={setFavoriteExe}
+        />
+      ))}
+
+      <InfiniteScrollSentinel
+        onLoadMore={loadMoreCards}
+        hasMore={hasMoreCards}
+      />
     </div>
   );
 };

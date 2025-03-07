@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
 import MoreIconBtn from "../MoreIconBtn";
 import { usePageContext } from "@/context/PageContext";
+import Badge from "../ui/Badge";
 
 interface Props {
   data: Card;
@@ -78,9 +79,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
                 className=' text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide'
                 key={tag.id}
               >
-                <span className='bg-hover h-9 px-2 border-y border-border btn max-w-fit rounded text-xs'>
-                  {tag.name}
-                </span>
+                <Badge text={tag.name} />
               </div>
             ))
           )}

@@ -34,8 +34,9 @@
     --text-color: #ffff;
     --text-foreground: #d4d4d4;
     --btn-hover: #ffffff33;
+    --badge-color: #262626;
     --border-color: #262626;
-    --hover-color: #262626;
+    --hover-color: #1b1b1b;
     --error-color: #fca5a5;
     --warn-color: #fefce8;
     --warn-border: #fde047;
