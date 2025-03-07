@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const Search = () => {
-  const { searchTerm, filteredCards } = useBookmarks();
+  const { searchTerm, cards } = useBookmarks();
   const [activeTab, setActiveTab] = useState(0);
   const filteredCategories = categoriesData.filter((cat) =>
     cat.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -37,16 +37,14 @@ const Search = () => {
             </div>
             <div className='flex flex-col gap-2 py-2'>
               {searchTerm !== "" && (
-                <TabsCards setActiveTab={setActiveTab} cards={filteredCards} />
+                <TabsCards setActiveTab={setActiveTab} cards={cards} />
               )}
-              {filteredCards.length <= 0 && (
-                <DataNotFound searchTerm={searchTerm} />
-              )}
+              {cards.length <= 0 && <DataNotFound searchTerm={searchTerm} />}
             </div>
           </div>
         </div>
         <div className='hidden relative lg:block pt-2'>
-          <TabCardDetail cards={filteredCards} activeTab={activeTab} />
+          <TabCardDetail cards={cards} activeTab={activeTab} />
         </div>
       </div>
     </div>

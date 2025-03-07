@@ -129,6 +129,8 @@ body::-webkit-scrollbar {
 }
 .swiper-wrapper {
   display: flex;
+  order: 1;
+  margin-left: 4px;
 }
 html,
 body {

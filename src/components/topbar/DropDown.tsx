@@ -6,11 +6,13 @@ import { usePageContext } from "@/context/PageContext";
 import DotsIcon from "../svgs/DotsIcon";
 
 const DropDown = () => {
-  const { filteredCards } = useBookmarks();
+  const { cards } = useBookmarks();
   const { page } = usePageContext();
   const [openDropDown, setOpenDropDown] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
-  const count = filteredCards.length;
+  const count = cards.length;
+  console.log(cards);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!btnRef.current) return;

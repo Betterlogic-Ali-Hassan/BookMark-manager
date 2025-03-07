@@ -4,6 +4,7 @@ import { Card } from "@/types/TabCardType";
 import MoreIconBtn from "../MoreIconBtn";
 import { usePageContext } from "@/context/PageContext";
 import Badge from "../ui/Badge";
+import { getCategoryName } from "@/lib/category-utils";
 
 interface Props {
   data: Card;
@@ -12,7 +13,8 @@ interface Props {
 const TabCard = ({ data, setActiveTab }: Props) => {
   const { id, path, tags, icon, title } = data;
   const { page } = usePageContext();
-  const { toggleCard, showSelectionCard, selectedCards } = useBookmarks();
+  const { toggleCard, showSelectionCard, selectedCards, toggleCategory } =
+    useBookmarks();
   const today = new Date().toDateString();
   const handleToggle = () => {
     if (showSelectionCard) toggleCard(id, path, tags);
@@ -78,6 +80,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
               <div
                 className=' text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide'
                 key={tag.id}
+                onClick={getCategoryName(tag.id, toggleCategory)}
               >
                 <Badge text={tag.name} />
               </div>

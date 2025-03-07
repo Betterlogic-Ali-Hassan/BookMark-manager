@@ -8,9 +8,9 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SliderBtn from "../SliderBtn";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { usePageContext } from "@/context/PageContext";
 import Button from "../ui/button";
-import { useEffect } from "react";
+
+import ResetFilter from "./ResetFilter";
 
 interface Props {
   className?: string;
@@ -21,18 +21,10 @@ interface Props {
   }[];
 }
 const TopNav = ({ className, categoriesData }: Props) => {
-  const { page, setPage } = usePageContext();
   const { setSelectedCategories, toggleCategory, selectedCategories } =
     useBookmarks();
 
-  const handleClearFilter = () => {
-    setSelectedCategories([]);
-  };
-
   const handleToggleCategory = (categoryId: number) => {
-    if (page !== "home") {
-      setPage("home");
-    }
     toggleCategory(categoryId);
   };
 
@@ -44,38 +36,23 @@ const TopNav = ({ className, categoriesData }: Props) => {
     setSelectedCategories(updatedCategories);
   };
 
-  useEffect(() => {
-    if (page !== "home") {
-      setSelectedCategories([]);
-    }
-  }, [page, setSelectedCategories]);
   return (
     <div className='lg:h-[3.25rem]'>
-      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border '>
+      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border max-lg:pl-[100px]'>
         <div className='flex overflow-hidden items-center'>
           <div className='flex overflow-x-auto no-scrollbar relative'>
             <Swiper
               modules={[Navigation]}
               slidesPerView='auto'
               navigation={{ nextEl: "#next1", prevEl: "#prev1" }}
-              className='mySwiper w-[768px] relative'
+              className='mySwiper w-[768px] relative flex'
             >
               <SliderBtn
                 icon={<ChevronRight size={18} className='text-text ' />}
                 id='next1'
                 className='right-0 h-7 w-7'
               />
-              {selectedCategories.length > 0 && (
-                <SwiperSlide className='max-w-fit'>
-                  <Button
-                    onClick={handleClearFilter}
-                    className='h-9 px-2 mr-2 bg-transparent hover:bg-transparent ring-0'
-                  >
-                    <ChevronLeft size={20} />
-                    <span>All</span>
-                  </Button>
-                </SwiperSlide>
-              )}
+              <ResetFilter />
               {selectedCategories.map((categoryId, i) => {
                 const category = categoriesData.find(
                   (cat) => cat.id === categoryId

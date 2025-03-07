@@ -3,17 +3,17 @@
 import {
   createContext,
   useContext,
-  useState,
   useEffect,
+  useState,
   type ReactNode,
 } from "react";
 import type { Card } from "../types/TabCardType";
 import { tabsData } from "../constant/tabsData";
+import { usePageContext } from "./PageContext";
 
 type Tags = { id: number; name: string }[];
 type BookmarkContextType = {
   cards: Card[];
-  filteredCards: Card[];
   selectedCards: number[];
   selectedCardUrls: string[];
   selectedCategories: number[];
@@ -29,6 +29,7 @@ type BookmarkContextType = {
   clearSelection: () => void;
   setSelectedCategories: (categories: number[]) => void;
   setCards: (cards: Card[]) => void;
+  filteredCards: Card[];
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
@@ -39,13 +40,26 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const [cards, setCards] = useState<Card[]>(tabsData);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCards, setFilteredCards] = useState<Card[]>(cards);
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
-
-  // Fixed toggleCard function to match the expected signature
+  const { page } = usePageContext();
+  const filteredCards = cards.filter((card) =>
+    card.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const resetData = () => {
+    setSearchTerm("");
+    setSelectedCategories([]);
+    setSelectedCards([]);
+    setSelectedCardUrls([]);
+    setShowCardDetail(false);
+    setShowSelectionCard(false);
+    setCards(filteredCards);
+  };
+  useEffect(() => {
+    resetData();
+  }, [page]);
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
@@ -59,8 +73,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const selectAll = () => {
-    setSelectedCards(filteredCards.map((card) => card.id));
-    setSelectedCardUrls(filteredCards.map((card) => card.path));
+    setSelectedCards(cards.map((card) => card.id));
+    setSelectedCardUrls(cards.map((card) => card.path));
   };
 
   const clearSelection = () => {
@@ -76,24 +90,10 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  // Update filteredCards whenever cards, searchTerm, or selectedCategories change
-  useEffect(() => {
-    const filtered = cards.filter((card) => {
-      const matchesSearch = card.title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesCategories =
-        selectedCategories.length === 0 ||
-        card.tags.some((tag) => selectedCategories.includes(tag.id));
-      return matchesSearch && matchesCategories;
-    });
-    setFilteredCards(filtered);
-  }, [selectedCategories, searchTerm, cards]);
-
   const value = {
-    cards,
+    cards: filteredCards,
+    filteredCards: cards,
     setSelectedCategories,
-    filteredCards,
     selectedCards,
     selectedCardUrls,
     selectedCategories,

@@ -1,4 +1,6 @@
 import { useBookmarks } from "@/context/BookmarkContext";
+import SelectIcon from "../svgs/SelectIcon";
+import { CrossIcon } from "lucide-react";
 
 const DropDownContent = () => {
   const {
@@ -28,22 +30,7 @@ const DropDownContent = () => {
           className='px-4 py-2 text-sm text-text  text-start w-full flex items-center gap-3 hover:bg-hover'
           onClick={handleShowSelectionCard}
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='1.5'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            className='h-5 w-5 text-foreground'
-          >
-            <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-            <path d='M9 11l3 3l8 -8'></path>
-            <path d='M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9'></path>
-          </svg>
+          <SelectIcon />
           <span>Select multiple</span>
         </button>
       )}
@@ -52,22 +39,7 @@ const DropDownContent = () => {
         className='px-4 py-2 text-sm text-text  text-start w-full flex items-center gap-3 hover:bg-hover'
         onClick={handleSelectAll}
       >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='24'
-          height='24'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          className='h-5 w-5 text-neutral-400'
-        >
-          <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-          <path d='M9 11l3 3l8 -8'></path>
-          <path d='M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9'></path>
-        </svg>
+        <SelectIcon />
         <span>Select all</span>
       </button>
       {showSelectionCard && (
@@ -75,20 +47,7 @@ const DropDownContent = () => {
           className='px-4 py-2 text-sm text-text  text-start w-full flex items-center gap-3 hover:bg-hover'
           onClick={handleCloseSelectionCard}
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke-width='1.5'
-            stroke='currentColor'
-            className='h-5 w-5 text-neutral-400'
-          >
-            <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              d='M6 18 18 6M6 6l12 12'
-            ></path>
-          </svg>
+          <CrossIcon />
           <span>Cancel selection</span>
         </button>
       )}
