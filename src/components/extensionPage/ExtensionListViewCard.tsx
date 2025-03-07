@@ -47,7 +47,7 @@ const ExtensionListViewCard = ({
         <img src={icon || "/placeholder.svg"} alt={title} />
       </div>
       <div className='grow'>
-        <h3 className='font-semibold'>{title}</h3>
+        <h3 className='font-semibold text-text'>{title}</h3>
         <a
           href={path}
           target='_blank'
@@ -57,7 +57,7 @@ const ExtensionListViewCard = ({
         >
           {path}
         </a>
-        <p className='mt-6'>{des}</p>
+        <p className='mt-6 text-[15px]'>{des}</p>
         <div className='flex items-center justify-between mt-6'>
           <div className='flex items-center gap-4'>
             {tags.map((tag) => (

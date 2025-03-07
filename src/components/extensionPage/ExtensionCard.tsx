@@ -63,7 +63,7 @@ const ExtensionCard = ({
         </div>
       </div>
       <div className='flex flex-col gap-1'>
-        <h2 className='font-semibold'>{title}</h2>
+        <h2 className='font-semibold text-text'>{title}</h2>
         <p className='text-foreground'>
           A simple journaling app for capturing daily memories with text, photo,
           stickers and video.
