@@ -1,11 +1,16 @@
+"use client";
+
+import type React from "react";
+
 import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SliderBtn from "../SliderBtn";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { usePageContext } from "@/context/PageContext";
 import Button from "../ui/button";
+import { useEffect } from "react";
 
 interface Props {
   className?: string;
@@ -19,9 +24,11 @@ const TopNav = ({ className, categoriesData }: Props) => {
   const { page, setPage } = usePageContext();
   const { setSelectedCategories, toggleCategory, selectedCategories } =
     useBookmarks();
+
   const handleClearFilter = () => {
     setSelectedCategories([]);
   };
+
   const handleToggleCategory = (categoryId: number) => {
     if (page !== "home") {
       setPage("home");
@@ -29,6 +36,19 @@ const TopNav = ({ className, categoriesData }: Props) => {
     toggleCategory(categoryId);
   };
 
+  const handleRemoveCategory = (categoryId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const updatedCategories = selectedCategories.filter(
+      (id) => id !== categoryId
+    );
+    setSelectedCategories(updatedCategories);
+  };
+
+  useEffect(() => {
+    if (page !== "home") {
+      setSelectedCategories([]);
+    }
+  }, [page, setSelectedCategories]);
   return (
     <div className='lg:h-[3.25rem]'>
       <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border '>
@@ -41,7 +61,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
               className='mySwiper w-[768px] relative'
             >
               <SliderBtn
-                icon={<ChevronRight size={18} className='text-black' />}
+                icon={<ChevronRight size={18} className='text-text ' />}
                 id='next1'
                 className='right-0 h-7 w-7'
               />
@@ -51,20 +71,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                     onClick={handleClearFilter}
                     className='h-9 px-2 mr-2 bg-transparent hover:bg-transparent ring-0'
                   >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth='1.5'
-                      stroke='currentColor'
-                      className='w-6 h-6'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M15.75 19.5 8.25 12l7.5-7.5'
-                      ></path>
-                    </svg>
+                    <ChevronLeft size={20} />
                     <span>All</span>
                   </Button>
                 </SwiperSlide>
@@ -76,11 +83,17 @@ const TopNav = ({ className, categoriesData }: Props) => {
                 return (
                   <SwiperSlide className='max-w-fit' key={i}>
                     <Button
-                      className='h-9 px-2 mr-2 bg-brand text-white hover:bg-brand-hover ring-0'
+                      className='h-8 px-4 py-0.5 mr-2 rounded-[20px] bg-brand text-white hover:bg-brand-hover ring-0 relative group'
                       key={i}
                       onClick={() => handleToggleCategory(categoryId)}
                     >
                       {category?.name}
+                      <span
+                        className='ml-2 inline-flex items-center justify-center rounded-full hover:bg-brand-hover/80'
+                        onClick={(e) => handleRemoveCategory(categoryId, e)}
+                      >
+                        <X size={16} className='text-white' />
+                      </span>
                     </Button>
                   </SwiperSlide>
                 );
@@ -90,7 +103,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                   <SwiperSlide className='max-w-fit' key={i}>
                     <button
                       className={cn(
-                        "focus:outline-none focus-visible:ring-1 ring-inset ring-neutral-700 dark:ring-neutral-300 rounded h-9 text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white inline-flex items-center text-sm font-semibold px-2 mr-2",
+                        "focus:outline-none focus-visible:ring-1 ring-inset ring-border rounded h-9 text-foreground hover:text-text inline-flex items-center text-sm font-semibold px-2 mr-2",
                         className
                       )}
                       onClick={() => handleToggleCategory(category.id)}
@@ -101,7 +114,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                   </SwiperSlide>
                 ))}
               <SliderBtn
-                icon={<ChevronLeft size={18} className='text-black' />}
+                icon={<ChevronLeft size={18} className='text-text ' />}
                 id='prev1'
                 className='left-0 h-7 w-7'
               />
