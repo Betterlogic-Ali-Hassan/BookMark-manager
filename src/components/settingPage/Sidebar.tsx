@@ -16,8 +16,7 @@ const Sidebar = ({ currentPage, setCurrentPage }: Props) => {
           onClick={goToPage(item.link)}
           className={cn(
             "flex items-center gap-4 border-b-2 md:border-none whitespace-nowrap py-4 px-6 font-semibold md:text-left hover:bg-sidebar-hover hover:text-text ",
-            currentPage === item.link &&
-              "border-brand bg-sidebar-hover text-text"
+            currentPage === item.link && "border-brand bg-badge text-text"
           )}
           key={i}
         >

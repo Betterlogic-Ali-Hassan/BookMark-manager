@@ -7,6 +7,7 @@ import DataNotFound from "../searchPage/DataNotFound";
 const TabsArea = () => {
   const [activeTab, setActiveTab] = useState(0);
   const { searchTerm } = useBookmarks();
+
   const { cards } = useBookmarks();
 
   return (

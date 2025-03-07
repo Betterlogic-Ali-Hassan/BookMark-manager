@@ -1,6 +1,7 @@
 "use client";
 
 import { categoriesData } from "@/constant/categoriesData";
+import { tabsData } from "@/constant/tabsData";
 import { useBookmarks } from "@/context/BookmarkContext";
 import {
   filterCardsByCategory,
@@ -8,7 +9,7 @@ import {
   getCategoryName,
 } from "@/lib/category-utils";
 import { cn } from "@/lib/utils";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 const Categories = ({ className }: { className?: string }) => {
   const {
@@ -18,18 +19,17 @@ const Categories = ({ className }: { className?: string }) => {
     cards,
     setCards,
   } = useBookmarks();
-  const [allCards] = useState(cards);
   const categoryCounts = useMemo(() => getCategoryCounts(cards), [cards]);
 
   useEffect(() => {
-    const filteredCards = filterCardsByCategory(allCards, selectedCategories);
+    const filteredCards = filterCardsByCategory(cards, selectedCategories);
     setCards(filteredCards);
-  }, [selectedCategories, allCards, setCards]);
+  }, [selectedCategories, setCards]);
 
   useEffect(() => {
     setSelectedCategories([]);
-    setCards(allCards);
-  }, [setCards, setSelectedCategories, allCards]);
+    setCards(tabsData);
+  }, [setCards, setSelectedCategories]);
 
   return (
     <div

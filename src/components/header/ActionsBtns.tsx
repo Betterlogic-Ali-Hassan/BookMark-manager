@@ -1,6 +1,7 @@
 "use client";
 import { usePageContext } from "@/context/PageContext";
 import { btns } from "@/constant/headerActionBtns";
+import SettingDialog from "../settingPage/SettingDialog";
 
 const ActionButtons = () => {
   const { setPage } = usePageContext();
@@ -14,6 +15,7 @@ const ActionButtons = () => {
       className='hidden lg:flex items-center justify-end gap-4 pr-4'
       aria-label='Action navigation'
     >
+      <SettingDialog />
       {btns.map((button, index) => (
         <button
           key={index}

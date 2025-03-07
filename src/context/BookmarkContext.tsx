@@ -55,11 +55,11 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setSelectedCardUrls([]);
     setShowCardDetail(false);
     setShowSelectionCard(false);
-    setCards(filteredCards);
   };
   useEffect(() => {
     resetData();
   }, [page]);
+
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
