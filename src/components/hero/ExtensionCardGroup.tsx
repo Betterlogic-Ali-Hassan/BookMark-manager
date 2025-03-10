@@ -6,6 +6,7 @@ import { useState } from "react";
 import type { Card } from "@/types/TabCardType";
 import CardRenderer from "./CardRenderer";
 import InfiniteScrollSentinel from "./InfiniteScrollSentinel";
+import { usePageContext } from "@/context/PageContext";
 
 interface ExtensionCardsGroupProps {
   cards: Card[];
@@ -25,6 +26,7 @@ export default function ExtensionCardsGroup({
   setFavoriteExe,
 }: ExtensionCardsGroupProps) {
   const [visibleCardsCount, setVisibleCardsCount] = useState(CARDS_PER_LOAD);
+  const { page } = usePageContext();
   const loadMoreCards = () => {
     setVisibleCardsCount((prevCount) =>
       Math.min(prevCount + CARDS_PER_LOAD, cards.length)
@@ -33,7 +35,7 @@ export default function ExtensionCardsGroup({
 
   const visibleCards = cards.slice(0, visibleCardsCount);
   const hasMoreCards = visibleCardsCount < cards.length;
-
+  const isDownloadPage = page === "downloads";
   return (
     <>
       <div
@@ -41,6 +43,7 @@ export default function ExtensionCardsGroup({
       >
         {visibleCards.map((card) => (
           <CardRenderer
+            isDownloadPage={isDownloadPage}
             key={card.id}
             data={card}
             isListView={isListView}
