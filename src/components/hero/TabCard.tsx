@@ -78,7 +78,10 @@ const TabCard = ({ data, setActiveTab }: Props) => {
           ) : (
             tags.slice(1).map((tag) => (
               <div
-                className=' text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide'
+                className={cn(
+                  " text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide",
+                  showSelectionCard && "max-w-[178px] min-w-[178px]"
+                )}
                 key={tag.id}
                 onClick={getCategoryName(tag.id, toggleCategory)}
               >

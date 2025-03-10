@@ -66,7 +66,12 @@ const ExtensionCard = ({
           stickers and video.
         </p>
       </div>
-      <div className='flex items-center  absolute top-3 right-16'>
+      <div
+        className={cn(
+          "flex items-center  absolute  right-20",
+          !showSelectionCard && "top-3 right-16"
+        )}
+      >
         <span
           className={cn(
             "cursor-pointer text-text hidden  group-hover:block",

@@ -24,7 +24,7 @@ const Settings = () => {
               Settings
             </span>
           </button>
-          <DialogClose className='bg-card p-3 rounded-full text-text opacity-100'>
+          <DialogClose className='bg-card p-3 rounded-full text-text opacity-80 hover:opacity-100'>
             <CrossIcon />
           </DialogClose>
         </div>

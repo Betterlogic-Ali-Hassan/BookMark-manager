@@ -18,7 +18,7 @@ export const getCategoryName = (id: number, toggleCategory: (id: number) => void
 };
 export const filterCardsByCategory = (cards: Card[], selectedCategories: number[]) => {
     if (selectedCategories.length === 0) {
-      return cards; 
+      return [...cards]; 
     }
     return cards.filter((card) =>
       card.tags.some((tag) => selectedCategories.includes(tag.id))

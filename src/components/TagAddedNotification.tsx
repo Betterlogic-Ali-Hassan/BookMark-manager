@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import InfoIcon from "./svgs/InfoIcon";
+import InfoIcon from "./svgs/CheckIcon";
 
 interface TagNotificationProps {
   text: string;

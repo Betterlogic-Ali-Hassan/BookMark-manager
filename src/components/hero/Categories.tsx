@@ -24,7 +24,8 @@ const Categories = ({ className }: { className?: string }) => {
   useEffect(() => {
     const filteredCards = filterCardsByCategory(cards, selectedCategories);
     setCards(filteredCards);
-  }, [selectedCategories, setCards]);
+    if (selectedCategories.length === 0) setCards(tabsData);
+  }, [selectedCategories, setCards, cards]);
 
   useEffect(() => {
     setSelectedCategories([]);
