@@ -15,7 +15,6 @@ interface ExtensionCardProps {
   setActiveTab: (tab: number) => void;
   setFavoriteExe: (callback: (prev: Card[]) => Card[]) => void;
   favoriteExe: Card[];
-  onClick: () => void;
 }
 
 const ExtensionCard = ({
@@ -23,7 +22,6 @@ const ExtensionCard = ({
   setActiveTab,
   setFavoriteExe,
   favoriteExe,
-  onClick,
 }: ExtensionCardProps) => {
   const { title, id, path, tags } = data;
   const { toggleCard, showSelectionCard } = useBookmarks();
@@ -61,7 +59,7 @@ const ExtensionCard = ({
       </div>
       <div className='flex flex-col gap-1'>
         <h2 className='font-semibold text-text'>{title}</h2>
-        <p className='text-foreground' onClick={onClick}>
+        <p className='text-foreground'>
           A simple journaling app for capturing daily memories with text, photo,
           stickers and video.
         </p>
