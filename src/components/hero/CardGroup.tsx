@@ -1,10 +1,8 @@
 "use client";
 
 import type React from "react";
-
 import { cn } from "@/lib/utils";
 import type { Card } from "@/types/TabCardType";
-
 import HourlyLog from "../HourlyLog";
 import CardRenderer from "./CardRenderer";
 

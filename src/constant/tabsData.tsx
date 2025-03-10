@@ -7,94 +7,125 @@ export const tabsData: Card[] = Array.from({ length: 150 }, (_, index) => {
       title: "Podscan.fm",
       path: "https://podscan.fm/",
       des: "Search podcasts and get notified about mentions",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://aistudio.google.com//&size=32",
       title: "Google AI Studio",
       path: "https://aistudio.google.com/",
       des: "Design and build AI-powered web and mobile applications",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://n8n.io//&size=32",
       title: "n8n",
       path: "https://n8n.io/",
       des: "A simple, open-source, and self-hosted workflow automation tool",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://blog.hubspot.com/marketing/internet-marketing/&size=32",
       title: "HubSpot Marketing Guide",
       path: "https://blog.hubspot.com/marketing",
       des: "HubSpot's marketing best practices and resources",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.midjourney.com//&size=32",
       title: "Midjourney",
       path: "https://www.midjourney.com/",
       des: "A generative AI tool for creating original content",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.google.com/&size=32",
       title: "Google",
       path: "https://www.google.com/",
       des: "Search the world's information, including webpages, images, videos and more.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.facebook.com/&size=32",
       title: "Facebook",
       path: "https://www.facebook.com/",
       des: "Connect with friends and the world around you on Facebook.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.youtube.com/&size=32",
       title: "YouTube",
       path: "https://www.youtube.com/",
       des: "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.twitter.com/&size=32",
       title: "Twitter",
       path: "https://www.twitter.com/",
       des: "Join the conversation! Twitter is the place to find out what's happening in the world right now.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.instagram.com/&size=32",
       title: "Instagram",
       path: "https://www.instagram.com/",
       des: "Create & share photos, stories, & reels with your friends and the world.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.linkedin.com/&size=32",
       title: "LinkedIn",
       path: "https://www.linkedin.com/",
       des: "Connect with professionals, grow your network, and advance your career with LinkedIn.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.wikipedia.org/&size=32",
       title: "Wikipedia",
       path: "https://www.wikipedia.org/",
       des: "The free encyclopedia that anyone can edit.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.amazon.com/&size=32",
       title: "Amazon",
       path: "https://www.amazon.com/",
       des: "Shop online for electronics, clothing, books, and more at Amazon.",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.netflix.com/&size=32",
       title: "Netflix",
       path: "https://www.netflix.com/",
       des: "Watch TV shows and movies anytime, anywhere. Start your free trial today!",
+      enabled: undefined,
+      iconUrl: ""
     },
     {
       icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.reddit.com/&size=32",
       title: "Reddit",
       path: "https://www.reddit.com/",
       des: "Dive into anything. Find communities and discussions on any topic you love.",
+      enabled: undefined,
+      iconUrl: ""
     },
   ];
 
-  // Tags array with IDs
+ 
+ 
   const tags = [
     { id: 1, name: "AI" },
     { id: 2, name: "API" },
@@ -141,5 +172,7 @@ export const tabsData: Card[] = Array.from({ length: 150 }, (_, index) => {
     path: item.path,
     des: item.des,
     tags: [tags[index % tags.length], tags[(index + 1) % tags.length]],
+    enabled: true,
+    iconUrl: item.icon,
   };
 });

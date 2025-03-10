@@ -3,17 +3,17 @@
 import {
   createContext,
   useContext,
-  useState,
   useEffect,
+  useState,
   type ReactNode,
 } from "react";
 import type { Card } from "../types/TabCardType";
-import { tabsData } from "../constant/tabsData";
+import { usePageContext } from "./PageContext";
 
+// Define types
 type Tags = { id: number; name: string }[];
 type BookmarkContextType = {
   cards: Card[];
-  filteredCards: Card[];
   selectedCards: number[];
   selectedCardUrls: string[];
   selectedCategories: number[];
@@ -29,6 +29,7 @@ type BookmarkContextType = {
   clearSelection: () => void;
   setSelectedCategories: (categories: number[]) => void;
   setCards: (cards: Card[]) => void;
+  filteredCards: Card[];
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
@@ -36,16 +37,93 @@ const BookmarkContext = createContext<BookmarkContextType | undefined>(
 );
 
 export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
-  const [cards, setCards] = useState<Card[]>(tabsData);
+  const [cards, setCards] = useState<Card[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCards, setFilteredCards] = useState<Card[]>(cards);
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
+  const { page } = usePageContext();
 
-  // Fixed toggleCard function to match the expected signature
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const bookmarksTree = await chrome.bookmarks.getTree();
+        const bookmarks: Card[] = [];
+
+        const processBookmarkNode = async (node: chrome.bookmarks.BookmarkTreeNode) => {
+          if (node.url) {
+            const fetchFavicon = async (url: string) => {
+              try {
+                const faviconUrl = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&size=32&url=${encodeURIComponent(url)}`;
+                const response = await fetch(faviconUrl);
+                const blob = await response.blob();
+            
+                return new Promise<string>((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onloadend = () => resolve(reader.result as string);
+                  reader.onerror = reject;
+                  reader.readAsDataURL(blob);
+                });
+              } catch (error) {
+                console.error("Error fetching favicon:", error);
+                return "https://example.com/fallback-icon.png"; // Fallback icon
+              }
+            };
+            
+
+            const faviconUrl = await fetchFavicon(node.url);
+
+            bookmarks.push({
+              id: Number(node.id),
+              title: node.title,
+              path: node.url,
+              des: "",
+              icon: faviconUrl,
+              tags: [],
+              enabled: undefined,
+              iconUrl: ""
+            });
+          }
+          if (node.children) {
+            for (const child of node.children) {
+              await processBookmarkNode(child);
+            }
+          }
+        };
+
+        for (const node of bookmarksTree) {
+          await processBookmarkNode(node);
+        }
+
+        console.log("Fetched Bookmarks:", bookmarks);
+        setCards(bookmarks);
+      } catch (error) {
+        console.error("Error fetching bookmarks:", error);
+      }
+    };
+
+    fetchBookmarks();
+  }, []);
+
+  const filteredCards = cards.filter((card) =>
+    card.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const resetData = () => {
+    setSearchTerm("");
+    setSelectedCategories([]);
+    setSelectedCards([]);
+    setSelectedCardUrls([]);
+    setShowCardDetail(false);
+    setShowSelectionCard(false);
+  };
+
+  useEffect(() => {
+    resetData();
+  }, [page]);
+
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
@@ -59,8 +137,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const selectAll = () => {
-    setSelectedCards(filteredCards.map((card) => card.id));
-    setSelectedCardUrls(filteredCards.map((card) => card.path));
+    setSelectedCards(cards.map((card) => card.id));
+    setSelectedCardUrls(cards.map((card) => card.path));
   };
 
   const clearSelection = () => {
@@ -76,24 +154,10 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  // Update filteredCards whenever cards, searchTerm, or selectedCategories change
-  useEffect(() => {
-    const filtered = cards.filter((card) => {
-      const matchesSearch = card.title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesCategories =
-        selectedCategories.length === 0 ||
-        card.tags.some((tag) => selectedCategories.includes(tag.id));
-      return matchesSearch && matchesCategories;
-    });
-    setFilteredCards(filtered);
-  }, [selectedCategories, searchTerm, cards]);
-
   const value = {
-    cards,
+    cards: filteredCards,
+    filteredCards: cards,
     setSelectedCategories,
-    filteredCards,
     selectedCards,
     selectedCardUrls,
     selectedCategories,

@@ -7,15 +7,13 @@ import {
 import { usePageContext } from "@/context/PageContext";
 import { cn } from "@/lib/utils";
 interface Props {
-  data: {
-    icon: React.ReactNode;
-    tooltip: string;
-    link: string;
-  };
+  icon: React.ReactNode;
+  tooltip: string;
+  link?: string;
+  className?: string;
 }
-const SidebarItem = ({ data }: Props) => {
+const SidebarItem = ({ icon, tooltip, link, className }: Props) => {
   const { page, setPage } = usePageContext();
-  const { icon, tooltip, link } = data;
   const selected = page === link;
   const handelClick = (link: string) => {
     return () => {
@@ -26,8 +24,11 @@ const SidebarItem = ({ data }: Props) => {
     <TooltipProvider delayDuration={0}>
       <Tooltip>
         <TooltipTrigger
-          className='flex h-16 w-full items-center justify-center'
-          onClick={handelClick(link)}
+          className={cn(
+            "flex h-16 w-full items-center justify-center",
+            className
+          )}
+          onClick={handelClick(link ? link : page)}
         >
           <span></span>
           <div

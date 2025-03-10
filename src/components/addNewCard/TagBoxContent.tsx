@@ -35,6 +35,8 @@ const TagBoxContent = ({ actionBtns, className }: Props) => {
         name: tag,
       })),
       des: formData.description,
+      enabled: true, // or some default value
+      iconUrl: `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formData.url}/&size=32`, // or some default value
     };
 
     setCards([...cards, newCard]);

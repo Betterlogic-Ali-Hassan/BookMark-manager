@@ -25,7 +25,6 @@ export default function ExtensionCardsGroup({
   setFavoriteExe,
 }: ExtensionCardsGroupProps) {
   const [visibleCardsCount, setVisibleCardsCount] = useState(CARDS_PER_LOAD);
-
   const loadMoreCards = () => {
     setVisibleCardsCount((prevCount) =>
       Math.min(prevCount + CARDS_PER_LOAD, cards.length)

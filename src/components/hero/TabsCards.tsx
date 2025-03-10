@@ -5,7 +5,6 @@ import type { Card } from "@/types/TabCardType";
 import { cn } from "@/lib/utils";
 import { useThumbnailToggler } from "@/context/ThumbnailTogglerContext";
 import { usePageContext } from "@/context/PageContext";
-
 import HourlyLog from "../HourlyLog";
 import CardGroup from "./CardGroup";
 import InfiniteScrollSentinel from "./InfiniteScrollSentinel";

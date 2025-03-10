@@ -4,7 +4,7 @@ import type React from "react";
 import type { Card } from "@/types/TabCardType";
 import TabCard from "./TabCard";
 import ThumbnailCard from "./thumbnailView/ThumbnailCard";
-import ExtensionCard from "../extensionPage/ExtensionCard";
+import ExtensionCard from "@/components/extensionPage/ExtensionCard";
 import ExtensionListViewCard from "../extensionPage/ExtensionListViewCard";
 
 interface CardRendererProps {
@@ -31,8 +31,9 @@ export default function CardRenderer({
         favoriteExe={favoriteExe}
         data={data}
         key={data.id}
-        setActiveTab={setActiveTab}
-      />
+        setActiveTab={setActiveTab} onClick={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
     ) : (
       <ExtensionListViewCard
         setFavoriteExe={setFavoriteExe}

@@ -3,6 +3,9 @@ import Logo from "./Logo";
 
 import SidebarItem from "./SidebarItem";
 
+import MobileCategoriesFilter from "../hero/MobileCategoriesFilter";
+import MobileMenu from "./MobileMenu";
+
 const HomeSidebar = () => {
   return (
     <div className='fixed left-0 top-0 h-screen'>
@@ -12,12 +15,22 @@ const HomeSidebar = () => {
         </div>
         <div>
           {sidebarData.map((item, i) => (
-            <SidebarItem data={item} key={i} />
+            <SidebarItem {...item} key={i} />
           ))}
+          <SidebarItem
+            icon={<MobileCategoriesFilter />}
+            tooltip='Filters'
+            className='lg:hidden flex'
+          />
+          <SidebarItem
+            icon={<MobileMenu />}
+            tooltip='Menu'
+            className='lg:hidden flex'
+          />
         </div>
         <div className='mt-auto'>
           {sidebarDataBottom.map((item, i) => (
-            <SidebarItem data={item} key={i} />
+            <SidebarItem {...item} key={i} />
           ))}
         </div>
       </div>
