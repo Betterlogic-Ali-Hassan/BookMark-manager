@@ -21,6 +21,7 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
   const { page } = usePageContext();
   const isShowHourlyLog = page === "history";
   const isExtensionsPage = page === "extensions";
+  const isDownloadPage = page === "downloads";
   const INITIAL_CARDS_COUNT = isExtensionsPage ? 20 : 100;
   const CARDS_PER_LOAD = isExtensionsPage ? 20 : 40;
   const [visibleCardsCount, setVisibleCardsCount] =
@@ -63,7 +64,6 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
     return groups.filter((group) => group.length > 0);
   }, [visibleCards, isShowHourlyLog]);
 
-  // Check if we've loaded all cards
   const hasMoreCards = visibleCardsCount < cards.length;
 
   return (
@@ -81,6 +81,7 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
             setActiveTab={setActiveTab}
             favoriteExe={favoriteExe}
             setFavoriteExe={setFavoriteExe}
+            isDownloadPage={isDownloadPage}
           />
         </div>
       )}
@@ -91,6 +92,7 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
           cards={group}
           isListView={isListView}
           isExtensionsPage={isExtensionsPage}
+          isDownloadPage={isDownloadPage}
           isShowHourlyLog={isShowHourlyLog}
           showHourlyLogAfter={index < cardGroups.length - 1}
           setActiveTab={setActiveTab}

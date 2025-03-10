@@ -11,23 +11,22 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Button from "../ui/button";
 
 import ResetFilter from "./ResetFilter";
+import { usePageContext } from "@/context/PageContext";
+type CategoryWithCount = { name: string; count: number; id: number };
+type CategoryWithoutCount = { name: string; id: number };
 
 interface Props {
   className?: string;
-  categoriesData: {
-    name: string;
-    count: number;
-    id: number;
-  }[];
+  categoriesData: Array<CategoryWithCount | CategoryWithoutCount>;
 }
 const TopNav = ({ className, categoriesData }: Props) => {
   const { setSelectedCategories, toggleCategory, selectedCategories } =
     useBookmarks();
-
+  const { page } = usePageContext();
   const handleToggleCategory = (categoryId: number) => {
     toggleCategory(categoryId);
   };
-
+  const isDownloadPage = page === "downloads";
   const handleRemoveCategory = (categoryId: number, e: React.MouseEvent) => {
     e.stopPropagation();
     const updatedCategories = selectedCategories.filter(
@@ -77,7 +76,10 @@ const TopNav = ({ className, categoriesData }: Props) => {
               })}
               {selectedCategories.length === 0 &&
                 categoriesData.slice(0, 5).map((category, i) => (
-                  <SwiperSlide className='max-w-fit' key={i}>
+                  <SwiperSlide
+                    className={cn("max-w-fit", isDownloadPage && "hidden")}
+                    key={i}
+                  >
                     <button
                       className={cn(
                         "focus:outline-none focus-visible:ring-1 ring-inset ring-border rounded h-9 text-foreground hover:text-text inline-flex items-center text-sm font-semibold px-2 mr-2",

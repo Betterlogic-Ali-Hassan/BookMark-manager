@@ -96,8 +96,8 @@ export const sidebarData = [
         </g>
       </svg>
     ),
-    tooltip: "Documentation",
-    link: "document",
+    tooltip: "Downloads",
+    link: "downloads",
   },
 ];
 export const sidebarDataBottom = [

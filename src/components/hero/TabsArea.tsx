@@ -2,11 +2,10 @@ import { useState } from "react";
 import TabCardDetail from "./tabCardDetail/TabCardDetail";
 import TabsCards from "./TabsCards";
 import { useBookmarks } from "@/context/BookmarkContext";
-import DataNotFound from "../searchPage/DataNotFound";
+import DataNotFound from "../DataNotFound";
 
 const TabsArea = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const { searchTerm } = useBookmarks();
 
   const { cards } = useBookmarks();
 
@@ -18,7 +17,7 @@ const TabsArea = () => {
           <TabCardDetail activeTab={activeTab} cards={cards} />
         </>
       ) : (
-        <DataNotFound searchTerm={searchTerm} />
+        <DataNotFound />
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 // import Badge from "@/components/ui/Badge";
 import MoreIconBtn from "@/components/MoreIconBtn";
-import { useBookmarks } from "@/context/BookmarkContext";
+
+import { useBookmarkItem } from "@/hooks/use-bookmark-item";
 import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
 // import ActionsBtns from "../tabCardDetail/ActionsBtns";
@@ -10,14 +11,8 @@ interface Props {
   setActiveTab: (tab: number) => void;
 }
 const ThumbnailCard = ({ data, setActiveTab }: Props) => {
-  const { icon, des, id, path, tags } = data;
-  const { toggleCard, showSelectionCard, selectedCards } = useBookmarks();
-  const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, path, tags);
-    setActiveTab(id);
-  };
-
-  const selected = selectedCards.includes(id);
+  const { icon, handleToggle, selected, des, showSelectionCard } =
+    useBookmarkItem(data, setActiveTab);
   return (
     <div
       className={cn(

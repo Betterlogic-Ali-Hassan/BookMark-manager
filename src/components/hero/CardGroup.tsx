@@ -12,6 +12,7 @@ interface CardGroupProps {
   cards: Card[];
   isListView: boolean;
   isExtensionsPage: boolean;
+  isDownloadPage: boolean;
   isShowHourlyLog: boolean;
   showHourlyLogAfter: boolean;
   setActiveTab: (tab: number) => void;
@@ -28,6 +29,7 @@ export default function CardGroup({
   setActiveTab,
   favoriteExe,
   setFavoriteExe,
+  isDownloadPage,
 }: CardGroupProps) {
   const containerClasses = cn(
     "flex flex-col gap-2 px-1.5 lg:px-0 mt-2 lg:mt-0",
@@ -38,6 +40,7 @@ export default function CardGroup({
     <div className={containerClasses}>
       {cards.map((card) => (
         <CardRenderer
+          isDownloadPage={isDownloadPage}
           key={card.id}
           data={card}
           isListView={isListView}

@@ -4,6 +4,7 @@ import { useBookmarks } from "@/context/BookmarkContext";
 import ThumbnailToggle from "../hero/ThumbnailToggle";
 import { usePageContext } from "@/context/PageContext";
 import DotsIcon from "../svgs/DotsIcon";
+import { cn } from "@/lib/utils";
 
 const DropDown = () => {
   const { cards } = useBookmarks();
@@ -25,13 +26,19 @@ const DropDown = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
+  const isShowThumbnailView = page === "downloads" || page === "history";
+  const isDownloadPage = page === "downloads";
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
-      {page !== "history" && <ThumbnailToggle />}
+      {!isShowThumbnailView && <ThumbnailToggle />}
       <div className='flex items-center px-4 whitespace-nowrap text-foreground  text-sm'>
-        {count} bookmarks
-        <div className='relative flex justify-center items-center'>
+        {count} {isDownloadPage ? "Downloads" : "Bookmarks"}
+        <div
+          className={cn(
+            "relative flex justify-center items-center",
+            isDownloadPage && "hidden"
+          )}
+        >
           <button
             ref={btnRef}
             className='p-2 lg:p-0.5  lg:text-foreground   hover:text-text'

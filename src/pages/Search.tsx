@@ -1,6 +1,6 @@
 import TabCardDetail from "@/components/hero/tabCardDetail/TabCardDetail";
 import TabsCards from "@/components/hero/TabsCards";
-import DataNotFound from "@/components/searchPage/DataNotFound";
+import DataNotFound from "@/components/DataNotFound";
 import SearchBar from "@/components/searchPage/SearchBar";
 import TopNav from "@/components/topbar/TopNav";
 import { categoriesData } from "@/constant/categoriesData";

@@ -1,14 +1,12 @@
 "use client";
-
 import type React from "react";
-
-import { useBookmarks } from "@/context/BookmarkContext";
 import type { Card } from "@/types/TabCardType";
 import { Switch } from "../ui/switch";
 import { BsPin, BsPinFill } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import MoreIconBtn from "../MoreIconBtn";
+import { useBookmarkItem } from "@/hooks/use-bookmark-item";
 
 interface ExtensionCardProps {
   data: Card;
@@ -23,8 +21,10 @@ const ExtensionCard = ({
   setFavoriteExe,
   favoriteExe,
 }: ExtensionCardProps) => {
-  const { title, id, path, tags } = data;
-  const { toggleCard, showSelectionCard } = useBookmarks();
+  const { handleToggle, showSelectionCard, title } = useBookmarkItem(
+    data,
+    setActiveTab
+  );
   const [switchChecked, setSwitchChecked] = useState(false);
   const isFavorite = favoriteExe.some((card) => card.id === data.id);
 
@@ -35,10 +35,6 @@ const ExtensionCard = ({
     );
   };
 
-  const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, path, tags);
-    setActiveTab(id);
-  };
   const handleSwitch = () => {
     setSwitchChecked(!switchChecked);
   };

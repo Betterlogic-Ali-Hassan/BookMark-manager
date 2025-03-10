@@ -27,7 +27,7 @@ const TabCardHeading = ({ icon, title }: Props) => {
             ></path>
           </svg>
         </object>
-        {title}
+        <span className='max-w-[186px] truncate'>{title}</span>
       </h2>
     </>
   );

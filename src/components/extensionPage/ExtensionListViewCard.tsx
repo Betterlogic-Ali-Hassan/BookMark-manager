@@ -4,9 +4,9 @@ import type React from "react";
 
 import type { Card } from "@/types/TabCardType";
 import { Switch } from "../ui/switch";
-import { useBookmarks } from "@/context/BookmarkContext";
 import { BsPin, BsPinFill } from "react-icons/bs";
 import { cn } from "@/lib/utils";
+import { useBookmarkItem } from "@/hooks/use-bookmark-item";
 
 interface ExtensionCardProps {
   data: Card;
@@ -21,8 +21,10 @@ const ExtensionListViewCard = ({
   setFavoriteExe,
   favoriteExe,
 }: ExtensionCardProps) => {
-  const { title, des, icon, tags, id, path } = data;
-  const { toggleCard, showSelectionCard } = useBookmarks();
+  const { handleToggle, title, icon, path, tags, des } = useBookmarkItem(
+    data,
+    setActiveTab
+  );
 
   const isFavorite = favoriteExe.some((card) => card.id === data.id);
 
@@ -31,11 +33,6 @@ const ExtensionListViewCard = ({
     setFavoriteExe((prev) =>
       isFavorite ? prev.filter((card) => card.id !== data.id) : [...prev, data]
     );
-  };
-
-  const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, path, tags);
-    setActiveTab(id);
   };
 
   return (

@@ -7,6 +7,7 @@ import HistoryPage from "./pages/HistoryPage";
 import { usePageContext } from "./context/PageContext";
 import ExtensionPage from "./pages/ExtensionPage";
 import { FormProvider } from "./context/from-Context";
+import Downloads from "./pages/Downloads";
 const App = () => {
   const { page } = usePageContext();
   return (
@@ -18,6 +19,7 @@ const App = () => {
         {page === "edit" && <EditBookmark />}
         {page === "history" && <HistoryPage />}
         {page === "extensions" && <ExtensionPage />}
+        {page === "downloads" && <Downloads />}
       </FormProvider>
     </BookmarkProvider>
   );

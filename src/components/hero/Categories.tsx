@@ -1,8 +1,10 @@
 "use client";
 
+import { categories } from "@/constant/categories";
 import { categoriesData } from "@/constant/categoriesData";
 import { tabsData } from "@/constant/tabsData";
 import { useBookmarks } from "@/context/BookmarkContext";
+import { usePageContext } from "@/context/PageContext";
 import {
   filterCardsByCategory,
   getCategoryCounts,
@@ -19,8 +21,10 @@ const Categories = ({ className }: { className?: string }) => {
     cards,
     setCards,
   } = useBookmarks();
+  const { page } = usePageContext();
   const categoryCounts = useMemo(() => getCategoryCounts(cards), [cards]);
-
+  const isDownloadPage = page === "downloads";
+  const categoryData = isDownloadPage ? categories : categoriesData;
   useEffect(() => {
     const filteredCards = filterCardsByCategory(cards, selectedCategories);
     setCards(filteredCards);
@@ -40,7 +44,7 @@ const Categories = ({ className }: { className?: string }) => {
       )}
     >
       <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2'>
-        {categoriesData.map((category, i) => (
+        {categoryData.map((category, i) => (
           <div key={i}>
             <button
               onClick={getCategoryName(category.id, toggleCategory)}
@@ -58,7 +62,8 @@ const Categories = ({ className }: { className?: string }) => {
                 className={cn(
                   "w-8 text-left shrink whitespace-nowrap truncate text-foreground",
                   selectedCategories.includes(category.id) &&
-                    "font-medium text-brand hover:text-brand"
+                    "font-medium text-brand hover:text-brand",
+                  isDownloadPage && "opacity-0"
                 )}
               >
                 {categoryCounts[category.id] || 0}

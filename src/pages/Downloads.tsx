@@ -1,10 +1,12 @@
 import Hero from "@/components/hero/Hero";
 import MainLayout from "./layout/MainLayout";
 
-export default function Home() {
+const Downloads = () => {
   return (
     <MainLayout>
       <Hero />
     </MainLayout>
   );
-}
+};
+
+export default Downloads;
