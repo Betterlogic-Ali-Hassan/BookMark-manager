@@ -39,7 +39,7 @@ const Search = () => {
               {searchTerm !== "" && (
                 <TabsCards setActiveTab={setActiveTab} cards={cards} />
               )}
-              {cards.length <= 0 && <DataNotFound searchTerm={searchTerm} />}
+              {cards.length <= 0 && <DataNotFound />}
             </div>
           </div>
         </div>
