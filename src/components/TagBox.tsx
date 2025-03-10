@@ -1,11 +1,19 @@
 "use client";
-import { useState, useEffect, type KeyboardEvent } from "react";
+
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  type KeyboardEvent,
+} from "react";
 import { categoriesData } from "@/constant/categoriesData";
 import { useFormContext } from "@/context/from-Context";
 import { TagNotification } from "./TagAddedNotification";
 import { TagButton } from "./AddTagBtn";
 import { PlusIcon } from "./svgs/PlusIcon";
-import { Tag } from "@/types/tag";
+import type { Tag } from "@/types/tag";
 
 interface TagBoxProps {
   allowedText?: boolean;
@@ -19,7 +27,7 @@ export default function TagBox({
   const [tagInputValue, setTagInputValue] = useState("");
   const { formData, updateFormData } = useFormContext();
   const [selectedTags, setSelectedTags] = useState<string[]>(
-    formData.tags || []
+    () => formData.tags || []
   );
   const [notification, setNotification] = useState({
     text: "",
@@ -27,25 +35,42 @@ export default function TagBox({
   });
   const [tags, setTags] = useState<Tag[]>(categoriesData || []);
 
-  // Update form context and call onTagsChange when selected tags change
-  useEffect(() => {
-    updateFormData("tags", selectedTags);
-    onTagsChange?.(selectedTags);
-  }, [selectedTags, updateFormData, onTagsChange]);
+  // Use ref for timeout to prevent memory leaks
+  const notificationTimeoutRef = useRef<NodeJS.Timeout>(null);
 
-  // Show notification with auto-dismiss
-  const showNotification = (text: string) => {
+  // Memoize the showNotification function to prevent recreation on each render
+  const showNotification = useCallback((text: string) => {
     setNotification({ text, visible: true });
 
-    const timeoutId = setTimeout(() => {
+    // Clear any existing timeout
+    if (notificationTimeoutRef.current) {
+      clearTimeout(notificationTimeoutRef.current);
+    }
+
+    notificationTimeoutRef.current = setTimeout(() => {
       setNotification((prev) => ({ ...prev, visible: false }));
     }, 1000);
+  }, []);
 
-    return () => clearTimeout(timeoutId);
-  };
+  // Update form context and call onTagsChange when selected tags change
+  useEffect(() => {
+    // Prevent unnecessary updates by comparing with current form data
+    if (JSON.stringify(formData.tags) !== JSON.stringify(selectedTags)) {
+      updateFormData("tags", selectedTags);
+    }
 
-  // Add a new tag
-  const handleAddTag = () => {
+    onTagsChange?.(selectedTags);
+
+    // Cleanup timeout on unmount
+    return () => {
+      if (notificationTimeoutRef.current) {
+        clearTimeout(notificationTimeoutRef.current);
+      }
+    };
+  }, [selectedTags, updateFormData, onTagsChange, formData.tags]);
+
+  // Memoize event handlers to prevent recreation on each render
+  const handleAddTag = useCallback(() => {
     const trimmedValue = tagInputValue.trim();
 
     if (!trimmedValue) return;
@@ -68,30 +93,45 @@ export default function TagBox({
 
     // Clear input
     setTagInputValue("");
-  };
+  }, [tagInputValue, showNotification]);
 
   // Toggle tag selection
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) => {
-      const isTagSelected = prev.includes(tag);
+  const toggleTag = useCallback(
+    (tag: string) => {
+      setSelectedTags((prev) => {
+        const isTagSelected = prev.includes(tag);
+        showNotification(
+          isTagSelected ? `Removed: Tag "${tag}"` : `Added: Tag "${tag}"`
+        );
 
-      // Show notification
-      showNotification(
-        isTagSelected ? `Removed: Tag "${tag}"` : `Added: Tag "${tag}"`
-      );
+        return isTagSelected ? prev.filter((t) => t !== tag) : [...prev, tag];
+      });
+    },
+    [showNotification]
+  );
 
-      // Update selected tags
-      return isTagSelected ? prev.filter((t) => t !== tag) : [...prev, tag];
-    });
-  };
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleAddTag();
+      }
+    },
+    [handleAddTag]
+  );
 
-  // Handle Enter key in input field
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleAddTag();
-    }
-  };
+  const tagButtons = useMemo(
+    () =>
+      tags.map((category) => (
+        <TagButton
+          key={category.id}
+          tag={category.name}
+          isSelected={selectedTags.includes(category.name)}
+          onClick={() => toggleTag(category.name)}
+        />
+      )),
+    [tags, selectedTags, toggleTag]
+  );
 
   return (
     <div className='space-y-2'>
@@ -131,16 +171,7 @@ export default function TagBox({
         </button>
       </div>
 
-      <div className='flex flex-wrap gap-1.5 py-1'>
-        {tags.map((category) => (
-          <TagButton
-            key={category.id}
-            tag={category.name}
-            isSelected={selectedTags.includes(category.name)}
-            onClick={() => toggleTag(category.name)}
-          />
-        ))}
-      </div>
+      <div className='flex flex-wrap gap-2 py-1'>{tagButtons}</div>
     </div>
   );
 }

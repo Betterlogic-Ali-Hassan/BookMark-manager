@@ -27,16 +27,20 @@ const DropDown = () => {
     };
   }, []);
   const isShowThumbnailView = page === "downloads" || page === "history";
-  const isDownloadPage = page === "downloads";
+  const pageTitles: Record<string, string> = {
+    downloads: "Downloads",
+    history: "History",
+    extensions: "Extensions",
+  };
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
       {!isShowThumbnailView && <ThumbnailToggle />}
       <div className='flex items-center px-4 whitespace-nowrap text-foreground  text-sm'>
-        {count} {isDownloadPage ? "Downloads" : "Bookmarks"}
+        {count} {pageTitles[page] || "Bookmarks"}
         <div
           className={cn(
             "relative flex justify-center items-center",
-            isDownloadPage && "hidden"
+            pageTitles["downloads"] && "hidden"
           )}
         >
           <button

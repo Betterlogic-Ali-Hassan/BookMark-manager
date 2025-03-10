@@ -1,7 +1,10 @@
 "use client";
 import { usePageContext } from "@/context/PageContext";
 import { btns } from "@/constant/headerActionBtns";
-import SettingDialog from "../settingPage/SettingDialog";
+
+import DialogBox from "../DialogBox";
+import SettingIcon from "../svgs/SettingIcon";
+import Settings from "@/pages/settings/Settings";
 
 const ActionButtons = () => {
   const { setPage } = usePageContext();
@@ -15,7 +18,9 @@ const ActionButtons = () => {
       className='hidden lg:flex items-center justify-end gap-4 pr-4'
       aria-label='Action navigation'
     >
-      <SettingDialog />
+      <DialogBox trigger={<SettingIcon />}>
+        <Settings />
+      </DialogBox>
       {btns.map((button, index) => (
         <button
           key={index}

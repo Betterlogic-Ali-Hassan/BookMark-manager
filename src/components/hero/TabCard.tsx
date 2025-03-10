@@ -53,7 +53,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
               {title}
             </div>
           </a>
-          <div className='pr-6 text-xs opacity-50  max-w-[300px]  min-w-[300px] tracking-wide'>
+          <div className='pr-6 text-xs opacity-50  max-w-[300px]  min-w-[300px] tracking-wide max-sm:hidden'>
             <span className='truncate max-w-[170px] block'>{path}</span>
           </div>
 
@@ -65,7 +65,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             tags.slice(1).map((tag) => (
               <div
                 className={cn(
-                  " text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide",
+                  " text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide max-lg:hidden",
                   showSelectionCard && "max-w-[178px] min-w-[178px]"
                 )}
                 key={tag.id}
@@ -76,7 +76,8 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             ))
           )}
         </div>
-        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card' />
+
+        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card ' />
       </div>
     </div>
   );

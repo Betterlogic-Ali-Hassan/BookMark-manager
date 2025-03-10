@@ -4,22 +4,22 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Settings from "@/pages/settings/Settings";
-import SettingIcon from "../svgs/SettingIcon";
 
-const SettingDialog = () => {
+interface Props {
+  trigger: React.ReactNode;
+  children: React.ReactNode;
+}
+const DialogBox = ({ trigger, children }: Props) => {
   return (
     <Dialog>
       <DialogTrigger className='text-sm text-foreground hover:text-text transition-colors'>
-        <SettingIcon />
+        {trigger}
       </DialogTrigger>
       <DialogContent className='bg-transparent border-0 h-fit'>
-        <DialogHeader>
-          <Settings />
-        </DialogHeader>
+        <DialogHeader>{children}</DialogHeader>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default SettingDialog;
+export default DialogBox;

@@ -1,6 +1,7 @@
 import { usePageContext } from "@/context/PageContext";
 import AlertDialogBox from "./AlertDialogBox";
 import { useBookmarks } from "@/context/BookmarkContext";
+import { DialogClose } from "./ui/dialog";
 
 const EditActionBtns = () => {
   const { setPage } = usePageContext();
@@ -34,10 +35,11 @@ const EditActionBtns = () => {
           </>
         }
       />
-
-      <button className='btn secondary ml-auto rounded ' onClick={handleBack}>
-        Cancel
-      </button>
+      <DialogClose asChild>
+        <button className='btn secondary ml-auto rounded ' onClick={handleBack}>
+          Cancel
+        </button>
+      </DialogClose>
       <button className='btn  inline-flex rounded done-btn'>Save</button>
     </div>
   );

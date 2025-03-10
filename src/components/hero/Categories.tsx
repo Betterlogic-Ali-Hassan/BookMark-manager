@@ -12,6 +12,10 @@ import {
 } from "@/lib/category-utils";
 import { cn } from "@/lib/utils";
 import { useEffect, useMemo } from "react";
+import DialogBox from "../DialogBox";
+import TagBox from "../TagBox";
+import { DialogClose } from "../ui/dialog";
+import CrossIcon from "../svgs/CrossIcon";
 
 const Categories = ({ className }: { className?: string }) => {
   const {
@@ -44,6 +48,7 @@ const Categories = ({ className }: { className?: string }) => {
       )}
     >
       <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2'>
+        <h2 className='  w-[60px] text-foreground opacity-50'>Filters </h2>
         {categoryData.map((category, i) => (
           <div key={i}>
             <button
@@ -71,6 +76,22 @@ const Categories = ({ className }: { className?: string }) => {
             </button>
           </div>
         ))}
+        <DialogBox
+          trigger={
+            <button className='bg-brand p-2 rounded mr-5 mt-1 text-white '>
+              Add New
+            </button>
+          }
+        >
+          <div className='flex items-center justify-center flex-col'>
+            <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[35px] right-[29%] opacity-80 hover:opacity-100 '>
+              <CrossIcon />
+            </DialogClose>
+            <div className=' bg-card p-6 rounded-lg  max-w-3xl'>
+              <TagBox />
+            </div>
+          </div>
+        </DialogBox>
       </div>
     </div>
   );

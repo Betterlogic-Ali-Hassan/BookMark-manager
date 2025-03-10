@@ -1,7 +1,7 @@
 import { BookmarkProvider } from "./context/BookmarkContext";
 import Home from "./pages/Home";
 // import Search from "./pages/Search";
-import AddBookmark from "./pages/AddBookmark";
+// import AddBookmark from "./pages/AddBookmark";
 import EditBookmark from "./pages/EditBookmark";
 import HistoryPage from "./pages/HistoryPage";
 import { usePageContext } from "./context/PageContext";
@@ -15,7 +15,7 @@ const App = () => {
       <FormProvider>
         {page === "home" && <Home />}
         {/* {page === "search" && <Search />} */}
-        {page === "new" && <AddBookmark />}
+        {/* {page === "new" && <AddBookmark />} */}
         {page === "edit" && <EditBookmark />}
         {page === "history" && <HistoryPage />}
         {page === "extensions" && <ExtensionPage />}

@@ -3,9 +3,7 @@ import { FaHistory } from "react-icons/fa";
 import { MdExtension } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
 import DocumentationIcon from "@/components/svgs/DocumentationIcon";
-
 import ExistIcon from "@/components/svgs/ExistIcon";
-import SettingIcon from "@/components/svgs/SettingIcon";
 
 export const sidebarData = [
   {
@@ -39,10 +37,5 @@ export const sidebarDataBottom = [
     icon: <ExistIcon />,
     tooltip: "Logout",
     link: "logout",
-  },
-  {
-    icon: <SettingIcon />,
-    tooltip: "Settings",
-    link: "settings",
   },
 ];
