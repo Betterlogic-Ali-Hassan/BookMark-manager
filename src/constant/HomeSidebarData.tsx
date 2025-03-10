@@ -1,101 +1,26 @@
+import { IoBookmarks } from "react-icons/io5";
+import { FaHistory } from "react-icons/fa";
+import { MdExtension } from "react-icons/md";
+import { IoMdDownload } from "react-icons/io";
+
 export const sidebarData = [
   {
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        xmlnsXlink='http://www.w3.org/1999/xlink'
-        aria-hidden='true'
-        role='img'
-        className='icon w-5 h-5'
-        width='1em'
-        height='1em'
-        viewBox='0 0 256 256'
-        data-v-b4402e20=''
-      >
-        <g fill='currentColor'>
-          <path
-            d='M88 48v160H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8Z'
-            opacity='.2'
-          ></path>
-          <path d='M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M40 152h16a8 8 0 0 0 0-16H40v-16h16a8 8 0 0 0 0-16H40V88h16a8 8 0 0 0 0-16H40V56h40v144H40Zm176 48H96V56h120z'></path>
-        </g>
-      </svg>
-    ),
+    icon: <IoBookmarks size={20} />,
     tooltip: "Bookmarks",
     link: "home",
   },
   {
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        xmlnsXlink='http://www.w3.org/1999/xlink'
-        aria-hidden='true'
-        role='img'
-        className='icon w-5 h-5'
-        width='1em'
-        height='1em'
-        viewBox='0 0 256 256'
-        data-v-b4402e20=''
-      >
-        <g fill='currentColor'>
-          <path
-            d='M224 56v144a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8'
-            opacity='.2'
-          ></path>
-          <path d='M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m0 160H40V56h176zM80 84a12 12 0 1 1-12-12a12 12 0 0 1 12 12m40 0a12 12 0 1 1-12-12a12 12 0 0 1 12 12'></path>
-        </g>
-      </svg>
-    ),
+    icon: <FaHistory size={20} />,
     tooltip: "History",
     link: "history",
   },
   {
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        xmlnsXlink='http://www.w3.org/1999/xlink'
-        aria-hidden='true'
-        role='img'
-        className='icon w-5 h-5'
-        width='1em'
-        height='1em'
-        viewBox='0 0 256 256'
-        data-v-b4402e20=''
-      >
-        <g fill='currentColor'>
-          <path
-            d='M224 128a96 96 0 0 1-144.07 83.11l-37.39 12.47a8 8 0 0 1-10.12-10.12l12.47-37.39A96 96 0 1 1 224 128'
-            opacity='.2'
-          ></path>
-          <path d='M128 24a104 104 0 0 0-91.82 152.88l-11.35 34.05a16 16 0 0 0 20.24 20.24l34.05-11.35A104 104 0 1 0 128 24m0 192a87.87 87.87 0 0 1-44.06-11.81a8 8 0 0 0-6.54-.67L40 216l12.47-37.4a8 8 0 0 0-.66-6.54A88 88 0 1 1 128 216'></path>
-        </g>
-      </svg>
-    ),
+    icon: <MdExtension size={20} />,
     tooltip: "Extensions",
     link: "extensions",
   },
   {
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        xmlnsXlink='http://www.w3.org/1999/xlink'
-        aria-hidden='true'
-        role='img'
-        className='icon w-5 h-5'
-        width='1em'
-        height='1em'
-        viewBox='0 0 256 256'
-        data-v-b4402e20=''
-      >
-        <g fill='currentColor'>
-          <path
-            d='M208 56v144a8 8 0 0 1-8 8H56a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h144a8 8 0 0 1 8 8'
-            opacity='.2'
-          ></path>
-          <path d='M200 40H56a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m0 80h-64V56h64Zm-80-64v64H56V56Zm-64 80h64v64H56Zm144 64h-64v-64h64z'></path>
-        </g>
-      </svg>
-    ),
+    icon: <IoMdDownload size={24} />,
     tooltip: "Downloads",
     link: "downloads",
   },

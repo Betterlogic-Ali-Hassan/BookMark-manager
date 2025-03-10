@@ -21,10 +21,7 @@ const ExtensionCard = ({
   setFavoriteExe,
   favoriteExe,
 }: ExtensionCardProps) => {
-  const { handleToggle, showSelectionCard, title } = useBookmarkItem(
-    data,
-    setActiveTab
-  );
+  const { handleToggle, title } = useBookmarkItem(data, setActiveTab);
   const [switchChecked, setSwitchChecked] = useState(false);
   const isFavorite = favoriteExe.some((card) => card.id === data.id);
 
@@ -49,8 +46,18 @@ const ExtensionCard = ({
           alt={title}
           className='h-[60px] w-[60px]'
         />
-        <div className='flex gap-5'>
+        <div className='flex items-start gap-3'>
+          <span
+            className={cn(
+              "cursor-pointer text-text hidden  group-hover:block ",
+              isFavorite && "block"
+            )}
+            onClick={addFavoriteExe}
+          >
+            {isFavorite ? <BsPinFill size={18} /> : <BsPin size={18} />}
+          </span>
           <Switch checked={switchChecked} onCheckedChange={handleSwitch} />
+          <MoreIconBtn className='!h-0 lg:px-0' />
         </div>
       </div>
       <div className='flex flex-col gap-1'>
@@ -59,23 +66,6 @@ const ExtensionCard = ({
           A simple journaling app for capturing daily memories with text, photo,
           stickers and video.
         </p>
-      </div>
-      <div
-        className={cn(
-          "flex items-center  absolute  right-20",
-          !showSelectionCard && "top-3 right-16"
-        )}
-      >
-        <span
-          className={cn(
-            "cursor-pointer text-text hidden  group-hover:block",
-            isFavorite && "block"
-          )}
-          onClick={addFavoriteExe}
-        >
-          {isFavorite ? <BsPinFill size={18} /> : <BsPin size={18} />}
-        </span>
-        <MoreIconBtn className='lg:pl-2' />
       </div>
     </div>
   );
