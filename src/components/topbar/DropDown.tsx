@@ -32,6 +32,7 @@ const DropDown = () => {
     history: "History",
     extensions: "Extensions",
   };
+  const isDownloadPage = page === "downloads";
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
       {!isShowThumbnailView && <ThumbnailToggle />}
@@ -40,7 +41,7 @@ const DropDown = () => {
         <div
           className={cn(
             "relative flex justify-center items-center",
-            pageTitles["downloads"] && "hidden"
+            isDownloadPage && "hidden"
           )}
         >
           <button
