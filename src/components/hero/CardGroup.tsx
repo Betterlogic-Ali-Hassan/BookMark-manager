@@ -40,8 +40,8 @@ export default function CardGroup({
     <div className={containerClasses}>
       {cards.map((card) => (
         <CardRenderer
-          isDownloadPage={isDownloadPage}
           key={card.id}
+          isDownloadPage={isDownloadPage}
           data={card}
           isListView={isListView}
           isExtensionsPage={isExtensionsPage}

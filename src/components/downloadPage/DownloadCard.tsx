@@ -1,22 +1,18 @@
 "use client";
-
-import React from "react";
-
 import type { Card } from "@/types/TabCardType";
 import CrossIcon from "../svgs/CrossIcon";
-
 interface DownloadCardProps {
   data: Card;
   setActiveTab: (tab: number) => void;
 }
 
 const DownloadCard = ({ data }: DownloadCardProps) => {
-  const { title, icon2, path } = data;
+  const { title, icon, path } = data;
+  console.log(data);
   return (
     <div className='p-6 border-border border group rounded-lg bg-card flex gap-6 mb-4 relative cursor-pointer'>
       <div className='h-[36px] w-[36px]'>
-        {/* Render icon2 only if it's a valid React element */}
-        {React.isValidElement(icon2) ? icon2 : null}
+        <img src={icon} alt={title} className='h-[36px] w-[36px]' />
       </div>
       <div className='grow flex items-center justify-between'>
         <div>

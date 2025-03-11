@@ -1,13 +1,7 @@
-import { FaFileAlt, FaFileArchive, FaFilePdf } from "react-icons/fa";
-import { RiApps2AiFill } from "react-icons/ri";
-import { BiSolidVideos } from "react-icons/bi";
-import { MdAudioFile } from "react-icons/md";
-import { IoImage } from "react-icons/io5";
-
 export const downloadData = [
   {
     id: 1,
-    icon2: <FaFilePdf size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
     title: "QR Code Generator",
     path: "https://high-qr-code-generator.com/",
     des: "Convert written text into spoken words.",
@@ -15,7 +9,7 @@ export const downloadData = [
   },
   {
     id: 2,
-    icon2: <FaFilePdf size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
     title: "Color Palette Generator",
     path: "https://coolors.co/",
     des: "Convert written text into spoken words.",
@@ -23,7 +17,7 @@ export const downloadData = [
   },
   {
     id: 3,
-    icon2: <IoImage size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=13917&format=png",
     title: "HTML Formatter",
     path: "https://htmlformatter.com/",
     des: "Convert written text into spoken words.",
@@ -31,7 +25,7 @@ export const downloadData = [
   },
   {
     id: 4,
-    icon2: <IoImage size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=13917&format=png",
     title: "CSS Minifier",
     path: "https://cssminifier.com/",
     des: "Convert written text into spoken words.",
@@ -39,7 +33,7 @@ export const downloadData = [
   },
   {
     id: 5,
-    icon2: <IoImage size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=13917&format=png",
     title: "JavaScript Beautifier",
     path: "https://beautifier.io/",
     des: "Convert written text into spoken words.",
@@ -47,7 +41,7 @@ export const downloadData = [
   },
   {
     id: 6,
-    icon2: <FaFilePdf size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
     title: "JSON Formatter",
     path: "https://jsonformatter.org/",
     des: "Convert written text into spoken words.",
@@ -55,7 +49,7 @@ export const downloadData = [
   },
   {
     id: 7,
-    icon2: <FaFilePdf size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
     title: "Markdown Editor",
     path: "https://dillinger.io/",
     des: "Convert written text into spoken words.",
@@ -63,7 +57,7 @@ export const downloadData = [
   },
   {
     id: 8,
-    icon2: <FaFileAlt size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
     title: "Regex Tester",
     path: "https://regex101.com/",
     des: "Convert written text into spoken words.",
@@ -71,7 +65,7 @@ export const downloadData = [
   },
   {
     id: 9,
-    icon2: <FaFileAlt size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
     title: "Image Compressor",
     path: "https://tinypng.com/",
     des: "Convert written text into spoken words.",
@@ -79,7 +73,7 @@ export const downloadData = [
   },
   {
     id: 10,
-    icon2: <FaFileAlt size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
     title: "Online Stopwatch",
     path: "https://www.online-stopwatch.com/",
     des: "Convert written text into spoken words.",
@@ -87,7 +81,7 @@ export const downloadData = [
   },
   {
     id: 11,
-    icon2: <FaFileAlt size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
     title: "UUID Generator",
     path: "https://www.uuidgenerator.net/",
     des: "Convert written text into spoken words.",
@@ -95,7 +89,7 @@ export const downloadData = [
   },
   {
     id: 12,
-    icon2: <RiApps2AiFill size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=fKXXelWgP1B6&format=png",
     title: "Lorem Ipsum Generator",
     path: "https://www.lipsum.com/",
     des: "Convert written text into spoken words.",
@@ -103,7 +97,7 @@ export const downloadData = [
   },
   {
     id: 13,
-    icon2: <RiApps2AiFill size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=fKXXelWgP1B6&format=png",
     title: "Password Generator",
     path: "https://passwordsgenerator.net/",
     des: "Convert written text into spoken words.",
@@ -111,7 +105,7 @@ export const downloadData = [
   },
   {
     id: 14,
-    icon2: <RiApps2AiFill size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=fKXXelWgP1B6&format=png",
     title: "Base64 Encoder/Decoder",
     path: "https://www.base64-image.de/",
     des: "Convert written text into spoken words.",
@@ -119,7 +113,7 @@ export const downloadData = [
   },
   {
     id: 15,
-    icon2: <FaFileArchive size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=13411&format=png",
     title: "Unit Converter",
     path: "https://www.unitconverters.net/",
     des: "Convert written text into spoken words.",
@@ -127,7 +121,7 @@ export const downloadData = [
   },
   {
     id: 16,
-    icon2: <FaFileArchive size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=13411&format=png",
     title: "Currency Converter",
     path: "https://www.xe.com/currencyconverter/",
     des: "Convert written text into spoken words.",
@@ -135,7 +129,7 @@ export const downloadData = [
   },
   {
     id: 17,
-    icon2: <BiSolidVideos size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=9a46bTk3awwI&format=png",
     title: "IP Address Lookup",
     path: "https://www.whatismyip.com/",
     des: "Convert written text into spoken words.",
@@ -143,7 +137,7 @@ export const downloadData = [
   },
   {
     id: 18,
-    icon2: <BiSolidVideos size={32} />,
+    icon: "https://img.icons8.com/?size=48&id=9a46bTk3awwI&format=png",
     title: "Barcode Generator",
     path: "https://barcode.tec-it.com/",
     des: "Convert written text into spoken words.",
@@ -151,7 +145,7 @@ export const downloadData = [
   },
   {
     id: 19,
-    icon2: <MdAudioFile size={32} />,
+    icon: "https://img.icons8.com/?size=80&id=lSaOzJehYBsV&format=png",
     title: "Text to Speech Converter",
     path: "https://ttsmp3.com/",
     des: "Convert written text into spoken words.",
@@ -159,7 +153,7 @@ export const downloadData = [
   },
   {
     id: 20,
-    icon2: <MdAudioFile size={32} />,
+    icon: "https://img.icons8.com/?size=80&id=lSaOzJehYBsV&format=png",
     title: "Word Counter",
     path: "https://wordcounter.net/",
     des: "Convert written text into spoken words.",
