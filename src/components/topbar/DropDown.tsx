@@ -4,7 +4,6 @@ import { useBookmarks } from "@/context/BookmarkContext";
 import ThumbnailToggle from "../hero/ThumbnailToggle";
 import { usePageContext } from "@/context/PageContext";
 import DotsIcon from "../svgs/DotsIcon";
-import { cn } from "@/lib/utils";
 
 const DropDown = () => {
   const { cards } = useBookmarks();
@@ -38,21 +37,18 @@ const DropDown = () => {
       {!isShowThumbnailView && <ThumbnailToggle />}
       <div className='flex items-center px-4 whitespace-nowrap text-foreground  text-sm'>
         {count} {pageTitles[page] || "Bookmarks"}
-        <div
-          className={cn(
-            "relative flex justify-center items-center",
-            isDownloadPage && "hidden"
-          )}
-        >
-          <button
-            ref={btnRef}
-            className='p-2 lg:p-0.5  lg:text-foreground   hover:text-text'
-            onClick={() => setOpenDropDown(!openDropDown)}
-          >
-            <DotsIcon />
-          </button>
-          {openDropDown && <DropDownContent />}
-        </div>
+        {!isDownloadPage && (
+          <div className='relative flex justify-center items-center'>
+            <button
+              ref={btnRef}
+              className='p-2 lg:p-0.5  lg:text-foreground   hover:text-text'
+              onClick={() => setOpenDropDown(!openDropDown)}
+            >
+              <DotsIcon />
+            </button>
+            {openDropDown && <DropDownContent />}
+          </div>
+        )}
       </div>
     </div>
   );
