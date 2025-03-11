@@ -75,21 +75,30 @@ export default function TagBox({
 
     if (!trimmedValue) return;
 
-    // Create new tag
-    const newTag: Tag = {
-      name: trimmedValue,
-      count: 1,
-      id: Date.now(),
-    };
+    // Check if tag already exists
+    setTags((prevTags) => {
+      if (
+        prevTags.some(
+          (tag) => tag.name.toLowerCase() === trimmedValue.toLowerCase()
+        )
+      ) {
+        showNotification(`Tag '${trimmedValue}' already exists!`);
+        return prevTags; // Return existing list without adding duplicate
+      }
 
-    // Update tags list
-    setTags((prevTags) => [...prevTags, newTag]);
+      // Create new tag
+      const newTag: Tag = {
+        name: trimmedValue,
+        count: 1,
+        id: trimmedValue.toLocaleLowerCase(),
+      };
 
-    // Add to selected tags
-    setSelectedTags((prev) => [...prev, trimmedValue]);
+      // Add new tag
+      setSelectedTags((prev) => [...prev, trimmedValue]);
+      showNotification(`New Tag Added '${trimmedValue}'`);
 
-    // Show notification
-    showNotification(`New Tag Added '${trimmedValue}'`);
+      return [...prevTags, newTag];
+    });
 
     // Clear input
     setTagInputValue("");

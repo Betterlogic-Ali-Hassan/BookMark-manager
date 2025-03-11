@@ -3,6 +3,7 @@ import DropDown from "./DropDown";
 import TopNav from "./TopNav";
 import { usePageContext } from "@/context/PageContext";
 import { categories } from "@/constant/categories";
+import History from "../historyPage/History";
 
 const TopBar = () => {
   const { page } = usePageContext();
@@ -12,7 +13,7 @@ const TopBar = () => {
     <>
       <div className='hidden lg:block'></div>
       {page === "history" ? (
-        <div className='hidden lg:block'></div>
+        <History />
       ) : (
         <TopNav categoriesData={categoryData} />
       )}

@@ -5,6 +5,8 @@ import MoreIconBtn from "../MoreIconBtn";
 import Badge from "../ui/Badge";
 import { getCategoryName } from "@/lib/category-utils";
 import { useBookmarkItem } from "@/hooks/use-bookmark-item";
+import { X } from "lucide-react";
+import { useBookmarks } from "@/context/BookmarkContext";
 
 interface Props {
   data: Card;
@@ -23,6 +25,12 @@ const TabCard = ({ data, setActiveTab }: Props) => {
     tags,
     toggleCategory,
   } = useBookmarkItem(data, setActiveTab);
+  const { deleteCard } = useBookmarks();
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    deleteCard(data.id);
+  };
   return (
     <div
       className={cn(
@@ -66,17 +74,28 @@ const TabCard = ({ data, setActiveTab }: Props) => {
               <div
                 className={cn(
                   " text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide max-lg:hidden",
-                  showSelectionCard && "max-w-[178px] min-w-[178px]"
+                  showSelectionCard &&
+                    "max-w-[178px] min-w-[178px] pointer-events-none"
                 )}
                 key={tag.id}
-                onClick={getCategoryName(tag.id, toggleCategory)}
               >
-                <Badge text={tag.name} />
+                <Badge
+                  text={tag.name}
+                  onClick={getCategoryName(tag.id, toggleCategory)}
+                />
               </div>
             ))
           )}
         </div>
-
+        <span
+          className={cn(
+            "mx-2 opacity-0 cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text",
+            showSelectionCard && "!opacity-0"
+          )}
+          onClick={handleDelete}
+        >
+          <X size={20} />
+        </span>
         <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card ' />
       </div>
     </div>

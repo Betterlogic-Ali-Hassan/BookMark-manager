@@ -1,10 +1,11 @@
 export type Card = {
   id: number;
-  icon: string;
+  icon?: string;
+  icon2?: React.ReactNode;
   title: string;
   path: string;
   tags: {
-    id: number;
+    id: string;
     name: string;
   }[];
   des: string;

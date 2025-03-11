@@ -21,7 +21,7 @@ const ExtensionCard = ({
   setFavoriteExe,
   favoriteExe,
 }: ExtensionCardProps) => {
-  const { handleToggle, title } = useBookmarkItem(data, setActiveTab);
+  const { handleToggle, title, icon } = useBookmarkItem(data, setActiveTab);
   const [switchChecked, setSwitchChecked] = useState(false);
   const isFavorite = favoriteExe.some((card) => card.id === data.id);
 
@@ -41,15 +41,11 @@ const ExtensionCard = ({
       onClick={handleToggle}
     >
       <div className='flex justify-between w-full h-[60px]'>
-        <img
-          src='https://framerusercontent.com/images/T9qkapeFrr98u1zDjP8vbEdaUs.png'
-          alt={title}
-          className='h-[60px] w-[60px]'
-        />
+        <img src={icon} alt={title} className='h-[50px] w-[50px]' />
         <div className='flex items-start gap-3'>
           <span
             className={cn(
-              "cursor-pointer text-text hidden  group-hover:block ",
+              "cursor-pointer text-text hidden  group-hover:block mt-[3px] ",
               isFavorite && "block"
             )}
             onClick={addFavoriteExe}

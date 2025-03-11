@@ -54,7 +54,7 @@ const TabCardDetail = ({ activeTab, cards }: Props) => {
                   <div className='text-xs text-text '>Added on 11/5/2024</div>
                 </div>
                 <hr className='border-neutral-200 dark:border-neutral-700' />
-                <ActionsBtns url={activeTabData?.path} />
+                <ActionsBtns url={activeTabData?.path} id={activeTabData?.id} />
                 <CloseBtn />
               </div>
             </div>

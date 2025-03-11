@@ -37,10 +37,10 @@ const ExtensionListViewCard = ({
 
   return (
     <div
-      className='p-6 border-border border group rounded-lg bg-card flex gap-12 mb-4 relative cursor-pointer'
+      className='p-6 border-border border group rounded-lg bg-card flex gap-10 mb-4 relative cursor-pointer'
       onClick={handleToggle}
     >
-      <div className='h-[36px] w-[36px]'>
+      <div className='h-[38px] w-[38px]'>
         <img src={icon || "/placeholder.svg"} alt={title} />
       </div>
       <div className='grow'>

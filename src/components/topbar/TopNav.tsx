@@ -12,8 +12,8 @@ import Button from "../ui/button";
 
 import ResetFilter from "./ResetFilter";
 import { usePageContext } from "@/context/PageContext";
-type CategoryWithCount = { name: string; count: number; id: number };
-type CategoryWithoutCount = { name: string; id: number };
+type CategoryWithCount = { name: string; count: number; id: string };
+type CategoryWithoutCount = { name: string; id: string };
 
 interface Props {
   className?: string;
@@ -23,11 +23,11 @@ const TopNav = ({ className, categoriesData }: Props) => {
   const { setSelectedCategories, toggleCategory, selectedCategories } =
     useBookmarks();
   const { page } = usePageContext();
-  const handleToggleCategory = (categoryId: number) => {
+  const handleToggleCategory = (categoryId: string) => {
     toggleCategory(categoryId);
   };
   const isDownloadPage = page === "downloads";
-  const handleRemoveCategory = (categoryId: number, e: React.MouseEvent) => {
+  const handleRemoveCategory = (categoryId: string, e: React.MouseEvent) => {
     e.stopPropagation();
     const updatedCategories = selectedCategories.filter(
       (id) => id !== categoryId

@@ -16,7 +16,7 @@ export function useBookmarkItem(
   const today = new Date().toDateString();
 
   const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, path, tags);
+    if (showSelectionCard) toggleCard(id, path);
     if (setActiveTab) setActiveTab(id);
   };
 

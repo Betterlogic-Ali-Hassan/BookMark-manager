@@ -5,13 +5,11 @@ import HoursBalls from "./HoursBalls";
 const History = () => {
   return (
     <>
-      <div className='hidden lg:block'></div>
       <div>
         <DateSlider />
         <HoursBalls />
         <ActionsBtns />
       </div>
-      <div className='hidden lg:block'></div>
     </>
   );
 };

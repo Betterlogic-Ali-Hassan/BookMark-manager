@@ -33,28 +33,24 @@ export default function CardRenderer({
         setFavoriteExe={setFavoriteExe}
         favoriteExe={favoriteExe}
         data={data}
-        key={data.id}
         setActiveTab={setActiveTab}
       />
     ) : (
       <ExtensionListViewCard
         setFavoriteExe={setFavoriteExe}
         favoriteExe={favoriteExe}
-        key={data.id}
         data={data}
         setActiveTab={setActiveTab}
       />
     );
   }
   if (isDownloadPage) {
-    return (
-      <DownloadCard data={data} key={data.id} setActiveTab={setActiveTab} />
-    );
+    return <DownloadCard data={data} setActiveTab={setActiveTab} />;
   }
 
   return isListView ? (
-    <ThumbnailCard data={data} key={data.id} setActiveTab={setActiveTab} />
+    <ThumbnailCard data={data} setActiveTab={setActiveTab} />
   ) : (
-    <TabCard key={data.id} data={data} setActiveTab={setActiveTab} />
+    <TabCard data={data} setActiveTab={setActiveTab} />
   );
 }
