@@ -48,7 +48,9 @@ const Categories = ({ className }: { className?: string }) => {
       )}
     >
       <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2'>
-        <h2 className='  w-[60px] text-foreground opacity-50'>Filters </h2>
+        <h2 className='  w-[60px] text-foreground opacity-60 font-medium'>
+          Filters{" "}
+        </h2>
         {categoryData.map((category, i) => (
           <div key={i}>
             <button
@@ -84,7 +86,7 @@ const Categories = ({ className }: { className?: string }) => {
           }
         >
           <div className='flex items-center justify-center flex-col'>
-            <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[35px] right-[29%] opacity-80 hover:opacity-100 '>
+            <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[40px] right-[30%] opacity-80 hover:opacity-100 '>
               <CrossIcon />
             </DialogClose>
             <div className=' bg-card p-6 rounded-lg  max-w-3xl'>

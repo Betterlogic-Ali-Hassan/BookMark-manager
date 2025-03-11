@@ -4,8 +4,9 @@ import { useFormContext } from "@/context/from-Context";
 interface Props {
   actionBtns?: boolean;
   className?: string;
+  notAllowTitle?: boolean;
 }
-const TextBoxInputs = ({ actionBtns, className }: Props) => {
+const TextBoxInputs = ({ actionBtns, className, notAllowTitle }: Props) => {
   const { formData, updateFormData, nextStep, prevStep, errors, resetForm } =
     useFormContext();
 
@@ -27,11 +28,14 @@ const TextBoxInputs = ({ actionBtns, className }: Props) => {
     <>
       <div className={cn("px-4 py-6 sm:p-8", className)}>
         <div className='mb-2'>
-          <div className='h-24'>
-            <label htmlFor='title' className='text-sm font-semibold'>
-              Title
-            </label>
-            <div className='relative mt-2'>
+          <div className={cn("h-24", notAllowTitle && "h-18")}>
+            {!notAllowTitle && (
+              <label htmlFor='title' className='text-sm font-semibold'>
+                Title
+              </label>
+            )}
+
+            <div className={cn("relative mt-2", notAllowTitle && "mb-8")}>
               <input
                 value={formData.title}
                 onChange={handleInputChange("title")}
@@ -50,9 +54,12 @@ const TextBoxInputs = ({ actionBtns, className }: Props) => {
             </div>
           </div>
         </div>
-        <label htmlFor='description' className='text-sm font-semibold '>
-          Description (optional)
-        </label>
+        {!notAllowTitle && (
+          <label htmlFor='description' className='text-sm font-semibold '>
+            Description (optional)
+          </label>
+        )}
+
         <div className='relative mt-2'>
           <textarea
             value={formData.description}
