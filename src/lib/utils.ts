@@ -14,8 +14,8 @@ export const useHandleDelete = () => {
         toast.error("No bookmarks selected for deletion")
         return
       }
+      
       deleteCard(ids)
-
       toast.success(text ? text : "Selected Bookmarks Deleted")
     } else {
       deleteCard(ids)

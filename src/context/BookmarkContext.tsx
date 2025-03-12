@@ -33,7 +33,7 @@ type BookmarkContextType = {
   setCards: (cards: Card[]) => void;
   filteredCards: Card[];
   addCard: (card: Card) => void;
-  deleteCard: (id: number) => void;
+  deleteCard: (id: number | number[]) => void;
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(

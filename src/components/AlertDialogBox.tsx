@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import WarningIcon from "./svgs/WarningIcon";
 import Bin from "./svgs/Bin";
+import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 
 interface Props {
   className?: string;
@@ -77,6 +78,7 @@ const AlertDialogBox = ({
               </div>
             </div>
           </AlertDialogTitle>
+          <AlertDialogDescription></AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className='btn secondary sm:mt-0 sm:w-auto mt-3 inline-flex w-full justify-center  border-transparent text-text  px-3 py-2 h-[36px] bg-card  hover:bg-hover rounded'>
