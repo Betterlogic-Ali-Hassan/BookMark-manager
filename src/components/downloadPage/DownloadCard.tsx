@@ -1,14 +1,15 @@
 "use client";
 import type { Card } from "@/types/TabCardType";
-import CrossIcon from "../svgs/CrossIcon";
+
+import DeleteEntry from "../DeleteEntry";
 interface DownloadCardProps {
   data: Card;
   setActiveTab: (tab: number) => void;
 }
 
 const DownloadCard = ({ data }: DownloadCardProps) => {
-  const { title, icon, path } = data;
-  console.log(data);
+  const { title, icon, path, id } = data;
+
   return (
     <div className='p-6 border-border border group rounded-lg bg-card flex gap-6 mb-4 relative cursor-pointer'>
       <div className='h-[36px] w-[36px]'>
@@ -29,9 +30,11 @@ const DownloadCard = ({ data }: DownloadCardProps) => {
         </div>
         <button className='btn rounded mt-4'>Show folder</button>
       </div>
-      <span className='absolute top-1 right-2 opacity-0 group-hover:opacity-100 transition duration-200'>
-        <CrossIcon />
-      </span>
+      <DeleteEntry
+        id={id}
+        text='Download Successfully Deleted'
+        className='absolute top-1.5 right-2  transition duration-200'
+      />
     </div>
   );
 };

@@ -5,8 +5,8 @@ import MoreIconBtn from "../MoreIconBtn";
 import Badge from "../ui/Badge";
 import { getCategoryName } from "@/lib/category-utils";
 import { useBookmarkItem } from "@/hooks/use-bookmark-item";
-import { X } from "lucide-react";
-import { useBookmarks } from "@/context/BookmarkContext";
+
+import DeleteEntry from "../DeleteEntry";
 
 interface Props {
   data: Card;
@@ -16,6 +16,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
   const {
     title,
     icon,
+    id,
     handleToggle,
     selected,
     path,
@@ -25,12 +26,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
     tags,
     toggleCategory,
   } = useBookmarkItem(data, setActiveTab);
-  const { deleteCard } = useBookmarks();
 
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    deleteCard(data.id);
-  };
   return (
     <div
       className={cn(
@@ -87,15 +83,13 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             ))
           )}
         </div>
-        <span
+        <DeleteEntry
+          id={id}
           className={cn(
-            "mx-2 opacity-0 cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text",
+            "mx-2  cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text",
             showSelectionCard && "!opacity-0"
           )}
-          onClick={handleDelete}
-        >
-          <X size={20} />
-        </span>
+        />
         <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card ' />
       </div>
     </div>

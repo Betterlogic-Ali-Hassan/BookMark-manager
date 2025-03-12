@@ -21,6 +21,7 @@ type BookmarkContextType = {
   searchTerm: string;
   showCardDetail: boolean;
   showSelectionCard: boolean;
+  setSelectedCards: (cards: number[]) => void;
   toggleCard: (id: number, url: string) => void;
   toggleCategory: (categoryId: string) => void;
   setSearchTerm: (term: string) => void;
@@ -183,9 +184,9 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setCards(updatedCards);
   };
 
-  // Delete card function - updates state and localStorage
-  const deleteCard = (id: number) => {
-    const updatedCards = cards.filter((card) => card.id !== id);
+  const deleteCard = (ids: number | number[]) => {
+    const idsToDelete = Array.isArray(ids) ? ids : [ids];
+    const updatedCards = cards.filter((card) => !idsToDelete.includes(card.id));
     setCards(updatedCards);
   };
 
@@ -194,6 +195,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     filteredCards: cards,
     setSelectedCategories,
     selectedCards,
+    setSelectedCards,
     selectedCardUrls,
     selectedCategories,
     searchTerm,

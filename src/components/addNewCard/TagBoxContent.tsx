@@ -6,8 +6,6 @@ import { toast } from "react-toastify";
 import { cn } from "@/lib/utils";
 import { useFormContext } from "@/context/from-Context";
 
-import { usePageContext } from "@/context/PageContext";
-
 type Tags = {
   name: string;
   id: number;
@@ -20,25 +18,11 @@ interface Props {
 const TagBoxContent = ({ actionBtns, className }: Props) => {
   const { prevStep, resetForm, isLoading, setIsLoading } = useFormContext();
 
-  const { setPage } = usePageContext();
-
   const handleSaveBtn = () => {
     setIsLoading(true);
-
     setTimeout(() => {
-      setPage("home");
       setIsLoading(false);
-      toast.success("Bookmark Added", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-
+      toast.success("Bookmark Added");
       resetForm();
     }, 2000);
   };

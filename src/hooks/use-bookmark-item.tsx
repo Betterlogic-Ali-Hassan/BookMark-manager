@@ -33,6 +33,7 @@ export function useBookmarkItem(
     today,
     handleToggle,
     selected,
+    selectedCards,
     showSelectionCard,
     toggleCategory,
   };

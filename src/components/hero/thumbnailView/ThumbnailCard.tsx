@@ -1,11 +1,8 @@
-// import Badge from "@/components/ui/Badge";
+import DeleteEntry from "@/components/DeleteEntry";
 import MoreIconBtn from "@/components/MoreIconBtn";
-
 import { useBookmarkItem } from "@/hooks/use-bookmark-item";
 import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
-// import ActionsBtns from "../tabCardDetail/ActionsBtns";
-
 interface Props {
   data: Card;
   setActiveTab: (tab: number) => void;
@@ -13,10 +10,11 @@ interface Props {
 const ThumbnailCard = ({ data, setActiveTab }: Props) => {
   const { icon, handleToggle, selected, des, showSelectionCard } =
     useBookmarkItem(data, setActiveTab);
+
   return (
     <div
       className={cn(
-        "h-fit select-none relative",
+        "h-fit select-none relative group ",
         showSelectionCard && "cursor-pointer"
       )}
       onClick={handleToggle}
@@ -59,8 +57,9 @@ const ThumbnailCard = ({ data, setActiveTab }: Props) => {
           />
         </div>
       </a>
-      <div className='absolute top-1 right-1  '>
-        <MoreIconBtn />
+      <div className='absolute top-1 right-4 flex items-center  '>
+        <MoreIconBtn className='!px-0 group-hover:opacity-0' />
+        <DeleteEntry id={data.id} className='hidden group-hover:block' />
       </div>
     </div>
   );

@@ -66,15 +66,17 @@ const ExtensionListViewCard = ({
           <Switch />
         </div>
       </div>
-      <span
-        className={cn(
-          "cursor-pointer hidden group-hover:block text-text absolute top-6 right-6",
-          isFavorite && "block"
-        )}
-        onClick={addFavoriteExe}
-      >
-        {isFavorite ? <BsPinFill size={20} /> : <BsPin size={20} />}
-      </span>
+      <div>
+        <span
+          className={cn(
+            "cursor-pointer hidden group-hover:block text-text absolute top-6 right-6",
+            isFavorite && "block"
+          )}
+          onClick={addFavoriteExe}
+        >
+          {isFavorite ? <BsPinFill size={20} /> : <BsPin size={20} />}
+        </span>
+      </div>
     </div>
   );
 };

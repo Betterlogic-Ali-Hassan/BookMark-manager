@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
@@ -16,7 +17,10 @@ const DialogBox = ({ trigger, children }: Props) => {
         {trigger}
       </DialogTrigger>
       <DialogContent className='bg-transparent border-0 h-fit'>
-        <DialogHeader>{children}</DialogHeader>
+        <DialogHeader>
+          <DialogTitle></DialogTitle>
+          {children}
+        </DialogHeader>
       </DialogContent>
     </Dialog>
   );

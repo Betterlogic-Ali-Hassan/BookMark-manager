@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import MoreIconBtn from "../MoreIconBtn";
 import { useBookmarkItem } from "@/hooks/use-bookmark-item";
+import { toast } from "react-toastify";
 
 interface ExtensionCardProps {
   data: Card;
@@ -30,14 +31,18 @@ const ExtensionCard = ({
     setFavoriteExe((prev) =>
       isFavorite ? prev.filter((card) => card.id !== data.id) : [...prev, data]
     );
+    toast.success(
+      isFavorite ? "Removed from Favorites!" : "Added to Favorites!"
+    );
   };
 
   const handleSwitch = () => {
     setSwitchChecked(!switchChecked);
   };
+
   return (
     <div
-      className='bg-card rounded-[24px] max-w-[284px] group p-6 flex flex-col relative items-start gap-6 cursor-pointer'
+      className='bg-card rounded-[24px] max-w-[284px] group p-6 flex flex-col relative items-start gap-6 cursor-pointer group'
       onClick={handleToggle}
     >
       <div className='flex justify-between w-full h-[60px]'>
@@ -53,7 +58,7 @@ const ExtensionCard = ({
             {isFavorite ? <BsPinFill size={18} /> : <BsPin size={18} />}
           </span>
           <Switch checked={switchChecked} onCheckedChange={handleSwitch} />
-          <MoreIconBtn className='!h-0 lg:px-0' />
+          <MoreIconBtn className='!h-0 lg:px-0 ' />
         </div>
       </div>
       <div className='flex flex-col gap-1'>

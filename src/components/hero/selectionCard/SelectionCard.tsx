@@ -6,7 +6,7 @@ import TagAlertBox from "@/components/TagAlertBox";
 import { useBookmarks } from "@/context/BookmarkContext";
 import { usePageContext } from "@/context/PageContext";
 
-import { cn } from "@/lib/utils";
+import { cn, useHandleDelete } from "@/lib/utils";
 import { toast } from "react-toastify";
 
 const SelectionCard = () => {
@@ -15,6 +15,7 @@ const SelectionCard = () => {
     clearSelection,
     setShowSelectionCard,
     selectedCards,
+    setSelectedCards,
     showSelectionCard,
   } = useBookmarks();
   const { page } = usePageContext();
@@ -42,6 +43,13 @@ const SelectionCard = () => {
 
   const isDisabled = selectedCards.length === 0;
   const notShowEditBtn = page === "history";
+  const handleDelete = useHandleDelete();
+
+  const onDelete = () => {
+    setShowSelectionCard(false);
+    setSelectedCards([]);
+    handleDelete(selectedCards);
+  };
   return (
     <div
       className={cn(
@@ -81,6 +89,7 @@ const SelectionCard = () => {
             </button>
 
             <AlertDialogBox
+              onClick={onDelete}
               disabled={isDisabled}
               className='hover:bg-hover  w-full py-3 px-4 text-left whitespace-nowrap flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-foreground [&_svg]:text-foreground'
               allowText
