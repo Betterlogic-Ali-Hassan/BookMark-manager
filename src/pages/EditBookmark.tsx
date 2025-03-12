@@ -32,7 +32,7 @@ const EditBookmark = ({ activeTabData }: EditBookmarkProps) => {
       tags:
         formData.tags.length > 0
           ? formData.tags.map((tag) => ({
-              id: crypto.randomUUID(),
+              id: tag.toLowerCase(),
               name: tag,
             }))
           : activeTabData.tags,
@@ -75,7 +75,11 @@ const EditBookmark = ({ activeTabData }: EditBookmarkProps) => {
             className='sm:px-8 sm:py-0 sm:pt-2'
             notAllowTitle
           />
-          <TagBoxContent actionBtns className='sm:px-8 sm:pt-2' />
+          <TagBoxContent
+            actionBtns
+            className='sm:px-8 sm:pt-2'
+            tag={activeTabData?.tags}
+          />
           <EditActionBtns savBtnAction={handleSaveBtn} />
         </div>
       </div>

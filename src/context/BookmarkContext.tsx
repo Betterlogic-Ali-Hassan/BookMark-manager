@@ -12,6 +12,8 @@ import { tabsData } from "@/constant/tabsData";
 import { usePageContext } from "./PageContext";
 import { extensions } from "@/constant/extensionData";
 import { downloadData } from "@/constant/DownloadsData";
+import { categoriesData } from "@/constant/categoriesData";
+import type { Tag } from "@/types/tag";
 
 type BookmarkContextType = {
   cards: Card[];
@@ -35,13 +37,14 @@ type BookmarkContextType = {
   addCard: (card: Card) => void;
   deleteCard: (id: number | number[]) => void;
   updateCard: (updatedCard: Card) => void;
+  categories: Tag[];
+  setCategories: (categories: Tag[]) => void;
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
   undefined
 );
 
-// Helper function to get localStorage key based on page
 const getStorageKey = (page: string) => {
   switch (page) {
     case "extensions":
@@ -53,13 +56,12 @@ const getStorageKey = (page: string) => {
   }
 };
 
+const CATEGORIES_STORAGE_KEY = "categories_data";
+
 export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const { page } = usePageContext();
 
-  // Get the appropriate storage key based on current page
   const storageKey = getStorageKey(page);
-
-  // Initialize data from localStorage or fallback to default data
   const getInitialData = () => {
     if (typeof window !== "undefined") {
       const storedData = localStorage.getItem(storageKey);
@@ -68,7 +70,6 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
           return JSON.parse(storedData);
         } catch (error) {
           console.error("Error parsing stored data:", error);
-          // If there's an error parsing, initialize with default data but save it to localStorage
           const defaultData =
             page === "extensions"
               ? extensions
@@ -79,7 +80,6 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
           return defaultData;
         }
       } else {
-        // If no data in localStorage, initialize with default data but save it to localStorage
         const defaultData =
           page === "extensions"
             ? extensions
@@ -90,12 +90,36 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
         return defaultData;
       }
     }
-    // Fallback to default data if we're on the server
     return page === "extensions"
       ? extensions
       : page === "downloads"
       ? downloadData
       : tabsData;
+  };
+
+  const getInitialCategories = () => {
+    if (typeof window !== "undefined") {
+      const storedCategories = localStorage.getItem(CATEGORIES_STORAGE_KEY);
+      if (storedCategories) {
+        try {
+          return JSON.parse(storedCategories);
+        } catch (error) {
+          console.error("Error parsing stored categories:", error);
+          localStorage.setItem(
+            CATEGORIES_STORAGE_KEY,
+            JSON.stringify(categoriesData)
+          );
+          return categoriesData;
+        }
+      } else {
+        localStorage.setItem(
+          CATEGORIES_STORAGE_KEY,
+          JSON.stringify(categoriesData)
+        );
+        return categoriesData;
+      }
+    }
+    return categoriesData;
   };
 
   const [cards, setCards] = useState<Card[]>(getInitialData);
@@ -105,27 +129,23 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Tag[]>(getInitialCategories);
 
-  // Filter cards based on search term and categories
   const filteredCards = cards.filter((card) => {
-    // First filter by search term
     const matchesSearch = card.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
 
-    // If no categories selected, just use search filter
     if (selectedCategories.length === 0) {
       return matchesSearch;
     }
 
-    // If categories are selected, check if card has any of the selected categories
     const hasSelectedCategory =
       card.tags && card.tags.some((tag) => selectedCategories.includes(tag.id));
 
     return matchesSearch && hasSelectedCategory;
   });
 
-  // Reset all state when page changes
   const resetAllState = () => {
     setSearchTerm("");
     setSelectedCategories([]);
@@ -135,19 +155,23 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setShowSelectionCard(false);
   };
 
-  // When page changes, load data from localStorage and reset all state
   useEffect(() => {
     resetAllState();
-    // Load data from localStorage for the new page
+
     setCards(getInitialData());
   }, [page]);
 
-  // Save cards to localStorage whenever they change
   useEffect(() => {
     if (typeof window !== "undefined" && cards) {
       localStorage.setItem(storageKey, JSON.stringify(cards));
     }
   }, [cards, storageKey]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && categories) {
+      localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
+    }
+  }, [categories]);
 
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
@@ -179,7 +203,6 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  // Add card function - updates state and localStorage
   const addCard = (card: Card) => {
     const updatedCards = [card, ...cards];
     setCards(updatedCards);
@@ -219,6 +242,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     addCard,
     deleteCard,
     updateCard,
+    categories,
+    setCategories,
   };
 
   return (

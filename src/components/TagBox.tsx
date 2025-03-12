@@ -1,5 +1,7 @@
 "use client";
 
+import type React from "react";
+
 import {
   useState,
   useEffect,
@@ -8,22 +10,23 @@ import {
   useRef,
   type KeyboardEvent,
 } from "react";
-import { categoriesData } from "@/constant/categoriesData";
-
 import { TagNotification } from "./TagAddedNotification";
 import { TagButton } from "./AddTagBtn";
 import { PlusIcon } from "./svgs/PlusIcon";
 import type { Tag } from "@/types/tag";
 import { useFormContext } from "@/context/from-Context";
+import { useBookmarks } from "@/context/BookmarkContext";
 
 interface TagBoxProps {
   allowedText?: boolean;
   onTagsChange?: (tags: string[]) => void;
+  tag?: { id: string; name: string }[] | undefined;
 }
 
 export default function TagBox({
   allowedText = false,
   onTagsChange,
+  tag,
 }: TagBoxProps) {
   const [tagInputValue, setTagInputValue] = useState("");
   const { updateFormData } = useFormContext();
@@ -32,88 +35,98 @@ export default function TagBox({
     text: "",
     visible: false,
   });
-  const [tags, setTags] = useState<Tag[]>(categoriesData || []);
+  const { categories, setCategories } = useBookmarks();
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const notificationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const formUpdateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const showNotification = useCallback((text: string) => {
-    setNotification({ text, visible: true });
-
     if (notificationTimeoutRef.current) {
       clearTimeout(notificationTimeoutRef.current);
     }
+
+    setNotification({ text, visible: true });
 
     notificationTimeoutRef.current = setTimeout(() => {
       setNotification((prev) => ({ ...prev, visible: false }));
     }, 1000);
   }, []);
 
-  // Update form context and call onTagsChange when selected tags change
-  useEffect(() => {
-    // Always update form data when selected tags change
-    updateFormData("tags", selectedTags);
-    onTagsChange?.(selectedTags);
+  const debouncedFormUpdate = useCallback(
+    (tags: string[]) => {
+      if (formUpdateTimeoutRef.current) {
+        clearTimeout(formUpdateTimeoutRef.current);
+      }
 
-    // Cleanup timeout on unmount
+      formUpdateTimeoutRef.current = setTimeout(() => {
+        updateFormData("tags", tags);
+        onTagsChange?.(tags);
+      }, 100);
+    },
+    [updateFormData, onTagsChange]
+  );
+
+  useEffect(() => {
+    if (selectedTags.length > 0 || onTagsChange) {
+      debouncedFormUpdate(selectedTags);
+    }
+
     return () => {
+      if (formUpdateTimeoutRef.current) {
+        clearTimeout(formUpdateTimeoutRef.current);
+      }
       if (notificationTimeoutRef.current) {
         clearTimeout(notificationTimeoutRef.current);
       }
     };
-  }, [selectedTags, updateFormData, onTagsChange]);
+  }, [selectedTags, debouncedFormUpdate]);
 
-  // Memoize event handlers to prevent recreation on each render
   const handleAddTag = useCallback(() => {
     const trimmedValue = tagInputValue.trim();
 
     if (!trimmedValue) return;
 
-    // Check if tag already exists in selected tags
     if (selectedTags.includes(trimmedValue)) {
       showNotification(`Tag '${trimmedValue}' already selected!`);
       setTagInputValue("");
+      setSearchTerm("");
       return;
     }
 
-    // Check if tag exists in available tags
-    const existingTag = tags.find(
+    const existingTag = categories.find(
       (tag) => tag.name.toLowerCase() === trimmedValue.toLowerCase()
     );
 
     if (existingTag) {
-      // Add existing tag to selection
       setSelectedTags((prev) => [...prev, existingTag.name]);
       showNotification(`Added: Tag '${existingTag.name}'`);
     } else {
-      // Create new tag
       const newTag: Tag = {
         name: trimmedValue,
         count: 1,
         id: trimmedValue.toLowerCase(),
       };
 
-      // Add new tag to available tags and selection
-      setTags((prev) => [...prev, newTag]);
+      setCategories([...categories, newTag]);
       setSelectedTags((prev) => [...prev, trimmedValue]);
       showNotification(`New Tag Added: '${trimmedValue}'`);
     }
 
-    // Clear input
     setTagInputValue("");
-  }, [tagInputValue, showNotification, selectedTags, tags]);
+    setSearchTerm("");
+  }, [tagInputValue, showNotification, selectedTags]);
 
-  // Toggle tag selection
   const toggleTag = useCallback(
     (tagName: string) => {
       setSelectedTags((prev) => {
         const isSelected = prev.includes(tagName);
 
         if (isSelected) {
-          // Remove tag
           showNotification(`Removed: Tag "${tagName}"`);
           return prev.filter((t) => t !== tagName);
         } else {
-          // Add tag
           showNotification(`Added: Tag "${tagName}"`);
           return [...prev, tagName];
         }
@@ -131,18 +144,36 @@ export default function TagBox({
     },
     [handleAddTag]
   );
+  const filteredTags = useMemo(() => {
+    if (!searchTerm) return categories;
+    return categories.filter((tag) =>
+      tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [categories, searchTerm]);
 
   const tagButtons = useMemo(
     () =>
-      tags.map((category) => (
+      filteredTags.map((category) => (
         <TagButton
           key={category.id}
           tag={category.name}
-          isSelected={selectedTags.includes(category.name)}
+          isSelected={
+            selectedTags.includes(category.name) ||
+            tag?.some((t) => t.name === category.name)
+          }
           onClick={() => toggleTag(category.name)}
         />
       )),
-    [tags, selectedTags, toggleTag]
+    [filteredTags, selectedTags, toggleTag]
+  );
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setTagInputValue(value);
+      setSearchTerm(value);
+    },
+    []
   );
 
   return (
@@ -164,7 +195,7 @@ export default function TagBox({
         <input
           type='text'
           value={tagInputValue}
-          onChange={(e) => setTagInputValue(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           name='tags'
           id='tags-input'
@@ -183,7 +214,9 @@ export default function TagBox({
         </button>
       </div>
 
-      <div className='flex flex-wrap gap-2 py-1'>{tagButtons}</div>
+      <div className='flex flex-wrap gap-2 py-1 justify-center'>
+        {tagButtons}
+      </div>
     </div>
   );
 }

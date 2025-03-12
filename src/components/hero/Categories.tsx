@@ -1,7 +1,6 @@
 "use client";
 
 import { categories } from "@/constant/categories";
-import { categoriesData } from "@/constant/categoriesData";
 import { useBookmarks } from "@/context/BookmarkContext";
 import { usePageContext } from "@/context/PageContext";
 import { getCategoryCounts, getCategoryName } from "@/lib/category-utils";
@@ -13,15 +12,20 @@ import { DialogClose } from "../ui/dialog";
 import CrossIcon from "../svgs/CrossIcon";
 
 const Categories = ({ className }: { className?: string }) => {
-  const { toggleCategory, selectedCategories, filteredCards } = useBookmarks();
+  const {
+    toggleCategory,
+    selectedCategories,
+    filteredCards,
+    categories: categoriesData,
+  } = useBookmarks();
   const { page } = usePageContext();
   const categoryCounts = useMemo(
     () => getCategoryCounts(filteredCards),
     [filteredCards]
   );
   const isDownloadPage = page === "downloads";
+  console.log(categoriesData);
   const categoryData = isDownloadPage ? categories : categoriesData;
-
   return (
     <div
       className={cn(

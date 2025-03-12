@@ -94,7 +94,6 @@ export const tabsData: Card[] = Array.from({ length: 150 }, (_, index) => {
     },
   ];
 
-  // Tags array with IDs
   const tags = [
     { id: "ai", name: "AI" },
     { id: "api", name: "API" },
@@ -140,6 +139,6 @@ export const tabsData: Card[] = Array.from({ length: 150 }, (_, index) => {
     title: item.title,
     path: item.path,
     des: item.des,
-    tags: [tags[index % tags.length], tags[(index + 1) % tags.length]],
+    tags: [tags[index % tags.length]],
   };
 });
