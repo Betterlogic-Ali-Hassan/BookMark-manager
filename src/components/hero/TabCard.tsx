@@ -87,7 +87,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
           id={id}
           className={cn(
             "mx-2  cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text",
-            showSelectionCard && "!opacity-0"
+            showSelectionCard && "!opacity-0 pointer-events-none"
           )}
         />
         <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card ' />
