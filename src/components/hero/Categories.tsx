@@ -1,7 +1,7 @@
 "use client";
 
 import { categoriesData } from "@/constant/categoriesData";
-import { tabsData } from "@/constant/tabsData";
+// import { tabsData } from "@/constant/tabsData";
 import { useBookmarks } from "@/context/BookmarkContext";
 import {
   filterCardsByCategory,
@@ -28,7 +28,7 @@ const Categories = ({ className }: { className?: string }) => {
 
   useEffect(() => {
     setSelectedCategories([]);
-    setCards(tabsData);
+    // setCards(tabsData);
   }, [setCards, setSelectedCategories]);
 
   return (

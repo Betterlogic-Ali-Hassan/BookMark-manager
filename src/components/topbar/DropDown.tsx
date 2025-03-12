@@ -11,7 +11,7 @@ const DropDown = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const count = cards.length;
-  console.log(cards);
+  // console.log(cards);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

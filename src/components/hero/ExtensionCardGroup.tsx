@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
 import type { Card } from "@/types/TabCardType";
 import CardRenderer from "./CardRenderer";
@@ -11,8 +9,7 @@ interface ExtensionCardsGroupProps {
   cards: Card[];
   isListView: boolean;
   setActiveTab: (tab: number) => void;
-  favoriteExe: Card[];
-  setFavoriteExe: React.Dispatch<React.SetStateAction<Card[]>>;
+  // Remove favoriteExe and setFavoriteExe since they're not used in extension mode.
 }
 
 const CARDS_PER_LOAD = 20;
@@ -21,8 +18,6 @@ export default function ExtensionCardsGroup({
   cards,
   isListView,
   setActiveTab,
-  favoriteExe,
-  setFavoriteExe,
 }: ExtensionCardsGroupProps) {
   const [visibleCardsCount, setVisibleCardsCount] = useState(CARDS_PER_LOAD);
   const loadMoreCards = () => {
@@ -36,9 +31,7 @@ export default function ExtensionCardsGroup({
 
   return (
     <>
-      <div
-        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 gap-x-4`}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 gap-x-4">
         {visibleCards.map((card) => (
           <CardRenderer
             key={card.id}
@@ -46,15 +39,10 @@ export default function ExtensionCardsGroup({
             isListView={isListView}
             isExtensionsPage={true}
             setActiveTab={setActiveTab}
-            favoriteExe={favoriteExe}
-            setFavoriteExe={setFavoriteExe}
           />
         ))}
       </div>
-      <InfiniteScrollSentinel
-        onLoadMore={loadMoreCards}
-        hasMore={hasMoreCards}
-      />
+      <InfiniteScrollSentinel onLoadMore={loadMoreCards} hasMore={hasMoreCards} />
     </>
   );
 }

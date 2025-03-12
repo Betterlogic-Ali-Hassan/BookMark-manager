@@ -54,45 +54,33 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
 
         const processBookmarkNode = async (node: chrome.bookmarks.BookmarkTreeNode) => {
           if (node.url) {
-            const fetchFavicon = async (url: string) => {
-              try {
-                const faviconUrl = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&size=32&url=${encodeURIComponent(url)}`;
-                const response = await fetch(faviconUrl);
-                const blob = await response.blob();
-            
-                return new Promise<string>((resolve, reject) => {
-                  const reader = new FileReader();
-                  reader.onloadend = () => resolve(reader.result as string);
-                  reader.onerror = reject;
-                  reader.readAsDataURL(blob);
-                });
-              } catch (error) {
-                console.error("Error fetching favicon:", error);
-                return "https://example.com/fallback-icon.png"; // Fallback icon
-              }
+            const fetchFavicon = (url: string): string => {
+              return `https://www.google.com/s2/favicons?sz=32&domain_url=${encodeURIComponent(url)}`;
             };
-            
-
-            const faviconUrl = await fetchFavicon(node.url);
-
+        
+            const faviconUrl = fetchFavicon(node.url);
+        
             bookmarks.push({
               id: Number(node.id),
               title: node.title,
               path: node.url,
               des: "",
-              icon: faviconUrl,
+              icon: faviconUrl, // Uses Google's favicon service
               tags: [],
               enabled: undefined,
               iconUrl: ""
             });
           }
+        
           if (node.children) {
             for (const child of node.children) {
               await processBookmarkNode(child);
             }
           }
         };
-
+        
+        
+        
         for (const node of bookmarksTree) {
           await processBookmarkNode(node);
         }

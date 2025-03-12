@@ -41,8 +41,7 @@ export default function CardGroup({
           isListView={isListView}
           isExtensionsPage={isExtensionsPage}
           setActiveTab={setActiveTab}
-          favoriteExe={favoriteExe}
-          setFavoriteExe={setFavoriteExe}
+          {...(!isExtensionsPage ? { favoriteExe, setFavoriteExe } : {})}
         />
       ))}
       {isShowHourlyLog && showHourlyLogAfter && <HourlyLog />}

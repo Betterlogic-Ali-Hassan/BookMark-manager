@@ -13,12 +13,15 @@ interface ExtensionContextProps {
   extensions: ExtensionData[];
   toggleExtension: (id: string) => void;
   refreshExtensions: () => void;
+  pinnedExtensions: string[]; // stores the IDs of pinned extensions
+  togglePin: (id: string) => void;
 }
 
 const ExtensionContext = createContext<ExtensionContextProps | undefined>(undefined);
 
 export const ExtensionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [extensions, setExtensions] = useState<ExtensionData[]>([]);
+  const [pinnedExtensions, setPinnedExtensions] = useState<string[]>([]);
 
   const fetchExtensions = () => {
     if (chrome && chrome.management && typeof chrome.management.getAll === 'function') {
@@ -27,7 +30,10 @@ export const ExtensionProvider: React.FC<{ children: ReactNode }> = ({ children 
           id: ext.id,
           name: ext.name,
           enabled: ext.enabled,
-          iconUrl: ext.icons && ext.icons.length ? ext.icons[ext.icons.length - 1].url : undefined,
+          iconUrl:
+            ext.icons && ext.icons.length
+              ? ext.icons[ext.icons.length - 1].url
+              : undefined,
         }));
         console.log("Fetched Extensions:", data);
         setExtensions(data);
@@ -39,7 +45,12 @@ export const ExtensionProvider: React.FC<{ children: ReactNode }> = ({ children 
 
   const toggleExtension = (id: string) => {
     const extension = extensions.find((ext) => ext.id === id);
-    if (extension && chrome && chrome.management && typeof chrome.management.setEnabled === 'function') {
+    if (
+      extension &&
+      chrome &&
+      chrome.management &&
+      typeof chrome.management.setEnabled === 'function'
+    ) {
       chrome.management.setEnabled(id, !extension.enabled, () => {
         // Refresh extension data after toggling.
         fetchExtensions();
@@ -53,12 +64,24 @@ export const ExtensionProvider: React.FC<{ children: ReactNode }> = ({ children 
     fetchExtensions();
   };
 
+  const togglePin = (id: string) => {
+    setPinnedExtensions((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((pinnedId) => pinnedId !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
+  };
+
   useEffect(() => {
     fetchExtensions();
   }, []);
 
   return (
-    <ExtensionContext.Provider value={{ extensions, toggleExtension, refreshExtensions }}>
+    <ExtensionContext.Provider
+      value={{ extensions, toggleExtension, refreshExtensions, pinnedExtensions, togglePin }}
+    >
       {children}
     </ExtensionContext.Provider>
   );
