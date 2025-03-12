@@ -8,7 +8,7 @@ import ExtensionListViewCard from "../extensionPage/ExtensionListViewCard";
 import type { ExtensionData } from "@/context/ExtensionContext";
 
 interface CardRendererProps {
-  data: Card;
+  data: Card | ExtensionData;
   isListView: boolean;
   isExtensionsPage: boolean;
   setActiveTab: (tab: number) => void;
@@ -21,29 +21,21 @@ export default function CardRenderer({
   setActiveTab,
 }: CardRendererProps) {
   if (isExtensionsPage) {
-    // Convert the Card object to ExtensionData.
-    // Assuming Card has: id (number), title (string), icon (string)
-    // and optionally an enabled property.
-    const extensionData: ExtensionData = {
-      id: data.id.toString(), // convert number to string
-      name: data.title,
-      enabled:
-        (data as unknown as { enabled?: boolean }).enabled !== undefined
-          ? (data as unknown as { enabled: boolean }).enabled
-          : false,
-      iconUrl: data.icon,
-    };
+    if ("name" in data) {
+      return isListView ? (
+        <ExtensionListViewCard extension={data as ExtensionData} key={(data as ExtensionData).id} />
+      ) : (
+        <ExtensionCard extension={data as ExtensionData} key={(data as ExtensionData).id} />
+      );
+    }
 
-    return isListView ? (
-      <ExtensionCard extension={extensionData} key={data.id.toString()} />
-    ) : (
-      <ExtensionListViewCard extension={extensionData} key={data.id.toString()} />
-    );
+    console.warn("Unexpected data format in Extension Page:", data);
+    return null;
   }
 
   return isListView ? (
-    <ThumbnailCard data={data} key={data.id.toString()} setActiveTab={setActiveTab} />
+    <ThumbnailCard data={data as Card} key={(data as Card).id.toString()} setActiveTab={setActiveTab} />
   ) : (
-    <TabCard key={data.id.toString()} data={data} setActiveTab={setActiveTab} />
+    <TabCard key={(data as Card).id.toString()} data={data as Card} setActiveTab={setActiveTab} />
   );
 }

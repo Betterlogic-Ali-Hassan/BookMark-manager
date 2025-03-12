@@ -8,10 +8,11 @@ import { usePageContext } from "@/context/PageContext";
 import HourlyLog from "../HourlyLog";
 import CardGroup from "./CardGroup";
 import InfiniteScrollSentinel from "./InfiniteScrollSentinel";
+import { useExtension } from "@/context/ExtensionContext";
 
 interface TabsCardsProps {
   setActiveTab: (tab: number) => void;
-  cards: Card[];
+  cards: Card[]; // Bookmarks data when not on the extensions page.
 }
 
 const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
@@ -20,26 +21,28 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
   const { page } = usePageContext();
   const isShowHourlyLog = page === "history";
   const isExtensionsPage = page === "extensions";
+
+  const { extensions } = useExtension();
+  const effectiveCards = isExtensionsPage ? extensions : cards;
+
   const INITIAL_CARDS_COUNT = isExtensionsPage ? 20 : 100;
   const CARDS_PER_LOAD = isExtensionsPage ? 20 : 40;
-  const [visibleCardsCount, setVisibleCardsCount] =
-    useState(INITIAL_CARDS_COUNT);
+  const [visibleCardsCount, setVisibleCardsCount] = useState(INITIAL_CARDS_COUNT);
 
   const loadMoreCards = useCallback(() => {
     setVisibleCardsCount((prevCount) =>
-      Math.min(prevCount + CARDS_PER_LOAD, cards.length)
+      Math.min(prevCount + CARDS_PER_LOAD, effectiveCards.length)
     );
-  }, [cards.length]);
+  }, [effectiveCards.length]);
 
   const visibleCards = useMemo(() => {
-    return cards.slice(0, visibleCardsCount);
-  }, [cards, visibleCardsCount]);
+    return effectiveCards.slice(0, visibleCardsCount);
+  }, [effectiveCards, visibleCardsCount]);
 
   const cardGroups = useMemo(() => {
     if (!isShowHourlyLog) {
       return [visibleCards];
     }
-
     const groups = [];
     let currentIndex = 0;
 
@@ -62,15 +65,14 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
     return groups.filter((group) => group.length > 0);
   }, [visibleCards, isShowHourlyLog]);
 
-  // Check if we've loaded all cards
-  const hasMoreCards = visibleCardsCount < cards.length;
+  const hasMoreCards = visibleCardsCount < effectiveCards.length;
 
   return (
     <div className={cn(isListView && "max-w-[970px]")}>
       {isShowHourlyLog && <HourlyLog />}
 
       {isExtensionsPage && favoriteExe.length > 0 && (
-        <div className='mb-12'>
+        <div className="mb-12">
           <CardGroup
             cards={favoriteExe}
             isListView={isListView}
@@ -98,10 +100,7 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
         />
       ))}
 
-      <InfiniteScrollSentinel
-        onLoadMore={loadMoreCards}
-        hasMore={hasMoreCards}
-      />
+      <InfiniteScrollSentinel onLoadMore={loadMoreCards} hasMore={hasMoreCards} />
     </div>
   );
 };

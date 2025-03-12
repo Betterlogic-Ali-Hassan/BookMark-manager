@@ -1,13 +1,14 @@
 "use client";
 
-import type React from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import type { Card } from "@/types/TabCardType";
+import type { ExtensionData } from "@/context/ExtensionContext";
 import HourlyLog from "../HourlyLog";
 import CardRenderer from "./CardRenderer";
 
 interface CardGroupProps {
-  cards: Card[];
+  cards: Card[] | ExtensionData[]; // ✅ Add this to allow passing bookmarks/extensions
   isListView: boolean;
   isExtensionsPage: boolean;
   isShowHourlyLog: boolean;
@@ -34,14 +35,14 @@ export default function CardGroup({
 
   return (
     <div className={containerClasses}>
-      {cards.map((card) => (
+      {cards.map((item) => (
         <CardRenderer
-          key={card.id}
-          data={card}
+          key={item.id}
+          data={item}
           isListView={isListView}
           isExtensionsPage={isExtensionsPage}
           setActiveTab={setActiveTab}
-          {...(!isExtensionsPage ? { favoriteExe, setFavoriteExe } : {})}
+          {...(!isExtensionsPage ? { favoriteExe, setFavoriteExe } : {})} // Only pass favoriteExe for bookmarks
         />
       ))}
       {isShowHourlyLog && showHourlyLogAfter && <HourlyLog />}
