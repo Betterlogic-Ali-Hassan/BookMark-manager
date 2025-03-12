@@ -28,7 +28,7 @@ const TabCardDetail = ({ activeTab, cards }: Props) => {
               <div className='relative flex flex-col gap-[18px]'>
                 <TabCardHeading
                   title={activeTabData?.title}
-                  icon={activeTabData?.icon}
+                  path={activeTabData?.path}
                 />
                 <div className='text-sm overflow-hidden truncate'>
                   <a
@@ -54,7 +54,7 @@ const TabCardDetail = ({ activeTab, cards }: Props) => {
                   <div className='text-xs text-text '>Added on 11/5/2024</div>
                 </div>
                 <hr className='border-neutral-200 dark:border-neutral-700' />
-                <ActionsBtns url={activeTabData?.path} id={activeTabData?.id} />
+                <ActionsBtns activeTabData={activeTabData} />
                 <CloseBtn />
               </div>
             </div>

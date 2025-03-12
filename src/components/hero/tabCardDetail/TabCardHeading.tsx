@@ -1,8 +1,8 @@
 interface Props {
-  icon?: string;
+  path?: string;
   title?: string;
 }
-const TabCardHeading = ({ icon, title }: Props) => {
+const TabCardHeading = ({ path, title }: Props) => {
   return (
     <>
       <h2 className='text-2xl font-semibold flex items-center gap-3 text-text pr-7'>
@@ -10,7 +10,7 @@ const TabCardHeading = ({ icon, title }: Props) => {
           type='image/png'
           aria-label='Favicon'
           className='w-[32px] h-[32px] flex-none rounded overflow-hidden'
-          data={icon}
+          data={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${path}&size=32`}
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

@@ -9,11 +9,12 @@ import {
   type KeyboardEvent,
 } from "react";
 import { categoriesData } from "@/constant/categoriesData";
-import { useFormContext } from "@/context/from-Context";
+
 import { TagNotification } from "./TagAddedNotification";
 import { TagButton } from "./AddTagBtn";
 import { PlusIcon } from "./svgs/PlusIcon";
 import type { Tag } from "@/types/tag";
+import { useFormContext } from "@/context/from-Context";
 
 interface TagBoxProps {
   allowedText?: boolean;
@@ -25,24 +26,19 @@ export default function TagBox({
   onTagsChange,
 }: TagBoxProps) {
   const [tagInputValue, setTagInputValue] = useState("");
-  const { formData, updateFormData } = useFormContext();
-  const [selectedTags, setSelectedTags] = useState<string[]>(
-    () => formData.tags || []
-  );
+  const { updateFormData } = useFormContext();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [notification, setNotification] = useState({
     text: "",
     visible: false,
   });
   const [tags, setTags] = useState<Tag[]>(categoriesData || []);
 
-  // Use ref for timeout to prevent memory leaks
-  const notificationTimeoutRef = useRef<NodeJS.Timeout>(null);
+  const notificationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Memoize the showNotification function to prevent recreation on each render
   const showNotification = useCallback((text: string) => {
     setNotification({ text, visible: true });
 
-    // Clear any existing timeout
     if (notificationTimeoutRef.current) {
       clearTimeout(notificationTimeoutRef.current);
     }
@@ -54,11 +50,8 @@ export default function TagBox({
 
   // Update form context and call onTagsChange when selected tags change
   useEffect(() => {
-    // Prevent unnecessary updates by comparing with current form data
-    if (JSON.stringify(formData.tags) !== JSON.stringify(selectedTags)) {
-      updateFormData("tags", selectedTags);
-    }
-
+    // Always update form data when selected tags change
+    updateFormData("tags", selectedTags);
     onTagsChange?.(selectedTags);
 
     // Cleanup timeout on unmount
@@ -67,7 +60,7 @@ export default function TagBox({
         clearTimeout(notificationTimeoutRef.current);
       }
     };
-  }, [selectedTags, updateFormData, onTagsChange, formData.tags]);
+  }, [selectedTags, updateFormData, onTagsChange]);
 
   // Memoize event handlers to prevent recreation on each render
   const handleAddTag = useCallback(() => {
@@ -75,45 +68,55 @@ export default function TagBox({
 
     if (!trimmedValue) return;
 
-    // Check if tag already exists
-    setTags((prevTags) => {
-      if (
-        prevTags.some(
-          (tag) => tag.name.toLowerCase() === trimmedValue.toLowerCase()
-        )
-      ) {
-        showNotification(`Tag '${trimmedValue}' already exists!`);
-        return prevTags; // Return existing list without adding duplicate
-      }
+    // Check if tag already exists in selected tags
+    if (selectedTags.includes(trimmedValue)) {
+      showNotification(`Tag '${trimmedValue}' already selected!`);
+      setTagInputValue("");
+      return;
+    }
 
+    // Check if tag exists in available tags
+    const existingTag = tags.find(
+      (tag) => tag.name.toLowerCase() === trimmedValue.toLowerCase()
+    );
+
+    if (existingTag) {
+      // Add existing tag to selection
+      setSelectedTags((prev) => [...prev, existingTag.name]);
+      showNotification(`Added: Tag '${existingTag.name}'`);
+    } else {
       // Create new tag
       const newTag: Tag = {
         name: trimmedValue,
         count: 1,
-        id: trimmedValue.toLocaleLowerCase(),
+        id: trimmedValue.toLowerCase(),
       };
 
-      // Add new tag
+      // Add new tag to available tags and selection
+      setTags((prev) => [...prev, newTag]);
       setSelectedTags((prev) => [...prev, trimmedValue]);
-      showNotification(`New Tag Added '${trimmedValue}'`);
-
-      return [...prevTags, newTag];
-    });
+      showNotification(`New Tag Added: '${trimmedValue}'`);
+    }
 
     // Clear input
     setTagInputValue("");
-  }, [tagInputValue, showNotification]);
+  }, [tagInputValue, showNotification, selectedTags, tags]);
 
   // Toggle tag selection
   const toggleTag = useCallback(
-    (tag: string) => {
+    (tagName: string) => {
       setSelectedTags((prev) => {
-        const isTagSelected = prev.includes(tag);
-        showNotification(
-          isTagSelected ? `Removed: Tag "${tag}"` : `Added: Tag "${tag}"`
-        );
+        const isSelected = prev.includes(tagName);
 
-        return isTagSelected ? prev.filter((t) => t !== tag) : [...prev, tag];
+        if (isSelected) {
+          // Remove tag
+          showNotification(`Removed: Tag "${tagName}"`);
+          return prev.filter((t) => t !== tagName);
+        } else {
+          // Add tag
+          showNotification(`Added: Tag "${tagName}"`);
+          return [...prev, tagName];
+        }
       });
     },
     [showNotification]

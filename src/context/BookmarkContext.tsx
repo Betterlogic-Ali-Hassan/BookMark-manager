@@ -34,6 +34,7 @@ type BookmarkContextType = {
   filteredCards: Card[];
   addCard: (card: Card) => void;
   deleteCard: (id: number | number[]) => void;
+  updateCard: (updatedCard: Card) => void;
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
@@ -189,6 +190,12 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     const updatedCards = cards.filter((card) => !idsToDelete.includes(card.id));
     setCards(updatedCards);
   };
+  const updateCard = (updatedCard: Card) => {
+    const updatedCards = cards.map((card) =>
+      card.id === updatedCard.id ? updatedCard : card
+    );
+    setCards(updatedCards);
+  };
 
   const value = {
     cards: filteredCards,
@@ -211,6 +218,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     clearSelection,
     addCard,
     deleteCard,
+    updateCard,
   };
 
   return (

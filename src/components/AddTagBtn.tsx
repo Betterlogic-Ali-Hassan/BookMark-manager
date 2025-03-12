@@ -6,7 +6,7 @@ export function TagButton({
   onClick,
 }: {
   tag: string;
-  isSelected: boolean;
+  isSelected: boolean | undefined;
   onClick: () => void;
 }) {
   return (

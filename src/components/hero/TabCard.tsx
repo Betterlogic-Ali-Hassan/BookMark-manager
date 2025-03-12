@@ -15,7 +15,6 @@ interface Props {
 const TabCard = ({ data, setActiveTab }: Props) => {
   const {
     title,
-    icon,
     id,
     handleToggle,
     selected,
@@ -51,7 +50,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             <object
               type='image/png'
               className='w-[16px] h-[16px] flex-none rounded-sm overflow-hidden'
-              data={icon}
+              data={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${path}&size=32`}
             />
             <div className='truncate text-sm font-medium text-text  pr-8 max-w-[150px]'>
               {title}
@@ -66,7 +65,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
               {today}
             </div>
           ) : (
-            tags.slice(1).map((tag) => (
+            tags.slice(0, 1).map((tag) => (
               <div
                 className={cn(
                   " text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide max-lg:hidden",

@@ -133,9 +133,12 @@ export function FormProvider({ children }: { children: ReactNode }) {
       tags: [],
     });
     setErrors({});
+
     localStorage.removeItem("inputText");
     localStorage.removeItem("titleValue");
     localStorage.removeItem("descriptionValue");
+
+    localStorage.removeItem("selectedTags");
   };
 
   return (

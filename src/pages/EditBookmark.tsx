@@ -1,28 +1,73 @@
+"use client";
 import PasteLinkInput from "@/components/addNewCard/PasteLinkInput";
 import TagBoxContent from "@/components/addNewCard/TagBoxContent";
 import TextBoxInputs from "@/components/addNewCard/TextBoxInputs";
 import EditActionBtns from "@/components/EditActionBtns";
-import CrossIcon from "@/components/svgs/CrossIcon";
-import EditBookmarkIcon from "@/components/svgs/EditBookmarkIcon";
+import { X, Edit } from "lucide-react";
 import { DialogClose } from "@/components/ui/dialog";
+import { useBookmarks } from "@/context/BookmarkContext";
 
-const EditBookmark = () => {
+import type { Card } from "@/types/TabCardType";
+import { toast } from "react-toastify";
+import { useFormContext } from "@/context/from-Context";
+
+interface EditBookmarkProps {
+  activeTabData?: Card;
+}
+
+const EditBookmark = ({ activeTabData }: EditBookmarkProps) => {
+  const { resetForm, setIsLoading, formData } = useFormContext();
+  const { updateCard } = useBookmarks();
+
+  const handleSaveBtn = () => {
+    if (!activeTabData) return;
+
+    setIsLoading(true);
+
+    const updatedCard: Card = {
+      ...activeTabData,
+      title: formData.title || activeTabData.title,
+      path: formData.url || activeTabData.path,
+      des: formData.description || activeTabData.des || "",
+      tags:
+        formData.tags.length > 0
+          ? formData.tags.map((tag) => ({
+              id: crypto.randomUUID(),
+              name: tag,
+            }))
+          : activeTabData.tags,
+      icon:
+        formData.url !== activeTabData.path
+          ? `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formData.url}/&size=32`
+          : activeTabData.icon,
+    };
+
+    updateCard(updatedCard);
+    toast.success("Bookmark Updated");
+
+    setTimeout(() => {
+      setIsLoading(false);
+      resetForm();
+    }, 2000);
+  };
+
   return (
     <div className='flex items-center justify-center'>
       <div className='w-full max-w-3xl'>
         <div className='flex items-center justify-between'>
           <h2 className='px-4 py-6 sm:p-8 text-xl font-semibold leading-7 text-text flex items-center gap-3 text-white'>
-            <EditBookmarkIcon />
+            <Edit className='h-5 w-5' />
             Edit Bookmark
           </h2>
-          <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit   opacity-80 hover:opacity-100 '>
-            <CrossIcon />
+          <DialogClose className='bg-card p-3 rounded-full text-text max-w-fit opacity-80 hover:opacity-100'>
+            <X className='h-4 w-4' />
           </DialogClose>
         </div>
+
         <div className='bg-white dark:bg-neutral-900 shadow-sm dark:bg-shadow-none ring-1 ring-neutral-900/5 dark:ring-0 sm:rounded-lg dark:border dark:border-neutral-800'>
           <PasteLinkInput
             actionBtns
-            className='sm:px-8 sm:pb-0 pt-4 '
+            className='sm:px-8 sm:pb-0 pt-4'
             notAllowTitle
           />
           <TextBoxInputs
@@ -31,7 +76,7 @@ const EditBookmark = () => {
             notAllowTitle
           />
           <TagBoxContent actionBtns className='sm:px-8 sm:pt-2' />
-          <EditActionBtns />
+          <EditActionBtns savBtnAction={handleSaveBtn} />
         </div>
       </div>
     </div>

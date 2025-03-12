@@ -6,17 +6,18 @@ import Share from "@/components/svgs/Share";
 import { useBookmarks } from "@/context/BookmarkContext";
 
 import EditBookmark from "@/pages/EditBookmark";
+import { Card } from "@/types/TabCardType";
 
 import { toast } from "react-toastify";
 interface Props {
-  url?: string;
-  id?: number;
+  activeTabData?: Card | undefined;
 }
-const ActionsBtns = ({ url, id }: Props) => {
+const ActionsBtns = ({ activeTabData }: Props) => {
   const { deleteCard, setShowCardDetail } = useBookmarks();
+  const { path, id } = activeTabData ?? {};
   const handleCopy = () => {
-    navigator.clipboard.writeText(url ? url : "");
-    if (url) toast.success(" URL copied to clipboard!");
+    navigator.clipboard.writeText(path ? path : "");
+    if (path) toast.success(" URL copied to clipboard!");
     else toast.error("URL is not copied");
   };
   const handleDelete = () => {
@@ -33,7 +34,7 @@ const ActionsBtns = ({ url, id }: Props) => {
           </button>
         }
       >
-        <EditBookmark />
+        <EditBookmark activeTabData={activeTabData} />
       </DialogBox>
 
       <button className='px-3  py-3 text-sm text-foreground rounded-full  hover:text-text bg-badge flex items-center '>
