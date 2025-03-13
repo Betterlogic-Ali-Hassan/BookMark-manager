@@ -1,28 +1,28 @@
-import { IoBookmarks } from "react-icons/io5";
-import { FaHistory } from "react-icons/fa";
-import { MdExtension } from "react-icons/md";
-import { IoMdDownload } from "react-icons/io";
+import { IoExtensionPuzzleOutline } from "react-icons/io5";
+import { TfiDownload } from "react-icons/tfi";
 import DocumentationIcon from "@/components/svgs/DocumentationIcon";
 import ExistIcon from "@/components/svgs/ExistIcon";
+import { BsBookmarks } from "react-icons/bs";
+import { GoHistory } from "react-icons/go";
 
 export const sidebarData = [
   {
-    icon: <IoBookmarks size={20} />,
+    icon: <BsBookmarks size={24} />,
     tooltip: "Bookmarks",
     link: "home",
   },
   {
-    icon: <FaHistory size={20} />,
+    icon: <GoHistory size={24} />,
     tooltip: "History",
     link: "history",
   },
   {
-    icon: <MdExtension size={20} />,
+    icon: <IoExtensionPuzzleOutline size={24} />,
     tooltip: "Extensions",
     link: "extensions",
   },
   {
-    icon: <IoMdDownload size={24} />,
+    icon: <TfiDownload size={24} />,
     tooltip: "Downloads",
     link: "downloads",
   },
