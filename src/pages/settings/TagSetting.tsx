@@ -1,5 +1,5 @@
-import AlertDialogBox from "@/components/AlertDialogBox";
-import NoTagAlertBox from "@/components/NoTagAlertDialogBox";
+import AlertDialogBox from "@/modals/AlertDialogBox";
+import NoTagAlertBox from "@/modals/NoTagAlertDialogBox";
 import TagBox from "@/components/TagBox";
 
 import { useState } from "react";

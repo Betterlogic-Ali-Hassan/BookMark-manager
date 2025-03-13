@@ -2,7 +2,7 @@
 import { usePageContext } from "@/context/PageContext";
 import { btns } from "@/constant/headerActionBtns";
 
-import DialogBox from "../DialogBox";
+import DialogBox from "../../modals/DialogBox";
 import SettingIcon from "../svgs/SettingIcon";
 import Settings from "@/pages/settings/Settings";
 

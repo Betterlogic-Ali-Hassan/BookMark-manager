@@ -1,4 +1,4 @@
-import AlertDialogBox from "./AlertDialogBox";
+import AlertDialogBox from "../modals/AlertDialogBox";
 import ActionBtn from "./historyPage/ActionBtn";
 
 const HourlyLog = () => {

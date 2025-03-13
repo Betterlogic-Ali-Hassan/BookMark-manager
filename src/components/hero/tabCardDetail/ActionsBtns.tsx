@@ -1,5 +1,5 @@
-import AlertDialogBox from "@/components/AlertDialogBox";
-import DialogBox from "@/components/DialogBox";
+import AlertDialogBox from "@/modals/AlertDialogBox";
+import DialogBox from "@/modals/DialogBox";
 import Copy from "@/components/svgs/Copy";
 import Edit from "@/components/svgs/Edit";
 import Share from "@/components/svgs/Share";

@@ -1,4 +1,4 @@
-import AlertDialogBox from "@/components/AlertDialogBox";
+import AlertDialogBox from "@/modals/AlertDialogBox";
 import CopytoClipboard from "@/components/svgs/CopytoClipboard";
 import CrossIcon from "@/components/svgs/CrossIcon";
 import OpenIcon from "@/components/svgs/OpenIcon";

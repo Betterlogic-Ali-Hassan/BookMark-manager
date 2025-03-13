@@ -1,4 +1,4 @@
-import AccountDeleteAlert from "@/components/AccountDeleteAlert";
+import AccountDeleteAlert from "@/modals/AccountDeleteAlert";
 import Alert from "@/components/settingPage/Alert";
 
 const Account = () => {

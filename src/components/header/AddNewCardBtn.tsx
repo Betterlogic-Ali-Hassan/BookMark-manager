@@ -1,6 +1,6 @@
 import Button from "../ui/button";
 import { PlusIcon } from "../svgs/PlusIcon";
-import DialogBox from "../DialogBox";
+import DialogBox from "../../modals/DialogBox";
 import AddNewCard from "../addNewCard/AddNewCard";
 
 const AddNewCardBtn = () => {

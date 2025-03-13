@@ -10,7 +10,7 @@ import {
   useRef,
   type KeyboardEvent,
 } from "react";
-import { TagNotification } from "./TagAddedNotification";
+import { TagNotification } from "../modals/TagAddedNotification";
 import { TagButton } from "./AddTagBtn";
 import { PlusIcon } from "./svgs/PlusIcon";
 import type { Tag } from "@/types/tag";

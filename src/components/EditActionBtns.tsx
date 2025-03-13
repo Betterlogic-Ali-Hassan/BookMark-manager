@@ -1,5 +1,5 @@
 import { usePageContext } from "@/context/PageContext";
-import AlertDialogBox from "./AlertDialogBox";
+import AlertDialogBox from "../modals/AlertDialogBox";
 import { useBookmarks } from "@/context/BookmarkContext";
 import { DialogClose } from "./ui/dialog";
 import Bin from "./svgs/Bin";

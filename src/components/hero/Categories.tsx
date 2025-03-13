@@ -6,7 +6,7 @@ import { usePageContext } from "@/context/PageContext";
 import { getCategoryCounts, getCategoryName } from "@/lib/category-utils";
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
-import DialogBox from "../DialogBox";
+import DialogBox from "../../modals/DialogBox";
 import TagBox from "../TagBox";
 import { DialogClose } from "../ui/dialog";
 import CrossIcon from "../svgs/CrossIcon";
