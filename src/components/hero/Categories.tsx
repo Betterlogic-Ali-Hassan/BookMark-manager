@@ -7,9 +7,7 @@ import { getCategoryCounts, getCategoryName } from "@/lib/category-utils";
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 import DialogBox from "../../modals/DialogBox";
-import TagBox from "../TagBox";
-import { DialogClose } from "../ui/dialog";
-import CrossIcon from "../svgs/CrossIcon";
+import AddNew from "../addNew2/AddNew";
 
 const Categories = ({ className }: { className?: string }) => {
   const {
@@ -33,7 +31,7 @@ const Categories = ({ className }: { className?: string }) => {
         className
       )}
     >
-      <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2 relative'>
+      <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2 '>
         <h2
           className={cn(
             "  w-[60px] text-foreground opacity-60 font-medium",
@@ -71,19 +69,12 @@ const Categories = ({ className }: { className?: string }) => {
         {!isDownloadPage && (
           <DialogBox
             trigger={
-              <button className='bg-brand p-2 rounded mr-5 mt-1 text-white fixed top-[55%] right-[71%] max-[1600px]:top-[80%] max-[1500px]:right-[82%] max-[1600px]:right-[77%]  '>
+              <button className='bg-brand p-2 rounded mr-5 mt-1 text-white   '>
                 Add New
               </button>
             }
           >
-            <div className='flex items-center justify-center flex-col'>
-              <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[50px] right-[30%] opacity-80 hover:opacity-100 '>
-                <CrossIcon />
-              </DialogClose>
-              <div className=' bg-card p-6 rounded-lg  max-w-3xl'>
-                <TagBox />
-              </div>
-            </div>
+            <AddNew />
           </DialogBox>
         )}
       </div>
