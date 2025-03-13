@@ -23,7 +23,7 @@ export function SearchInput({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className='pl-[28px] border-0 shadow-none w-full outline-none text-sm h-8'
+          className='pl-[28px] border-0 shadow-none w-full outline-none text-sm h-9 bg-transparent'
         />
       </div>
     </div>

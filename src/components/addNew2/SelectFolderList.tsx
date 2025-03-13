@@ -9,7 +9,7 @@ interface FolderListProps {
 
 export function FolderList({ folders, onSelect }: FolderListProps) {
   return (
-    <div className='overflow-y-auto max-h-40 px-2 py-2 scroll-bar'>
+    <div className='overflow-y-auto max-h-40 px-2 py-2 no-scrollbar'>
       {folders.length > 0 ? (
         folders.map((folder, index) => (
           <FolderItem key={index} folder={folder} onSelect={onSelect} />
