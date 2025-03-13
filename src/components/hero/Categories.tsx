@@ -29,11 +29,11 @@ const Categories = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "hidden lg:block w-[260px] justify-self-end overflow-x-hidden max-h-[400px] overflow-y-auto no-scrollbar py-2",
+        "hidden lg:block w-[260px] justify-self-end overflow-x-hidden max-h-[400px] overflow-y-auto no-scrollbar py-2  ",
         className
       )}
     >
-      <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2'>
+      <div className='flex flex-col gap-1.5 lg:gap-0 lg:items-end lg:pr-2 relative'>
         <h2
           className={cn(
             "  w-[60px] text-foreground opacity-60 font-medium",
@@ -71,13 +71,13 @@ const Categories = ({ className }: { className?: string }) => {
         {!isDownloadPage && (
           <DialogBox
             trigger={
-              <button className='bg-brand p-2 rounded mr-5 mt-1 text-white '>
+              <button className='bg-brand p-2 rounded mr-5 mt-1 text-white fixed top-[55%] right-[71%] max-[1600px]:top-[80%] max-[1500px]:right-[82%] max-[1600px]:right-[77%]  '>
                 Add New
               </button>
             }
           >
             <div className='flex items-center justify-center flex-col'>
-              <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[40px] right-[30%] opacity-80 hover:opacity-100 '>
+              <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[50px] right-[30%] opacity-80 hover:opacity-100 '>
                 <CrossIcon />
               </DialogClose>
               <div className=' bg-card p-6 rounded-lg  max-w-3xl'>
