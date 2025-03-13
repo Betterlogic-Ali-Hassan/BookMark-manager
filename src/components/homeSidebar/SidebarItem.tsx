@@ -25,7 +25,7 @@ const SidebarItem = ({ icon, tooltip, link, className }: Props) => {
       <Tooltip>
         <TooltipTrigger
           className={cn(
-            "flex h-16 w-full items-center justify-center",
+            "flex h-11 w-11 items-center justify-center",
             className
           )}
           onClick={handelClick(link ? link : page)}
@@ -33,7 +33,7 @@ const SidebarItem = ({ icon, tooltip, link, className }: Props) => {
           <span></span>
           <div
             className={cn(
-              " text-text hover:bg-hover  flex size-12 items-center justify-center rounded-2xl transition-colors duration-300",
+              " text-text hover:bg-hover  flex  h-11 w-11 items-center justify-center rounded-2xl transition-colors duration-300",
               selected && "bg-card "
             )}
           >

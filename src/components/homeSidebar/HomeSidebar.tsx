@@ -1,22 +1,26 @@
-import { sidebarData, sidebarDataBottom } from "@/constant/HomeSidebarData";
-import Logo from "./Logo";
+// import { sidebarData, sidebarDataBottom } from "@/constant/HomeSidebarData";
+// import Logo from "./Logo";
 
-import SidebarItem from "./SidebarItem";
+import SidebarNavigation from "./SidebarDemo";
 
-import MobileCategoriesFilter from "../hero/MobileCategoriesFilter";
-import MobileMenu from "./MobileMenu";
-import DialogBox from "../DialogBox";
-import SettingIcon from "../svgs/SettingIcon";
-import Settings from "@/pages/settings/Settings";
+// import SidebarItem from "./SidebarItem";
+
+// import MobileCategoriesFilter from "../hero/MobileCategoriesFilter";
+// import MobileMenu from "./MobileMenu";
+// import DialogBox from "../DialogBox";
+// import SettingIcon from "../svgs/SettingIcon";
+// import Settings from "@/pages/settings/Settings";
+// import SidebarNavigation from "./SidebarDemo";
 
 const HomeSidebar = () => {
   return (
-    <div className='fixed left-0 top-0 h-screen'>
-      <div className='border-border  pointer-events-auto relative z-20 flex h-full w-[80px] flex-col border-r bg-background transition-all duration-300'>
+    <div className='fixed left-0 top-0 h-screen '>
+      {/* <div className='border-border py-8 px-2 w-16  pointer-events-auto relative z-20 flex h-full flex-col border-r bg-background transition-all duration-300'>
         <div className='flex h-16 w-full items-center justify-center'>
           <Logo />
         </div>
-        <div>
+        <span className='flex h-8 w-8 items-center justify-center rounded-full bg-transparent'></span>
+        <div className='flex flex-col gap-2'>
           {sidebarData.map((item, i) => (
             <SidebarItem {...item} key={i} />
           ))}
@@ -31,7 +35,7 @@ const HomeSidebar = () => {
             className='lg:hidden flex'
           />
         </div>
-        <div className='mt-auto'>
+        <div className='mt-auto '>
           {sidebarDataBottom.map((item, i) => (
             <SidebarItem {...item} key={i} />
           ))}
@@ -44,7 +48,8 @@ const HomeSidebar = () => {
             tooltip='Settings'
           />
         </div>
-      </div>
+      </div> */}
+      <SidebarNavigation />
     </div>
   );
 };
