@@ -7,8 +7,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import WarnIcon from "./svgs/WarnIcon";
-import RenameIcon from "./svgs/RenameIcon";
+import WarnIcon from "../components/svgs/WarnIcon";
+import RenameIcon from "../components/svgs/RenameIcon";
 
 const NoTagAlertBox = () => {
   return (

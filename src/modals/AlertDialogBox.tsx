@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/lib/utils";
 import React from "react";
-import WarningIcon from "./svgs/WarningIcon";
-import Bin from "./svgs/Bin";
+import WarningIcon from "../components/svgs/WarningIcon";
+import Bin from "../components/svgs/Bin";
 import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 
 interface Props {
