@@ -30,6 +30,8 @@ module.exports = {
 			'warn-border':'var( --warn-border)',
 			'warn-color':'var( --warn-color)',
 			'warn-text':'var( --warn-text)',
+			'home-sidebar-hover':'var( --home-sidebar-hover)',
+
 			
 		  },
 		},

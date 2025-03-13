@@ -26,9 +26,9 @@ const SidebarItem = ({ icon, tooltip, link, className }: Props) => {
         <TooltipTrigger
           className={cn(
             "flex h-11 w-11 items-center justify-center rounded-[14px] p-0 transition-colors ",
-            "hover:bg-[#27272a] hover:text-default-foreground",
+            "hover:bg-home-sidebar-hover hover:text-default-foreground",
             "focus:bg-default/40 focus:text-default-foreground outline-none",
-            selected && "bg-[#27272a]",
+            selected && "bg-home-sidebar-hover",
             className
           )}
           onClick={handelClick(link ? link : page)}
