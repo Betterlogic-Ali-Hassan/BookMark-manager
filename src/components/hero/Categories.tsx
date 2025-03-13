@@ -29,7 +29,7 @@ const Categories = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "hidden lg:block w-[260px] justify-self-end overflow-x-hidden overflow-y-auto no-scrollbar py-2",
+        "hidden lg:block w-[260px] justify-self-end overflow-x-hidden max-h-[400px] overflow-y-auto no-scrollbar py-2",
         className
       )}
     >
