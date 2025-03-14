@@ -61,6 +61,16 @@ const getStorageKey = (page: string) => {
 };
 
 const CATEGORIES_STORAGE_KEY = "categories_data";
+const getPinCategoriesStorageKey = (page: string) => {
+  switch (page) {
+    case "extensions":
+      return "extensions_pin_categories";
+    case "downloads":
+      return "downloads_pin_categories";
+    default:
+      return "tabs_pin_categories";
+  }
+};
 
 export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const { page } = usePageContext();
@@ -129,7 +139,21 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const [cards, setCards] = useState<Card[]>(getInitialData);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [pinCategories, setPinCategories] = useState<string[]>([]);
+  const [pinCategories, setPinCategories] = useState<string[]>(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      const storedPinCategories = localStorage.getItem(pinCategoriesKey);
+      if (storedPinCategories) {
+        try {
+          return JSON.parse(storedPinCategories);
+        } catch (error) {
+          console.error("Error parsing stored pinned categories:", error);
+          return [];
+        }
+      }
+    }
+    return [];
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
@@ -168,6 +192,23 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   }, [page]);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      const storedPinCategories = localStorage.getItem(pinCategoriesKey);
+      if (storedPinCategories) {
+        try {
+          setPinCategories(JSON.parse(storedPinCategories));
+        } catch (error) {
+          console.error("Error parsing stored pinned categories:", error);
+          setPinCategories([]);
+        }
+      } else {
+        setPinCategories([]);
+      }
+    }
+  }, [page]);
+
+  useEffect(() => {
     if (typeof window !== "undefined" && cards) {
       localStorage.setItem(storageKey, JSON.stringify(cards));
     }
@@ -178,6 +219,13 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
     }
   }, [categories]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      localStorage.setItem(pinCategoriesKey, JSON.stringify(pinCategories));
+    }
+  }, [pinCategories, page]);
 
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>

@@ -52,11 +52,11 @@ export function BackToTopContainer({
   };
 
   return (
-    <div className='relative'>
+    <div className='relative block lg:grid lg:col-span-2 lg:grid-cols-subgrid   overflow-y-auto no-scrollbar lg:overflow-y-scroll overflow-x-hidden grow pb-4 lg:pb-6 max-lg:pl-[100px] max-sm:pl-[80px] max-lg:pt-2'>
       <div
         ref={containerRef}
         className={cn(
-          "overflow-y-auto relative no-scrollbar",
+          " relative no-scrollbar block lg:grid lg:col-span-2 lg:grid-cols-subgrid   overflow-y-auto no-scrollbar lg:overflow-y-scroll overflow-x-hidden grow pb-4 lg:pb-6 max-lg:pl-[100px] max-sm:pl-[80px] max-lg:pt-2",
           containerClassName
         )}
         style={{ height }}
@@ -73,14 +73,16 @@ export function BackToTopContainer({
           className
         )}
       >
-        <Button
-          onClick={scrollToTop}
-          aria-label='Back to top'
-          className='h-12 w-12 rounded-full !p-0 flex items-center justify-center'
-        >
-          <ArrowUp className='h-5 w-5' />
-          <span className='sr-only'>Back to top</span>
-        </Button>
+        <div className='flex justify-end ml-[80px] w-full'>
+          <Button
+            onClick={scrollToTop}
+            aria-label='Back to top'
+            className='h-12 w-12 rounded-full !p-0 flex items-center justify-center'
+          >
+            <ArrowUp className='h-5 w-5' />
+            <span className='sr-only'>Back to top</span>
+          </Button>
+        </div>
       </div>
     </div>
   );
