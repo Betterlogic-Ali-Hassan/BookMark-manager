@@ -25,7 +25,7 @@ const AddNew = () => {
             name='title'
             required
             placeholder='Enter folder name'
-            className='flex h-10 w-full rounded border bg-transparent px-3 py-3 text-base transition-colors focus-visible:outline-none   md:text-sm border-border  text-text'
+            className='flex h-12 w-full rounded border bg-transparent px-3 py-3 text-base transition-colors focus-visible:outline-none   md:text-sm border-border  text-text'
           />
         </div>
         <label

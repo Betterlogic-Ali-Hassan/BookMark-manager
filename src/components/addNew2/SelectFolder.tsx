@@ -31,7 +31,7 @@ export function FolderSelect({ className = "" }: FolderSelectProps) {
     <div className={className}>
       <div className='flex flex-col gap-2'>
         <Popover open={openPopover} onOpenChange={setOpenPopover}>
-          <PopoverTrigger className='w-full mb-1 outline-none focus:outline-none ring-0 flex h-[44px] px-4 text-sm items-center justify-between rounded-sm border border-border bg-transparent text-text  placeholder:text-foreground disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1'>
+          <PopoverTrigger className='w-full mb-1 outline-none focus:outline-none ring-0 flex h-12 px-4 text-sm items-center justify-between rounded-sm border border-border bg-transparent text-text  placeholder:text-foreground disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1'>
             {selected}
             <span>
               <ChevronDown size={20} />
