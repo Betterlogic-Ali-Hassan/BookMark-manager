@@ -53,8 +53,8 @@ const SelectionCard = () => {
   return (
     <div
       className={cn(
-        "hidden lg:block relative  opacity-0 translate-x-[100%] transition-all duration-300",
-        showSelectionCard && "opacity-100 translate-x-0"
+        "hidden lg:block relative  lg:opacity-0 lg:translate-x-[100%] transition-all duration-300 ",
+        showSelectionCard && "opacity-100 translate-x-0 "
       )}
     >
       <div className='sticky top-0 left-0 w-full max-w-md min-w-72 text-white ml-2'>

@@ -7,12 +7,12 @@ import { getCategoryName } from "@/lib/category-utils";
 import { useBookmarkItem } from "@/hooks/use-bookmark-item";
 
 import DeleteEntry from "../DeleteEntry";
+import MobileCardDetail from "./tabCardDetail/MobileCardDetail";
 
 interface Props {
   data: Card;
-  setActiveTab?: (tab: number) => void;
 }
-const TabCard = ({ data, setActiveTab }: Props) => {
+const TabCard = ({ data }: Props) => {
   const {
     title,
     id,
@@ -23,8 +23,9 @@ const TabCard = ({ data, setActiveTab }: Props) => {
     showSelectionCard,
     today,
     tags,
+
     toggleCategory,
-  } = useBookmarkItem(data, setActiveTab);
+  } = useBookmarkItem(data);
 
   return (
     <div
@@ -89,7 +90,8 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             showSelectionCard && "!opacity-0 pointer-events-none"
           )}
         />
-        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card max-sm:opacity-100 ' />
+        <MobileCardDetail />
+        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card max-sm:opacity-100 max-lg:hidden ' />
       </div>
     </div>
   );

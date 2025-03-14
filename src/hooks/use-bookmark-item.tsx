@@ -4,14 +4,16 @@ import { useBookmarks } from "@/context/BookmarkContext";
 import { usePageContext } from "@/context/PageContext";
 import { Card } from "@/types/TabCardType";
 
-export function useBookmarkItem(
-  data: Card,
-  setActiveTab?: (id: number) => void
-) {
+export function useBookmarkItem(data: Card) {
   const { id, path, tags, icon, title, des } = data;
   const { page } = usePageContext();
-  const { toggleCard, showSelectionCard, selectedCards, toggleCategory } =
-    useBookmarks();
+  const {
+    toggleCard,
+    showSelectionCard,
+    selectedCards,
+    toggleCategory,
+    setActiveTab,
+  } = useBookmarks();
 
   const today = new Date().toDateString();
 

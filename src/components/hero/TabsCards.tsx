@@ -9,14 +9,15 @@ import { usePageContext } from "@/context/PageContext";
 import HourlyLog from "../HourlyLog";
 import CardGroup from "./CardGroup";
 import InfiniteScrollSentinel from "./InfiniteScrollSentinel";
+import { useBookmarks } from "@/context/BookmarkContext";
 
 interface TabsCardsProps {
-  setActiveTab: (tab: number) => void;
   cards: Card[];
 }
 
-const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
+const TabsCards = ({ cards }: TabsCardsProps) => {
   const { isListView } = useThumbnailToggler();
+  const { setActiveTab } = useBookmarks();
   const [favoriteExe, setFavoriteExe] = useState<Card[]>([]);
   const { page } = usePageContext();
   const isShowHourlyLog = page === "history";

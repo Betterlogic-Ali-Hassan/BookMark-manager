@@ -39,6 +39,8 @@ type BookmarkContextType = {
   updateCard: (updatedCard: Card) => void;
   categories: Tag[];
   setCategories: (categories: Tag[]) => void;
+  activeTab: number;
+  setActiveTab: (tab: number) => void;
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
@@ -123,6 +125,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const [cards, setCards] = useState<Card[]>(getInitialData);
+  const [activeTab, setActiveTab] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showCardDetail, setShowCardDetail] = useState(false);
@@ -244,6 +247,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     updateCard,
     categories,
     setCategories,
+    activeTab,
+    setActiveTab,
   };
 
   return (

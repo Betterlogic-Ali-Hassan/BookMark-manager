@@ -52,7 +52,7 @@ const EditBookmark = ({ activeTabData }: EditBookmarkProps) => {
   };
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center h-screen bg-black/70'>
       <div className='w-full max-w-3xl'>
         <div className='flex items-center justify-between'>
           <h2 className='px-4 py-6 sm:p-8 text-xl font-semibold leading-7 text-text flex items-center gap-3 text-white'>
