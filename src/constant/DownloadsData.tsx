@@ -5,7 +5,7 @@ export const downloadData = [
     title: "QR Code Generator",
     path: "https://high-qr-code-generator.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "pdf", name: "PDFs" }],
+    tags: [{ id: "pdfs", name: "PDFs" }],
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const downloadData = [
     title: "Color Palette Generator",
     path: "https://coolors.co/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "pdf", name: "PDFs" }],
+    tags: [{ id: "pdfs", name: "PDFs" }],
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ export const downloadData = [
     title: "HTML Formatter",
     path: "https://htmlformatter.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "img", name: "Image" }],
+    tags: [{ id: "images", name: "Image" }],
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ export const downloadData = [
     title: "CSS Minifier",
     path: "https://cssminifier.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "img", name: "Image" }],
+    tags: [{ id: "images", name: "Image" }],
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ export const downloadData = [
     title: "JavaScript Beautifier",
     path: "https://beautifier.io/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "img", name: "Image" }],
+    tags: [{ id: "images", name: "Image" }],
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ export const downloadData = [
     title: "JSON Formatter",
     path: "https://jsonformatter.org/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "pdf", name: "PDFs" }],
+    tags: [{ id: "pdfs", name: "PDFs" }],
   },
   {
     id: 7,
@@ -53,7 +53,7 @@ export const downloadData = [
     title: "Markdown Editor",
     path: "https://dillinger.io/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "pdf", name: "PDFs" }],
+    tags: [{ id: "pdfs", name: "pdfs" }],
   },
   {
     id: 8,
@@ -61,7 +61,7 @@ export const downloadData = [
     title: "Regex Tester",
     path: "https://regex101.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "document", name: "Document" }],
+    tags: [{ id: "documents", name: "documents" }],
   },
   {
     id: 9,
@@ -69,7 +69,7 @@ export const downloadData = [
     title: "Image Compressor",
     path: "https://tinypng.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "document", name: "Document" }],
+    tags: [{ id: "documents", name: "documents" }],
   },
   {
     id: 10,
@@ -77,7 +77,7 @@ export const downloadData = [
     title: "Online Stopwatch",
     path: "https://www.online-stopwatch.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "document", name: "Document" }],
+    tags: [{ id: "documents", name: "documents" }],
   },
   {
     id: 11,
@@ -85,7 +85,7 @@ export const downloadData = [
     title: "UUID Generator",
     path: "https://www.uuidgenerator.net/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "document", name: "Document" }],
+    tags: [{ id: "documents", name: "documents" }],
   },
   {
     id: 12,
@@ -93,7 +93,7 @@ export const downloadData = [
     title: "Lorem Ipsum Generator",
     path: "https://www.lipsum.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "app", name: "Apps" }],
+    tags: [{ id: "apps", name: "apps" }],
   },
   {
     id: 13,
@@ -101,7 +101,7 @@ export const downloadData = [
     title: "Password Generator",
     path: "https://passwordsgenerator.net/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "app", name: "Apps" }],
+    tags: [{ id: "apps", name: "apps" }],
   },
   {
     id: 14,
@@ -109,7 +109,7 @@ export const downloadData = [
     title: "Base64 Encoder/Decoder",
     path: "https://www.base64-image.de/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "app", name: "Apps" }],
+    tags: [{ id: "apps", name: "apps" }],
   },
   {
     id: 15,
@@ -117,7 +117,7 @@ export const downloadData = [
     title: "Unit Converter",
     path: "https://www.unitconverters.net/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "compress", name: "compress" }],
+    tags: [{ id: "compressed files", name: "compressed files" }],
   },
   {
     id: 16,
@@ -125,7 +125,7 @@ export const downloadData = [
     title: "Currency Converter",
     path: "https://www.xe.com/currencyconverter/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "compress", name: "compress" }],
+    tags: [{ id: "compressed files", name: "compressed files" }],
   },
   {
     id: 17,
@@ -133,7 +133,7 @@ export const downloadData = [
     title: "IP Address Lookup",
     path: "https://www.whatismyip.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "video", name: "video" }],
+    tags: [{ id: "videos", name: "videos" }],
   },
   {
     id: 18,
@@ -141,7 +141,7 @@ export const downloadData = [
     title: "Barcode Generator",
     path: "https://barcode.tec-it.com/",
     des: "Convert written text into spoken words.",
-    tags: [{ id: "video", name: "video" }],
+    tags: [{ id: "videos", name: "videos" }],
   },
   {
     id: 19,
