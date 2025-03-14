@@ -28,7 +28,7 @@ const HomeSidebar = () => {
                   <SidebarItem
                     icon={<MobileCategoriesFilter />}
                     tooltip='Filters'
-                    className='lg:hidden flex'
+                    className='lg:hidden flex mt-2'
                   />
                   <SidebarItem
                     icon={<MobileMenu />}

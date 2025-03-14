@@ -10,6 +10,8 @@ import { GoPlus } from "react-icons/go";
 import { usePageContext } from "@/context/PageContext";
 import SelectIcon from "../svgs/SelectIcon";
 import ExistIcon from "../svgs/ExistIcon";
+import AddNewCard from "../addNewCard/AddNewCard";
+import DialogBox from "@/modals/DialogBox";
 
 const MobileMenu = () => {
   const { setPage } = usePageContext();
@@ -22,13 +24,20 @@ const MobileMenu = () => {
         <HiOutlineMenuAlt1 />
       </DropdownMenuTrigger>
       <DropdownMenuContent side='right' className='bg-background ml-8 mt-10'>
-        <DropdownMenuItem
-          onClick={goAddNew}
-          className='flex items-center gap-3 py-3 px-4'
+        <DialogBox
+          trigger={
+            <div
+              onClick={goAddNew}
+              className='flex items-center gap-3 py-3 px-4'
+            >
+              <GoPlus size={18} />
+              Add Bookmark
+            </div>
+          }
         >
-          <GoPlus size={18} />
-          Add Bookmark
-        </DropdownMenuItem>
+          <AddNewCard />
+        </DialogBox>
+
         <DropdownMenuSeparator className='bg-border' />
         <DropdownMenuItem className='flex items-center gap-3 py-3 px-4'>
           <SelectIcon />

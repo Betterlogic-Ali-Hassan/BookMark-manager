@@ -17,7 +17,7 @@ const DialogBox = ({ trigger, children }: Props) => {
     <>
       {open && <div className='fixed inset-0 bg-black/50 z-40'></div>}
       <Dialog open={open} onOpenChange={setOpen} modal={false}>
-        <DialogTrigger className='text-sm text-foreground hover:text-text transition-colors'>
+        <DialogTrigger className='text-sm text-foreground hover:text-text transition-colors max-lg:self-baseline'>
           {trigger}
         </DialogTrigger>
         <DialogContent className='bg-transparent border-0 h-fit'>

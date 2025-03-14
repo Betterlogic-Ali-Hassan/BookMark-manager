@@ -37,7 +37,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
 
   return (
     <div className='lg:h-[3.25rem]'>
-      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border max-lg:pl-[100px]'>
+      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border max-lg:pl-[100px] max-sm:pl-[80px]'>
         <div className='flex overflow-hidden items-center'>
           <div className='flex overflow-x-auto no-scrollbar relative'>
             <Swiper

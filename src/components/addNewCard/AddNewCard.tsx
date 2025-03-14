@@ -10,8 +10,8 @@ import CrossIcon from "../svgs/CrossIcon";
 const AddNewCard = () => {
   return (
     <FormProvider>
-      <div className='flex items-center flex-col  justify-center relative '>
-        <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[60px] right-[29%] opacity-80 hover:opacity-100 '>
+      <div className='flex items-center flex-col  justify-center relative mx-2 '>
+        <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[60px] lg:right-[29%] right-1 opacity-80 hover:opacity-100 '>
           <CrossIcon />
         </DialogClose>
         <div className='w-full max-w-3xl bg-hover p-6 rounded-lg'>

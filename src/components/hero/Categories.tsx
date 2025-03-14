@@ -27,7 +27,7 @@ const Categories = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "hidden lg:block w-[260px] justify-self-end overflow-x-hidden max-h-[400px] overflow-y-auto no-scrollbar py-2  ",
+        "hidden lg:block w-[260px] justify-self-end overflow-x-hidden lg:max-h-[400px] overflow-y-auto no-scrollbar py-2 max-lg:p-5 ",
         className
       )}
     >
@@ -69,7 +69,7 @@ const Categories = ({ className }: { className?: string }) => {
         {!isDownloadPage && (
           <DialogBox
             trigger={
-              <button className='bg-brand p-2 rounded mr-5 mt-1 text-white   '>
+              <button className='bg-brand p-2 rounded lg:mr-5 mt-1 text-white   '>
                 Add New
               </button>
             }

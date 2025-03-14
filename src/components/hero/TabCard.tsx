@@ -52,7 +52,7 @@ const TabCard = ({ data, setActiveTab }: Props) => {
               className='w-[16px] h-[16px] flex-none rounded-sm overflow-hidden'
               data={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${path}&size=32`}
             />
-            <div className='truncate text-sm font-medium text-text  pr-8 max-w-[150px]'>
+            <div className='truncate text-sm font-medium text-text  pr-8 max-w-[135px] sm:max-w-[150px] '>
               {title}
             </div>
           </a>
@@ -85,11 +85,11 @@ const TabCard = ({ data, setActiveTab }: Props) => {
         <DeleteEntry
           id={id}
           className={cn(
-            "mx-2  cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text",
+            "mx-2  cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text max-sm:opacity-100",
             showSelectionCard && "!opacity-0 pointer-events-none"
           )}
         />
-        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card ' />
+        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card max-sm:opacity-100 ' />
       </div>
     </div>
   );
