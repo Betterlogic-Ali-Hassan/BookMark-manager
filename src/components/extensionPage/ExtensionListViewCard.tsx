@@ -10,21 +10,16 @@ import { useBookmarkItem } from "@/hooks/use-bookmark-item";
 
 interface ExtensionCardProps {
   data: Card;
-  setActiveTab: (tab: number) => void;
   setFavoriteExe: (callback: (prev: Card[]) => Card[]) => void;
   favoriteExe: Card[];
 }
 
 const ExtensionListViewCard = ({
   data,
-  setActiveTab,
   setFavoriteExe,
   favoriteExe,
 }: ExtensionCardProps) => {
-  const { handleToggle, title, icon, path, tags, des } = useBookmarkItem(
-    data,
-    setActiveTab
-  );
+  const { handleToggle, title, icon, path, tags, des } = useBookmarkItem(data);
 
   const isFavorite = favoriteExe.some((card) => card.id === data.id);
 

@@ -5,11 +5,10 @@ import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
 interface Props {
   data: Card;
-  setActiveTab: (tab: number) => void;
 }
-const ThumbnailCard = ({ data, setActiveTab }: Props) => {
+const ThumbnailCard = ({ data }: Props) => {
   const { icon, handleToggle, selected, des, showSelectionCard } =
-    useBookmarkItem(data, setActiveTab);
+    useBookmarkItem(data);
 
   return (
     <div
@@ -58,8 +57,11 @@ const ThumbnailCard = ({ data, setActiveTab }: Props) => {
         </div>
       </a>
       <div className='absolute top-1 right-4 flex items-center  '>
-        <MoreIconBtn className='!px-0 group-hover:opacity-0' />
-        <DeleteEntry id={data.id} className='hidden group-hover:block' />
+        <DeleteEntry
+          id={data.id}
+          className='opacity-0 group-hover:opacity-100 pr-2'
+        />
+        <MoreIconBtn className='!px-0 ' />
       </div>
     </div>
   );

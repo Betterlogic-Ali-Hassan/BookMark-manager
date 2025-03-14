@@ -30,7 +30,7 @@ const TabCard = ({ data }: Props) => {
   return (
     <div
       className={cn(
-        "  border-transparent hover:bg-hover overflow-hidden select-none bg-card  w-full relative border block rounded-md group",
+        "  border-transparent hover:bg-hover overflow-x-auto no-scrollbar select-none bg-card  w-full relative border block rounded-md group",
         selected &&
           "hover:bg-selected-hover border-selected-border bg-selected-bg",
         showSelectionCard && "cursor-pointer"
@@ -44,7 +44,8 @@ const TabCard = ({ data }: Props) => {
             className={cn(
               "focus:outline-none focus-visible:ring-1 ring-inset ring-brand  rounded truncate grow flex items-center gap-3 px-5 lg:px-4 h-14 lg:h-12",
               showSelectionCard && "pointer-events-none",
-              page === "history" && "max-w-[280px] min-w-[280px]"
+              page === "history" &&
+                "max-w-[280px] sm:min-w-[280px] min-w-[200px]"
             )}
             href={path}
           >
@@ -62,7 +63,7 @@ const TabCard = ({ data }: Props) => {
           </div>
 
           {page === "history" ? (
-            <div className='pr-6 text-xs opacity-50 truncate max-w-[140px] min-w-[140px] tracking-wide'>
+            <div className='pr-6 text-xs opacity-50 truncate sm:max-w-[140px] sm:min-w-[120px] lg:min-w-[140px] tracking-wide'>
               {today}
             </div>
           ) : (

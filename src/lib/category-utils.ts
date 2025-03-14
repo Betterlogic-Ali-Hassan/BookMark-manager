@@ -11,9 +11,9 @@ export const getCategoryCounts = (cards: Card[]) => {
 };
 
 
-export const getCategoryName = (id: string, toggleCategory: (id:string) => void) => {
+export const getCategoryName = (name: string, toggleCategory: (name:string) => void) => {
   return () => {
-    toggleCategory(id);
+    toggleCategory(name);
   };
 };
 export const filterCardsByCategory = (cards: Card[], selectedCategories: string[]) => {

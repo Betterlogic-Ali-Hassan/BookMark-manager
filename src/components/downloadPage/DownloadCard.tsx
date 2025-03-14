@@ -4,7 +4,6 @@ import type { Card } from "@/types/TabCardType";
 import DeleteEntry from "../DeleteEntry";
 interface DownloadCardProps {
   data: Card;
-  setActiveTab: (tab: number) => void;
 }
 
 const DownloadCard = ({ data }: DownloadCardProps) => {

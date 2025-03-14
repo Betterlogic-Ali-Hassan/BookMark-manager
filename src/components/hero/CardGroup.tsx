@@ -15,7 +15,7 @@ interface CardGroupProps {
   isDownloadPage: boolean;
   isShowHourlyLog: boolean;
   showHourlyLogAfter: boolean;
-  setActiveTab: (tab: number) => void;
+
   favoriteExe: Card[];
   setFavoriteExe: React.Dispatch<React.SetStateAction<Card[]>>;
 }
@@ -26,13 +26,12 @@ export default function CardGroup({
   isExtensionsPage,
   isShowHourlyLog,
   showHourlyLogAfter,
-  setActiveTab,
   favoriteExe,
   setFavoriteExe,
   isDownloadPage,
 }: CardGroupProps) {
   const containerClasses = cn(
-    "flex flex-col gap-2 px-1.5 lg:px-0 mt-2 lg:mt-0",
+    "flex flex-col gap-2 px-1.5 lg:px-0 mt-2 lg:mt-0 ",
     isListView && "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 gap-x-4"
   );
 
@@ -45,7 +44,6 @@ export default function CardGroup({
           data={card}
           isListView={isListView}
           isExtensionsPage={isExtensionsPage}
-          setActiveTab={setActiveTab}
           favoriteExe={favoriteExe}
           setFavoriteExe={setFavoriteExe}
         />

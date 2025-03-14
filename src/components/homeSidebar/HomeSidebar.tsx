@@ -2,9 +2,7 @@ import { sidebarData, sidebarDataBottom } from "@/constant/HomeSidebarData";
 import SidebarItem from "./SidebarItem";
 import MobileCategoriesFilter from "../hero/MobileCategoriesFilter";
 import MobileMenu from "./MobileMenu";
-import DialogBox from "@/modals/DialogBox";
 import SettingIcon from "../svgs/SettingIcon";
-import Settings from "@/pages/settings/Settings";
 import Logo from "./Logo";
 
 const HomeSidebar = () => {
@@ -43,14 +41,7 @@ const HomeSidebar = () => {
                   {sidebarDataBottom.map((item, i) => (
                     <SidebarItem {...item} key={i} />
                   ))}
-                  <SidebarItem
-                    icon={
-                      <DialogBox trigger={<SettingIcon />}>
-                        <Settings />
-                      </DialogBox>
-                    }
-                    tooltip='Settings'
-                  />
+                  <SidebarItem icon={<SettingIcon />} tooltip='Settings' />
                 </ul>
               </li>
             </nav>

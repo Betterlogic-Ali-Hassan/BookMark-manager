@@ -20,6 +20,7 @@ type BookmarkContextType = {
   selectedCards: number[];
   selectedCardUrls: string[];
   selectedCategories: string[];
+  pinCategories: string[];
   searchTerm: string;
   showCardDetail: boolean;
   showSelectionCard: boolean;
@@ -32,6 +33,7 @@ type BookmarkContextType = {
   selectAll: () => void;
   clearSelection: () => void;
   setSelectedCategories: (categories: string[]) => void;
+  setPinCategories: (categories: string[]) => void;
   setCards: (cards: Card[]) => void;
   filteredCards: Card[];
   addCard: (card: Card) => void;
@@ -127,6 +129,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const [cards, setCards] = useState<Card[]>(getInitialData);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [pinCategories, setPinCategories] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
@@ -199,10 +202,11 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const toggleCategory = (categoryId: string) => {
+    const category = categoryId.toLowerCase();
     setSelectedCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId]
+      prev.includes(category)
+        ? prev.filter((id) => id !== category)
+        : [...prev, category]
     );
   };
 
@@ -249,6 +253,8 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setCategories,
     activeTab,
     setActiveTab,
+    pinCategories,
+    setPinCategories,
   };
 
   return (

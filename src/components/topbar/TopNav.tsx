@@ -20,8 +20,12 @@ interface Props {
   categoriesData: Array<CategoryWithCount | CategoryWithoutCount>;
 }
 const TopNav = ({ className, categoriesData }: Props) => {
-  const { setSelectedCategories, toggleCategory, selectedCategories } =
-    useBookmarks();
+  const {
+    setSelectedCategories,
+    toggleCategory,
+    selectedCategories,
+    pinCategories,
+  } = useBookmarks();
   const { page } = usePageContext();
   const handleToggleCategory = (categoryId: string) => {
     toggleCategory(categoryId);
@@ -75,7 +79,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
                 );
               })}
               {selectedCategories.length === 0 &&
-                categoriesData.slice(0, 5).map((category, i) => (
+                pinCategories.map((category, i) => (
                   <SwiperSlide
                     className={cn("max-w-fit", isDownloadPage && "hidden")}
                     key={i}
@@ -85,10 +89,10 @@ const TopNav = ({ className, categoriesData }: Props) => {
                         "focus:outline-none focus-visible:ring-1 ring-inset ring-border rounded h-9 text-foreground hover:text-text inline-flex items-center text-sm font-semibold px-2 mr-2",
                         className
                       )}
-                      onClick={() => handleToggleCategory(category.id)}
+                      onClick={() => handleToggleCategory(category)}
                       key={i}
                     >
-                      {category.name}
+                      {category}
                     </button>
                   </SwiperSlide>
                 ))}

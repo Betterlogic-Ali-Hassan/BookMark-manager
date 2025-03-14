@@ -59,12 +59,12 @@ const EditBookmark = ({ activeTabData }: EditBookmarkProps) => {
             <Edit className='h-5 w-5' />
             Edit Bookmark
           </h2>
-          <DialogClose className='bg-card p-3 rounded-full text-text max-w-fit opacity-80 hover:opacity-100'>
-            <X className='h-4 w-4' />
-          </DialogClose>
         </div>
 
         <div className='bg-white dark:bg-neutral-900 shadow-sm dark:bg-shadow-none ring-1 ring-neutral-900/5 dark:ring-0 sm:rounded-lg dark:border dark:border-neutral-800'>
+          <DialogClose className='bg-card p-3 rounded-full text-text w-full flex justify-end opacity-80 hover:opacity-100 '>
+            <X className='h-6 w-6' />
+          </DialogClose>
           <PasteLinkInput
             actionBtns
             className='sm:px-8 sm:pb-0 pt-4'

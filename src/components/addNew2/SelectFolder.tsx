@@ -37,7 +37,7 @@ export function FolderSelect({ className = "" }: FolderSelectProps) {
               <ChevronDown size={20} />
             </span>
           </PopoverTrigger>
-          <PopoverContent className='relative z-50 max-h-96 w-[402px]  overflow-hidden rounded-md border bg-card text-popover-foreground shadow-md p-0'>
+          <PopoverContent className='relative z-50 max-h-96 w-[720px]  overflow-hidden rounded-md border bg-card text-popover-foreground shadow-md p-0'>
             <SearchInput value={searchTerm} onChange={handleSearch} />
             <FolderList folders={filteredFolders} onSelect={handleSelect} />
           </PopoverContent>

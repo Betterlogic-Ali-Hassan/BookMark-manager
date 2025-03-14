@@ -13,7 +13,6 @@ interface CardRendererProps {
   isListView: boolean;
   isExtensionsPage: boolean;
   isDownloadPage: boolean;
-  setActiveTab: (tab: number) => void;
   favoriteExe: Card[];
   setFavoriteExe: React.Dispatch<React.SetStateAction<Card[]>>;
 }
@@ -22,7 +21,6 @@ export default function CardRenderer({
   data,
   isListView,
   isExtensionsPage,
-  setActiveTab,
   favoriteExe,
   setFavoriteExe,
   isDownloadPage,
@@ -33,24 +31,18 @@ export default function CardRenderer({
         setFavoriteExe={setFavoriteExe}
         favoriteExe={favoriteExe}
         data={data}
-        setActiveTab={setActiveTab}
       />
     ) : (
       <ExtensionListViewCard
         setFavoriteExe={setFavoriteExe}
         favoriteExe={favoriteExe}
         data={data}
-        setActiveTab={setActiveTab}
       />
     );
   }
   if (isDownloadPage) {
-    return <DownloadCard data={data} setActiveTab={setActiveTab} />;
+    return <DownloadCard data={data} />;
   }
 
-  return isListView ? (
-    <ThumbnailCard data={data} setActiveTab={setActiveTab} />
-  ) : (
-    <TabCard data={data} setActiveTab={setActiveTab} />
-  );
+  return isListView ? <ThumbnailCard data={data} /> : <TabCard data={data} />;
 }

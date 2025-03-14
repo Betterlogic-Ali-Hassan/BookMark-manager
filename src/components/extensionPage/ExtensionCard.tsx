@@ -11,18 +11,16 @@ import { toast } from "react-toastify";
 
 interface ExtensionCardProps {
   data: Card;
-  setActiveTab: (tab: number) => void;
   setFavoriteExe: (callback: (prev: Card[]) => Card[]) => void;
   favoriteExe: Card[];
 }
 
 const ExtensionCard = ({
   data,
-  setActiveTab,
   setFavoriteExe,
   favoriteExe,
 }: ExtensionCardProps) => {
-  const { handleToggle, title, icon } = useBookmarkItem(data, setActiveTab);
+  const { handleToggle, title, icon } = useBookmarkItem(data);
   const [switchChecked, setSwitchChecked] = useState(false);
   const isFavorite = favoriteExe.some((card) => card.id === data.id);
 

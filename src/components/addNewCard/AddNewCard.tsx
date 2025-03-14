@@ -11,10 +11,10 @@ const AddNewCard = () => {
   return (
     <FormProvider>
       <div className='flex items-center flex-col  justify-center relative mx-2 '>
-        <DialogClose className='bg-card p-3  rounded-full text-text max-w-fit  absolute -top-[60px] lg:right-[29%] right-1 opacity-80 hover:opacity-100 '>
-          <CrossIcon />
-        </DialogClose>
-        <div className='w-full max-w-3xl bg-hover p-6 rounded-lg'>
+        <div className='w-full max-w-3xl bg-hover p-6 rounded-lg relative'>
+          <DialogClose className=' p-3  rounded-full text-text max-w-fit absolute top-2 right-2 opacity-80 hover:opacity-100 '>
+            <CrossIcon className='h-6 w-6' />
+          </DialogClose>
           <Heading />
           <div className='flex flex-col gap-6 sm:gap-8 overflow-hidden sm:overflow-visible'>
             <Stepper />

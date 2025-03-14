@@ -5,7 +5,7 @@ interface Props {
 const DateSliderBtn = ({ icon, onClick }: Props) => {
   return (
     <button
-      className='h-[42px] max-w-[25px] w-full flex items-center justify-center rounded border-border   bg-card hover:bg-hover  transition duration-200'
+      className='h-[42px] max-w-[25px] w-full flex items-center  max-lg:hidden justify-center rounded border-border   bg-card hover:bg-hover  transition duration-200'
       onClick={onClick}
     >
       {icon}

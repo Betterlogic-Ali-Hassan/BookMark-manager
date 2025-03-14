@@ -39,7 +39,7 @@ const DateSlider = () => {
   return (
     <div className='flex items-center gap-6 justify-between w-full mt-3'>
       <DateSliderBtn onClick={scrollLeft} icon={<ChevronLeft size={12} />} />
-      <div className='flex items-center gap-3 lg:gap-[14px] '>
+      <div className='flex items-center gap-3 lg:gap-[14px] overflow-x-auto no-scrollbar '>
         {visibleDates.map((dateItem) => (
           <DateSliderItem
             key={dateItem.date.toDateString()}
