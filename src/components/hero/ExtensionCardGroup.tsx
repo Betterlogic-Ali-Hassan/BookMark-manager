@@ -21,7 +21,7 @@ const CARDS_PER_LOAD = 20;
 export default function ExtensionCardsGroup({
   cards,
   isListView,
-  setActiveTab,
+
   favoriteExe,
   setFavoriteExe,
 }: ExtensionCardsGroupProps) {
@@ -48,7 +48,6 @@ export default function ExtensionCardsGroup({
             data={card}
             isListView={isListView}
             isExtensionsPage={true}
-            setActiveTab={setActiveTab}
             favoriteExe={favoriteExe}
             setFavoriteExe={setFavoriteExe}
           />
