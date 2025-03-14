@@ -66,7 +66,7 @@ export function BackToTopContainer({
 
       <div
         className={cn(
-          "sticky bottom-4 right-0 w-full justify-end z-10 rounded-full shadow-md transition-all duration-300 h-12 flex items-center  !p-0 ",
+          "sticky bottom-4 right-0 w-full justify-end z-10  transition-all duration-300 ml-[80px] h-12 flex items-center  !p-0 ",
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none",
