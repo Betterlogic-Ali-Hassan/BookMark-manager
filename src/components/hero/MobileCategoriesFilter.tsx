@@ -9,7 +9,7 @@ const MobileCategoriesFilter = () => {
       <SheetTrigger>
         <FilterIcon />
       </SheetTrigger>
-      <SheetContent className='bg-card overflow-y-auto no-scrollbar'>
+      <SheetContent className='bg-card overflow-y-auto no-scrollbar '>
         <ResetFilter />
         <Categories className='max-lg:flex w-full' />
       </SheetContent>

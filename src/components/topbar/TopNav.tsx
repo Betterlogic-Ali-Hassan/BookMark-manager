@@ -12,23 +12,26 @@ import Button from "../ui/button";
 
 import ResetFilter from "./ResetFilter";
 
+type CategoryWithCount = { name: string; count: number; id: string };
+type CategoryWithoutCount = { name: string; id: string };
+
 interface Props {
   className?: string;
-  categoriesData: {
-    name: string;
-    count: number;
-    id: number;
-  }[];
+  categoriesData: Array<CategoryWithCount | CategoryWithoutCount>;
 }
 const TopNav = ({ className, categoriesData }: Props) => {
-  const { setSelectedCategories, toggleCategory, selectedCategories } =
-    useBookmarks();
+  const {
+    setSelectedCategories,
+    toggleCategory,
+    selectedCategories,
+    pinCategories,
+  } = useBookmarks();
 
-  const handleToggleCategory = (categoryId: number) => {
+  const handleToggleCategory = (categoryId: string) => {
     toggleCategory(categoryId);
   };
 
-  const handleRemoveCategory = (categoryId: number, e: React.MouseEvent) => {
+  const handleRemoveCategory = (categoryId: string, e: React.MouseEvent) => {
     e.stopPropagation();
     const updatedCategories = selectedCategories.filter(
       (id) => id !== categoryId
@@ -38,7 +41,7 @@ const TopNav = ({ className, categoriesData }: Props) => {
 
   return (
     <div className='lg:h-[3.25rem]'>
-      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border max-lg:pl-[100px]'>
+      <div className='relative w-full px-2 lg:px-0 py-2 border-b lg:border-none border-border max-lg:pl-[100px] max-sm:pl-[80px]'>
         <div className='flex overflow-hidden items-center'>
           <div className='flex overflow-x-auto no-scrollbar relative'>
             <Swiper
@@ -76,17 +79,17 @@ const TopNav = ({ className, categoriesData }: Props) => {
                 );
               })}
               {selectedCategories.length === 0 &&
-                categoriesData.slice(0, 5).map((category, i) => (
+                pinCategories.map((category, i) => (
                   <SwiperSlide className='max-w-fit' key={i}>
                     <button
                       className={cn(
                         "focus:outline-none focus-visible:ring-1 ring-inset ring-border rounded h-9 text-foreground hover:text-text inline-flex items-center text-sm font-semibold px-2 mr-2",
                         className
                       )}
-                      onClick={() => handleToggleCategory(category.id)}
+                      onClick={() => handleToggleCategory(category)}
                       key={i}
                     >
-                      {category.name}
+                      {category}
                     </button>
                   </SwiperSlide>
                 ))}

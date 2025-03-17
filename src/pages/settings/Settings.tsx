@@ -20,11 +20,11 @@ const Settings = () => {
       <div className='w-full max-w-4xl bg-card  md:bg-transparent md:dark:bg-transparent'>
         <div className='flex items-center justify-between'>
           <button className='px-4 py-6 md:p-8 text-text flex items-center gap-3'>
-            <span className='text-2xl leading-1 font-semibold text-card'>
+            <span className='text-2xl leading-1 font-semibold text-white'>
               Settings
             </span>
           </button>
-          <DialogClose className='bg-card p-3 rounded-full text-text opacity-100'>
+          <DialogClose className='bg-card p-3 rounded-full text-text opacity-80 hover:opacity-100'>
             <CrossIcon />
           </DialogClose>
         </div>

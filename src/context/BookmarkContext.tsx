@@ -7,99 +7,178 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Card } from "../types/TabCardType";
+import type { Card } from "@/types/TabCardType";
+import { tabsData } from "@/constant/tabsData";
 import { usePageContext } from "./PageContext";
+import { useManagementData } from "@/constant/extensionData";
+import { useDownloadData } from "@/constant/DownloadsData";
+import { categoriesData } from "@/constant/categoriesData";
+import type { Tag } from "@/types/tag";
 
-// Define types
-type Tags = { id: number; name: string }[];
 type BookmarkContextType = {
   cards: Card[];
   selectedCards: number[];
   selectedCardUrls: string[];
-  selectedCategories: number[];
+  selectedCategories: string[];
+  pinCategories: string[];
   searchTerm: string;
   showCardDetail: boolean;
   showSelectionCard: boolean;
-  toggleCard: (id: number, url: string, tags: Tags) => void;
-  toggleCategory: (categoryId: number) => void;
+  setSelectedCards: (cards: number[]) => void;
+  toggleCard: (id: number, url: string) => void;
+  toggleCategory: (categoryId: string) => void;
   setSearchTerm: (term: string) => void;
   setShowCardDetail: (show: boolean) => void;
   setShowSelectionCard: (show: boolean) => void;
   selectAll: () => void;
   clearSelection: () => void;
-  setSelectedCategories: (categories: number[]) => void;
+  setSelectedCategories: (categories: string[]) => void;
+  setPinCategories: (categories: string[]) => void;
   setCards: (cards: Card[]) => void;
   filteredCards: Card[];
+  addCard: (card: Card) => void;
+  deleteCard: (id: number | number[]) => void;
+  updateCard: (updatedCard: Card) => void;
+  categories: Tag[];
+  setCategories: (categories: Tag[]) => void;
+  activeTab: number;
+  setActiveTab: (tab: number) => void;
 };
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(
   undefined
 );
 
+const getStorageKey = (page: string) => {
+  switch (page) {
+    case "extensions":
+      return "extensions_data";
+    case "downloads":
+      return "downloads_data";
+    default:
+      return "tabs_data";
+  }
+};
+
+const CATEGORIES_STORAGE_KEY = "categories_data";
+const getPinCategoriesStorageKey = (page: string) => {
+  switch (page) {
+    case "extensions":
+      return "extensions_pin_categories";
+    case "downloads":
+      return "downloads_pin_categories";
+    default:
+      return "tabs_pin_categories";
+  }
+};
+
 export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
-  const [cards, setCards] = useState<Card[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const { page } = usePageContext();
+  const { downloadData } = useDownloadData();
+  const { extensionData } = useManagementData();
+
+  const storageKey = getStorageKey(page);
+  const getInitialData = () => {
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem(storageKey);
+      if (storedData) {
+        try {
+          return JSON.parse(storedData);
+        } catch (error) {
+          console.error("Error parsing stored data:", error);
+          const defaultData =
+            page === "extensions"
+              ? extensionData
+              : page === "downloads"
+              ? downloadData
+              : tabsData;
+          localStorage.setItem(storageKey, JSON.stringify(defaultData));
+          return defaultData;
+        }
+      } else {
+        const defaultData =
+          page === "extensions"
+            ? extensionData
+            : page === "downloads"
+            ? downloadData
+            : tabsData;
+        localStorage.setItem(storageKey, JSON.stringify(defaultData));
+        return defaultData;
+      }
+    }
+    return page === "extensions"
+      ? extensionData
+      : page === "downloads"
+      ? downloadData
+      : tabsData;
+  };
+
+  const getInitialCategories = () => {
+    if (typeof window !== "undefined") {
+      const storedCategories = localStorage.getItem(CATEGORIES_STORAGE_KEY);
+      if (storedCategories) {
+        try {
+          return JSON.parse(storedCategories);
+        } catch (error) {
+          console.error("Error parsing stored categories:", error);
+          localStorage.setItem(
+            CATEGORIES_STORAGE_KEY,
+            JSON.stringify(categoriesData)
+          );
+          return categoriesData;
+        }
+      } else {
+        localStorage.setItem(
+          CATEGORIES_STORAGE_KEY,
+          JSON.stringify(categoriesData)
+        );
+        return categoriesData;
+      }
+    }
+    return categoriesData;
+  };
+
+  const [cards, setCards] = useState<Card[]>(getInitialData);
+  const [activeTab, setActiveTab] = useState(0);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [pinCategories, setPinCategories] = useState<string[]>(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      const storedPinCategories = localStorage.getItem(pinCategoriesKey);
+      if (storedPinCategories) {
+        try {
+          return JSON.parse(storedPinCategories);
+        } catch (error) {
+          console.error("Error parsing stored pinned categories:", error);
+          return [];
+        }
+      }
+    }
+    return [];
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
-  const { page } = usePageContext();
+  const [categories, setCategories] = useState<Tag[]>(getInitialCategories);
 
-  useEffect(() => {
-    const fetchBookmarks = async () => {
-      try {
-        const bookmarksTree = await chrome.bookmarks.getTree();
-        const bookmarks: Card[] = [];
+  const filteredCards = cards.filter((card) => {
+    const matchesSearch = card.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
-        const processBookmarkNode = async (node: chrome.bookmarks.BookmarkTreeNode) => {
-          if (node.url) {
-            const fetchFavicon = (url: string): string => {
-              return `https://www.google.com/s2/favicons?sz=32&domain_url=${encodeURIComponent(url)}`;
-            };
-        
-            const faviconUrl = fetchFavicon(node.url);
-        
-            bookmarks.push({
-              id: Number(node.id),
-              title: node.title,
-              path: node.url,
-              des: "",
-              icon: faviconUrl, // Uses Google's favicon service
-              tags: [],
-              enabled: undefined,
-              iconUrl: ""
-            });
-          }
-        
-          if (node.children) {
-            for (const child of node.children) {
-              await processBookmarkNode(child);
-            }
-          }
-        };
-        
-        
-        
-        for (const node of bookmarksTree) {
-          await processBookmarkNode(node);
-        }
+    if (selectedCategories.length === 0) {
+      return matchesSearch;
+    }
 
-        console.log("Fetched Bookmarks:", bookmarks);
-        setCards(bookmarks);
-      } catch (error) {
-        console.error("Error fetching bookmarks:", error);
-      }
-    };
+    const hasSelectedCategory =
+      card.tags && card.tags.some((tag) => selectedCategories.includes(tag.id));
 
-    fetchBookmarks();
-  }, []);
+    return matchesSearch && hasSelectedCategory;
+  });
 
-  const filteredCards = cards.filter((card) =>
-    card.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const resetData = () => {
+  const resetAllState = () => {
     setSearchTerm("");
     setSelectedCategories([]);
     setSelectedCards([]);
@@ -109,8 +188,46 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    resetData();
+    resetAllState();
+
+    setCards(getInitialData());
   }, [page]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      const storedPinCategories = localStorage.getItem(pinCategoriesKey);
+      if (storedPinCategories) {
+        try {
+          setPinCategories(JSON.parse(storedPinCategories));
+        } catch (error) {
+          console.error("Error parsing stored pinned categories:", error);
+          setPinCategories([]);
+        }
+      } else {
+        setPinCategories([]);
+      }
+    }
+  }, [page]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && cards) {
+      localStorage.setItem(storageKey, JSON.stringify(cards));
+    }
+  }, [cards, storageKey]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && categories) {
+      localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      localStorage.setItem(pinCategoriesKey, JSON.stringify(pinCategories));
+    }
+  }, [pinCategories, page]);
 
   const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
@@ -134,12 +251,30 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     setSelectedCardUrls([]);
   };
 
-  const toggleCategory = (categoryId: number) => {
+  const toggleCategory = (categoryId: string) => {
+    const category = categoryId.toLowerCase();
     setSelectedCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId]
+      prev.includes(category)
+        ? prev.filter((id) => id !== category)
+        : [...prev, category]
     );
+  };
+
+  const addCard = (card: Card) => {
+    const updatedCards = [card, ...cards];
+    setCards(updatedCards);
+  };
+
+  const deleteCard = (ids: number | number[]) => {
+    const idsToDelete = Array.isArray(ids) ? ids : [ids];
+    const updatedCards = cards.filter((card) => !idsToDelete.includes(card.id));
+    setCards(updatedCards);
+  };
+  const updateCard = (updatedCard: Card) => {
+    const updatedCards = cards.map((card) =>
+      card.id === updatedCard.id ? updatedCard : card
+    );
+    setCards(updatedCards);
   };
 
   const value = {
@@ -147,6 +282,7 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     filteredCards: cards,
     setSelectedCategories,
     selectedCards,
+    setSelectedCards,
     selectedCardUrls,
     selectedCategories,
     searchTerm,
@@ -160,6 +296,15 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     selectAll,
     setCards,
     clearSelection,
+    addCard,
+    deleteCard,
+    updateCard,
+    categories,
+    setCategories,
+    activeTab,
+    setActiveTab,
+    pinCategories,
+    setPinCategories,
   };
 
   return (

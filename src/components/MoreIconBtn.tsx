@@ -14,7 +14,7 @@ const MoreIconBtn = ({ className }: Props) => {
       {!showSelectionCard && (
         <button
           className={cn(
-            " focus:outline-none focus-visible:ring-1 ring-inset ring-border rounded-r px-4 lg:px-3 h-14 lg:h-12 text-foreground hover:text-text    ",
+            " focus:outline-none focus-visible:ring-1 ring-inset ring-border rounded-r px-4 lg:px-3 h-14 lg:h-12 text-foreground hover:text-text",
             className
           )}
           onClick={handleCardDetail}

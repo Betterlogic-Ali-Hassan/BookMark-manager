@@ -3,7 +3,7 @@
   "name": "Bookmark Manager",
   "version": "1.0.0",
   "description": "Easy Bookmarks",
-  "permissions": ["bookmarks", "management"],
+  "permissions": ["bookmarks", "management", "downloads"],
   "background": {
     "service_worker": "background.js"
   },

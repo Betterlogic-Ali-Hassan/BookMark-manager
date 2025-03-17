@@ -11,7 +11,6 @@ const DropDown = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const count = cards.length;
-  // console.log(cards);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -25,22 +24,30 @@ const DropDown = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
+  const isShowThumbnailView = page === "downloads" || page === "history";
+  const pageTitles: Record<string, string> = {
+    downloads: "Downloads",
+    history: "History",
+    extensions: "Extensions",
+  };
+  const isDownloadPage = page === "downloads";
   return (
     <div className='hidden lg:flex lg:h-[3.25rem] items-center justify-end'>
-      {page !== "history" && <ThumbnailToggle />}
+      {!isShowThumbnailView && <ThumbnailToggle />}
       <div className='flex items-center px-4 whitespace-nowrap text-foreground  text-sm'>
-        {count} bookmarks
-        <div className='relative flex justify-center items-center'>
-          <button
-            ref={btnRef}
-            className='p-2 lg:p-0.5  lg:text-foreground   hover:text-text'
-            onClick={() => setOpenDropDown(!openDropDown)}
-          >
-            <DotsIcon />
-          </button>
-          {openDropDown && <DropDownContent />}
-        </div>
+        {count} {pageTitles[page] || "Bookmarks"}
+        {!isDownloadPage && (
+          <div className='relative flex justify-center items-center'>
+            <button
+              ref={btnRef}
+              className='p-2 lg:p-0.5  lg:text-foreground   hover:text-text'
+              onClick={() => setOpenDropDown(!openDropDown)}
+            >
+              <DotsIcon />
+            </button>
+            {openDropDown && <DropDownContent />}
+          </div>
+        )}
       </div>
     </div>
   );

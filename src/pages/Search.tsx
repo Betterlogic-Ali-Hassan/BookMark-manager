@@ -1,17 +1,14 @@
 import TabCardDetail from "@/components/hero/tabCardDetail/TabCardDetail";
 import TabsCards from "@/components/hero/TabsCards";
-import DataNotFound from "@/components/searchPage/DataNotFound";
+import DataNotFound from "@/components/DataNotFound";
 import SearchBar from "@/components/searchPage/SearchBar";
 import TopNav from "@/components/topbar/TopNav";
 import { categoriesData } from "@/constant/categoriesData";
 import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
 
-import { useState } from "react";
-
 const Search = () => {
   const { searchTerm, cards } = useBookmarks();
-  const [activeTab, setActiveTab] = useState(0);
   const filteredCategories = categoriesData.filter((cat) =>
     cat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -36,15 +33,13 @@ const Search = () => {
               )}
             </div>
             <div className='flex flex-col gap-2 py-2'>
-              {searchTerm !== "" && (
-                <TabsCards setActiveTab={setActiveTab} cards={cards} />
-              )}
-              {cards.length <= 0 && <DataNotFound searchTerm={searchTerm} />}
+              {searchTerm !== "" && <TabsCards cards={cards} />}
+              {cards.length <= 0 && <DataNotFound />}
             </div>
           </div>
         </div>
         <div className='hidden relative lg:block pt-2'>
-          <TabCardDetail cards={cards} activeTab={activeTab} />
+          <TabCardDetail cards={cards} />
         </div>
       </div>
     </div>

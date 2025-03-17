@@ -1,33 +1,38 @@
-import { useBookmarks } from "@/context/BookmarkContext";
 import { cn } from "@/lib/utils";
 import { Card } from "@/types/TabCardType";
 import MoreIconBtn from "../MoreIconBtn";
-import { usePageContext } from "@/context/PageContext";
+
 import Badge from "../ui/Badge";
 import { getCategoryName } from "@/lib/category-utils";
+import { useBookmarkItem } from "@/hooks/use-bookmark-item";
+
+import DeleteEntry from "../DeleteEntry";
+import MobileCardDetail from "./tabCardDetail/MobileCardDetail";
 
 interface Props {
   data: Card;
-  setActiveTab: (tab: number) => void;
 }
-const TabCard = ({ data, setActiveTab }: Props) => {
-  const { id, path, tags, icon, title } = data;
-  const { page } = usePageContext();
-  const { toggleCard, showSelectionCard, selectedCards, toggleCategory } =
-    useBookmarks();
-  const today = new Date().toDateString();
-  const handleToggle = () => {
-    if (showSelectionCard) toggleCard(id, path, tags);
-    setActiveTab(id);
-  };
+const TabCard = ({ data }: Props) => {
+  const {
+    title,
+    id,
+    handleToggle,
+    selected,
+    path,
+    page,
+    showSelectionCard,
+    today,
+    tags,
 
-  const selected = selectedCards.includes(data.id);
+    toggleCategory,
+  } = useBookmarkItem(data);
+
   return (
     <div
       className={cn(
-        "  border-transparent hover:bg-hover overflow-hidden select-none bg-card  w-full relative border block rounded-md group",
+        "  border-transparent hover:bg-hover overflow-x-auto no-scrollbar select-none bg-card  w-full relative border block rounded-md group",
         selected &&
-        "hover:bg-selected-hover border-selected-border bg-selected-bg",
+          "hover:bg-selected-hover border-selected-border bg-selected-bg",
         showSelectionCard && "cursor-pointer"
       )}
       onClick={handleToggle}
@@ -39,59 +44,55 @@ const TabCard = ({ data, setActiveTab }: Props) => {
             className={cn(
               "focus:outline-none focus-visible:ring-1 ring-inset ring-brand  rounded truncate grow flex items-center gap-3 px-5 lg:px-4 h-14 lg:h-12",
               showSelectionCard && "pointer-events-none",
-              page === "history" && "max-w-[280px] min-w-[280px]"
+              page === "history" &&
+                "max-w-[280px] sm:min-w-[280px] min-w-[200px]"
             )}
             href={path}
           >
-            <img
-              src={icon}
-              alt="Favicon"
-              className="w-[16px] h-[16px]"
-              onError={(e) => {
-                (e.target as HTMLImageElement).onerror = null; // Prevent infinite loop
-                (e.target as HTMLImageElement).outerHTML = `
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke-width='1.5'
-            stroke='currentColor'
-            class='w-[16px] h-[16px] text-foreground'
-          >
-            <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              d='M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418'
-            ></path>
-          </svg>
-        `;
-              }}
+            <object
+              type='image/png'
+              className='w-[16px] h-[16px] flex-none rounded-sm overflow-hidden'
+              data={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${path}&size=32`}
             />
-            <div className='truncate text-sm font-medium text-text  pr-8 max-w-[150px]'>
+            <div className='truncate text-sm font-medium text-text  pr-8 max-w-[135px] sm:max-w-[150px] '>
               {title}
             </div>
           </a>
-          <div className='pr-6 text-xs opacity-50  max-w-[300px]  min-w-[300px] tracking-wide'>
+          <div className='pr-6 text-xs opacity-50  max-w-[300px]  min-w-[300px] tracking-wide max-sm:hidden'>
             <span className='truncate max-w-[170px] block'>{path}</span>
           </div>
 
           {page === "history" ? (
-            <div className='pr-6 text-xs opacity-50 truncate max-w-[140px] min-w-[140px] tracking-wide'>
+            <div className='pr-6 text-xs opacity-50 truncate sm:max-w-[140px] sm:min-w-[120px] lg:min-w-[140px] tracking-wide'>
               {today}
             </div>
           ) : (
-            tags.slice(1).map((tag) => (
+            tags.slice(0, 1).map((tag) => (
               <div
-                className=' text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide'
+                className={cn(
+                  " text-xs  truncate max-w-[130px] min-w-[130px] tracking-wide max-lg:hidden",
+                  showSelectionCard &&
+                    "max-w-[178px] min-w-[178px] pointer-events-none"
+                )}
                 key={tag.id}
-                onClick={getCategoryName(tag.id, toggleCategory)}
               >
-                <Badge text={tag.name} />
+                <Badge
+                  text={tag.name}
+                  onClick={getCategoryName(tag.id, toggleCategory)}
+                />
               </div>
             ))
           )}
         </div>
-        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card' />
+        <DeleteEntry
+          id={id}
+          className={cn(
+            "mx-2  cursor-pointer group-hover:opacity-100 transition duration-200 text-foreground hover:text-text max-sm:opacity-100",
+            showSelectionCard && "!opacity-0 pointer-events-none"
+          )}
+        />
+        <MobileCardDetail />
+        <MoreIconBtn className='opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-card max-sm:opacity-100 max-lg:hidden ' />
       </div>
     </div>
   );

@@ -1,41 +1,48 @@
 "use client";
 
+import type React from "react";
 import type { Card } from "@/types/TabCardType";
 import TabCard from "./TabCard";
 import ThumbnailCard from "./thumbnailView/ThumbnailCard";
-import ExtensionCard from "@/components/extensionPage/ExtensionCard";
+import ExtensionCard from "../extensionPage/ExtensionCard";
 import ExtensionListViewCard from "../extensionPage/ExtensionListViewCard";
-import type { ExtensionData } from "@/context/ExtensionContext";
+import DownloadCard from "../downloadPage/DownloadCard";
 
 interface CardRendererProps {
-  data: Card | ExtensionData;
+  data: Card;
   isListView: boolean;
   isExtensionsPage: boolean;
-  setActiveTab: (tab: number) => void;
+  isDownloadPage: boolean;
+  favoriteExe: Card[];
+  setFavoriteExe: React.Dispatch<React.SetStateAction<Card[]>>;
 }
 
 export default function CardRenderer({
   data,
   isListView,
   isExtensionsPage,
-  setActiveTab,
+  favoriteExe,
+  setFavoriteExe,
+  isDownloadPage,
 }: CardRendererProps) {
   if (isExtensionsPage) {
-    if ("name" in data) {
-      return isListView ? (
-        <ExtensionListViewCard extension={data as ExtensionData} key={(data as ExtensionData).id} />
-      ) : (
-        <ExtensionCard extension={data as ExtensionData} key={(data as ExtensionData).id} />
-      );
-    }
-
-    console.warn("Unexpected data format in Extension Page:", data);
-    return null;
+    return isListView ? (
+      <ExtensionCard
+        setFavoriteExe={setFavoriteExe}
+        favoriteExe={favoriteExe}
+        data={data}
+      />
+    ) : (
+      <ExtensionListViewCard
+        setFavoriteExe={setFavoriteExe}
+        favoriteExe={favoriteExe}
+        data={data}
+      />
+    );
+  }
+  if (isDownloadPage) {
+    return <DownloadCard data={data} />;
   }
 
-  return isListView ? (
-    <ThumbnailCard data={data as Card} key={(data as Card).id.toString()} setActiveTab={setActiveTab} />
-  ) : (
-    <TabCard key={(data as Card).id.toString()} data={data as Card} setActiveTab={setActiveTab} />
-  );
+  return isListView ? <ThumbnailCard data={data} /> : <TabCard data={data} />;
 }

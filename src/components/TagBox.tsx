@@ -1,97 +1,180 @@
 "use client";
-import { useState, useEffect, type KeyboardEvent } from "react";
-import { categoriesData } from "@/constant/categoriesData";
-import { useFormContext } from "@/context/from-Context";
-import { TagNotification } from "./TagAddedNotification";
+
+import type React from "react";
+
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  type KeyboardEvent,
+} from "react";
+import { TagNotification } from "../modals/TagAddedNotification";
 import { TagButton } from "./AddTagBtn";
 import { PlusIcon } from "./svgs/PlusIcon";
-import { Tag } from "@/types/tag";
+import type { Tag } from "@/types/tag";
+import { useFormContext } from "@/context/from-Context";
+import { useBookmarks } from "@/context/BookmarkContext";
 
 interface TagBoxProps {
   allowedText?: boolean;
   onTagsChange?: (tags: string[]) => void;
+  tag?: { id: string; name: string }[] | undefined;
 }
 
 export default function TagBox({
   allowedText = false,
   onTagsChange,
+  tag,
 }: TagBoxProps) {
   const [tagInputValue, setTagInputValue] = useState("");
-  const { formData, updateFormData } = useFormContext();
-  const [selectedTags, setSelectedTags] = useState<string[]>(
-    formData.tags || []
-  );
+  const { updateFormData } = useFormContext();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [notification, setNotification] = useState({
     text: "",
     visible: false,
   });
-  const [tags, setTags] = useState<Tag[]>(categoriesData || []);
+  const { categories, setCategories } = useBookmarks();
 
-  // Update form context and call onTagsChange when selected tags change
-  useEffect(() => {
-    updateFormData("tags", selectedTags);
-    onTagsChange?.(selectedTags);
-  }, [selectedTags, updateFormData, onTagsChange]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Show notification with auto-dismiss
-  const showNotification = (text: string) => {
+  const notificationTimeoutRef = useRef<number | null>(null);
+  const formUpdateTimeoutRef = useRef<number | null>(null);  
+
+  const showNotification = useCallback((text: string) => {
+    if (notificationTimeoutRef.current) {
+      clearTimeout(notificationTimeoutRef.current);
+    }
+
     setNotification({ text, visible: true });
 
-    const timeoutId = setTimeout(() => {
+    notificationTimeoutRef.current = setTimeout(() => {
       setNotification((prev) => ({ ...prev, visible: false }));
     }, 1000);
+  }, []);
 
-    return () => clearTimeout(timeoutId);
-  };
+  const debouncedFormUpdate = useCallback(
+    (tags: string[]) => {
+      if (formUpdateTimeoutRef.current) {
+        clearTimeout(formUpdateTimeoutRef.current);
+      }
 
-  // Add a new tag
-  const handleAddTag = () => {
+      formUpdateTimeoutRef.current = setTimeout(() => {
+        updateFormData("tags", tags);
+        onTagsChange?.(tags);
+      }, 100);
+    },
+    [updateFormData, onTagsChange]
+  );
+
+  useEffect(() => {
+    if (selectedTags.length > 0 || onTagsChange) {
+      debouncedFormUpdate(selectedTags);
+    }
+
+    return () => {
+      if (formUpdateTimeoutRef.current) {
+        clearTimeout(formUpdateTimeoutRef.current);
+      }
+      if (notificationTimeoutRef.current) {
+        clearTimeout(notificationTimeoutRef.current);
+      }
+    };
+  }, [selectedTags, debouncedFormUpdate]);
+
+  const handleAddTag = useCallback(() => {
     const trimmedValue = tagInputValue.trim();
 
     if (!trimmedValue) return;
 
-    // Create new tag
-    const newTag: Tag = {
-      name: trimmedValue,
-      count: 1,
-      id: Date.now(),
-    };
-
-    // Update tags list
-    setTags((prevTags) => [...prevTags, newTag]);
-
-    // Add to selected tags
-    setSelectedTags((prev) => [...prev, trimmedValue]);
-
-    // Show notification
-    showNotification(`New Tag Added '${trimmedValue}'`);
-
-    // Clear input
-    setTagInputValue("");
-  };
-
-  // Toggle tag selection
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) => {
-      const isTagSelected = prev.includes(tag);
-
-      // Show notification
-      showNotification(
-        isTagSelected ? `Removed: Tag "${tag}"` : `Added: Tag "${tag}"`
-      );
-
-      // Update selected tags
-      return isTagSelected ? prev.filter((t) => t !== tag) : [...prev, tag];
-    });
-  };
-
-  // Handle Enter key in input field
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleAddTag();
+    if (selectedTags.includes(trimmedValue)) {
+      showNotification(`Tag '${trimmedValue}' already selected!`);
+      setTagInputValue("");
+      setSearchTerm("");
+      return;
     }
-  };
+
+    const existingTag = categories.find(
+      (tag) => tag.name.toLowerCase() === trimmedValue.toLowerCase()
+    );
+
+    if (existingTag) {
+      setSelectedTags((prev) => [...prev, existingTag.name]);
+      showNotification(`Added: Tag '${existingTag.name}'`);
+    } else {
+      const newTag: Tag = {
+        name: trimmedValue,
+        count: 1,
+        id: trimmedValue.toLowerCase(),
+      };
+
+      setCategories([...categories, newTag]);
+      setSelectedTags((prev) => [...prev, trimmedValue]);
+      showNotification(`New Tag Added: '${trimmedValue}'`);
+    }
+
+    setTagInputValue("");
+    setSearchTerm("");
+  }, [tagInputValue, showNotification, selectedTags]);
+
+  const toggleTag = useCallback(
+    (tagName: string) => {
+      setSelectedTags((prev) => {
+        const isSelected = prev.includes(tagName);
+
+        if (isSelected) {
+          showNotification(`Removed: Tag "${tagName}"`);
+          return prev.filter((t) => t !== tagName);
+        } else {
+          showNotification(`Added: Tag "${tagName}"`);
+          return [...prev, tagName];
+        }
+      });
+    },
+    [showNotification]
+  );
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleAddTag();
+      }
+    },
+    [handleAddTag]
+  );
+  const filteredTags = useMemo(() => {
+    if (!searchTerm) return categories;
+    return categories.filter((tag) =>
+      tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [categories, searchTerm]);
+
+  const tagButtons = useMemo(
+    () =>
+      filteredTags.map((category) => (
+        <TagButton
+          key={category.id}
+          tag={category.name}
+          isSelected={
+            selectedTags.includes(category.name) ||
+            tag?.some((t) => t.name === category.name)
+          }
+          onClick={() => toggleTag(category.name)}
+        />
+      )),
+    [filteredTags, selectedTags, toggleTag]
+  );
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setTagInputValue(value);
+      setSearchTerm(value);
+    },
+    []
+  );
 
   return (
     <div className='space-y-2'>
@@ -112,7 +195,7 @@ export default function TagBox({
         <input
           type='text'
           value={tagInputValue}
-          onChange={(e) => setTagInputValue(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           name='tags'
           id='tags-input'
@@ -131,15 +214,8 @@ export default function TagBox({
         </button>
       </div>
 
-      <div className='flex flex-wrap gap-1.5 py-1'>
-        {tags.map((category) => (
-          <TagButton
-            key={category.id}
-            tag={category.name}
-            isSelected={selectedTags.includes(category.name)}
-            onClick={() => toggleTag(category.name)}
-          />
-        ))}
+      <div className='flex flex-wrap gap-2 py-1 justify-center'>
+        {tagButtons}
       </div>
     </div>
   );

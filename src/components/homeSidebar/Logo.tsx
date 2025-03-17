@@ -4,7 +4,10 @@ const Logo = () => {
   const { setPage } = usePageContext();
   const goHome = () => setPage("home");
   return (
-    <button onClick={goHome}>
+    <button
+      onClick={goHome}
+      className='flex  items-center justify-center rounded-full '
+    >
       <img
         src='https://bookmarkmanager.com/logo/icon.svg'
         alt='Bookmark Manager Logo Icon'

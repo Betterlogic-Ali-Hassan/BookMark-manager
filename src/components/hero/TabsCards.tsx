@@ -5,44 +5,42 @@ import type { Card } from "@/types/TabCardType";
 import { cn } from "@/lib/utils";
 import { useThumbnailToggler } from "@/context/ThumbnailTogglerContext";
 import { usePageContext } from "@/context/PageContext";
+
 import HourlyLog from "../HourlyLog";
 import CardGroup from "./CardGroup";
 import InfiniteScrollSentinel from "./InfiniteScrollSentinel";
-import { useExtension } from "@/context/ExtensionContext";
 
 interface TabsCardsProps {
-  setActiveTab: (tab: number) => void;
-  cards: Card[]; // Bookmarks data when not on the extensions page.
+  cards: Card[];
 }
 
-const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
+const TabsCards = ({ cards }: TabsCardsProps) => {
   const { isListView } = useThumbnailToggler();
   const [favoriteExe, setFavoriteExe] = useState<Card[]>([]);
   const { page } = usePageContext();
   const isShowHourlyLog = page === "history";
   const isExtensionsPage = page === "extensions";
-
-  const { extensions } = useExtension();
-  const effectiveCards = isExtensionsPage ? extensions : cards;
-
+  const isDownloadPage = page === "downloads";
   const INITIAL_CARDS_COUNT = isExtensionsPage ? 20 : 100;
   const CARDS_PER_LOAD = isExtensionsPage ? 20 : 40;
-  const [visibleCardsCount, setVisibleCardsCount] = useState(INITIAL_CARDS_COUNT);
+  const [visibleCardsCount, setVisibleCardsCount] =
+    useState(INITIAL_CARDS_COUNT);
 
   const loadMoreCards = useCallback(() => {
     setVisibleCardsCount((prevCount) =>
-      Math.min(prevCount + CARDS_PER_LOAD, effectiveCards.length)
+      Math.min(prevCount + CARDS_PER_LOAD, cards.length)
     );
-  }, [effectiveCards.length]);
+  }, [cards.length]);
 
   const visibleCards = useMemo(() => {
-    return effectiveCards.slice(0, visibleCardsCount);
-  }, [effectiveCards, visibleCardsCount]);
+    return cards.slice(0, visibleCardsCount);
+  }, [cards, visibleCardsCount]);
 
   const cardGroups = useMemo(() => {
     if (!isShowHourlyLog) {
       return [visibleCards];
     }
+
     const groups = [];
     let currentIndex = 0;
 
@@ -65,23 +63,23 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
     return groups.filter((group) => group.length > 0);
   }, [visibleCards, isShowHourlyLog]);
 
-  const hasMoreCards = visibleCardsCount < effectiveCards.length;
+  const hasMoreCards = visibleCardsCount < cards.length;
 
   return (
     <div className={cn(isListView && "max-w-[970px]")}>
       {isShowHourlyLog && <HourlyLog />}
 
       {isExtensionsPage && favoriteExe.length > 0 && (
-        <div className="mb-12">
+        <div className='mb-12'>
           <CardGroup
             cards={favoriteExe}
             isListView={isListView}
             isExtensionsPage={isExtensionsPage}
             isShowHourlyLog={false}
             showHourlyLogAfter={false}
-            setActiveTab={setActiveTab}
             favoriteExe={favoriteExe}
             setFavoriteExe={setFavoriteExe}
+            isDownloadPage={isDownloadPage}
           />
         </div>
       )}
@@ -92,15 +90,18 @@ const TabsCards = ({ setActiveTab, cards }: TabsCardsProps) => {
           cards={group}
           isListView={isListView}
           isExtensionsPage={isExtensionsPage}
+          isDownloadPage={isDownloadPage}
           isShowHourlyLog={isShowHourlyLog}
           showHourlyLogAfter={index < cardGroups.length - 1}
-          setActiveTab={setActiveTab}
           favoriteExe={favoriteExe}
           setFavoriteExe={setFavoriteExe}
         />
       ))}
 
-      <InfiniteScrollSentinel onLoadMore={loadMoreCards} hasMore={hasMoreCards} />
+      <InfiniteScrollSentinel
+        onLoadMore={loadMoreCards}
+        hasMore={hasMoreCards}
+      />
     </div>
   );
 };

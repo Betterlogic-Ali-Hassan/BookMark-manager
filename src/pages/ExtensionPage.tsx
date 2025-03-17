@@ -1,5 +1,5 @@
 import Hero from "@/components/hero/Hero";
-import MainLayout from "./MainLayout";
+import MainLayout from "./layout/MainLayout";
 
 export default function ExtensionPage() {
   return (

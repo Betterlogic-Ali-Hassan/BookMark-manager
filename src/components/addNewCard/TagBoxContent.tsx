@@ -1,60 +1,49 @@
+"use client";
+
 import TagBox from "../TagBox";
 import ActionBtns from "./ActionBtns";
-
 import { toast } from "react-toastify";
-
 import { cn } from "@/lib/utils";
-import { useFormContext } from "@/context/from-Context";
-import { useBookmarks } from "@/context/BookmarkContext";
-import { usePageContext } from "@/context/PageContext";
 
-type Tags = {
-  name: string;
-  id: number;
-};
-interface Props {
+import { useBookmarks } from "@/context/BookmarkContext";
+import type { Card } from "@/types/TabCardType";
+import { useFormContext } from "@/context/from-Context";
+
+interface TagBoxContentProps {
   actionBtns?: boolean;
   className?: string;
-  selectedCardTags?: Tags[];
+  tag?: { id: string; name: string }[] | undefined;
 }
-const TagBoxContent = ({ actionBtns, className }: Props) => {
+
+const TagBoxContent = ({
+  actionBtns = false,
+  className = "",
+  tag,
+}: TagBoxContentProps) => {
   const { prevStep, resetForm, isLoading, setIsLoading, formData } =
     useFormContext();
-  const { cards, setCards } = useBookmarks();
-  const { setPage } = usePageContext();
+  const { addCard, cards } = useBookmarks();
 
   const handleSaveBtn = () => {
     setIsLoading(true);
-    const newCard = {
-      id: Date.now(),
-      icon: `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formData.url}/&size=32`,
+    const newId = cards.length > 0 ? cards[cards.length - 1].id + 1 : 1;
+    const newCard: Card = {
+      id: newId,
       title: formData.title,
+      icon: `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formData.url}/&size=32`,
       path: formData.url,
-      tags: formData.tags.map((tag, index) => ({
-        id: index + 1,
+      des: formData.description,
+      tags: formData.tags.map((tag) => ({
+        id: tag.toLowerCase(),
         name: tag,
       })),
-      des: formData.description,
-      enabled: true, // or some default value
-      iconUrl: `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formData.url}/&size=32`, // or some default value
     };
 
-    setCards([...cards, newCard]);
+    addCard(newCard);
+    toast.success("Bookmark Added");
 
     setTimeout(() => {
-      setPage("home");
       setIsLoading(false);
-      toast.success("Bookmark Added", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-
       resetForm();
     }, 2000);
   };
@@ -62,8 +51,9 @@ const TagBoxContent = ({ actionBtns, className }: Props) => {
   return (
     <>
       <div className={cn("px-4 py-6 sm:p-8", className)}>
-        <TagBox />
+        <TagBox tag={tag} />
       </div>
+
       {!actionBtns && (
         <ActionBtns
           prevBtnClick={prevStep}

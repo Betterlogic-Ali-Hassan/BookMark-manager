@@ -19,7 +19,10 @@ const HoursBalls = () => {
   };
 
   return (
-    <div className='flex items-center justify-between gap-3 mt-6'>
+    <div
+      className='flex items-center justify-between gap-3 mt-6  overflow-x-auto no-scrollbar
+    '
+    >
       <FiMoon size={18} />
       <div className='flex items-center gap-1.5'>
         {hours.map((hour, index) => (
@@ -34,8 +37,8 @@ const HoursBalls = () => {
       </div>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        width='18'
-        height='18'
+        width='18px'
+        height='18px'
         viewBox='0 -960 960 960'
         fill='currentColor'
       >

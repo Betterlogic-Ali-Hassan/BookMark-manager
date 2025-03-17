@@ -8,9 +8,10 @@ import ClipBoardIcon from "../svgs/ClipBoardIcon";
 interface Props {
   actionBtns?: boolean;
   className?: string;
+  notAllowTitle?: boolean;
 }
 
-const PasteLinkInput = ({ actionBtns, className }: Props) => {
+const PasteLinkInput = ({ actionBtns, className, notAllowTitle }: Props) => {
   const { formData, updateFormData, nextStep, errors, resetForm } =
     useFormContext();
   const [loading, setLoading] = useState(false);
@@ -38,10 +39,13 @@ const PasteLinkInput = ({ actionBtns, className }: Props) => {
   return (
     <>
       <div className={cn("px-4 py-6 sm:p-8", className)}>
-        <div className='h-24'>
-          <label htmlFor='url' className='text-sm font-semibold'>
-            URL
-          </label>
+        <div className={cn("h-24", notAllowTitle && "h-[50px]")}>
+          {!notAllowTitle && (
+            <label htmlFor='url' className='text-sm font-semibold'>
+              URL
+            </label>
+          )}
+
           <div className='flex relative rounded mt-2'>
             <input
               type='url'

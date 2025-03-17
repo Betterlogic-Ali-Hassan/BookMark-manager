@@ -1,12 +1,10 @@
 export type Card = {
-  enabled: any;
-  iconUrl: string;
   id: number;
-  icon: string;
+  icon?: string;
   title: string;
   path: string;
   tags: {
-    id: number;
+    id: string;
     name: string;
   }[];
   des: string;
