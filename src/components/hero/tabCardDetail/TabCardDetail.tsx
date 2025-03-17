@@ -17,10 +17,8 @@ const TabCardDetail = ({ cards }: Props) => {
     <>
       <div
         className={cn(
-          showCardDetail
-            ? "block opacity-100 translate-x-0 max-lg:translate-x-0 max-lg:opacity-100"
-            : "hidden opacity-0 translate-x-[50%] max-lg:block max-lg:translate-x-0 max-lg:opacity-100",
-          "relative transition-all duration-300 lg:block "
+          "hidden  relative   opacity-0 translate-x-[50%] transition-all duration-300 ",
+          showCardDetail && "opacity-100 lg:block translate-x-0"
         )}
       >
         <div className='sticky top-0 left-0 w-full  lg:max-w-md min-w-72 max-h-[328px] min-h-[328px] text-white ml-2'>

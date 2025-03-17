@@ -8,6 +8,7 @@ import { usePageContext } from "@/context/PageContext";
 
 import { cn, useHandleDelete } from "@/lib/utils";
 import { toast } from "react-toastify";
+import { useCallback } from "react";
 
 const SelectionCard = () => {
   const {
@@ -36,10 +37,11 @@ const SelectionCard = () => {
       toast.error("No URL Selected");
     }
   };
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
+    console.log("clicked");
     clearSelection();
     setShowSelectionCard(false);
-  };
+  }, [clearSelection, setShowSelectionCard]);
 
   const isDisabled = selectedCards.length === 0;
   const notShowEditBtn = page === "history";
@@ -53,7 +55,7 @@ const SelectionCard = () => {
   return (
     <div
       className={cn(
-        "hidden lg:block relative  lg:opacity-0 lg:translate-x-[100%] transition-all duration-300 ",
+        "hidden lg:block relative  opacity-0 translate-x-[100%] transition-all duration-300 ",
         showSelectionCard && "opacity-100 translate-x-0 "
       )}
     >
