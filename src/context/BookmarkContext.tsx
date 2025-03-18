@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -6,15 +5,13 @@ import {
   useContext,
   useEffect,
   useState,
-  useCallback,
-  useMemo,
   type ReactNode,
 } from "react";
 import type { Card } from "@/types/TabCardType";
 import { tabsData } from "@/constant/tabsData";
 import { usePageContext } from "./PageContext";
-import { extensions } from "@/constant/extensionData";
-import { downloadData } from "@/constant/DownloadsData";
+import { useManagementData } from "@/constant/extensionData";
+import { useDownloadData } from "@/constant/DownloadsData";
 import { categoriesData } from "@/constant/categoriesData";
 import type { Tag } from "@/types/tag";
 
@@ -52,148 +49,187 @@ const BookmarkContext = createContext<BookmarkContextType | undefined>(
   undefined
 );
 
-// Storage keys as constants
+const getStorageKey = (page: string) => {
+  switch (page) {
+    case "extensions":
+      return "extensions_data";
+    case "downloads":
+      return "downloads_data";
+    default:
+      return "tabs_data";
+  }
+};
+
 const CATEGORIES_STORAGE_KEY = "categories_data";
-const STORAGE_KEYS = {
-  tabs: "tabs_data",
-  extensions: "extensions_data",
-  downloads: "downloads_data",
-};
-
-const PIN_CATEGORIES_KEYS = {
-  tabs: "tabs_pin_categories",
-  extensions: "extensions_pin_categories",
-  downloads: "downloads_pin_categories",
-};
-
-const DEFAULT_DATA = {
-  tabs: tabsData,
-  extensions: extensions,
-  downloads: downloadData,
+const getPinCategoriesStorageKey = (page: string) => {
+  switch (page) {
+    case "extensions":
+      return "extensions_pin_categories";
+    case "downloads":
+      return "downloads_pin_categories";
+    default:
+      return "tabs_pin_categories";
+  }
 };
 
 export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
   const { page } = usePageContext();
+  const { downloadData } = useDownloadData();
+  const { extensionData } = useManagementData();
 
-  // Get storage keys based on current page
-  const storageKey =
-    STORAGE_KEYS[page as keyof typeof STORAGE_KEYS] || STORAGE_KEYS.tabs;
-  const pinCategoriesKey =
-    PIN_CATEGORIES_KEYS[page as keyof typeof PIN_CATEGORIES_KEYS] ||
-    PIN_CATEGORIES_KEYS.tabs;
-
-  // Helper function to safely get data from localStorage
-  const getFromStorage = useCallback((key: string, defaultValue: any) => {
-    if (typeof window === "undefined") return defaultValue;
-
-    try {
-      const stored = localStorage.getItem(key);
-      return stored ? JSON.parse(stored) : defaultValue;
-    } catch (error) {
-      console.error(`Error retrieving ${key} from storage:`, error);
-      return defaultValue;
+  const storageKey = getStorageKey(page);
+  const getInitialData = () => {
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem(storageKey);
+      if (storedData) {
+        try {
+          return JSON.parse(storedData);
+        } catch (error) {
+          console.error("Error parsing stored data:", error);
+          const defaultData =
+            page === "extensions"
+              ? extensionData
+              : page === "downloads"
+              ? downloadData
+              : tabsData;
+          localStorage.setItem(storageKey, JSON.stringify(defaultData));
+          return defaultData;
+        }
+      } else {
+        const defaultData =
+          page === "extensions"
+            ? extensionData
+            : page === "downloads"
+            ? downloadData
+            : tabsData;
+        localStorage.setItem(storageKey, JSON.stringify(defaultData));
+        return defaultData;
+      }
     }
-  }, []);
+    return page === "extensions"
+      ? extensionData
+      : page === "downloads"
+      ? downloadData
+      : tabsData;
+  };
 
-  // Helper function to safely set data to localStorage
-  const setToStorage = useCallback((key: string, value: any) => {
-    if (typeof window === "undefined") return;
-
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      console.error(`Error saving ${key} to storage:`, error);
+  const getInitialCategories = () => {
+    if (typeof window !== "undefined") {
+      const storedCategories = localStorage.getItem(CATEGORIES_STORAGE_KEY);
+      if (storedCategories) {
+        try {
+          return JSON.parse(storedCategories);
+        } catch (error) {
+          console.error("Error parsing stored categories:", error);
+          localStorage.setItem(
+            CATEGORIES_STORAGE_KEY,
+            JSON.stringify(categoriesData)
+          );
+          return categoriesData;
+        }
+      } else {
+        localStorage.setItem(
+          CATEGORIES_STORAGE_KEY,
+          JSON.stringify(categoriesData)
+        );
+        return categoriesData;
+      }
     }
-  }, []);
+    return categoriesData;
+  };
 
-  // Initialize state with data from localStorage or defaults
-  const [cards, setCards] = useState<Card[]>(() =>
-    getFromStorage(
-      storageKey,
-      DEFAULT_DATA[page as keyof typeof DEFAULT_DATA] || tabsData
-    )
-  );
-  const [categories, setCategories] = useState<Tag[]>(() =>
-    getFromStorage(CATEGORIES_STORAGE_KEY, categoriesData)
-  );
-  const [pinCategories, setPinCategories] = useState<string[]>(() =>
-    getFromStorage(pinCategoriesKey, [])
-  );
-
+  const [cards, setCards] = useState<Card[]>(getInitialData);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [pinCategories, setPinCategories] = useState<string[]>(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      const storedPinCategories = localStorage.getItem(pinCategoriesKey);
+      if (storedPinCategories) {
+        try {
+          return JSON.parse(storedPinCategories);
+        } catch (error) {
+          console.error("Error parsing stored pinned categories:", error);
+          return [];
+        }
+      }
+    }
+    return [];
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const [showCardDetail, setShowCardDetail] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showSelectionCard, setShowSelectionCard] = useState(false);
   const [selectedCardUrls, setSelectedCardUrls] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Tag[]>(getInitialCategories);
 
-  // Reset state when page changes
-  const resetAllState = useCallback(() => {
+  const filteredCards = cards.filter((card) => {
+    const matchesSearch = card.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    if (selectedCategories.length === 0) {
+      return matchesSearch;
+    }
+
+    const hasSelectedCategory =
+      card.tags && card.tags.some((tag) => selectedCategories.includes(tag.id));
+
+    return matchesSearch && hasSelectedCategory;
+  });
+
+  const resetAllState = () => {
     setSearchTerm("");
     setSelectedCategories([]);
     setSelectedCards([]);
     setSelectedCardUrls([]);
     setShowCardDetail(false);
     setShowSelectionCard(false);
-  }, []);
+  };
 
-  // Update cards when page changes
   useEffect(() => {
     resetAllState();
-    setCards(
-      getFromStorage(
-        STORAGE_KEYS[page as keyof typeof STORAGE_KEYS] || STORAGE_KEYS.tabs,
-        DEFAULT_DATA[page as keyof typeof DEFAULT_DATA] || tabsData
-      )
-    );
-    setPinCategories(
-      getFromStorage(
-        PIN_CATEGORIES_KEYS[page as keyof typeof PIN_CATEGORIES_KEYS] ||
-          PIN_CATEGORIES_KEYS.tabs,
-        []
-      )
-    );
-  }, [page, getFromStorage, resetAllState]);
 
-  // Persist cards to localStorage when they change
+    setCards(getInitialData());
+  }, [page]);
+
   useEffect(() => {
-    setToStorage(storageKey, cards);
-  }, [cards, storageKey, setToStorage]);
-
-  // Persist categories to localStorage when they change
-  useEffect(() => {
-    setToStorage(CATEGORIES_STORAGE_KEY, categories);
-  }, [categories, setToStorage]);
-
-  // Persist pinned categories to localStorage when they change
-  useEffect(() => {
-    setToStorage(pinCategoriesKey, pinCategories);
-  }, [pinCategories, pinCategoriesKey, setToStorage]);
-
-  // Filter cards based on search term and selected categories
-  const filteredCards = useMemo(
-    () =>
-      cards.filter((card) => {
-        const matchesSearch = card.title
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-
-        if (selectedCategories.length === 0) {
-          return matchesSearch;
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      const storedPinCategories = localStorage.getItem(pinCategoriesKey);
+      if (storedPinCategories) {
+        try {
+          setPinCategories(JSON.parse(storedPinCategories));
+        } catch (error) {
+          console.error("Error parsing stored pinned categories:", error);
+          setPinCategories([]);
         }
+      } else {
+        setPinCategories([]);
+      }
+    }
+  }, [page]);
 
-        const hasSelectedCategory =
-          card.tags &&
-          card.tags.some((tag) => selectedCategories.includes(tag.id));
+  useEffect(() => {
+    if (typeof window !== "undefined" && cards) {
+      localStorage.setItem(storageKey, JSON.stringify(cards));
+    }
+  }, [cards, storageKey]);
 
-        return matchesSearch && hasSelectedCategory;
-      }),
-    [cards, searchTerm, selectedCategories]
-  );
+  useEffect(() => {
+    if (typeof window !== "undefined" && categories) {
+      localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
+    }
+  }, [categories]);
 
-  // Card selection functions
-  const toggleCard = useCallback((id: number, url: string) => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pinCategoriesKey = getPinCategoriesStorageKey(page);
+      localStorage.setItem(pinCategoriesKey, JSON.stringify(pinCategories));
+    }
+  }, [pinCategories, page]);
+
+  const toggleCard = (id: number, url: string) => {
     setSelectedCards((prev) =>
       prev.includes(id) ? prev.filter((cardId) => cardId !== id) : [...prev, id]
     );
@@ -203,96 +239,73 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
         ? prev.filter((cardUrl) => cardUrl !== url)
         : [...prev, url]
     );
-  }, []);
+  };
 
-  const selectAll = useCallback(() => {
+  const selectAll = () => {
     setSelectedCards(cards.map((card) => card.id));
     setSelectedCardUrls(cards.map((card) => card.path));
-  }, [cards]);
+  };
 
-  const clearSelection = useCallback(() => {
+  const clearSelection = () => {
     setSelectedCards([]);
     setSelectedCardUrls([]);
-  }, []);
+  };
 
-  // Category functions
-  const toggleCategory = useCallback((categoryId: string) => {
+  const toggleCategory = (categoryId: string) => {
     const category = categoryId.toLowerCase();
     setSelectedCategories((prev) =>
       prev.includes(category)
         ? prev.filter((id) => id !== category)
         : [...prev, category]
     );
-  }, []);
+  };
 
-  // CRUD operations for cards
-  const addCard = useCallback((card: Card) => {
-    setCards((prev) => [card, ...prev]);
-  }, []);
+  const addCard = (card: Card) => {
+    const updatedCards = [card, ...cards];
+    setCards(updatedCards);
+  };
 
-  const deleteCard = useCallback((ids: number | number[]) => {
+  const deleteCard = (ids: number | number[]) => {
     const idsToDelete = Array.isArray(ids) ? ids : [ids];
-    setCards((prev) => prev.filter((card) => !idsToDelete.includes(card.id)));
-  }, []);
-
-  const updateCard = useCallback((updatedCard: Card) => {
-    setCards((prev) =>
-      prev.map((card) => (card.id === updatedCard.id ? updatedCard : card))
+    const updatedCards = cards.filter((card) => !idsToDelete.includes(card.id));
+    setCards(updatedCards);
+  };
+  const updateCard = (updatedCard: Card) => {
+    const updatedCards = cards.map((card) =>
+      card.id === updatedCard.id ? updatedCard : card
     );
-  }, []);
+    setCards(updatedCards);
+  };
 
-  // Context value
-  const value = useMemo(
-    () => ({
-      cards: filteredCards,
-      filteredCards: cards,
-      selectedCards,
-      selectedCardUrls,
-      selectedCategories,
-      pinCategories,
-      searchTerm,
-      showCardDetail,
-      showSelectionCard,
-      activeTab,
-      categories,
-      setSelectedCards,
-      toggleCard,
-      toggleCategory,
-      setSearchTerm,
-      setShowCardDetail,
-      setShowSelectionCard,
-      selectAll,
-      clearSelection,
-      setSelectedCategories,
-      setPinCategories,
-      setCards,
-      addCard,
-      deleteCard,
-      updateCard,
-      setCategories,
-      setActiveTab,
-    }),
-    [
-      filteredCards,
-      cards,
-      selectedCards,
-      selectedCardUrls,
-      selectedCategories,
-      pinCategories,
-      searchTerm,
-      showCardDetail,
-      showSelectionCard,
-      activeTab,
-      categories,
-      toggleCard,
-      toggleCategory,
-      selectAll,
-      clearSelection,
-      addCard,
-      deleteCard,
-      updateCard,
-    ]
-  );
+  const value = {
+    cards: filteredCards,
+    filteredCards: cards,
+    setSelectedCategories,
+    selectedCards,
+    setSelectedCards,
+    selectedCardUrls,
+    selectedCategories,
+    searchTerm,
+    showCardDetail,
+    showSelectionCard,
+    toggleCard,
+    toggleCategory,
+    setSearchTerm,
+    setShowCardDetail,
+    setShowSelectionCard,
+    selectAll,
+    setCards,
+    clearSelection,
+    addCard,
+    deleteCard,
+    updateCard,
+    categories,
+    setCategories,
+    activeTab,
+    setActiveTab,
+    pinCategories,
+    setPinCategories,
+  };
 
   return (
     <BookmarkContext.Provider value={value}>

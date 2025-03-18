@@ -44,7 +44,22 @@ const ExtensionCard = ({
       onClick={handleToggle}
     >
       <div className='flex justify-between w-full h-[60px]'>
-        <img src={icon} alt={title} className='h-[50px] w-[50px]' />
+
+
+        <div className="w-[50px] h-[50px]">
+
+          <img
+            src={icon}
+            alt={title}
+
+            onError={(e) => {
+              (e.target as HTMLImageElement).onerror = null; // Prevent infinite loop
+              (e.target as HTMLImageElement).outerHTML = `
+              <img src='https://framerusercontent.com/images/T9qkapeFrr98u1zDjP8vbEdaUs.png' />
+        `;
+            }}
+          />
+        </div>
         <div className='flex items-start gap-3'>
           <span
             className={cn(

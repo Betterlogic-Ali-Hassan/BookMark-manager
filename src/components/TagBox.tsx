@@ -39,8 +39,8 @@ export default function TagBox({
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const notificationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const formUpdateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const notificationTimeoutRef = useRef<number | null>(null);
+  const formUpdateTimeoutRef = useRef<number | null>(null);  
 
   const showNotification = useCallback((text: string) => {
     if (notificationTimeoutRef.current) {

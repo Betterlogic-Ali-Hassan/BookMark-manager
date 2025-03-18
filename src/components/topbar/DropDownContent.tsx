@@ -11,8 +11,8 @@ const DropDownContent = () => {
     showSelectionCard,
   } = useBookmarks();
 
+  // Helper functions
   const toggleSelectionCard = (show: boolean) => {
-    console.log("toggleSelectionCard", show);
     setShowSelectionCard(show);
     setShowCardDetail(false);
     if (!show) clearSelection();

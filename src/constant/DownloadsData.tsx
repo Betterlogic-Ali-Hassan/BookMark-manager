@@ -1,162 +1,103 @@
-export const downloadData = [
-  {
-    id: 1,
-    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
-    title: "QR Code Generator",
-    path: "https://high-qr-code-generator.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "pdfs", name: "PDFs" }],
-  },
-  {
-    id: 2,
-    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
-    title: "Color Palette Generator",
-    path: "https://coolors.co/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "pdfs", name: "PDFs" }],
-  },
-  {
-    id: 3,
-    icon: "https://img.icons8.com/?size=48&id=13917&format=png",
-    title: "HTML Formatter",
-    path: "https://htmlformatter.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "images", name: "Image" }],
-  },
-  {
-    id: 4,
-    icon: "https://img.icons8.com/?size=48&id=13917&format=png",
-    title: "CSS Minifier",
-    path: "https://cssminifier.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "images", name: "Image" }],
-  },
-  {
-    id: 5,
-    icon: "https://img.icons8.com/?size=48&id=13917&format=png",
-    title: "JavaScript Beautifier",
-    path: "https://beautifier.io/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "images", name: "Image" }],
-  },
-  {
-    id: 6,
-    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
-    title: "JSON Formatter",
-    path: "https://jsonformatter.org/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "pdfs", name: "PDFs" }],
-  },
-  {
-    id: 7,
-    icon: "https://img.icons8.com/?size=48&id=LmcGmjPSQXSa&format=png",
-    title: "Markdown Editor",
-    path: "https://dillinger.io/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "pdfs", name: "pdfs" }],
-  },
-  {
-    id: 8,
-    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
-    title: "Regex Tester",
-    path: "https://regex101.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "documents", name: "documents" }],
-  },
-  {
-    id: 9,
-    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
-    title: "Image Compressor",
-    path: "https://tinypng.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "documents", name: "documents" }],
-  },
-  {
-    id: 10,
-    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
-    title: "Online Stopwatch",
-    path: "https://www.online-stopwatch.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "documents", name: "documents" }],
-  },
-  {
-    id: 11,
-    icon: "https://img.icons8.com/?size=48&id=12053&format=png",
-    title: "UUID Generator",
-    path: "https://www.uuidgenerator.net/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "documents", name: "documents" }],
-  },
-  {
-    id: 12,
-    icon: "https://img.icons8.com/?size=48&id=fKXXelWgP1B6&format=png",
-    title: "Lorem Ipsum Generator",
-    path: "https://www.lipsum.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "apps", name: "apps" }],
-  },
-  {
-    id: 13,
-    icon: "https://img.icons8.com/?size=48&id=fKXXelWgP1B6&format=png",
-    title: "Password Generator",
-    path: "https://passwordsgenerator.net/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "apps", name: "apps" }],
-  },
-  {
-    id: 14,
-    icon: "https://img.icons8.com/?size=48&id=fKXXelWgP1B6&format=png",
-    title: "Base64 Encoder/Decoder",
-    path: "https://www.base64-image.de/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "apps", name: "apps" }],
-  },
-  {
-    id: 15,
-    icon: "https://img.icons8.com/?size=48&id=13411&format=png",
-    title: "Unit Converter",
-    path: "https://www.unitconverters.net/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "compressed files", name: "compressed files" }],
-  },
-  {
-    id: 16,
-    icon: "https://img.icons8.com/?size=48&id=13411&format=png",
-    title: "Currency Converter",
-    path: "https://www.xe.com/currencyconverter/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "compressed files", name: "compressed files" }],
-  },
-  {
-    id: 17,
-    icon: "https://img.icons8.com/?size=48&id=9a46bTk3awwI&format=png",
-    title: "IP Address Lookup",
-    path: "https://www.whatismyip.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "videos", name: "videos" }],
-  },
-  {
-    id: 18,
-    icon: "https://img.icons8.com/?size=48&id=9a46bTk3awwI&format=png",
-    title: "Barcode Generator",
-    path: "https://barcode.tec-it.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "videos", name: "videos" }],
-  },
-  {
-    id: 19,
-    icon: "https://img.icons8.com/?size=80&id=lSaOzJehYBsV&format=png",
-    title: "Text to Speech Converter",
-    path: "https://ttsmp3.com/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "audio", name: "audio" }],
-  },
-  {
-    id: 20,
-    icon: "https://img.icons8.com/?size=80&id=lSaOzJehYBsV&format=png",
-    title: "Word Counter",
-    path: "https://wordcounter.net/",
-    des: "Convert written text into spoken words.",
-    tags: [{ id: "audio", name: "audio" }],
-  },
-];
+"use Client";
+
+import { useEffect, useState } from "react";
+
+export interface DownloadDataItem {
+  id: number;
+  icon: string;
+  title: string;
+  path: string;
+  des: string;
+  tags: { id: string; name: string }[];
+}
+
+export const useDownloadData = (): {
+  downloadData: DownloadDataItem[];
+  loading: boolean;
+  error: string | null;
+} => {
+  const [downloadData, setDownloadData] = useState<DownloadDataItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (chrome && chrome.downloads) {
+      const updateDownloads = () => {
+        chrome.downloads.search({}, (items) => {
+          if (chrome.runtime.lastError) {
+            setError(
+              chrome.runtime.lastError.message || "An unknown error occurred."
+            );
+            setLoading(false);
+            return;
+          }
+
+          console.log("Raw download items:", items);
+
+          const dataPromises = items.map((item) => {
+            return new Promise<DownloadDataItem>((resolve) => {
+              const filename = item.filename
+                ? item.filename.split(/[/\\]/).pop() || "Unknown"
+                : "Unknown";
+
+              chrome.downloads.getFileIcon(item.id, { size: 32 }, (iconUrl) => {
+                if (chrome.runtime.lastError) {
+                  console.error(
+                    "Error retrieving icon for item",
+                    item.id,
+                    chrome.runtime.lastError.message
+                  );
+                  resolve({
+                    id: item.id,
+                    icon: "default_icon.png",
+                    title: filename,
+                    path: item.filename || "",
+                    des: item.referrer || "",
+                    tags: []
+                  });
+                } else {
+                  resolve({
+                    id: item.id,
+                    icon: iconUrl || "default_icon.png",
+                    title: filename,
+                    path: item.filename || "",
+                    des: item.referrer || "",
+                    tags: []
+                  });
+                }
+              });
+            });
+          });
+
+          Promise.all(dataPromises)
+            .then((data) => {
+              console.log("Transformed Download Data:", data);
+              setDownloadData(data);
+              setLoading(false);
+            })
+            .catch((err) => {
+              setError(err.message || "Error processing download items.");
+              setLoading(false);
+            });
+        });
+      };
+
+      updateDownloads();
+
+      chrome.downloads.onCreated.addListener(updateDownloads);
+      chrome.downloads.onChanged.addListener(updateDownloads);
+      chrome.downloads.onErased.addListener(updateDownloads);
+
+      return () => {
+        chrome.downloads.onCreated.removeListener(updateDownloads);
+        chrome.downloads.onChanged.removeListener(updateDownloads);
+        chrome.downloads.onErased.removeListener(updateDownloads);
+      };
+    } else {
+      setError("Chrome downloads API is not available.");
+      setLoading(false);
+    }
+  }, []);
+
+  return { downloadData, loading, error };
+};
