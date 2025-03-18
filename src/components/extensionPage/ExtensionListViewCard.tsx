@@ -36,17 +36,7 @@ const ExtensionListViewCard = ({
       onClick={handleToggle}
     >
       <div className='h-[38px] w-[38px]'>
-      <img
-            src={icon}
-            alt={title}
-
-            onError={(e) => {
-              (e.target as HTMLImageElement).onerror = null; // Prevent infinite loop
-              (e.target as HTMLImageElement).outerHTML = `
-              <img src='https://framerusercontent.com/images/T9qkapeFrr98u1zDjP8vbEdaUs.png' />
-        `;
-            }}
-          />
+        <img src={icon || "/placeholder.svg"} alt={title} />
       </div>
       <div className='grow'>
         <h3 className='font-semibold text-text'>{title}</h3>
